@@ -1,9 +1,9 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
 using ShippingSysem.BLL.DTOs.Create;
+using ShippingSysem.BLL.DTOs.EmployeeDTOS;
 using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
-using ShippingSystem.PL.DTOs.Read;
 using System;
 using System.Collections.Generic;
 using System.Linq;

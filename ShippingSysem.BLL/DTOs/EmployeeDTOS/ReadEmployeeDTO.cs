@@ -1,4 +1,4 @@
-﻿namespace ShippingSystem.PL.DTOs.Read
+﻿namespace ShippingSysem.BLL.DTOs.EmployeeDTOS
 {
     public class ReadEmployeeDTO
     {
