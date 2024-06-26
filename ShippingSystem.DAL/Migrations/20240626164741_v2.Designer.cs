@@ -12,8 +12,8 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    [Migration("20240624204524_v3")]
-    partial class v3
+    [Migration("20240626164741_v2")]
+    partial class v2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -151,16 +151,14 @@ namespace ShippingSystem.DAL.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(21)
-                        .HasColumnType("nvarchar(21)");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -222,10 +220,6 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("RoleID");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Account");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.Branch", b =>
@@ -241,6 +235,9 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.Property<int?>("GovernmentID")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -268,6 +265,9 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<int?>("GovernmentID")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -283,6 +283,93 @@ namespace ShippingSystem.DAL.Migrations
                     b.ToTable("City");
                 });
 
+            modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryAccount", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Company_Percantage")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Discount_type")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("RoleID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BranchID");
+
+                    b.HasIndex("RoleID");
+
+                    b.ToTable("DeliveryAccounts", (string)null);
+                });
+
             modelBuilder.Entity("ShippingSystem.DAL.Models.Entity", b =>
                 {
                     b.Property<int>("Id")
@@ -290,6 +377,9 @@ namespace ShippingSystem.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -311,6 +401,9 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<int?>("BranchID")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -326,7 +419,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.ToTable("Government");
                 });
 
-            modelBuilder.Entity("ShippingSystem.DAL.Models.Order", b =>
+            modelBuilder.Entity("ShippingSystem.DAL.Models.MerchantAccount", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -334,8 +427,104 @@ namespace ShippingSystem.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("AccountId")
+                    b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Government")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal>("Pickup_Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("Refund_Percentage")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("RoleID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("StoreName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BranchID");
+
+                    b.HasIndex("RoleID");
+
+                    b.ToTable("MerchantAccounts", (string)null);
+                });
+
+            modelBuilder.Entity("ShippingSystem.DAL.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ClientName")
                         .IsRequired()
@@ -347,6 +536,9 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<int?>("MerchantID")
                         .HasColumnType("int");
@@ -386,8 +578,6 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId");
-
                     b.HasIndex("DeliveryID");
 
                     b.HasIndex("MerchantID");
@@ -408,6 +598,9 @@ namespace ShippingSystem.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -431,6 +624,9 @@ namespace ShippingSystem.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -508,6 +704,9 @@ namespace ShippingSystem.DAL.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -534,6 +733,9 @@ namespace ShippingSystem.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -550,54 +752,6 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("ShippingTypeId");
 
                     b.ToTable("ShippingType");
-                });
-
-            modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryAccount", b =>
-                {
-                    b.HasBaseType("ShippingSystem.DAL.Models.Account");
-
-                    b.Property<decimal>("Company_Percantage")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("DeliveryId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Discount_type")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasIndex("DeliveryId");
-
-                    b.HasDiscriminator().HasValue("DeliveryAccount");
-                });
-
-            modelBuilder.Entity("ShippingSystem.DAL.Models.MerchantAccount", b =>
-                {
-                    b.HasBaseType("ShippingSystem.DAL.Models.Account");
-
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Government")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("MerchantId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Pickup_Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Refund_Percentage")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("StoreName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasIndex("MerchantId");
-
-                    b.HasDiscriminator().HasValue("MerchantAccount");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -684,6 +838,21 @@ namespace ShippingSystem.DAL.Migrations
                     b.Navigation("Government");
                 });
 
+            modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryAccount", b =>
+                {
+                    b.HasOne("ShippingSystem.DAL.Models.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchID");
+
+                    b.HasOne("ShippingSystem.DAL.Models.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleID");
+
+                    b.Navigation("Branch");
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("ShippingSystem.DAL.Models.Government", b =>
                 {
                     b.HasOne("ShippingSystem.DAL.Models.Branch", "Branch")
@@ -693,18 +862,29 @@ namespace ShippingSystem.DAL.Migrations
                     b.Navigation("Branch");
                 });
 
+            modelBuilder.Entity("ShippingSystem.DAL.Models.MerchantAccount", b =>
+                {
+                    b.HasOne("ShippingSystem.DAL.Models.Branch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchID");
+
+                    b.HasOne("ShippingSystem.DAL.Models.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleID");
+
+                    b.Navigation("Branch");
+
+                    b.Navigation("Role");
+                });
+
             modelBuilder.Entity("ShippingSystem.DAL.Models.Order", b =>
                 {
-                    b.HasOne("ShippingSystem.DAL.Models.Account", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("AccountId");
-
                     b.HasOne("ShippingSystem.DAL.Models.DeliveryAccount", "DeliveryAccount")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("DeliveryID");
 
                     b.HasOne("ShippingSystem.DAL.Models.MerchantAccount", "MerchantAccount")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("MerchantID");
 
                     b.HasOne("ShippingSystem.DAL.Models.PaymentType", "paymentType")
@@ -716,7 +896,7 @@ namespace ShippingSystem.DAL.Migrations
                         .HasForeignKey("ShippingTypeID");
 
                     b.HasOne("ShippingSystem.DAL.Models.Account", "StaffMemberAccount")
-                        .WithMany()
+                        .WithMany("Orders")
                         .HasForeignKey("StaffMemberID");
 
                     b.Navigation("DeliveryAccount");
@@ -782,28 +962,6 @@ namespace ShippingSystem.DAL.Migrations
                         .HasForeignKey("ShippingTypeId");
                 });
 
-            modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryAccount", b =>
-                {
-                    b.HasOne("ShippingSystem.DAL.Models.Account", "account")
-                        .WithMany()
-                        .HasForeignKey("DeliveryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("account");
-                });
-
-            modelBuilder.Entity("ShippingSystem.DAL.Models.MerchantAccount", b =>
-                {
-                    b.HasOne("ShippingSystem.DAL.Models.Account", "account")
-                        .WithMany()
-                        .HasForeignKey("MerchantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("account");
-                });
-
             modelBuilder.Entity("ShippingSystem.DAL.Models.Account", b =>
                 {
                     b.Navigation("Orders");
@@ -814,9 +972,19 @@ namespace ShippingSystem.DAL.Migrations
                     b.Navigation("Accounts");
                 });
 
+            modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryAccount", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("ShippingSystem.DAL.Models.Government", b =>
                 {
                     b.Navigation("Cities");
+                });
+
+            modelBuilder.Entity("ShippingSystem.DAL.Models.MerchantAccount", b =>
+                {
+                    b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.Order", b =>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShippingSystem.DAL.Models.Base;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,14 +9,16 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class Government
+    public class Government : IEntity
     {
+        public bool IsDeleted { get; set; }
+      
         [Key]
         [Required]
         public int Id { get; set; }
         [MaxLength(50)]
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         [Required]
         public bool Status { get; set; }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class OrderDetails
+    public class OrderDetails 
     {
         [ForeignKey("order")]
         public int OrderId { get; set; }

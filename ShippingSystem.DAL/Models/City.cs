@@ -5,17 +5,20 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ShippingSystem.DAL.Models.Base;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class City
+    public class City:IEntity
     {
         [Key]
         [Required]
         public int Id { get; set; }
+        public bool IsDeleted { get; set; }
+        
         [MaxLength(50)]
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         [Required]
         public bool Status { get; set; }
 
