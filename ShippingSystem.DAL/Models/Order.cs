@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShippingSystem.DAL.Models.Base;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,19 +15,21 @@ namespace ShippingSystem.DAL.Models
     //    Approved,
     //    Rejected
     //}
-    public class Order
+    public class Order : IEntity
     {
+        public bool IsDeleted { get; set; }
+      
         [Key]
         [Required]
         public int Id { get; set; }
         [MaxLength(50)]
         [Required]
-        public string ClientName { get; set; }
+        public string ClientName { get; set; } = string.Empty;
 
 
         [Required]
         //[EnumDataType(typeof(StatusOptions))]
-        public string Status { get; set; }
+        public string Status { get; set; } = string.Empty;
 
 
         [Required]
@@ -37,7 +40,7 @@ namespace ShippingSystem.DAL.Models
 
 
         [Required]
-        public string PhoneOne { get; set; }
+        public string PhoneOne { get; set; } = string.Empty;
 
         public string? PhoneTwo { get; set; }
 
@@ -46,7 +49,7 @@ namespace ShippingSystem.DAL.Models
 
         public string? Notes { get; set; }
         [Required]
-        public string StreetAndVillage { get; set; }
+        public string StreetAndVillage { get; set; } = string.Empty;
 
         [ForeignKey("StaffMemberAccount")]
         public int? StaffMemberID { get; set; }

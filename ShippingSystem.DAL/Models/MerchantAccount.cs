@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using ShippingSystem.DAL.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,14 +10,16 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class MerchantAccount : IdentityUser<int>
+    public class MerchantAccount : IdentityUser<int>,IEntity
     {
+        public bool IsDeleted { get; set; }
+      
         [MaxLength(50)]
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         [MaxLength(255)]
         [Required]
-        public string Address { get; set; }
+        public string Address { get; set; } = string.Empty;
         [Required]
         public bool Status { get; set; }
 
@@ -32,12 +35,12 @@ namespace ShippingSystem.DAL.Models
 
         public virtual List<Order>? Orders { get; set; } = new List<Order>();
         [Required]
-        public string StoreName { get; set; }
+        public string StoreName { get; set; } = string.Empty;
 
         [Required]
-        public string Government { get; set; }
+        public string Government { get; set; } = string.Empty;
         [Required]
-        public string City { get; set; }
+        public string City { get; set; } = string.Empty;
         public decimal Pickup_Price { get; set; }
         [Required]
         public decimal Refund_Percentage { get; set; }

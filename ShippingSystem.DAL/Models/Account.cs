@@ -6,17 +6,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
+using ShippingSystem.DAL.Models.Base;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class Account : IdentityUser<int>
+    public class Account : IdentityUser<int> ,IEntity
     {
         [MaxLength(50)]
         [Required]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         [MaxLength(255)]
         [Required]
-        public string Address { get; set; }
+        public string Address { get; set; } = string.Empty;
         [Required]
         public bool Status { get; set; }
 
@@ -31,6 +32,7 @@ namespace ShippingSystem.DAL.Models
         public Branch Branch { get; set; }
 
         public virtual List<Order>? Orders { get; set; } = new List<Order>();
-
+        public bool IsDeleted { get; set; }
+    
     }
 }
