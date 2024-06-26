@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -10,7 +11,7 @@ using ShippingSystem.DAL.Models.Base;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class Account : IdentityUser<int> ,IEntity
+    public class Account : IdentityUser<int>, IEntity
     {
         [MaxLength(50)]
         [Required]
@@ -32,7 +33,9 @@ namespace ShippingSystem.DAL.Models
         public Branch Branch { get; set; }
 
         public virtual List<Order>? Orders { get; set; } = new List<Order>();
+
+        [DefaultValue(false)]
         public bool IsDeleted { get; set; }
-    
+
     }
 }

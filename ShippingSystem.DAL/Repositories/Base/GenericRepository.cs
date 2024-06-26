@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Repositories.Base
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class ,IEntity
+    public class GenericRepository<T> : IGenericRepository<T> where T : class, IEntity
     {
         private readonly ShippingDBContext context;
         private readonly DbSet<T> dbSet;
@@ -20,9 +20,11 @@ namespace ShippingSystem.DAL.Repositories.Base
             this.context = context;
             dbSet = context.Set<T>();
         }
-        public Task AddAsync(T entity)
+        public Task<T> AddAsync(T entity)
         {
-            throw new NotImplementedException();
+            dbSet.Add(entity);
+            return Task.FromResult(entity);
+            //throw new NotImplementedException();
         }
 
         public Task<T> Delete(T entity)
@@ -32,7 +34,7 @@ namespace ShippingSystem.DAL.Repositories.Base
 
         public async Task<IQueryable<T>> GetAllAsync()
         {
-            return await Task.FromResult(dbSet.Where(obj => obj.IsDeleted == false)); 
+            return await Task.FromResult(dbSet.Where(obj => obj.IsDeleted == false));
         }
 
         public Task<T> GetByIdAsync(int id)
@@ -42,7 +44,8 @@ namespace ShippingSystem.DAL.Repositories.Base
 
         public Task SaveAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(context.SaveChanges());
+
         }
 
         public Task<T> Update(T entity)

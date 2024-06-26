@@ -1,6 +1,9 @@
 
 using Microsoft.EntityFrameworkCore;
+using ShippingSysem.BLL.Services;
+using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
+using ShippingSystem.DAL.Repositories.Base;
 
 namespace ShippingSystem.PL
 {
@@ -29,7 +32,9 @@ namespace ShippingSystem.PL
                 options.SignIn.RequireConfirmedEmail = false;
             }).AddEntityFrameworkStores<ShippingDBContext>();
 
-
+            //Register Emp Services 
+            builder.Services.AddScoped<IGenericRepository<Account>, GenericRepository<Account>>();
+            builder.Services.AddScoped<EmployeeService>();
 
             var app = builder.Build();
 
