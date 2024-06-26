@@ -14,6 +14,7 @@ namespace ShippingSystem.DAL.Interfaces.Base
         Task<T> AddAsync(T entity);
         Task<T> Update(T entity);
         Task<T> Delete(T entity);
+        Task<T> DeleteById(int id);
         Task SaveAsync();
     }
 }
