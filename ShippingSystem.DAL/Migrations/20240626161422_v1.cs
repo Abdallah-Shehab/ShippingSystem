@@ -40,6 +40,25 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PaymentType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PaymentTypeId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PaymentType", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PaymentType_PaymentType_PaymentTypeId",
+                        column: x => x.PaymentTypeId,
+                        principalTable: "PaymentType",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Permission",
                 columns: table => new
                 {
@@ -50,6 +69,26 @@ namespace ShippingSystem.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Permission", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ShippingType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ShippingTypeId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ShippingType", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ShippingType_ShippingType_ShippingTypeId",
+                        column: x => x.ShippingTypeId,
+                        principalTable: "ShippingType",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -225,6 +264,49 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DeliveryAccounts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    RoleID = table.Column<int>(type: "int", nullable: true),
+                    BranchID = table.Column<int>(type: "int", nullable: true),
+                    Discount_type = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Company_Percantage = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeliveryAccounts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DeliveryAccounts_AspNetRoles_RoleID",
+                        column: x => x.RoleID,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_DeliveryAccounts_Branch_BranchID",
+                        column: x => x.BranchID,
+                        principalTable: "Branch",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Government",
                 columns: table => new
                 {
@@ -239,6 +321,52 @@ namespace ShippingSystem.DAL.Migrations
                     table.PrimaryKey("PK_Government", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Government_Branch_BranchID",
+                        column: x => x.BranchID,
+                        principalTable: "Branch",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MerchantAccounts",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Status = table.Column<bool>(type: "bit", nullable: false),
+                    RoleID = table.Column<int>(type: "int", nullable: true),
+                    BranchID = table.Column<int>(type: "int", nullable: true),
+                    StoreName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Government = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Pickup_Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Refund_Percentage = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MerchantAccounts", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MerchantAccounts_AspNetRoles_RoleID",
+                        column: x => x.RoleID,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_MerchantAccounts_Branch_BranchID",
                         column: x => x.BranchID,
                         principalTable: "Branch",
                         principalColumn: "Id");
@@ -262,6 +390,80 @@ namespace ShippingSystem.DAL.Migrations
                         column: x => x.GovernmentID,
                         principalTable: "Government",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClientName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    TotalWeight = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PhoneOne = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhoneTwo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StreetAndVillage = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StaffMemberID = table.Column<int>(type: "int", nullable: true),
+                    MerchantID = table.Column<int>(type: "int", nullable: true),
+                    DeliveryID = table.Column<int>(type: "int", nullable: true),
+                    ShippingTypeID = table.Column<int>(type: "int", nullable: true),
+                    PaymentTypeID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Order_AspNetUsers_StaffMemberID",
+                        column: x => x.StaffMemberID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Order_DeliveryAccounts_DeliveryID",
+                        column: x => x.DeliveryID,
+                        principalTable: "DeliveryAccounts",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Order_MerchantAccounts_MerchantID",
+                        column: x => x.MerchantID,
+                        principalTable: "MerchantAccounts",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Order_PaymentType_PaymentTypeID",
+                        column: x => x.PaymentTypeID,
+                        principalTable: "PaymentType",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Order_ShippingType_ShippingTypeID",
+                        column: x => x.ShippingTypeID,
+                        principalTable: "ShippingType",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Product",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Weight = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    order_Id = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Product_Order_order_Id",
+                        column: x => x.order_Id,
+                        principalTable: "Order",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
@@ -324,9 +526,59 @@ namespace ShippingSystem.DAL.Migrations
                 column: "GovernmentID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DeliveryAccounts_BranchID",
+                table: "DeliveryAccounts",
+                column: "BranchID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DeliveryAccounts_RoleID",
+                table: "DeliveryAccounts",
+                column: "RoleID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Government_BranchID",
                 table: "Government",
                 column: "BranchID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MerchantAccounts_BranchID",
+                table: "MerchantAccounts",
+                column: "BranchID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MerchantAccounts_RoleID",
+                table: "MerchantAccounts",
+                column: "RoleID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_DeliveryID",
+                table: "Order",
+                column: "DeliveryID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_MerchantID",
+                table: "Order",
+                column: "MerchantID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_PaymentTypeID",
+                table: "Order",
+                column: "PaymentTypeID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_ShippingTypeID",
+                table: "Order",
+                column: "ShippingTypeID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_StaffMemberID",
+                table: "Order",
+                column: "StaffMemberID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PaymentType_PaymentTypeId",
+                table: "PaymentType",
+                column: "PaymentTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Permission_Role_Entities_entityId",
@@ -337,6 +589,16 @@ namespace ShippingSystem.DAL.Migrations
                 name: "IX_Permission_Role_Entities_permission_id",
                 table: "Permission_Role_Entities",
                 column: "permission_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Product_order_Id",
+                table: "Product",
+                column: "order_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ShippingType_ShippingTypeId",
+                table: "ShippingType",
+                column: "ShippingTypeId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserClaims_AspNetUsers_UserId",
@@ -406,13 +668,31 @@ namespace ShippingSystem.DAL.Migrations
                 name: "Permission_Role_Entities");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "Product");
 
             migrationBuilder.DropTable(
                 name: "Entity");
 
             migrationBuilder.DropTable(
                 name: "Permission");
+
+            migrationBuilder.DropTable(
+                name: "Order");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "DeliveryAccounts");
+
+            migrationBuilder.DropTable(
+                name: "MerchantAccounts");
+
+            migrationBuilder.DropTable(
+                name: "PaymentType");
+
+            migrationBuilder.DropTable(
+                name: "ShippingType");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

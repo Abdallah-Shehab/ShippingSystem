@@ -11,8 +11,8 @@ namespace ShippingSystem.DAL.Repositories.Base
         Task<IQueryable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
         Task AddAsync(T entity);
-        void Update(T entity);
-        void Delete(T entity);
+        Task<T> Update(T entity);
+        Task<T> Delete(T entity);
         Task SaveAsync();
     }
 }

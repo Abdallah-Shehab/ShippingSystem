@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,11 +9,29 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class DeliveryAccount : Account
+    public class DeliveryAccount : IdentityUser<int>
     {
-        [ForeignKey("account")]
-        public int Account_id { get; set; }
-        public Account account { get; set; }
+        [MaxLength(50)]
+        [Required]
+        public string Name { get; set; }
+        [MaxLength(255)]
+        [Required]
+        public string Address { get; set; }
+        [Required]
+        public bool Status { get; set; }
+
+        [ForeignKey("Role")]
+        public int? RoleID { get; set; }
+
+        public Role Role { get; set; }
+
+        [ForeignKey("Branch")]
+        public int? BranchID { get; set; }
+
+        public Branch Branch { get; set; }
+
+        public virtual List<Order>? Orders { get; set; } = new List<Order>();
+
 
         public decimal Discount_type { get; set; }
         public decimal Company_Percantage { get; set; }
