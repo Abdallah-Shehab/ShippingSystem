@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class Permission_Role_Entities
+    public class Permission_User_Entities
     {
-        [ForeignKey("role")]
-        public int role_id { get; set; }
+        [ForeignKey("account")]
+        public int user_id { get; set; }
 
         [ForeignKey("permission")]
         public int permission_id { get; set; }
 
-        [ForeignKey("entities")]
+        [ForeignKey("entity")]
         public int entity_id { get; set; }
 
-        public Role role { get; set; }
+        public Account account { get; set; }
         public Permission permission { get; set; }
         public Entity entity { get; set; }
     }
