@@ -35,10 +35,10 @@ namespace ShippingSystem.DAL.Models
 
 
         [Required]
-        public Decimal TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
 
         [Required]
-        public Decimal TotalWeight { get; set; }
+        public decimal TotalWeight { get; set; }
 
 
         [Required]
