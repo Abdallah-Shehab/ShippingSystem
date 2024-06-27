@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Azure;
+using Microsoft.EntityFrameworkCore;
 using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
 using ShippingSystem.DAL.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,46 +26,47 @@ namespace ShippingSystem.DAL.Repositories.Base
         {
             dbSet.Add(entity);
             return Task.FromResult(entity);
-            //throw new NotImplementedException();
         }
 
         public async Task<T> DeleteById(int id)
         {
-            T account = await GetByIdAsync(id);
-            if (account == null)
-            {
-                throw new Exception("Account not found");
-            }
+            T entity = await GetByIdAsync(id);
+            entity.IsDeleted = true;
+            await context.SaveChangesAsync();
 
-            dbSet.Remove(account);
-
-            return account;
+            return await Task.FromResult(entity);
         }
-        public Task<T> Update(T entity)
+        public async Task<T> Update(T entity)
         {
             dbSet.Update(entity);
-            return Task.FromResult(entity);
+            return await Task.FromResult(entity);
         }
-
         public async Task<IQueryable<T>> GetAllAsync()
         {
             return await Task.FromResult(dbSet.Where(obj => obj.IsDeleted == false));
         }
+        public async Task<IQueryable<T>> GetAllAsyncWithPagination(int page = 1,int pageSize = 10)
+        {
+            return await Task.FromResult(dbSet.Where(obj => obj.IsDeleted == false)
+                                              .Skip((page-1) * pageSize)
+                                              .Take(pageSize));
+        }
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await Task.FromResult(dbSet.FirstOrDefault(obj => obj.Id == id));
+            return await Task.FromResult(dbSet.FirstOrDefault(obj => obj.Id == id && obj.IsDeleted == false));
         }
 
-        public Task SaveAsync()
+        public async Task<int> SaveAsync()
         {
-            return Task.FromResult(context.SaveChanges());
-
+            var rowsEffected = await context.SaveChangesAsync();
+            return await Task.FromResult(rowsEffected);
         }
-
-        public Task<T> Delete(T entity)
+        
+        public async Task<IQueryable<T>> GetAllWithFilter(Expression<Func<T, bool>> expression)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(dbSet.Where(expression));
         }
+
     }
 }
