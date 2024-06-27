@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Interfaces.Base
 {
-    public interface IGenericRepository<T> where T : class,IEntity
+    public interface IGenericRepository<T> where T : class, IEntity
     {
         Task<IQueryable<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
-        Task AddAsync(T entity);
+        Task<T> AddAsync(T entity);
         Task<T> Update(T entity);
         Task<T> Delete(T entity);
+        Task<T> DeleteById(int id);
         Task SaveAsync();
     }
 }

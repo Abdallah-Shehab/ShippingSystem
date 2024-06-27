@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Repositories.Base
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : class ,IEntity
+    public class GenericRepository<T> : IGenericRepository<T> where T : class, IEntity
     {
         private readonly ShippingDBContext context;
         private readonly DbSet<T> dbSet;
@@ -20,32 +20,48 @@ namespace ShippingSystem.DAL.Repositories.Base
             this.context = context;
             dbSet = context.Set<T>();
         }
-        public Task AddAsync(T entity)
+        public Task<T> AddAsync(T entity)
         {
-            throw new NotImplementedException();
+            dbSet.Add(entity);
+            return Task.FromResult(entity);
+            //throw new NotImplementedException();
         }
 
-        public Task<T> Delete(T entity)
+        public async Task<T> DeleteById(int id)
         {
-            throw new NotImplementedException();
+            T account = await GetByIdAsync(id);
+            if (account == null)
+            {
+                throw new Exception("Account not found");
+            }
+
+            dbSet.Remove(account);
+
+            return account;
+        }
+        public Task<T> Update(T entity)
+        {
+            dbSet.Update(entity);
+            return Task.FromResult(entity);
         }
 
         public async Task<IQueryable<T>> GetAllAsync()
         {
-            return await Task.FromResult(dbSet.Where(obj => obj.IsDeleted == false)); 
+            return await Task.FromResult(dbSet.Where(obj => obj.IsDeleted == false));
         }
 
-        public Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await Task.FromResult(dbSet.FirstOrDefault(obj => obj.Id == id));
         }
 
         public Task SaveAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(context.SaveChanges());
+
         }
 
-        public Task<T> Update(T entity)
+        public Task<T> Delete(T entity)
         {
             throw new NotImplementedException();
         }
