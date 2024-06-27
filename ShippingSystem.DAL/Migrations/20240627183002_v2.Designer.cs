@@ -781,7 +781,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasOne("ShippingSystem.DAL.Models.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -790,7 +790,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasOne("ShippingSystem.DAL.Models.Account", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -799,7 +799,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasOne("ShippingSystem.DAL.Models.Account", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -808,13 +808,13 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasOne("ShippingSystem.DAL.Models.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ShippingSystem.DAL.Models.Account", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -823,7 +823,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasOne("ShippingSystem.DAL.Models.Account", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -956,19 +956,19 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasOne("ShippingSystem.DAL.Models.Entity", "entity")
                         .WithMany()
                         .HasForeignKey("entity_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ShippingSystem.DAL.Models.Permission", "permission")
                         .WithMany()
                         .HasForeignKey("permission_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ShippingSystem.DAL.Models.Account", "account")
                         .WithMany()
                         .HasForeignKey("user_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("account");
@@ -983,7 +983,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasOne("ShippingSystem.DAL.Models.Order", "order")
                         .WithMany("Products")
                         .HasForeignKey("order_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("order");

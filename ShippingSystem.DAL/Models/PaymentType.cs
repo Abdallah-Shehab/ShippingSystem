@@ -21,6 +21,6 @@ namespace ShippingSystem.DAL.Models
         public string Name { get; set; }
 
 
-        public List<PaymentType> PaymentTypes { get; set; } = new List<PaymentType>();
+        public List<Order> orders { get; set; } = new List<Order>();
     }
 }
