@@ -24,7 +24,7 @@ namespace ShippingSystem.DAL.Models
         [Required]
         public bool Status { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateOnly CreatedDate { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
 
         [ForeignKey("Government")]
         public int? GovernmentID { get; set; }

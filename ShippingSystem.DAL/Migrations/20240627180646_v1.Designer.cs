@@ -12,7 +12,7 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    [Migration("20240626161422_v1")]
+    [Migration("20240627180646_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -158,6 +158,9 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -233,6 +236,9 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<int?>("GovernmentID")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -258,6 +264,9 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.Property<int?>("GovernmentID")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -306,6 +315,9 @@ namespace ShippingSystem.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
@@ -366,6 +378,9 @@ namespace ShippingSystem.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -385,6 +400,9 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.Property<int?>("BranchID")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -436,6 +454,9 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<string>("Government")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -516,6 +537,9 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("MerchantID")
                         .HasColumnType("int");
 
@@ -575,6 +599,9 @@ namespace ShippingSystem.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -598,6 +625,9 @@ namespace ShippingSystem.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -607,9 +637,9 @@ namespace ShippingSystem.DAL.Migrations
                     b.ToTable("Permission");
                 });
 
-            modelBuilder.Entity("ShippingSystem.DAL.Models.Permission_Role_Entities", b =>
+            modelBuilder.Entity("ShippingSystem.DAL.Models.Permission_User_Entities", b =>
                 {
-                    b.Property<int>("role_id")
+                    b.Property<int>("user_id")
                         .HasColumnType("int");
 
                     b.Property<int>("permission_id")
@@ -618,16 +648,13 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<int>("entity_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("entityId")
-                        .HasColumnType("int");
+                    b.HasKey("user_id", "permission_id", "entity_id");
 
-                    b.HasKey("role_id", "permission_id", "entity_id");
-
-                    b.HasIndex("entityId");
+                    b.HasIndex("entity_id");
 
                     b.HasIndex("permission_id");
 
-                    b.ToTable("Permission_Role_Entities");
+                    b.ToTable("Permission_User_Entities");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.Product", b =>
@@ -674,6 +701,9 @@ namespace ShippingSystem.DAL.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -699,6 +729,9 @@ namespace ShippingSystem.DAL.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -881,11 +914,11 @@ namespace ShippingSystem.DAL.Migrations
                         .HasForeignKey("PaymentTypeId");
                 });
 
-            modelBuilder.Entity("ShippingSystem.DAL.Models.Permission_Role_Entities", b =>
+            modelBuilder.Entity("ShippingSystem.DAL.Models.Permission_User_Entities", b =>
                 {
                     b.HasOne("ShippingSystem.DAL.Models.Entity", "entity")
                         .WithMany()
-                        .HasForeignKey("entityId")
+                        .HasForeignKey("entity_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -895,17 +928,17 @@ namespace ShippingSystem.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShippingSystem.DAL.Models.Role", "role")
+                    b.HasOne("ShippingSystem.DAL.Models.Account", "account")
                         .WithMany()
-                        .HasForeignKey("role_id")
+                        .HasForeignKey("user_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("account");
 
                     b.Navigation("entity");
 
                     b.Navigation("permission");
-
-                    b.Navigation("role");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.Product", b =>
