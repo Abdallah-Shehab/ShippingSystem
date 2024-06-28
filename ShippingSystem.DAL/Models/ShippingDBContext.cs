@@ -43,7 +43,7 @@ namespace ShippingSystem.DAL.Models
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
-            //builder.Entity<AccountPermissions>().HasKey("user_id", "permission_id");
+
 
 
             builder.Entity<Account>()
