@@ -20,7 +20,7 @@ namespace ShippingSystem.DAL.Repositories.Base
         public GenericRepository(ShippingDBContext context)
         {
             this.context = context;
-            dbSet = context.Set<T>();
+            dbSet = this.context.Set<T>();
         }
         public Task<T> AddAsync(T entity)
         {
@@ -43,13 +43,14 @@ namespace ShippingSystem.DAL.Repositories.Base
         }
         public async Task<IQueryable<T>> GetAllAsync()
         {
-            return await Task.FromResult(dbSet.Where(obj => obj.IsDeleted == false));
+            return await Task.FromResult(dbSet.Where(obj => obj.IsDeleted == false).AsNoTracking());
         }
         public async Task<IQueryable<T>> GetAllAsyncWithPagination(int page = 1,int pageSize = 10)
         {
             return await Task.FromResult(dbSet.Where(obj => obj.IsDeleted == false)
                                               .Skip((page-1) * pageSize)
-                                              .Take(pageSize));
+                                              .Take(pageSize)
+                                              .AsNoTracking());
         }
 
         public async Task<T> GetByIdAsync(int id)
@@ -65,7 +66,7 @@ namespace ShippingSystem.DAL.Repositories.Base
         
         public async Task<IQueryable<T>> GetAllWithFilter(Expression<Func<T, bool>> expression)
         {
-            return await Task.FromResult(dbSet.Where(expression));
+            return await Task.FromResult(dbSet.Where(expression).AsNoTracking());
         }
 
     }

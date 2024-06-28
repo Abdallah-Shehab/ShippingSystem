@@ -70,6 +70,8 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<IGenericRepository<Account>, GenericRepository<Account>>();
             builder.Services.AddScoped<EmployeeService>();
 
+            //Register Order Service
+            builder.Services.AddScoped<OrderService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
