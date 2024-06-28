@@ -25,6 +25,6 @@ namespace ShippingSystem.DAL.Models
         public decimal Price { get; set; }
 
 
-        public List<ShippingType> Shippers { get; set; } = new List<ShippingType>();
+        public List<Order> Orders { get; set; } = new List<Order>();
     }
 }

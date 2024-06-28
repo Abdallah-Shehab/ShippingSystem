@@ -12,8 +12,8 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    [Migration("20240626212650_v4")]
-    partial class v4
+    [Migration("20240627180646_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -637,9 +637,9 @@ namespace ShippingSystem.DAL.Migrations
                     b.ToTable("Permission");
                 });
 
-            modelBuilder.Entity("ShippingSystem.DAL.Models.Permission_Role_Entities", b =>
+            modelBuilder.Entity("ShippingSystem.DAL.Models.Permission_User_Entities", b =>
                 {
-                    b.Property<int>("role_id")
+                    b.Property<int>("user_id")
                         .HasColumnType("int");
 
                     b.Property<int>("permission_id")
@@ -648,16 +648,13 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<int>("entity_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("entityId")
-                        .HasColumnType("int");
+                    b.HasKey("user_id", "permission_id", "entity_id");
 
-                    b.HasKey("role_id", "permission_id", "entity_id");
-
-                    b.HasIndex("entityId");
+                    b.HasIndex("entity_id");
 
                     b.HasIndex("permission_id");
 
-                    b.ToTable("Permission_Role_Entities");
+                    b.ToTable("Permission_User_Entities");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.Product", b =>
@@ -759,7 +756,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasOne("ShippingSystem.DAL.Models.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -768,7 +765,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasOne("ShippingSystem.DAL.Models.Account", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -777,7 +774,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasOne("ShippingSystem.DAL.Models.Account", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -786,13 +783,13 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasOne("ShippingSystem.DAL.Models.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ShippingSystem.DAL.Models.Account", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -801,7 +798,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasOne("ShippingSystem.DAL.Models.Account", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -917,31 +914,31 @@ namespace ShippingSystem.DAL.Migrations
                         .HasForeignKey("PaymentTypeId");
                 });
 
-            modelBuilder.Entity("ShippingSystem.DAL.Models.Permission_Role_Entities", b =>
+            modelBuilder.Entity("ShippingSystem.DAL.Models.Permission_User_Entities", b =>
                 {
                     b.HasOne("ShippingSystem.DAL.Models.Entity", "entity")
                         .WithMany()
-                        .HasForeignKey("entityId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("entity_id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ShippingSystem.DAL.Models.Permission", "permission")
                         .WithMany()
                         .HasForeignKey("permission_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("ShippingSystem.DAL.Models.Role", "role")
+                    b.HasOne("ShippingSystem.DAL.Models.Account", "account")
                         .WithMany()
-                        .HasForeignKey("role_id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("user_id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("account");
 
                     b.Navigation("entity");
 
                     b.Navigation("permission");
-
-                    b.Navigation("role");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.Product", b =>
@@ -949,7 +946,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasOne("ShippingSystem.DAL.Models.Order", "order")
                         .WithMany("Products")
                         .HasForeignKey("order_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("order");

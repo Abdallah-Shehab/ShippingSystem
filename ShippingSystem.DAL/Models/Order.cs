@@ -35,10 +35,10 @@ namespace ShippingSystem.DAL.Models
 
 
         [Required]
-        public Decimal TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
 
         [Required]
-        public Decimal TotalWeight { get; set; }
+        public decimal TotalWeight { get; set; }
 
 
         [Required]
@@ -50,6 +50,13 @@ namespace ShippingSystem.DAL.Models
         public string? Email { get; set; }
 
         public string? Notes { get; set; }
+
+        public decimal? ReceivedMoney { get; set; }
+        public decimal? DeliveryPrice { get; set; }
+        public decimal? PaiedMoney { get; set; }
+
+        public DateOnly? CreatedDate { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
+        public DateOnly? DeliverydDate { get; set; }
         [Required]
         public string StreetAndVillage { get; set; } = string.Empty;
 
@@ -66,12 +73,22 @@ namespace ShippingSystem.DAL.Models
         [ForeignKey("paymentType")]
         public int? PaymentTypeID { get; set; }
 
+        [ForeignKey("government")]
+
+        public int? GovernmentId { get; set; }
+
+        [ForeignKey("city")]
+
+        public int? CitytId { get; set; }
         public Account StaffMemberAccount { get; set; }
         public MerchantAccount MerchantAccount { get; set; }
         public DeliveryAccount DeliveryAccount { get; set; }
 
         public ShippingType ShippingType { get; set; }
         public PaymentType paymentType { get; set; }
+
+        public Government government { get; set; }
+        public City city { get; set; }
         public virtual List<Product>? Products { get; set; } = new List<Product>();
 
 
