@@ -72,6 +72,8 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<EmployeeService>();
             builder.Services.AddScoped<PermissionsService>();
 
+            //Register Order Service
+            builder.Services.AddScoped<OrderService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
