@@ -10,30 +10,24 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class Permission : IEntity
+    public class AccountPermissions
     {
-        [DefaultValue(false)]
-        public bool IsDeleted { get; set; }
-
-        [Key]
-        public int Id { get; set; }
-
-
 
 
         [ForeignKey("Account")]
-        public int AccountId { get; set; }
+        public int userId { get; set; }
         public Account Account { get; set; }
 
-        [ForeignKey("Entity")]
-        public int EntityId { get; set; }
-        public ExistedEntities Entity { get; set; }
+        [ForeignKey("Permission")]
+        public int PermissionId { get; set; }
+        public Permission Permission { get; set; }
 
         public bool CanRead { get; set; }
         public bool CanWrite { get; set; }
-        public bool CanDelete { get; set; }
         public bool CanCreate { get; set; }
+        public bool CanUpdate { get; set; }
 
 
+        //public AccessedEntity entity { get; set; }
     }
 }

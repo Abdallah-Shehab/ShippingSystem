@@ -1,4 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
+using ShippingSysem.BLL.DTOs.EmployeeDTOS;
+using ShippingSysem.BLL.DTOs.EntitiesPermissionsDTOS;
+using ShippingSysem.BLL.DTOs.PermissionsDTOS;
 using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
 using System;
@@ -11,32 +15,42 @@ namespace ShippingSysem.BLL.Services
 {
     public class PermissionsService
     {
-        private readonly IGenericRepository<AccessedEntity> genRepo;
-        private readonly ShippingDBContext dbContext;
+        private readonly IGenericRepository<Account> genRepo;
+
+        private ShippingDBContext dbContext;
 
 
-        public PermissionsService(IGenericRepository<AccessedEntity> genRepo, ShippingDBContext dbContext)
+        public PermissionsService(ShippingDBContext dbContext, IGenericRepository<Account> genRepo)
         {
-            this.genRepo = genRepo;
+
             this.dbContext = dbContext;
+            this.genRepo = genRepo;
         }
 
-        public List<string> GetAllPermissionsForUser()
+        //public async Task<List<Permission>> GetAllPermissionsForUser()
+        //{
+        //    var acc = dbContext.Set<Account>().FirstOrDefault(i=>i.Id==1);
+        //    var permissions = acc.Permissions.ToList();
+
+        //    return permissions;
+        //}
+
+
+        public Task<List<PermissionDTO>> GetAllPermissionsForUser(int userId)
         {
-            try
+            var acc = dbContext.Set<Permission>().Where(i => i.AccountId == userId).Select(a => new PermissionDTO
             {
-                var permissions = dbContext.Accounts.Select(s => s.).ToList();
+                EntityId = a.Entity.Id,
+                EntityName = a.Entity.Name,
+                CanRead = a.CanRead,
+                CanWrite = a.CanWrite,
+                CanDelete = a.CanDelete,
+                CanCreate = a.CanCreate
+            }).ToList();
 
-                return permissions;
-            }
-            catch (Exception ex)
-            {
-                // Log the exception (optional)
-                // logger.LogError(ex, "An error occurred while fetching permissions for user with ID {UserId}", userId);
 
-                // Return an empty list to maintain the expected return type
-                return new List<string>();
-            }
+            return Task.FromResult(acc);
         }
+
     }
 }
