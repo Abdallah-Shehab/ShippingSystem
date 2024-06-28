@@ -1,6 +1,7 @@
 ﻿using ShippingSystem.DAL.Models.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -11,8 +12,9 @@ namespace ShippingSystem.DAL.Models
 {
     public class Government : IEntity
     {
+        [DefaultValue(false)]
         public bool IsDeleted { get; set; }
-      
+
         [Key]
         [Required]
         public int Id { get; set; }
