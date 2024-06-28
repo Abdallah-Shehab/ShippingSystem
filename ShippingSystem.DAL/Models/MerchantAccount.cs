@@ -2,6 +2,7 @@
 using ShippingSystem.DAL.Models.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -10,10 +11,11 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class MerchantAccount : IdentityUser<int>,IEntity
+    public class MerchantAccount : IdentityUser<int>, IEntity
     {
+        [DefaultValue(false)]
         public bool IsDeleted { get; set; }
-      
+
         [MaxLength(50)]
         [Required]
         public string Name { get; set; } = string.Empty;

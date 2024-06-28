@@ -1,6 +1,9 @@
 
 using Microsoft.EntityFrameworkCore;
+using ShippingSysem.BLL.Services;
+using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
+using ShippingSystem.DAL.Repositories.Base;
 
 namespace ShippingSystem.PL
 {
@@ -27,10 +30,48 @@ namespace ShippingSystem.PL
                 options.User.RequireUniqueEmail = true;
                 options.User.AllowedUserNameCharacters = null;
                 options.SignIn.RequireConfirmedEmail = false;
+                // Adjust other password settings as necessary
+                options.Password.RequiredLength = 6;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+            }).AddEntityFrameworkStores<ShippingDBContext>();
+
+            builder.Services.AddIdentityCore<DeliveryAccount>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.User.AllowedUserNameCharacters = null;
+                options.SignIn.RequireConfirmedEmail = false;
+                // Adjust other password settings as necessary
+                options.Password.RequiredLength = 6;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+            }).AddEntityFrameworkStores<ShippingDBContext>();
+
+            builder.Services.AddIdentityCore<MerchantAccount>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.User.AllowedUserNameCharacters = null;
+                options.SignIn.RequireConfirmedEmail = false;
+                // Adjust other password settings as necessary
+                options.Password.RequiredLength = 6;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
             }).AddEntityFrameworkStores<ShippingDBContext>();
 
 
 
+            //Register Emp Services 
+            builder.Services.AddScoped<IGenericRepository<Account>, GenericRepository<Account>>();
+            builder.Services.AddScoped<EmployeeService>();
+
+            //Register Order Service
+            builder.Services.AddScoped<OrderService>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

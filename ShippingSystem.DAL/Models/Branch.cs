@@ -1,6 +1,7 @@
 ﻿using ShippingSystem.DAL.Models.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class Branch: IEntity
+    public class Branch : IEntity
     {
         [Key]
         [Required]
@@ -17,12 +18,13 @@ namespace ShippingSystem.DAL.Models
         [MaxLength(50)]
         [Required]
         public string Name { get; set; } = string.Empty;
+        [DefaultValue(false)]
         public bool IsDeleted { get; set; }
-        
+
         [Required]
         public bool Status { get; set; }
 
-        public DateTime Date { get; set; }
+        public DateOnly CreatedDate { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
 
         [ForeignKey("Government")]
         public int? GovernmentID { get; set; }
