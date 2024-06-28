@@ -20,6 +20,6 @@ namespace ShippingSystem.DAL.Models
 
         public Account account { get; set; }
         public Permission permission { get; set; }
-        public Entity entity { get; set; }
+        public AccessedEntity entity { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class Entity : IEntity
+    public class AccessedEntity : IEntity
     {
         [Key]
         public int Id { get; set; }

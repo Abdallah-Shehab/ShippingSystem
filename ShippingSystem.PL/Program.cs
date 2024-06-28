@@ -32,7 +32,7 @@ namespace ShippingSystem.PL
                 options.SignIn.RequireConfirmedEmail = false;
                 // Adjust other password settings as necessary
                 options.Password.RequiredLength = 6;
-                options.Password.RequireDigit = false;
+
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -45,7 +45,7 @@ namespace ShippingSystem.PL
                 options.SignIn.RequireConfirmedEmail = false;
                 // Adjust other password settings as necessary
                 options.Password.RequiredLength = 6;
-                options.Password.RequireDigit = false;
+
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -58,7 +58,7 @@ namespace ShippingSystem.PL
                 options.SignIn.RequireConfirmedEmail = false;
                 // Adjust other password settings as necessary
                 options.Password.RequiredLength = 6;
-                options.Password.RequireDigit = false;
+
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -68,7 +68,9 @@ namespace ShippingSystem.PL
 
             //Register Emp Services 
             builder.Services.AddScoped<IGenericRepository<Account>, GenericRepository<Account>>();
+            builder.Services.AddScoped<IGenericRepository<AccessedEntity>, GenericRepository<AccessedEntity>>();
             builder.Services.AddScoped<EmployeeService>();
+            builder.Services.AddScoped<PermissionsService>();
 
             var app = builder.Build();
 
