@@ -58,11 +58,16 @@ namespace ShippingSystem.DAL.Repositories.Base
             return await Task.FromResult(dbSet.FirstOrDefault(obj => obj.Id == id && obj.IsDeleted == false));
         }
 
+        //public async Task<int> SaveAsync()
+        //{
+        //    var rowsEffected = await context.SaveChangesAsync();
+        //    return await Task.FromResult(rowsEffected);
+        //}
         public async Task<int> SaveAsync()
         {
             return await context.SaveChangesAsync();
         }
-        
+
         public async Task<IQueryable<T>> GetAllWithFilter(Expression<Func<T, bool>> expression)
         {
             return await Task.FromResult(dbSet.Where(expression).AsNoTracking());

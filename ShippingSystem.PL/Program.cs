@@ -89,8 +89,6 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
             builder.Services.AddScoped<OrderService>();
-            builder.Services.AddScoped<BranchService>();
-            builder.Services.AddScoped<IOrderRepository,OrderRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
