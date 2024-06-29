@@ -19,6 +19,6 @@ namespace ShippingSystem.DAL.Repositories
             cities = this.context.Cities;
         }
         
-    }
+    
     }
 }
