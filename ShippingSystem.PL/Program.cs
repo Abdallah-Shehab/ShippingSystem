@@ -71,6 +71,7 @@ namespace ShippingSystem.PL
 
             //Register Emp Services 
             builder.Services.AddScoped<IGenericRepository<Account>, GenericRepository<Account>>();
+            builder.Services.AddScoped<IGenericRepository<Role>, GenericRepository<Role>>();
             builder.Services.AddScoped<IGenericStatusRepository<Branch>, GenericStatusRepository<Branch>>();
             builder.Services.AddScoped<IGenericRepository<ExistedEntities>, GenericRepository<ExistedEntities>>();
 
@@ -79,7 +80,7 @@ namespace ShippingSystem.PL
 
             //builder.Services.AddScoped<IGenericRepository<Permission_User_Entities>, GenericRepository<Permission_User_Entities>>();
             builder.Services.AddScoped<EmployeeService>();
-            builder.Services.AddScoped<PermissionsService>();
+            builder.Services.AddScoped<RoleService>();
 
             // Delivery Accounts Service
             builder.Services.AddScoped<DeliveryAccountService>();
