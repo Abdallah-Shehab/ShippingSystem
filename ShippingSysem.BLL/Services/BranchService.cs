@@ -38,6 +38,19 @@ namespace ShippingSysem.BLL.Services
 			else
 				return null;
 		}
-	
+
+		public async Task<bool> ChangeStatus(int id)
+		{
+			var row = await iGenericStatusRepository.GetByIdAsync(id);
+			var changedOrNot = false;
+			if (row != null)
+			{
+				iGenericStatusRepository.ChangeStatus(row);
+				await iGenericStatusRepository.SaveAsync();
+				changedOrNot = true;
+			}
+			return changedOrNot;
+		}
+
 	}
 }

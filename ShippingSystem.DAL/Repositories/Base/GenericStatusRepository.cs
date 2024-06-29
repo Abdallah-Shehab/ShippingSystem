@@ -23,14 +23,6 @@ namespace ShippingSystem.DAL.Repositories.Base
 		public async void ChangeStatus(T row)
 		{
 			row.Status = !row.Status;
-
-			//T row = await GetByIdAsync(id);
-			//if (row != null)
-			//{
-			//	row.status = !row.status;
-			//	return await SaveAsync();
-			//}
-			//return 0;
 		}
 	}
 }

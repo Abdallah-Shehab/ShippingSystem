@@ -23,6 +23,12 @@ namespace ShippingSystem.PL.Controllers
 			var branches = await branchService.GetBranches();
 			return Ok(branches);
 		}
+
+		[HttpGet("changeStatus/{id}")]   
+		public async Task<IActionResult> ChangeStatus(int id)
+		{
+			return Ok(await branchService.ChangeStatus(id));
+		}
 		
 	}
 }
