@@ -28,7 +28,12 @@ namespace ShippingSystem.PL.Controllers
 		public async Task<IActionResult> GetBranchByID(int id)
 		{
 			var branch = await branchService.GetBranchByID(id);
-			return Ok(branch);
+			if (branch != null)
+			{
+				return Ok(branch);
+			}
+			else
+				return NotFound();
 		}
 
 		[HttpGet("changeStatus/{id}")]   
@@ -45,7 +50,14 @@ namespace ShippingSystem.PL.Controllers
 		[HttpPut("{id}")]
 		public async Task<IActionResult> UpdateBranch(int id,CreateBranchDTO branchdto)
 		{
-			return Ok(await branchService.UpdateBranch(id, branchdto));
+			var branch = await branchService.UpdateBranch(id, branchdto);
+			if (branch != null)
+			{
+				return Ok(branch);
+			}
+			else
+				return NotFound();
+
 		}
 		[HttpPost]
 		public async Task<IActionResult> AddBranch(CreateBranchDTO branchdto)

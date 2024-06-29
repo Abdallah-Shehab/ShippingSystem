@@ -23,16 +23,21 @@ namespace ShippingSysem.BLL.Services
 		public async Task<ReadBranchDTO> GetBranchByID(int id)
 		{
 			var branch = await iGenericStatusRepository.GetByIdAsync(id);
-			return new ReadBranchDTO()
+			if (branch != null)
 			{
-				Id = branch.Id,
-				Name = branch.Name,
-				CreatedDate = branch.CreatedDate,
-				GovernmentID = branch.GovernmentID,
-				GovernmentName = iGenericStatusRepositoryGovernment.GetByIdAsync(branch.GovernmentID).Result.Name,
-				IsDeleted = branch.IsDeleted,
-				Status = branch.Status
-			};
+				return new ReadBranchDTO()
+				{
+					Id = branch.Id,
+					Name = branch.Name,
+					CreatedDate = branch.CreatedDate,
+					GovernmentID = branch.GovernmentID,
+					GovernmentName = iGenericStatusRepositoryGovernment.GetByIdAsync(branch.GovernmentID).Result.Name,
+					IsDeleted = branch.IsDeleted,
+					Status = branch.Status
+				};
+			}
+			else
+				return null;
 		}
 		public async Task<List<ReadBranchDTO>> GetBranches()
 		{
@@ -82,25 +87,30 @@ namespace ShippingSysem.BLL.Services
 		public async Task<ReadBranchDTO> UpdateBranch(int id, CreateBranchDTO branchdto)
 		{
 			var branch = await iGenericStatusRepository.GetByIdAsync(id);
-			
-			//mapping from CreateBranchDTO to Branch
-			branch.Name = branchdto.Name;
-			branch.GovernmentID = branchdto.GovernmentID;
 
-			Branch updatedBranch = iGenericStatusRepository.Update(branch).Result;
-			await iGenericStatusRepository.SaveAsync();
-
-			//mapping from Branch to ReadBranchDTO
-			return new ReadBranchDTO()
+			if (branch != null)
 			{
-				Id = updatedBranch.Id,
-				Name = updatedBranch.Name,
-				CreatedDate = updatedBranch.CreatedDate,
-				GovernmentID = updatedBranch.GovernmentID,
-				GovernmentName = iGenericStatusRepositoryGovernment.GetByIdAsync(updatedBranch.GovernmentID).Result.Name,
-				IsDeleted = updatedBranch.IsDeleted,
-				Status = updatedBranch.Status
-			};
+				//mapping from CreateBranchDTO to Branch
+				branch.Name = branchdto.Name;
+				branch.GovernmentID = branchdto.GovernmentID;
+
+				Branch updatedBranch = iGenericStatusRepository.Update(branch).Result;
+				await iGenericStatusRepository.SaveAsync();
+
+				//mapping from Branch to ReadBranchDTO
+				return new ReadBranchDTO()
+				{
+					Id = updatedBranch.Id,
+					Name = updatedBranch.Name,
+					CreatedDate = updatedBranch.CreatedDate,
+					GovernmentID = updatedBranch.GovernmentID,
+					GovernmentName = iGenericStatusRepositoryGovernment.GetByIdAsync(updatedBranch.GovernmentID).Result.Name,
+					IsDeleted = updatedBranch.IsDeleted,
+					Status = updatedBranch.Status
+				};
+			}
+			else
+				return null;
 		}
 
 		public async Task<ReadBranchDTO> AddBranch(CreateBranchDTO branchdto)
