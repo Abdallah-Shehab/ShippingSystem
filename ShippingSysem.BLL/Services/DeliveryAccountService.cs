@@ -25,7 +25,7 @@ namespace ShippingSysem.BLL.Services
                     UserName = acc.UserName,
                     Email = acc.Email,
                     Phone = acc.PhoneNumber,
-                    Branch = acc.Branch.Name , // Ensure Branch.Name is safely accessed
+                    Branch = acc.Branch.Name , 
                     Status = acc.Status,
                     IsDeleted = acc.IsDeleted,
                     DiscountType = acc.Discount_type

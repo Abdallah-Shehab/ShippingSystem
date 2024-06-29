@@ -10,7 +10,7 @@ namespace ShippingSystem.PL.Controllers
     {
         private readonly DeliveryAccountService deliveryAccountService;
 
-        public DeliveryController(DeliveryAccountService deliveryAccountService) // Corrected the constructor name
+        public DeliveryController(DeliveryAccountService deliveryAccountService)
         {
             this.deliveryAccountService = deliveryAccountService;
         }
