@@ -89,6 +89,27 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<OrderService>();
 
 
+
+
+            //  add  CORS configuration:
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("http://localhost:4200")
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
+
+         
+
+            
+            
+
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -99,10 +120,10 @@ namespace ShippingSystem.PL
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors();
             app.UseAuthorization();
 
-
+           
             app.MapControllers();
 
             app.Run();
