@@ -93,6 +93,7 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 
+
             // Allow Cors
             string txt = "AllowedURLS";
             builder.Services.AddCors(o =>
@@ -104,6 +105,7 @@ namespace ShippingSystem.PL
                     builder.AllowAnyHeader();
                 });
             });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -114,7 +116,9 @@ namespace ShippingSystem.PL
             }
 
             app.UseHttpsRedirection();
+
             app.UseCors(txt);
+
             app.UseAuthorization();
 
 
