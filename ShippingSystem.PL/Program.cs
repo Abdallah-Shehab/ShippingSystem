@@ -1,8 +1,10 @@
 
 using Microsoft.EntityFrameworkCore;
 using ShippingSysem.BLL.Services;
+using ShippingSystem.DAL.Interfaces;
 using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
+using ShippingSystem.DAL.Repositories;
 using ShippingSystem.DAL.Repositories.Base;
 
 namespace ShippingSystem.PL
@@ -25,6 +27,7 @@ namespace ShippingSystem.PL
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DB"));
             });
+
             builder.Services.AddIdentity<Account, Role>(options =>
             {
                 options.User.RequireUniqueEmail = true;
@@ -32,7 +35,7 @@ namespace ShippingSystem.PL
                 options.SignIn.RequireConfirmedEmail = false;
                 // Adjust other password settings as necessary
                 options.Password.RequiredLength = 6;
-                options.Password.RequireDigit = false;
+
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -45,7 +48,7 @@ namespace ShippingSystem.PL
                 options.SignIn.RequireConfirmedEmail = false;
                 // Adjust other password settings as necessary
                 options.Password.RequiredLength = 6;
-                options.Password.RequireDigit = false;
+
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -58,7 +61,7 @@ namespace ShippingSystem.PL
                 options.SignIn.RequireConfirmedEmail = false;
                 // Adjust other password settings as necessary
                 options.Password.RequiredLength = 6;
-                options.Password.RequireDigit = false;
+
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -68,10 +71,26 @@ namespace ShippingSystem.PL
 
             //Register Emp Services 
             builder.Services.AddScoped<IGenericRepository<Account>, GenericRepository<Account>>();
+            builder.Services.AddScoped< IGenericStatusRepository<Branch>, GenericStatusRepository<Branch>>();
+            builder.Services.AddScoped<IGenericRepository<ExistedEntities>, GenericRepository<ExistedEntities>>();
+
+            //Delivery Accounts
+            builder.Services.AddScoped<IGenericRepository<DeliveryAccount>, GenericRepository<DeliveryAccount>>();
+
+            //builder.Services.AddScoped<IGenericRepository<Permission_User_Entities>, GenericRepository<Permission_User_Entities>>();
             builder.Services.AddScoped<EmployeeService>();
+            builder.Services.AddScoped<PermissionsService>();
+
+            // Delivery Accounts Service
+            builder.Services.AddScoped< DeliveryAccountService>();
+
 
             //Register Order Service
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
             builder.Services.AddScoped<OrderService>();
+            builder.Services.AddScoped<BranchService>();
+            builder.Services.AddScoped<IOrderRepository,OrderRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.

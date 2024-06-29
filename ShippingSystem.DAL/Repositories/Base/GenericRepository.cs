@@ -60,8 +60,7 @@ namespace ShippingSystem.DAL.Repositories.Base
 
         public async Task<int> SaveAsync()
         {
-            var rowsEffected = await context.SaveChangesAsync();
-            return await Task.FromResult(rowsEffected);
+            return await context.SaveChangesAsync();
         }
         
         public async Task<IQueryable<T>> GetAllWithFilter(Expression<Func<T, bool>> expression)

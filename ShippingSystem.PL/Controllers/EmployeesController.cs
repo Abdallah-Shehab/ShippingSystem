@@ -12,12 +12,12 @@ namespace ShippingSystem.PL.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Employees : ControllerBase
+    public class EmployeesController : ControllerBase
     {
         private readonly IGenericRepository<Account> genRepo;
         private readonly EmployeeService empService;
 
-        public Employees(IGenericRepository<Account> genRepo, EmployeeService EmpService)
+        public EmployeesController(IGenericRepository<Account> genRepo, EmployeeService EmpService)
         {
             this.genRepo = genRepo;
             empService = EmpService;
