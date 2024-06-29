@@ -88,6 +88,7 @@ namespace ShippingSystem.DAL.Repositories
         //private method to get all navigation properties I need
         private IQueryable<Order> GetOrders(Expression<Func<Order, bool>> expression)
         {
+            //Note => you must handle this function, when there is no data for orders in database it occures error (nullReference error)
             return context.Orders.Include(order => order.city)
                                  .Include(order => order.government)
                                  .Include(order => order.MerchantAccount)
