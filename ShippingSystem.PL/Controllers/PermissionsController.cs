@@ -42,6 +42,13 @@ namespace ShippingSystem.PL.Controllers
             if (result) return Ok("Updated");
             else return NotFound();
         }
+        //[HttpGet]
+
+        //public async Task<IActionResult> Get()
+        //{
+        //    var permissions = service.GetAllPermissionsForUser();
+        //    return Ok(permissions);
+        //}
 
 
     }

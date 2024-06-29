@@ -27,6 +27,7 @@ namespace ShippingSystem.PL
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DB"));
             });
+
             builder.Services.AddIdentity<Account, Role>(options =>
             {
                 options.User.RequireUniqueEmail = true;
