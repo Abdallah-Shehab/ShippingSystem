@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ShippingSystem.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class v1 : Migration
+    public partial class v10 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -90,7 +90,7 @@ namespace ShippingSystem.DAL.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -137,7 +137,7 @@ namespace ShippingSystem.DAL.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,7 +194,7 @@ namespace ShippingSystem.DAL.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -219,13 +219,13 @@ namespace ShippingSystem.DAL.Migrations
                         column: x => x.AccountId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Permission_ExistedEntities_EntityId",
                         column: x => x.EntityId,
                         principalTable: "ExistedEntities",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -238,7 +238,7 @@ namespace ShippingSystem.DAL.Migrations
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateOnly>(type: "date", nullable: false),
-                    GovernmentID = table.Column<int>(type: "int", nullable: true)
+                    GovernmentID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -366,6 +366,8 @@ namespace ShippingSystem.DAL.Migrations
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
+                    NormalShippingCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PickupShippingCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     GovernmentID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -467,7 +469,7 @@ namespace ShippingSystem.DAL.Migrations
                         column: x => x.order_Id,
                         principalTable: "Order",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -484,7 +486,7 @@ namespace ShippingSystem.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "123 New Street", null, "ec5de543-b40c-40dd-a330-bc6b134c86af", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAELEA2SGvXSYp4Do4D7Ug3oMoY4wXytB9qtOc2jk+uCCLoJ2dO++b3HQFGS+q+P5sEQ==", null, false, null, null, true, false, "newuser" });
+                values: new object[] { 1, 0, "123 New Street", null, "81eb9c29-a145-423e-87b5-2ed898b8ce0d", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEON5ioaQHWgGJ+UP99YGjXhLsmCRWU8AsP5RV4wzHFP3Z7kN+lu4HE0+OunPxXQIYg==", null, false, null, null, true, false, "newuser" });
 
             migrationBuilder.InsertData(
                 table: "ExistedEntities",
@@ -527,8 +529,16 @@ namespace ShippingSystem.DAL.Migrations
                 columns: new[] { "Id", "AccountId", "CanCreate", "CanDelete", "CanRead", "CanWrite", "EntityId", "IsDeleted" },
                 values: new object[,]
                 {
-                    { 1, 1, true, false, true, true, 1, false },
-                    { 2, 1, false, false, true, false, 2, false }
+                    { 1, 1, false, false, false, false, 1, false },
+                    { 2, 1, false, false, false, false, 2, false },
+                    { 3, 1, false, false, false, false, 3, false },
+                    { 4, 1, false, false, false, false, 4, false },
+                    { 5, 1, false, false, false, false, 5, false },
+                    { 6, 1, false, false, false, false, 6, false },
+                    { 7, 1, false, false, false, false, 7, false },
+                    { 8, 1, false, false, false, false, 8, false },
+                    { 9, 1, false, false, false, false, 9, false },
+                    { 10, 1, false, false, false, false, 10, false }
                 });
 
             migrationBuilder.CreateIndex(
@@ -671,7 +681,7 @@ namespace ShippingSystem.DAL.Migrations
                 column: "UserId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.NoAction);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserLogins_AspNetUsers_UserId",
@@ -679,7 +689,7 @@ namespace ShippingSystem.DAL.Migrations
                 column: "UserId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.NoAction);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserRoles_AspNetUsers_UserId",
@@ -687,7 +697,7 @@ namespace ShippingSystem.DAL.Migrations
                 column: "UserId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.NoAction);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUsers_Branch_BranchID",
@@ -701,7 +711,8 @@ namespace ShippingSystem.DAL.Migrations
                 table: "Branch",
                 column: "GovernmentID",
                 principalTable: "Government",
-                principalColumn: "Id");
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
