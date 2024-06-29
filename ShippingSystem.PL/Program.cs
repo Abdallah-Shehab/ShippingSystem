@@ -34,7 +34,7 @@ namespace ShippingSystem.PL
                 options.SignIn.RequireConfirmedEmail = false;
                 // Adjust other password settings as necessary
                 options.Password.RequiredLength = 6;
-                options.Password.RequireDigit = false;
+
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -47,7 +47,7 @@ namespace ShippingSystem.PL
                 options.SignIn.RequireConfirmedEmail = false;
                 // Adjust other password settings as necessary
                 options.Password.RequiredLength = 6;
-                options.Password.RequireDigit = false;
+
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -60,7 +60,7 @@ namespace ShippingSystem.PL
                 options.SignIn.RequireConfirmedEmail = false;
                 // Adjust other password settings as necessary
                 options.Password.RequiredLength = 6;
-                options.Password.RequireDigit = false;
+
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -71,9 +71,14 @@ namespace ShippingSystem.PL
             //Register Emp Services 
             builder.Services.AddScoped<IGenericRepository<Account>, GenericRepository<Account>>();
             builder.Services.AddScoped< IGenericStatusRepository<Branch>, GenericStatusRepository<Branch>>();
+            builder.Services.AddScoped<IGenericRepository<ExistedEntities>, GenericRepository<ExistedEntities>>();
+            //builder.Services.AddScoped<IGenericRepository<Permission_User_Entities>, GenericRepository<Permission_User_Entities>>();
             builder.Services.AddScoped<EmployeeService>();
+            builder.Services.AddScoped<PermissionsService>();
 
             //Register Order Service
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
             builder.Services.AddScoped<OrderService>();
             builder.Services.AddScoped<BranchService>();
             builder.Services.AddScoped<IOrderRepository,OrderRepository>();
