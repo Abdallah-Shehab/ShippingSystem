@@ -27,13 +27,7 @@ namespace ShippingSysem.BLL.Services
             this.genRepo = genRepo;
         }
 
-        //public async Task<List<Permission>> GetAllPermissionsForUser()
-        //{
-        //    var acc = dbContext.Set<Account>().FirstOrDefault(i=>i.Id==1);
-        //    var permissions = acc.Permissions.ToList();
 
-        //    return permissions;
-        //}
 
 
         public Task<List<PermissionDTO>> GetAllPermissionsForUser(int userId)
@@ -51,6 +45,39 @@ namespace ShippingSysem.BLL.Services
 
             return Task.FromResult(acc);
         }
+
+        public async Task<bool> UpdatePermissionsForUser(int id, List<PermissionDTO> permissions)
+        {
+            var account = await dbContext.Set<Account>()
+                                    .Include(e => e.Permissions)
+                                    .FirstOrDefaultAsync(i => i.Id == id);
+
+            if (account == null)
+            {
+                throw new ArgumentException($"Account with ID {id} not found.");
+            }
+
+
+            // Update permissions based on permissionDtos
+            foreach (var permissionDto in permissions)
+            {
+                var existingPermission = account.Permissions.FirstOrDefault(p => p.EntityId == permissionDto.EntityId);
+
+                if (existingPermission != null)
+                {
+                    existingPermission.CanRead = permissionDto.CanRead;
+                    existingPermission.CanWrite = permissionDto.CanWrite;
+                    existingPermission.CanDelete = permissionDto.CanDelete;
+                    existingPermission.CanCreate = permissionDto.CanCreate;
+                }
+
+            }
+            await genRepo.SaveAsync();
+            return true;
+
+        }
+
+
 
     }
 }

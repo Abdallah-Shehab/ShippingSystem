@@ -35,6 +35,14 @@ namespace ShippingSystem.PL.Controllers
             return NotFound();
         }
 
+        [HttpPut]
+        public async Task<IActionResult> UpdateAccountPermissions(int id, List<PermissionDTO> permissions)
+        {
+            var result = await service.UpdatePermissionsForUser(id, permissions);
+            if (result) return Ok("Updated");
+            else return NotFound();
+        }
+
 
     }
 }

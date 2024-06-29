@@ -114,21 +114,95 @@ namespace ShippingSystem.DAL.Models
                     Id = 1,
                     AccountId = newAccount.Id,
                     EntityId = 1, // Settings
-                    CanRead = true,
-                    CanWrite = true,
+                    CanRead = false,
+                    CanWrite = false,
                     CanDelete = false,
-                    CanCreate = true
+                    CanCreate = false
                 },
                 new Permission
                 {
                     Id = 2,
                     AccountId = newAccount.Id,
                     EntityId = 2, // Branches
-                    CanRead = true,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                }, new Permission
+                {
+                    Id = 3,
+                    AccountId = newAccount.Id,
+                    EntityId = 3, // Branches
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                }, new Permission
+                {
+                    Id = 4,
+                    AccountId = newAccount.Id,
+                    EntityId = 4, // Branches
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                }, new Permission
+                {
+                    Id = 5,
+                    AccountId = newAccount.Id,
+                    EntityId = 5, // Branches
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                }, new Permission
+                {
+                    Id = 6,
+                    AccountId = newAccount.Id,
+                    EntityId = 6, // Branches
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                }, new Permission
+                {
+                    Id = 7,
+                    AccountId = newAccount.Id,
+                    EntityId = 7, // Branches
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                }, new Permission
+                {
+                    Id = 8,
+                    AccountId = newAccount.Id,
+                    EntityId = 8, // Branches
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                }, new Permission
+                {
+                    Id = 9,
+                    AccountId = newAccount.Id,
+                    EntityId = 9, // Branches
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                }, new Permission
+                {
+                    Id = 10,
+                    AccountId = newAccount.Id,
+                    EntityId = 10, // Branches
+                    CanRead = false,
                     CanWrite = false,
                     CanDelete = false,
                     CanCreate = false
                 }
+
+
             );
             base.OnModelCreating(builder);
         }
