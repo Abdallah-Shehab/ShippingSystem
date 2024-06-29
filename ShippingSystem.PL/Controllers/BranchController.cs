@@ -37,7 +37,7 @@ namespace ShippingSystem.PL.Controllers
 			return Ok(await branchService.ChangeStatus(id));
 		}
 
-		[HttpGet("deleteBranch/{id}")]
+		[HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteBranch(int id)
 		{
 			return Ok(await branchService.DeleteBranch(id));
