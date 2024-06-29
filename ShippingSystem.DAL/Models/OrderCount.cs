@@ -8,7 +8,7 @@ namespace ShippingSystem.DAL.Models
 {
     public class OrderCount
     {
-        public string Status { get; set; }
+        public string Status { get; set; } 
 
         public int Count { get; set; }
     }

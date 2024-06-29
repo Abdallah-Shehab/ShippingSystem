@@ -24,10 +24,14 @@ namespace ShippingSystem.DAL.Repositories
         public async Task<IQueryable<Order>> GetAllFilterdOrdersAsync(string status = "")
         {
             if (string.IsNullOrEmpty(status))
-                return await Task.FromResult(GetOrders(order=> order.IsDeleted == false));
+                return await Task.FromResult(
+                                            GetOrders(order=> order.IsDeleted == false)
+                                            );
 
 
-            return await Task.FromResult(GetOrders(order=> order.IsDeleted == false && order.Status == status));
+            return await Task.FromResult(
+                                        GetOrders(order=> order.IsDeleted == false && order.Status == status)
+                                        );
         }
 
         //Get All Orders With Pagination Using Status As Filteration
@@ -35,36 +39,49 @@ namespace ShippingSystem.DAL.Repositories
         public async Task<IQueryable<Order>> GetAllFilterdOrdersAsync(int page, int pageSize, string Status = "")
         {
             if (string.IsNullOrEmpty(Status))
-                return await Task.FromResult(GetOrders(order=>order.IsDeleted == false).Skip((page - 1) * pageSize)
-                                                                                       .Take(pageSize));
+                return await Task.FromResult(
+                                            GetOrders(order=>order.IsDeleted == false)
+                                            .Skip((page - 1) * pageSize)
+                                            .Take(pageSize)
+                                            );
 
-            return await Task.FromResult(GetOrders(order => order.IsDeleted == false && order.Status == Status).Skip((page - 1) * pageSize)
-                                                                                       .Take(pageSize));
+
+            return await Task.FromResult(
+                                        GetOrders(order => order.IsDeleted == false && order.Status == Status)
+                                        .Skip((page - 1) * pageSize)
+                                        .Take(pageSize)
+                                        );
         }
 
         //Get Count For all orders depending on Status 
         public async Task<IQueryable<OrderCount>> GetOrderCountsAsync()
         {
-            return await Task.FromResult(context.Orders
-                                                .GroupBy(order => order.Status)
-                                                .Select(order => new OrderCount
-                                                {
-                                                    Status = order.Key,
-                                                    Count = order.Count()
-                                                }));
+            return await Task.FromResult(
+                                        context.Orders
+                                               .GroupBy(order => order.Status)
+                                               .Select(order => new OrderCount
+                                               {
+                                                   Status = order.Key,
+                                                   Count = order.Count()
+                                               })
+                                               .AsNoTracking()
+                                        );
         }
 
         //Get Count For all orders for specific mrechant account depending on Status 
         public async Task<IQueryable<OrderCount>> GetOrderCountsAsync(int merchantId)
         {
-            return await Task.FromResult(context.Orders
-                                                .Where(order=> order.MerchantID == merchantId)
-                                                .GroupBy(order => order.Status)
-                                                .Select(order => new OrderCount
-                                                {
+            return await Task.FromResult(
+                                        context.Orders
+                                               .Where(order=> order.MerchantID == merchantId)
+                                               .GroupBy(order => order.Status)
+                                               .Select(order => new OrderCount
+                                               {
                                                     Status = order.Key,
                                                     Count = order.Count()
-                                                }));
+                                               })
+                                               .AsNoTracking()
+                                        );
         }
 
 
