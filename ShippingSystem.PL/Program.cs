@@ -1,8 +1,10 @@
 
 using Microsoft.EntityFrameworkCore;
 using ShippingSysem.BLL.Services;
+using ShippingSystem.DAL.Interfaces;
 using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
+using ShippingSystem.DAL.Repositories;
 using ShippingSystem.DAL.Repositories.Base;
 
 namespace ShippingSystem.PL
@@ -25,6 +27,7 @@ namespace ShippingSystem.PL
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DB"));
             });
+
             builder.Services.AddIdentity<Account, Role>(options =>
             {
                 options.User.RequireUniqueEmail = true;
@@ -73,6 +76,7 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<PermissionsService>();
 
             //Register Order Service
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
             builder.Services.AddScoped<OrderService>();
             var app = builder.Build();
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShippingSystem.DAL.Models;
 
@@ -11,9 +12,11 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    partial class ShippingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240629100555_v6")]
+    partial class v6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,7 +145,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Entities");
+                    b.ToTable("AccessedEntity");
 
                     b.HasData(
                         new
@@ -330,7 +333,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("GovernmentID");
 
-                    b.ToTable("Branches");
+                    b.ToTable("Branch");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.City", b =>
@@ -359,7 +362,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("GovernmentID");
 
-                    b.ToTable("Cities");
+                    b.ToTable("City");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryAccount", b =>
@@ -475,7 +478,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("BranchID");
 
-                    b.ToTable("Governments");
+                    b.ToTable("Government");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.MerchantAccount", b =>
@@ -672,7 +675,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("StaffMemberID");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Order");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.PaymentType", b =>
@@ -693,7 +696,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentTypes");
+                    b.ToTable("PaymentType");
 
                     b.HasData(
                         new
@@ -727,7 +730,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Permissions");
+                    b.ToTable("Permission");
 
                     b.HasData(
                         new
@@ -773,7 +776,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("permission_id");
 
-                    b.ToTable("Permissions_User_Entities");
+                    b.ToTable("Permission_User_Entities");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.Product", b =>
@@ -805,7 +808,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("order_Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.Role", b =>
@@ -888,7 +891,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShippingTypes");
+                    b.ToTable("ShippingType");
 
                     b.HasData(
                         new

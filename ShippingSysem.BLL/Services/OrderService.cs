@@ -24,21 +24,30 @@ namespace ShippingSysem.BLL.Services
         {
             var orders = await repository.GetAllFilterdOrdersAsync(status);
 
-            var ordersDtos = await MappingorderDTOs(orders);
-
-            return await Task.FromResult(ordersDtos);
+            return await MappingorderDTOs(orders);
         }
 
         //Mpping The Orders return from The Database with Pagination and using Status as filteration
         public async Task<List<OrederReadDTO>> GetAllFilterdOrders(int page, int pageSize, string status = "")
         {
-            var orders = await repository.GetAllFilterdOrdersAsync(page,pageSize,status);
+            var orders = await repository.GetAllFilterdOrdersAsync(page, pageSize, status);
 
-            var ordersDtos = await MappingorderDTOs(orders);
-
-            return await Task.FromResult(ordersDtos);
+            return await MappingorderDTOs(orders);
         }
 
+        //Get Count For all orders depending on Status 
+        public async Task<List<OrderCount>> GetOrderCountsAsync()
+        {
+            var Orders = await repository.GetOrderCountsAsync();
+            return await Orders.ToListAsync();
+        }
+
+        //Get Count For all orders for specific mrechant account depending on Status 
+        public async Task<List<OrderCount>> GetOrderCountsAsync(int merchantId)
+        {
+            var Orders = await repository.GetOrderCountsAsync(merchantId);
+            return await Orders.ToListAsync();
+        }
 
         //Private Method using for Mapping The orders return from database(order Repository)
         private async Task<List<OrederReadDTO>> MappingorderDTOs(IQueryable<Order> orders)

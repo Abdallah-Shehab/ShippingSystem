@@ -14,13 +14,13 @@ namespace ShippingSystem.PL.Controllers
         {
             this.service = service;
         }
-        [HttpGet]
+        //[HttpGet]
 
-        public async Task<IActionResult> Get()
-        {
-            var permissions = service.GetAllPermissionsForUser();
-            return Ok(permissions);
-        }
+        //public async Task<IActionResult> Get()
+        //{
+        //    var permissions = service.GetAllPermissionsForUser();
+        //    return Ok(permissions);
+        //}
 
 
     }
