@@ -71,9 +71,17 @@ namespace ShippingSystem.PL
             //Register Emp Services 
             builder.Services.AddScoped<IGenericRepository<Account>, GenericRepository<Account>>();
             builder.Services.AddScoped<IGenericRepository<ExistedEntities>, GenericRepository<ExistedEntities>>();
+
+            //Delivery Accounts
+            builder.Services.AddScoped<IGenericRepository<DeliveryAccount>, GenericRepository<DeliveryAccount>>();
+
             //builder.Services.AddScoped<IGenericRepository<Permission_User_Entities>, GenericRepository<Permission_User_Entities>>();
             builder.Services.AddScoped<EmployeeService>();
             builder.Services.AddScoped<PermissionsService>();
+
+            // Delivery Accounts Service
+            builder.Services.AddScoped< DeliveryAccountService>();
+
 
             //Register Order Service
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
