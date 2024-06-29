@@ -86,7 +86,9 @@ namespace ShippingSysem.BLL.Services
                     name = acc.Name,
                     BranchName = acc.Branch.Name,
                     email = acc.Email,
-                    phone = acc.PhoneNumber
+                    phone = acc.PhoneNumber,
+                    Status = acc.Status,
+                    RoleName = acc.Role.Name
                 }).ToList();
 
             return dtos;

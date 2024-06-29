@@ -71,7 +71,7 @@ namespace ShippingSystem.PL
 
             //Register Emp Services 
             builder.Services.AddScoped<IGenericRepository<Account>, GenericRepository<Account>>();
-            builder.Services.AddScoped< IGenericStatusRepository<Branch>, GenericStatusRepository<Branch>>();
+            builder.Services.AddScoped<IGenericStatusRepository<Branch>, GenericStatusRepository<Branch>>();
             builder.Services.AddScoped<IGenericRepository<ExistedEntities>, GenericRepository<ExistedEntities>>();
 
             //Delivery Accounts
@@ -82,7 +82,7 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<PermissionsService>();
 
             // Delivery Accounts Service
-            builder.Services.AddScoped< DeliveryAccountService>();
+            builder.Services.AddScoped<DeliveryAccountService>();
 
 
             //Register Order Service
@@ -90,7 +90,20 @@ namespace ShippingSystem.PL
 
             builder.Services.AddScoped<OrderService>();
             builder.Services.AddScoped<BranchService>();
-            builder.Services.AddScoped<IOrderRepository,OrderRepository>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
+
+            // Allow Cors
+            string txt = "AllowedURLS";
+            builder.Services.AddCors(o =>
+            {
+                o.AddPolicy(txt, builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
+                });
+            });
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -101,7 +114,7 @@ namespace ShippingSystem.PL
             }
 
             app.UseHttpsRedirection();
-
+            app.UseCors(txt);
             app.UseAuthorization();
 
 
