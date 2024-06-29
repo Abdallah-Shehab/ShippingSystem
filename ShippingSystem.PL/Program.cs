@@ -72,6 +72,7 @@ namespace ShippingSystem.PL
             //Register Emp Services 
             builder.Services.AddScoped<IGenericRepository<Account>, GenericRepository<Account>>();
             builder.Services.AddScoped< IGenericStatusRepository<Branch>, GenericStatusRepository<Branch>>();
+            builder.Services.AddScoped<IGenericStatusRepository<Government>, GenericStatusRepository<Government>>();
             builder.Services.AddScoped<IGenericRepository<ExistedEntities>, GenericRepository<ExistedEntities>>();
 
             //Delivery Accounts
