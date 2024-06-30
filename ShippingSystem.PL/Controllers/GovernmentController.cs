@@ -22,6 +22,7 @@ namespace ShippingSystem.PL.Controllers
 			var governments = await governmentService.GetGovernments();
 			return Ok(governments);
 		}
+		
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetGovernmentByID(int id)
 		{
@@ -34,17 +35,6 @@ namespace ShippingSystem.PL.Controllers
 				return NotFound();
 		}
 
-		[HttpGet("changeStatus/{id}")]
-		public async Task<IActionResult> ChangeStatus(int id)
-		{
-			return Ok(await governmentService.ChangeStatus(id));
-		}
-
-		[HttpDelete("{id}")]
-		public async Task<IActionResult> DeleteGovernment(int id)
-		{
-			return Ok(await governmentService.DeleteGovernment(id));
-		}
 		[HttpPut("{id}")]
 		public async Task<IActionResult> UpdateGovernment(int id, CreateGovernmentDTO governmentdto)
 		{
@@ -57,10 +47,30 @@ namespace ShippingSystem.PL.Controllers
 				return NotFound();
 
 		}
+		
 		[HttpPost]
 		public async Task<IActionResult> AddGovernment(CreateGovernmentDTO governmentdto)
 		{
 			return Ok(await governmentService.AddGovernment(governmentdto));
 		}
+		
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> DeleteGovernment(int id)
+		{
+			return Ok(await governmentService.DeleteGovernment(id));
+		}
+		
+		[HttpGet("changeStatus/{id}")]
+		public async Task<IActionResult> ChangeStatus(int id)
+		{
+			return Ok(await governmentService.ChangeStatus(id));
+		}
+
+		[HttpPost("pagination")]
+		public async Task<IActionResult> GovernmentPagination(int page, int pageSize)
+		{
+			return Ok(governmentService.GovernmentPagination(page, pageSize));
+		}
+
 	}
 }

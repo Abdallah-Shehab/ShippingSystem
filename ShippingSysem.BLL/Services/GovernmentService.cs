@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ShippingSysem.BLL.DTOs.BranchDTOs;
 using ShippingSysem.BLL.DTOs.GovernmentDTOs;
 using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
@@ -23,13 +24,7 @@ namespace ShippingSysem.BLL.Services
 			var government = await iGenericStatusRepository.GetByIdAsync(id);
 			if (government != null)
 			{
-				return new ReadGovernmentDTO()
-				{
-					Id = government.Id,
-					Name = government.Name,
-					IsDeleted = government.IsDeleted,
-					Status = government.Status
-				};
+				return MappingGovernmentToReadGovernmentDTO(government);
 			}
 			else
 				return null;
@@ -40,11 +35,12 @@ namespace ShippingSysem.BLL.Services
 			if (governments != null)
 			{
 				var dtos = await governments
-				.Select(b => new ReadGovernmentDTO
+				.Select(government => new ReadGovernmentDTO
 				{
-					Id = b.Id,
-					Name = b.Name,
-					Status = b.Status
+					Id = government.Id,
+					Name = government.Name,
+					IsDeleted = government.IsDeleted,
+					Status = government.Status
 				}).ToListAsync();
 
 				return dtos;
@@ -53,6 +49,41 @@ namespace ShippingSysem.BLL.Services
 				return null;
 		}
 
+		public async Task<ReadGovernmentDTO> UpdateGovernment(int id, CreateGovernmentDTO governmentdto)
+		{
+			var government = await iGenericStatusRepository.GetByIdAsync(id);
+
+			if (government != null)
+			{
+				//mapping from CreateGovernmentDTO to Government
+				government.Name = governmentdto.Name;
+				government.Status = governmentdto.Status;
+
+				Government updatedGovernment = iGenericStatusRepository.Update(government).Result;
+				await iGenericStatusRepository.SaveAsync();
+
+				//mapping from Government to ReadGovernmentDTO
+				return MappingGovernmentToReadGovernmentDTO(updatedGovernment);
+			}
+			else
+				return null;
+		}
+
+		public async Task<ReadGovernmentDTO> AddGovernment(CreateGovernmentDTO governmentdto)
+		{
+			Government government = new()
+			{
+				//mapping from CreateGovernmentDTO to Government
+				Name = governmentdto.Name,
+				Status = governmentdto.Status
+			};
+
+			Government addedGovernment = iGenericStatusRepository.AddAsync(government).Result;
+			await iGenericStatusRepository.SaveAsync();
+
+			//mapping from Government to ReadGovernmentDTO
+			return MappingGovernmentToReadGovernmentDTO(addedGovernment);
+		}
 		public async Task<bool> ChangeStatus(int id)
 		{
 			var row = await iGenericStatusRepository.GetByIdAsync(id);
@@ -77,51 +108,21 @@ namespace ShippingSysem.BLL.Services
 			}
 			return deletedOrNot;
 		}
-		public async Task<ReadGovernmentDTO> UpdateGovernment(int id, CreateGovernmentDTO governmentdto)
+
+		public List<ReadGovernmentDTO> GovernmentPagination(int page, int pageSize)
 		{
-			var government = await iGenericStatusRepository.GetByIdAsync(id);
-
-			if (government != null)
-			{
-				//mapping from CreateGovernmentDTO to Government
-				government.Name = governmentdto.Name;
-				government.Status = governmentdto.Status;
-
-				Government updatedGovernment = iGenericStatusRepository.Update(government).Result;
-				await iGenericStatusRepository.SaveAsync();
-
-				//mapping from Government to ReadGovernmentDTO
-				return new ReadGovernmentDTO()
-				{
-					Id = updatedGovernment.Id,
-					Name = updatedGovernment.Name,
-					IsDeleted = updatedGovernment.IsDeleted,
-					Status = updatedGovernment.Status
-				};
-			}
-			else
-				return null;
+			return iGenericStatusRepository.GetAllAsyncWithPagination(page, pageSize).Result.ToList()
+				   .Select(g => MappingGovernmentToReadGovernmentDTO(g)).ToList();
 		}
 
-		public async Task<ReadGovernmentDTO> AddGovernment(CreateGovernmentDTO governmentdto)
+		public ReadGovernmentDTO MappingGovernmentToReadGovernmentDTO(Government government)
 		{
-			Government government = new()
+			return new ReadGovernmentDTO
 			{
-				//mapping from CreateGovernmentDTO to Government
-				Name = governmentdto.Name,
-				Status = governmentdto.Status
-			};
-
-			Government addedGovernment = iGenericStatusRepository.AddAsync(government).Result;
-			await iGenericStatusRepository.SaveAsync();
-
-			//mapping from Government to ReadGovernmentDTO
-			return new ReadGovernmentDTO()
-			{
-				Id = addedGovernment.Id,
-				Name = addedGovernment.Name,
-				IsDeleted = addedGovernment.IsDeleted,
-				Status = addedGovernment.Status
+				Id = government.Id,
+				Name = government.Name,
+				IsDeleted = government.IsDeleted,
+				Status = government.Status
 			};
 		}
 

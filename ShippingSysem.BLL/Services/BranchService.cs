@@ -25,7 +25,18 @@ namespace ShippingSysem.BLL.Services
 			var branch = await iGenericStatusRepository.GetByIdAsync(id);
 			if (branch != null)
 			{
-				return new ReadBranchDTO()
+				return MappingBranchToReadBranchDTO(branch);
+			}
+			else
+				return null;
+		}
+		public async Task<List<ReadBranchDTO>> GetBranches()
+		{
+			var branches = await iGenericStatusRepository.GetAllAsync();
+			if (branches != null)
+			{
+				var dtos = await branches
+				.Select(branch => new ReadBranchDTO
 				{
 					Id = branch.Id,
 					Name = branch.Name,
@@ -34,27 +45,7 @@ namespace ShippingSysem.BLL.Services
 					GovernmentName = iGenericStatusRepositoryGovernment.GetByIdAsync(branch.GovernmentID).Result.Name,
 					IsDeleted = branch.IsDeleted,
 					Status = branch.Status
-				};
-			}
-			else
-				return null;
-		}
-		public async Task<List<ReadBranchDTO>> GetBranches()
-		{
-			var branches = iGenericStatusRepository.GetAllAsync().Result.ToList();
-			if (branches != null)
-			{
-				var dtos = branches
-				.Select(b =>
-				new ReadBranchDTO
-				{
-					Id = b.Id,
-					Name = b.Name,
-					CreatedDate = b.CreatedDate,
-					GovernmentID = b.GovernmentID,
-					GovernmentName = iGenericStatusRepositoryGovernment.GetByIdAsync(b.GovernmentID).Result.Name,
-					Status = b.Status
-				}).ToList();
+				}).ToListAsync();
 
 				return dtos;
 			}
@@ -62,30 +53,6 @@ namespace ShippingSysem.BLL.Services
 				return null;
 		}
 
-		public async Task<bool> ChangeStatus(int id)
-		{
-			var row = await iGenericStatusRepository.GetByIdAsync(id);
-			var changedOrNot = false;
-			if (row != null)
-			{
-				iGenericStatusRepository.ChangeStatus(row);
-				await iGenericStatusRepository.SaveAsync();
-				changedOrNot = true;
-			}
-			return changedOrNot;
-		}
-		public async Task<bool> DeleteBranch(int id)
-		{
-			var row = await iGenericStatusRepository.GetByIdAsync(id);
-			var deletedOrNot = false;
-			if (row != null)
-			{
-				iGenericStatusRepository.Delete(row);
-				await iGenericStatusRepository.SaveAsync();
-				deletedOrNot = true;
-			}
-			return deletedOrNot;
-		}
 		public async Task<ReadBranchDTO> UpdateBranch(int id, CreateBranchDTO branchdto)
 		{
 			var branch = await iGenericStatusRepository.GetByIdAsync(id);
@@ -100,16 +67,7 @@ namespace ShippingSysem.BLL.Services
 				await iGenericStatusRepository.SaveAsync();
 
 				//mapping from Branch to ReadBranchDTO
-				return new ReadBranchDTO()
-				{
-					Id = updatedBranch.Id,
-					Name = updatedBranch.Name,
-					CreatedDate = updatedBranch.CreatedDate,
-					GovernmentID = updatedBranch.GovernmentID,
-					GovernmentName = iGenericStatusRepositoryGovernment.GetByIdAsync(updatedBranch.GovernmentID).Result.Name,
-					IsDeleted = updatedBranch.IsDeleted,
-					Status = updatedBranch.Status
-				};
+				return MappingBranchToReadBranchDTO(branch);
 			}
 			else
 				return null;
@@ -129,17 +87,50 @@ namespace ShippingSysem.BLL.Services
 			await iGenericStatusRepository.SaveAsync();
 
 			//mapping from Branch to ReadBranchDTO
-			return new ReadBranchDTO()
+			return MappingBranchToReadBranchDTO(branch);
+		}
+		public async Task<bool> DeleteBranch(int id)
+		{
+			var row = await iGenericStatusRepository.GetByIdAsync(id);
+			var deletedOrNot = false;
+			if (row != null)
 			{
-				Id = addedBranch.Id,
-				Name = addedBranch.Name,
-				CreatedDate = addedBranch.CreatedDate,
-				GovernmentID = addedBranch.GovernmentID,
-				GovernmentName = iGenericStatusRepositoryGovernment.GetByIdAsync(addedBranch.GovernmentID).Result.Name,
-				IsDeleted = addedBranch.IsDeleted,
-				Status = addedBranch.Status
-			};
+				iGenericStatusRepository.Delete(row);
+				await iGenericStatusRepository.SaveAsync();
+				deletedOrNot = true;
+			}
+			return deletedOrNot;
+		}
+		public async Task<bool> ChangeStatus(int id)
+		{
+			var row = await iGenericStatusRepository.GetByIdAsync(id);
+			var changedOrNot = false;
+			if (row != null)
+			{
+				iGenericStatusRepository.ChangeStatus(row);
+				await iGenericStatusRepository.SaveAsync();
+				changedOrNot = true;
+			}
+			return changedOrNot;
+		}
+		public List<ReadBranchDTO> BranchPagination(int page, int pageSize)
+		{
+			return iGenericStatusRepository.GetAllAsyncWithPagination(page,pageSize).Result.ToList()
+				   .Select(b => MappingBranchToReadBranchDTO(b)).ToList();
 		}
 
+		public ReadBranchDTO MappingBranchToReadBranchDTO(Branch branch)
+		{
+			return new ReadBranchDTO
+			{
+				Id = branch.Id,
+				Name = branch.Name,
+				CreatedDate = branch.CreatedDate,
+				GovernmentID = branch.GovernmentID,
+				GovernmentName = iGenericStatusRepositoryGovernment.GetByIdAsync(branch.GovernmentID).Result.Name,
+				IsDeleted = branch.IsDeleted,
+				Status = branch.Status
+			};
+		}
 	}
 }

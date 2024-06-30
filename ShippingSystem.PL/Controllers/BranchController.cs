@@ -64,6 +64,11 @@ namespace ShippingSystem.PL.Controllers
 		{
 			return Ok(await branchService.AddBranch(branchdto));
 		}
+		[HttpPost("pagination")]
+		public async Task<IActionResult> BranchPagination(int page, int pageSize)
+		{
+			return Ok(branchService.BranchPagination(page, pageSize));
+		}
 
 	}
 }
