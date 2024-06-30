@@ -41,18 +41,20 @@ namespace ShippingSysem.BLL.Services
 		}
 		public async Task<List<ReadBranchDTO>> GetBranches()
 		{
-			var branches = await iGenericStatusRepository.GetAllAsync();
+			var branches = iGenericStatusRepository.GetAllAsync().Result.ToList();
 			if (branches != null)
 			{
-				var dtos = await branches
+				var dtos = branches
 				.Select(b =>
 				new ReadBranchDTO
 				{
 					Id = b.Id,
 					Name = b.Name,
 					CreatedDate = b.CreatedDate,
+					GovernmentID = b.GovernmentID,
+					GovernmentName = iGenericStatusRepositoryGovernment.GetByIdAsync(b.GovernmentID).Result.Name,
 					Status = b.Status
-				}).ToListAsync();
+				}).ToList();
 
 				return dtos;
 			}
@@ -78,7 +80,7 @@ namespace ShippingSysem.BLL.Services
 			var deletedOrNot = false;
 			if (row != null)
 			{
-				iGenericStatusRepository.DeleteBranch(row);
+				iGenericStatusRepository.Delete(row);
 				await iGenericStatusRepository.SaveAsync();
 				deletedOrNot = true;
 			}
