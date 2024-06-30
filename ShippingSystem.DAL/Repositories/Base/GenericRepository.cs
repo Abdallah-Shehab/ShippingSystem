@@ -28,11 +28,22 @@ namespace ShippingSystem.DAL.Repositories.Base
             return entity;
         }
 
+        //public async Task<T> DeleteById(int id)
+        //{
+        //    T entity = await GetByIdAsync(id);
+        //    entity.IsDeleted = true;
+        //    await context.SaveChangesAsync();
+        //    return entity;
+        //}
+
         public async Task<T> DeleteById(int id)
         {
-            T entity = await GetByIdAsync(id);
-            entity.IsDeleted = true;
-            await context.SaveChangesAsync();
+            var entity = await GetByIdAsync(id);
+            if (entity != null)
+            {
+                dbSet.Remove(entity);
+                await context.SaveChangesAsync();
+            }
             return entity;
         }
 

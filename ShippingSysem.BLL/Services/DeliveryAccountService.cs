@@ -41,6 +41,8 @@ namespace ShippingSysem.BLL.Services
         }
         //method to  Add Delivery Account
 
+
+
         public async Task<bool> AddDeliveryAccount(AddDeliveryAccountDTO dto)
         {
             try
@@ -66,6 +68,32 @@ namespace ShippingSysem.BLL.Services
             {
                 
                 _logger.LogError(ex, "Error adding delivery account");
+                return false;
+            }
+        }
+
+
+
+
+        // Method to Delete Delivery Account
+        public async Task<bool> DeleteDeliveryAccount(int accountId)
+        {
+            try
+            {
+                var account = await genRepo.GetByIdAsync(accountId);
+                if (account == null)
+                {
+                    _logger.LogWarning($"Delivery account with ID {accountId} not found.");
+                    return false;
+                }
+
+                await genRepo.DeleteById(accountId);
+                await genRepo.SaveAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Error deleting delivery account with ID {accountId}");
                 return false;
             }
         }

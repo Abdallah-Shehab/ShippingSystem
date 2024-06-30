@@ -42,5 +42,20 @@ namespace ShippingSystem.PL.Controllers
             return BadRequest("Could not add delivery account.");
         }
 
+
+
+        // Action to Delete Delivery Account
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteDeliveryAccount(int id)
+        {
+            var success = await deliveryAccountService.DeleteDeliveryAccount(id);
+            if (success)
+            {
+                return Ok($"Delivery account with ID {id} deleted successfully.");
+            }
+
+            return BadRequest($"Could not delete delivery account with ID {id}.");
+        }
+
     }
 }
