@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ShippingSystem.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class v1 : Migration
+    public partial class v10 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,6 +19,7 @@ namespace ShippingSystem.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -27,16 +30,17 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Entity",
+                name: "ExistedEntities",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Entity", x => x.Id);
+                    table.PrimaryKey("PK_ExistedEntities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -45,30 +49,12 @@ namespace ShippingSystem.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PaymentTypeId = table.Column<int>(type: "int", nullable: true)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PaymentType", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_PaymentType_PaymentType_PaymentTypeId",
-                        column: x => x.PaymentTypeId,
-                        principalTable: "PaymentType",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Permission",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Permission", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -77,18 +63,13 @@ namespace ShippingSystem.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    ShippingTypeId = table.Column<int>(type: "int", nullable: true)
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ShippingType", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ShippingType_ShippingType_ShippingTypeId",
-                        column: x => x.ShippingTypeId,
-                        principalTable: "ShippingType",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -108,38 +89,6 @@ namespace ShippingSystem.DAL.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Permission_Role_Entities",
-                columns: table => new
-                {
-                    role_id = table.Column<int>(type: "int", nullable: false),
-                    permission_id = table.Column<int>(type: "int", nullable: false),
-                    entity_id = table.Column<int>(type: "int", nullable: false),
-                    entityId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Permission_Role_Entities", x => new { x.role_id, x.permission_id, x.entity_id });
-                    table.ForeignKey(
-                        name: "FK_Permission_Role_Entities_AspNetRoles_role_id",
-                        column: x => x.role_id,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Permission_Role_Entities_Entity_entityId",
-                        column: x => x.entityId,
-                        principalTable: "Entity",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Permission_Role_Entities_Permission_permission_id",
-                        column: x => x.permission_id,
-                        principalTable: "Permission",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
@@ -202,6 +151,7 @@ namespace ShippingSystem.DAL.Migrations
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     RoleID = table.Column<int>(type: "int", nullable: true),
                     BranchID = table.Column<int>(type: "int", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -248,15 +198,47 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Permission",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    AccountId = table.Column<int>(type: "int", nullable: false),
+                    EntityId = table.Column<int>(type: "int", nullable: false),
+                    CanRead = table.Column<bool>(type: "bit", nullable: false),
+                    CanWrite = table.Column<bool>(type: "bit", nullable: false),
+                    CanDelete = table.Column<bool>(type: "bit", nullable: false),
+                    CanCreate = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Permission", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Permission_AspNetUsers_AccountId",
+                        column: x => x.AccountId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Permission_ExistedEntities_EntityId",
+                        column: x => x.EntityId,
+                        principalTable: "ExistedEntities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Branch",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GovernmentID = table.Column<int>(type: "int", nullable: true)
+                    CreatedDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    GovernmentID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -270,6 +252,7 @@ namespace ShippingSystem.DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     RoleID = table.Column<int>(type: "int", nullable: true),
@@ -312,6 +295,7 @@ namespace ShippingSystem.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     BranchID = table.Column<int>(type: "int", nullable: true)
@@ -332,6 +316,7 @@ namespace ShippingSystem.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
@@ -378,8 +363,11 @@ namespace ShippingSystem.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
+                    NormalShippingCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PickupShippingCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     GovernmentID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -398,6 +386,7 @@ namespace ShippingSystem.DAL.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     ClientName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TotalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -406,12 +395,19 @@ namespace ShippingSystem.DAL.Migrations
                     PhoneTwo = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReceivedMoney = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    DeliveryPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PaiedMoney = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    CreatedDate = table.Column<DateOnly>(type: "date", nullable: true),
+                    DeliverydDate = table.Column<DateOnly>(type: "date", nullable: true),
                     StreetAndVillage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StaffMemberID = table.Column<int>(type: "int", nullable: true),
                     MerchantID = table.Column<int>(type: "int", nullable: true),
                     DeliveryID = table.Column<int>(type: "int", nullable: true),
                     ShippingTypeID = table.Column<int>(type: "int", nullable: true),
-                    PaymentTypeID = table.Column<int>(type: "int", nullable: true)
+                    PaymentTypeID = table.Column<int>(type: "int", nullable: true),
+                    GovernmentId = table.Column<int>(type: "int", nullable: true),
+                    CitytId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -422,9 +418,19 @@ namespace ShippingSystem.DAL.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
+                        name: "FK_Order_City_CitytId",
+                        column: x => x.CitytId,
+                        principalTable: "City",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_Order_DeliveryAccounts_DeliveryID",
                         column: x => x.DeliveryID,
                         principalTable: "DeliveryAccounts",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Order_Government_GovernmentId",
+                        column: x => x.GovernmentId,
+                        principalTable: "Government",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Order_MerchantAccounts_MerchantID",
@@ -464,6 +470,75 @@ namespace ShippingSystem.DAL.Migrations
                         principalTable: "Order",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "IsDeleted", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, null, false, "Merchant", null },
+                    { 2, null, false, "Employee", null },
+                    { 3, null, false, "Delivery", null },
+                    { 4, null, false, "Admin", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
+                values: new object[] { 1, 0, "123 New Street", null, "81eb9c29-a145-423e-87b5-2ed898b8ce0d", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEON5ioaQHWgGJ+UP99YGjXhLsmCRWU8AsP5RV4wzHFP3Z7kN+lu4HE0+OunPxXQIYg==", null, false, null, null, true, false, "newuser" });
+
+            migrationBuilder.InsertData(
+                table: "ExistedEntities",
+                columns: new[] { "Id", "IsDeleted", "Name" },
+                values: new object[,]
+                {
+                    { 1, false, "Settings" },
+                    { 2, false, "Branches" },
+                    { 3, false, "Employees" },
+                    { 4, false, "Merchants" },
+                    { 5, false, "Deliveries" },
+                    { 6, false, "Governorates" },
+                    { 7, false, "Cities" },
+                    { 8, false, "Orders" },
+                    { 9, false, "Financials" },
+                    { 10, false, "Reports" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PaymentType",
+                columns: new[] { "Id", "IsDeleted", "Name" },
+                values: new object[,]
+                {
+                    { 1, false, "Cash" },
+                    { 2, false, "Visa" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ShippingType",
+                columns: new[] { "Id", "IsDeleted", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 1, false, "Normal", 30m },
+                    { 2, false, "7 Days", 50m },
+                    { 3, false, "24 Hour", 70m }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Permission",
+                columns: new[] { "Id", "AccountId", "CanCreate", "CanDelete", "CanRead", "CanWrite", "EntityId", "IsDeleted" },
+                values: new object[,]
+                {
+                    { 1, 1, false, false, false, false, 1, false },
+                    { 2, 1, false, false, false, false, 2, false },
+                    { 3, 1, false, false, false, false, 3, false },
+                    { 4, 1, false, false, false, false, 4, false },
+                    { 5, 1, false, false, false, false, 5, false },
+                    { 6, 1, false, false, false, false, 6, false },
+                    { 7, 1, false, false, false, false, 7, false },
+                    { 8, 1, false, false, false, false, 8, false },
+                    { 9, 1, false, false, false, false, 9, false },
+                    { 10, 1, false, false, false, false, 10, false }
                 });
 
             migrationBuilder.CreateIndex(
@@ -551,9 +626,19 @@ namespace ShippingSystem.DAL.Migrations
                 column: "RoleID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Order_CitytId",
+                table: "Order",
+                column: "CitytId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Order_DeliveryID",
                 table: "Order",
                 column: "DeliveryID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_GovernmentId",
+                table: "Order",
+                column: "GovernmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_MerchantID",
@@ -576,29 +661,19 @@ namespace ShippingSystem.DAL.Migrations
                 column: "StaffMemberID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PaymentType_PaymentTypeId",
-                table: "PaymentType",
-                column: "PaymentTypeId");
+                name: "IX_Permission_AccountId",
+                table: "Permission",
+                column: "AccountId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permission_Role_Entities_entityId",
-                table: "Permission_Role_Entities",
-                column: "entityId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Permission_Role_Entities_permission_id",
-                table: "Permission_Role_Entities",
-                column: "permission_id");
+                name: "IX_Permission_EntityId",
+                table: "Permission",
+                column: "EntityId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_order_Id",
                 table: "Product",
                 column: "order_Id");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ShippingType_ShippingTypeId",
-                table: "ShippingType",
-                column: "ShippingTypeId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserClaims_AspNetUsers_UserId",
@@ -636,7 +711,8 @@ namespace ShippingSystem.DAL.Migrations
                 table: "Branch",
                 column: "GovernmentID",
                 principalTable: "Government",
-                principalColumn: "Id");
+                principalColumn: "Id",
+                onDelete: ReferentialAction.NoAction);
         }
 
         /// <inheritdoc />
@@ -662,25 +738,22 @@ namespace ShippingSystem.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "City");
-
-            migrationBuilder.DropTable(
-                name: "Permission_Role_Entities");
+                name: "Permission");
 
             migrationBuilder.DropTable(
                 name: "Product");
 
             migrationBuilder.DropTable(
-                name: "Entity");
-
-            migrationBuilder.DropTable(
-                name: "Permission");
+                name: "ExistedEntities");
 
             migrationBuilder.DropTable(
                 name: "Order");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "City");
 
             migrationBuilder.DropTable(
                 name: "DeliveryAccounts");
