@@ -71,15 +71,10 @@ namespace ShippingSystem.PL
 
             //Register Emp Services 
             builder.Services.AddScoped<IGenericRepository<Account>, GenericRepository<Account>>();
-
-            builder.Services.AddScoped< IGenericStatusRepository<Branch>, GenericStatusRepository<Branch>>();
             builder.Services.AddScoped<IGenericStatusRepository<Government>, GenericStatusRepository<Government>>();
-
             builder.Services.AddScoped<IGenericRepository<Role>, GenericRepository<Role>>();
             builder.Services.AddScoped<IGenericStatusRepository<Branch>, GenericStatusRepository<Branch>>();
-
-
-
+            //builder.Services.AddScoped<IGenericStatusRepository<Government>, GenericStatusRepository<Government>>();
             builder.Services.AddScoped<IGenericRepository<ExistedEntities>, GenericRepository<ExistedEntities>>();
 
             //Delivery Accounts
@@ -87,7 +82,7 @@ namespace ShippingSystem.PL
 
             //builder.Services.AddScoped<IGenericRepository<Permission_User_Entities>, GenericRepository<Permission_User_Entities>>();
             builder.Services.AddScoped<EmployeeService>();
-            builder.Services.AddScoped<RoleService>();
+            //builder.Services.AddScoped<PermissionsService>();
 
             // Delivery Accounts Service
             builder.Services.AddScoped<DeliveryAccountService>();
@@ -98,7 +93,8 @@ namespace ShippingSystem.PL
 
             builder.Services.AddScoped<OrderService>();
             builder.Services.AddScoped<BranchService>();
-            builder.Services.AddScoped<IOrderRepository,OrderRepository>();
+            builder.Services.AddScoped<GovernmentService>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
             //Register City Service
             builder.Services.AddScoped<IGenericRepository<Government>, GenericRepository<Government>>();
@@ -107,17 +103,29 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<CityService>();
 
 
-            // Allow Cors
-            string txt = "AllowedURLS";
-            builder.Services.AddCors(o =>
+
+            //  add  CORS configuration:
+
+            builder.Services.AddCors(options =>
             {
-                o.AddPolicy(txt, builder =>
+                options.AddDefaultPolicy(builder =>
                 {
-                    builder.AllowAnyOrigin();
-                    builder.AllowAnyMethod();
-                    builder.AllowAnyHeader();
+                    builder.WithOrigins("http://localhost:4200")
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
                 });
             });
+
+         
+
+            
+            
+
+
+
+
+
+
 
             var app = builder.Build();
 
@@ -129,9 +137,7 @@ namespace ShippingSystem.PL
             }
 
             app.UseHttpsRedirection();
-
-            app.UseCors(txt);
-
+            app.UseCors();
             app.UseAuthorization();
 
 

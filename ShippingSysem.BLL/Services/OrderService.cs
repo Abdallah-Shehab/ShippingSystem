@@ -110,8 +110,9 @@ namespace ShippingSysem.BLL.Services
 
 
         // Mapping the Orders from Dto To Database 
-        public async Task<OrderCreateDTO> CreateOrder(OrderCreateDTO _orderCreateDto) {
-         
+        public async Task<OrderCreateDTO> CreateOrder(OrderCreateDTO _orderCreateDto)
+        {
+
             Order order = new Order()
             {
                 CitytId = _orderCreateDto.CityID,
@@ -137,10 +138,7 @@ namespace ShippingSysem.BLL.Services
 
                 }).ToList(),
             };
-
             await repository.AddAsync(order);
-
-
             await repository.SaveAsync();
 
             return _orderCreateDto;

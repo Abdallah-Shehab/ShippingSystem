@@ -12,7 +12,11 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
+<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240630190536_v1.Designer.cs
     [Migration("20240630190536_v1")]
+========
+    [Migration("20240630183516_v1")]
+>>>>>>>> Azza:ShippingSystem.DAL/Migrations/20240630183516_v1.Designer.cs
     partial class v1
     {
         /// <inheritdoc />
@@ -227,13 +231,21 @@ namespace ShippingSystem.DAL.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Address = "123 New Street",
+<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240630190536_v1.Designer.cs
                             ConcurrencyStamp = "27dbba3c-00cb-445d-add1-e3ef363e049c",
+========
+                            ConcurrencyStamp = "10d821ee-0e9a-440d-9684-23a107d707b3",
+>>>>>>>> Azza:ShippingSystem.DAL/Migrations/20240630183516_v1.Designer.cs
                             Email = "newuser@example.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             Name = "New User",
+<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240630190536_v1.Designer.cs
                             PasswordHash = "AQAAAAIAAYagAAAAEOBOb8jgNB9IP0+e8HesBEHIUQyRXuOZ+YJa3b49axmqsGGMjzPNa/acYaqA1QnTig==",
+========
+                            PasswordHash = "AQAAAAIAAYagAAAAEHjiGD5dh4wovwoIXuzyT+dyESnPEJitXyio1E8+pRwnvyNf01fjFjdlVj8psiLg5A==",
+>>>>>>>> Azza:ShippingSystem.DAL/Migrations/20240630183516_v1.Designer.cs
                             PhoneNumberConfirmed = false,
                             RoleID = 1,
                             Status = true,
@@ -342,6 +354,9 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Governments")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");

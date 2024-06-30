@@ -258,6 +258,7 @@ namespace ShippingSystem.DAL.Migrations
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     RoleID = table.Column<int>(type: "int", nullable: true),
                     BranchID = table.Column<int>(type: "int", nullable: true),
+                    Governments = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Discount_type = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Company_Percantage = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -524,7 +525,11 @@ namespace ShippingSystem.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
+<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240630190536_v1.cs
                 values: new object[] { 1, 0, "123 New Street", null, "27dbba3c-00cb-445d-add1-e3ef363e049c", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEOBOb8jgNB9IP0+e8HesBEHIUQyRXuOZ+YJa3b49axmqsGGMjzPNa/acYaqA1QnTig==", null, false, 1, null, true, false, "newuser" });
+========
+                values: new object[] { 1, 0, "123 New Street", null, "10d821ee-0e9a-440d-9684-23a107d707b3", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEHjiGD5dh4wovwoIXuzyT+dyESnPEJitXyio1E8+pRwnvyNf01fjFjdlVj8psiLg5A==", null, false, 1, null, true, false, "newuser" });
+>>>>>>>> Azza:ShippingSystem.DAL/Migrations/20240630183516_v1.cs
 
             migrationBuilder.InsertData(
                 table: "Permissions",
