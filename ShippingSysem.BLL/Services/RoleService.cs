@@ -44,6 +44,14 @@ namespace ShippingSysem.BLL.Services
             return allRoles;
         }
 
+        public async Task<Role> GetRole(int id)
+        {
+            var role = await RolegenRepo.GetByIdAsync(id);
+
+
+            return role;
+        }
+
         public async Task<Role> UpdateRole(int id, string rolename)
         {
             var role = await RolegenRepo.GetByIdAsync(id);
@@ -122,10 +130,10 @@ namespace ShippingSysem.BLL.Services
         }
 
 
-        public async Task<bool> DeleteRole(int id)
+        public async Task<Role> DeleteRole(int id)
         {
             var entity = await RolegenRepo.DeleteById(id);
-            return (entity.IsDeleted);
+            return (entity);
         }
 
     }

@@ -80,7 +80,7 @@ namespace ShippingSysem.BLL.Services
         }
         private async Task<OrederReadDTO> MappingorderToOrderReadDTO(Order order)
         {
-            
+
             return new OrederReadDTO()
             {
                 Id = order.Id,
@@ -103,14 +103,15 @@ namespace ShippingSysem.BLL.Services
                 DeliveryName = order.DeliveryAccount.Name,
                 CreatedDate = order.CreatedDate,
                 DeliverydDate = order.DeliverydDate,
-                TotalWeight=order.TotalWeight
+                TotalWeight = order.TotalWeight
             };
         }
 
 
         // Mapping the Orders from Dto To Database 
-        public async Task<OrderCreateDTO> CreateOrder(OrderCreateDTO _orderCreateDto) {
-            
+        public async Task<OrderCreateDTO> CreateOrder(OrderCreateDTO _orderCreateDto)
+        {
+
             Order order = new Order()
             {
                 CitytId = _orderCreateDto.CityID,
@@ -133,14 +134,14 @@ namespace ShippingSysem.BLL.Services
 
                 }).ToList(),
             };
-           await repository.AddAsync(order);
-            repository.SaveAsync();
+            await repository.AddAsync(order);
+            await repository.SaveAsync();
 
             return _orderCreateDto;
 
 
         }
-        
-    
+
+
     }
 }
