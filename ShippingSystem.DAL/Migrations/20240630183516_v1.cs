@@ -91,7 +91,7 @@ namespace ShippingSystem.DAL.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -116,13 +116,13 @@ namespace ShippingSystem.DAL.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Permission_ExistedEntities_EntityId",
                         column: x => x.EntityId,
                         principalTable: "ExistedEntities",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -169,7 +169,7 @@ namespace ShippingSystem.DAL.Migrations
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,7 +226,7 @@ namespace ShippingSystem.DAL.Migrations
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -258,6 +258,7 @@ namespace ShippingSystem.DAL.Migrations
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     RoleID = table.Column<int>(type: "int", nullable: true),
                     BranchID = table.Column<int>(type: "int", nullable: true),
+                    Governments = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Discount_type = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Company_Percantage = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -470,7 +471,7 @@ namespace ShippingSystem.DAL.Migrations
                         column: x => x.order_Id,
                         principalTable: "Order",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -478,10 +479,10 @@ namespace ShippingSystem.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "IsDeleted", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, null, new DateOnly(2024, 6, 29), false, "Merchant", null },
-                    { 2, null, new DateOnly(2024, 6, 29), false, "Employee", null },
-                    { 3, null, new DateOnly(2024, 6, 29), false, "Delivery", null },
-                    { 4, null, new DateOnly(2024, 6, 29), false, "Admin", null }
+                    { 1, null, new DateOnly(2024, 6, 30), false, "Employee", null },
+                    { 2, null, new DateOnly(2024, 6, 30), false, "Merchant", null },
+                    { 3, null, new DateOnly(2024, 6, 30), false, "Delivery", null },
+                    { 4, null, new DateOnly(2024, 6, 30), false, "Admin", null }
                 });
 
             migrationBuilder.InsertData(
@@ -523,23 +524,23 @@ namespace ShippingSystem.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "123 New Street", null, "2cde3e14-c4b8-4fff-b2d6-6d39378aa96f", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEKyH2jx1J7S3WIjUk2gb8Y4eb/mAVM+PDXHp0TAGOdxvWORn/4HIxyfiHcTDAFghog==", null, false, 4, null, true, false, "newuser" });
+                values: new object[] { 1, 0, "123 New Street", null, "10d821ee-0e9a-440d-9684-23a107d707b3", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEHjiGD5dh4wovwoIXuzyT+dyESnPEJitXyio1E8+pRwnvyNf01fjFjdlVj8psiLg5A==", null, false, 1, null, true, false, "newuser" });
 
             migrationBuilder.InsertData(
                 table: "Permission",
                 columns: new[] { "Id", "CanCreate", "CanDelete", "CanRead", "CanWrite", "EntityId", "IsDeleted", "RoleId" },
                 values: new object[,]
                 {
-                    { 1, false, false, false, false, 1, false, 4 },
-                    { 2, false, false, false, false, 2, false, 4 },
-                    { 3, false, false, false, false, 3, false, 4 },
-                    { 4, false, false, false, false, 4, false, 4 },
-                    { 5, false, false, false, false, 5, false, 4 },
-                    { 6, false, false, false, false, 6, false, 4 },
-                    { 7, false, false, false, false, 7, false, 4 },
-                    { 8, false, false, false, false, 8, false, 4 },
-                    { 9, false, false, false, false, 9, false, 4 },
-                    { 10, false, false, false, false, 10, false, 4 }
+                    { 1, false, false, false, false, 1, false, 1 },
+                    { 2, false, false, false, false, 2, false, 1 },
+                    { 3, false, false, false, false, 3, false, 1 },
+                    { 4, false, false, false, false, 4, false, 1 },
+                    { 5, false, false, false, false, 5, false, 1 },
+                    { 6, false, false, false, false, 6, false, 1 },
+                    { 7, false, false, false, false, 7, false, 1 },
+                    { 8, false, false, false, false, 8, false, 1 },
+                    { 9, false, false, false, false, 9, false, 1 },
+                    { 10, false, false, false, false, 10, false, 1 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -682,7 +683,7 @@ namespace ShippingSystem.DAL.Migrations
                 column: "UserId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.NoAction);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserLogins_AspNetUsers_UserId",
@@ -690,7 +691,7 @@ namespace ShippingSystem.DAL.Migrations
                 column: "UserId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.NoAction);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserRoles_AspNetUsers_UserId",
@@ -698,7 +699,7 @@ namespace ShippingSystem.DAL.Migrations
                 column: "UserId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.NoAction);
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUsers_Branch_BranchID",
@@ -713,7 +714,7 @@ namespace ShippingSystem.DAL.Migrations
                 column: "GovernmentID",
                 principalTable: "Government",
                 principalColumn: "Id",
-                onDelete: ReferentialAction.NoAction);
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />

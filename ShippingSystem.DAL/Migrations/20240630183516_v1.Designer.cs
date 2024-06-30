@@ -12,7 +12,7 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    [Migration("20240629234454_v1")]
+    [Migration("20240630183516_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -227,15 +227,15 @@ namespace ShippingSystem.DAL.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Address = "123 New Street",
-                            ConcurrencyStamp = "2cde3e14-c4b8-4fff-b2d6-6d39378aa96f",
+                            ConcurrencyStamp = "10d821ee-0e9a-440d-9684-23a107d707b3",
                             Email = "newuser@example.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             Name = "New User",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKyH2jx1J7S3WIjUk2gb8Y4eb/mAVM+PDXHp0TAGOdxvWORn/4HIxyfiHcTDAFghog==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHjiGD5dh4wovwoIXuzyT+dyESnPEJitXyio1E8+pRwnvyNf01fjFjdlVj8psiLg5A==",
                             PhoneNumberConfirmed = false,
-                            RoleID = 4,
+                            RoleID = 1,
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "newuser"
@@ -342,6 +342,9 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Governments")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -786,7 +789,7 @@ namespace ShippingSystem.DAL.Migrations
                             CanWrite = false,
                             EntityId = 1,
                             IsDeleted = false,
-                            RoleId = 4
+                            RoleId = 1
                         },
                         new
                         {
@@ -797,7 +800,7 @@ namespace ShippingSystem.DAL.Migrations
                             CanWrite = false,
                             EntityId = 2,
                             IsDeleted = false,
-                            RoleId = 4
+                            RoleId = 1
                         },
                         new
                         {
@@ -808,7 +811,7 @@ namespace ShippingSystem.DAL.Migrations
                             CanWrite = false,
                             EntityId = 3,
                             IsDeleted = false,
-                            RoleId = 4
+                            RoleId = 1
                         },
                         new
                         {
@@ -819,7 +822,7 @@ namespace ShippingSystem.DAL.Migrations
                             CanWrite = false,
                             EntityId = 4,
                             IsDeleted = false,
-                            RoleId = 4
+                            RoleId = 1
                         },
                         new
                         {
@@ -830,7 +833,7 @@ namespace ShippingSystem.DAL.Migrations
                             CanWrite = false,
                             EntityId = 5,
                             IsDeleted = false,
-                            RoleId = 4
+                            RoleId = 1
                         },
                         new
                         {
@@ -841,7 +844,7 @@ namespace ShippingSystem.DAL.Migrations
                             CanWrite = false,
                             EntityId = 6,
                             IsDeleted = false,
-                            RoleId = 4
+                            RoleId = 1
                         },
                         new
                         {
@@ -852,7 +855,7 @@ namespace ShippingSystem.DAL.Migrations
                             CanWrite = false,
                             EntityId = 7,
                             IsDeleted = false,
-                            RoleId = 4
+                            RoleId = 1
                         },
                         new
                         {
@@ -863,7 +866,7 @@ namespace ShippingSystem.DAL.Migrations
                             CanWrite = false,
                             EntityId = 8,
                             IsDeleted = false,
-                            RoleId = 4
+                            RoleId = 1
                         },
                         new
                         {
@@ -874,7 +877,7 @@ namespace ShippingSystem.DAL.Migrations
                             CanWrite = false,
                             EntityId = 9,
                             IsDeleted = false,
-                            RoleId = 4
+                            RoleId = 1
                         },
                         new
                         {
@@ -885,7 +888,7 @@ namespace ShippingSystem.DAL.Migrations
                             CanWrite = false,
                             EntityId = 10,
                             IsDeleted = false,
-                            RoleId = 4
+                            RoleId = 1
                         });
                 });
 
@@ -960,28 +963,28 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateOnly(2024, 6, 29),
-                            IsDeleted = false,
-                            Name = "Merchant"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateOnly(2024, 6, 29),
+                            CreatedDate = new DateOnly(2024, 6, 30),
                             IsDeleted = false,
                             Name = "Employee"
                         },
                         new
                         {
+                            Id = 2,
+                            CreatedDate = new DateOnly(2024, 6, 30),
+                            IsDeleted = false,
+                            Name = "Merchant"
+                        },
+                        new
+                        {
                             Id = 3,
-                            CreatedDate = new DateOnly(2024, 6, 29),
+                            CreatedDate = new DateOnly(2024, 6, 30),
                             IsDeleted = false,
                             Name = "Delivery"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateOnly(2024, 6, 29),
+                            CreatedDate = new DateOnly(2024, 6, 30),
                             IsDeleted = false,
                             Name = "Admin"
                         });
