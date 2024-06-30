@@ -78,7 +78,7 @@ namespace ShippingSysem.BLL.Services
 			var deletedOrNot = false;
 			if (row != null)
 			{
-				iGenericStatusRepository.DeleteBranch(row);
+				iGenericStatusRepository.Delete(row);
 				await iGenericStatusRepository.SaveAsync();
 				deletedOrNot = true;
 			}

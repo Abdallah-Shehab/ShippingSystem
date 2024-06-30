@@ -100,6 +100,11 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<BranchService>();
             builder.Services.AddScoped<IOrderRepository,OrderRepository>();
 
+            //Register City Service
+            builder.Services.AddScoped<IGenericRepository<Government>, GenericRepository<Government>>();
+            builder.Services.AddScoped<IGenericRepository<City>, GenericRepository<City>>();
+            builder.Services.AddScoped< CityReposatry>();
+            builder.Services.AddScoped<CityService>();
 
 
             // Allow Cors
