@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using ShippingSysem.BLL.DTOs.OrderDTOs;
+using ShippingSysem.BLL.DTOs.ProductDTOs;
 using ShippingSystem.DAL.Interfaces;
 using ShippingSystem.DAL.Models;
 using System;
@@ -125,6 +126,9 @@ namespace ShippingSysem.BLL.Services
                 PhoneTwo = _orderCreateDto.PhoneTwo,
                 Status = _orderCreateDto.Status,
                 GovernmentId = _orderCreateDto.GovernmentId,
+                StreetAndVillage = _orderCreateDto.StreetAndVillage,
+                TotalWeight = _orderCreateDto.TotalWeight,
+                TotalPrice = _orderCreateDto.TotalPrice,
                 Products = _orderCreateDto.Products.Select(p => new Product()
                 {
                     Quantity = p.Quantity,

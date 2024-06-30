@@ -31,7 +31,7 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExistedEntities",
+                name: "Entities",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -41,11 +41,11 @@ namespace ShippingSystem.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExistedEntities", x => x.Id);
+                    table.PrimaryKey("PK_Entities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PaymentType",
+                name: "PaymentTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -55,11 +55,11 @@ namespace ShippingSystem.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PaymentType", x => x.Id);
+                    table.PrimaryKey("PK_PaymentTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ShippingType",
+                name: "ShippingTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -70,7 +70,7 @@ namespace ShippingSystem.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ShippingType", x => x.Id);
+                    table.PrimaryKey("PK_ShippingTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -95,7 +95,7 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Permission",
+                name: "Permissions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -110,17 +110,17 @@ namespace ShippingSystem.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Permission", x => x.Id);
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Permission_AspNetRoles_RoleId",
+                        name: "FK_Permissions_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Permission_ExistedEntities_EntityId",
+                        name: "FK_Permissions_Entities_EntityId",
                         column: x => x.EntityId,
-                        principalTable: "ExistedEntities",
+                        principalTable: "Entities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -230,7 +230,7 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Branch",
+                name: "Branches",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -243,7 +243,7 @@ namespace ShippingSystem.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Branch", x => x.Id);
+                    table.PrimaryKey("PK_Branches", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -285,14 +285,14 @@ namespace ShippingSystem.DAL.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_DeliveryAccounts_Branch_BranchID",
+                        name: "FK_DeliveryAccounts_Branches_BranchID",
                         column: x => x.BranchID,
-                        principalTable: "Branch",
+                        principalTable: "Branches",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Government",
+                name: "Governments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -304,11 +304,11 @@ namespace ShippingSystem.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Government", x => x.Id);
+                    table.PrimaryKey("PK_Governments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Government_Branch_BranchID",
+                        name: "FK_Governments_Branches_BranchID",
                         column: x => x.BranchID,
-                        principalTable: "Branch",
+                        principalTable: "Branches",
                         principalColumn: "Id");
                 });
 
@@ -353,14 +353,14 @@ namespace ShippingSystem.DAL.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_MerchantAccounts_Branch_BranchID",
+                        name: "FK_MerchantAccounts_Branches_BranchID",
                         column: x => x.BranchID,
-                        principalTable: "Branch",
+                        principalTable: "Branches",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "City",
+                name: "Cities",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -370,20 +370,21 @@ namespace ShippingSystem.DAL.Migrations
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     NormalShippingCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PickupShippingCost = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    GovernmentID = table.Column<int>(type: "int", nullable: true)
+                    GovernmentID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_City", x => x.Id);
+                    table.PrimaryKey("PK_Cities", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_City_Government_GovernmentID",
+                        name: "FK_Cities_Governments_GovernmentID",
                         column: x => x.GovernmentID,
-                        principalTable: "Government",
-                        principalColumn: "Id");
+                        principalTable: "Governments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "Orders",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -413,46 +414,46 @@ namespace ShippingSystem.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Order_AspNetUsers_StaffMemberID",
+                        name: "FK_Orders_AspNetUsers_StaffMemberID",
                         column: x => x.StaffMemberID,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Order_City_CitytId",
+                        name: "FK_Orders_Cities_CitytId",
                         column: x => x.CitytId,
-                        principalTable: "City",
+                        principalTable: "Cities",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Order_DeliveryAccounts_DeliveryID",
+                        name: "FK_Orders_DeliveryAccounts_DeliveryID",
                         column: x => x.DeliveryID,
                         principalTable: "DeliveryAccounts",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Order_Government_GovernmentId",
+                        name: "FK_Orders_Governments_GovernmentId",
                         column: x => x.GovernmentId,
-                        principalTable: "Government",
+                        principalTable: "Governments",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Order_MerchantAccounts_MerchantID",
+                        name: "FK_Orders_MerchantAccounts_MerchantID",
                         column: x => x.MerchantID,
                         principalTable: "MerchantAccounts",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Order_PaymentType_PaymentTypeID",
+                        name: "FK_Orders_PaymentTypes_PaymentTypeID",
                         column: x => x.PaymentTypeID,
-                        principalTable: "PaymentType",
+                        principalTable: "PaymentTypes",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Order_ShippingType_ShippingTypeID",
+                        name: "FK_Orders_ShippingTypes_ShippingTypeID",
                         column: x => x.ShippingTypeID,
-                        principalTable: "ShippingType",
+                        principalTable: "ShippingTypes",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -465,11 +466,11 @@ namespace ShippingSystem.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Product_Order_order_Id",
+                        name: "FK_Products_Orders_order_Id",
                         column: x => x.order_Id,
-                        principalTable: "Order",
+                        principalTable: "Orders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -486,7 +487,7 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ExistedEntities",
+                table: "Entities",
                 columns: new[] { "Id", "IsDeleted", "Name" },
                 values: new object[,]
                 {
@@ -503,7 +504,7 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "PaymentType",
+                table: "PaymentTypes",
                 columns: new[] { "Id", "IsDeleted", "Name" },
                 values: new object[,]
                 {
@@ -512,7 +513,7 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ShippingType",
+                table: "ShippingTypes",
                 columns: new[] { "Id", "IsDeleted", "Name", "Price" },
                 values: new object[,]
                 {
@@ -524,10 +525,14 @@ namespace ShippingSystem.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
+<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240630190536_v1.cs
+                values: new object[] { 1, 0, "123 New Street", null, "27dbba3c-00cb-445d-add1-e3ef363e049c", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEOBOb8jgNB9IP0+e8HesBEHIUQyRXuOZ+YJa3b49axmqsGGMjzPNa/acYaqA1QnTig==", null, false, 1, null, true, false, "newuser" });
+========
                 values: new object[] { 1, 0, "123 New Street", null, "10d821ee-0e9a-440d-9684-23a107d707b3", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEHjiGD5dh4wovwoIXuzyT+dyESnPEJitXyio1E8+pRwnvyNf01fjFjdlVj8psiLg5A==", null, false, 1, null, true, false, "newuser" });
+>>>>>>>> Azza:ShippingSystem.DAL/Migrations/20240630183516_v1.cs
 
             migrationBuilder.InsertData(
-                table: "Permission",
+                table: "Permissions",
                 columns: new[] { "Id", "CanCreate", "CanDelete", "CanRead", "CanWrite", "EntityId", "IsDeleted", "RoleId" },
                 values: new object[,]
                 {
@@ -593,13 +598,13 @@ namespace ShippingSystem.DAL.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Branch_GovernmentID",
-                table: "Branch",
+                name: "IX_Branches_GovernmentID",
+                table: "Branches",
                 column: "GovernmentID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_City_GovernmentID",
-                table: "City",
+                name: "IX_Cities_GovernmentID",
+                table: "Cities",
                 column: "GovernmentID");
 
             migrationBuilder.CreateIndex(
@@ -613,8 +618,8 @@ namespace ShippingSystem.DAL.Migrations
                 column: "RoleID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Government_BranchID",
-                table: "Government",
+                name: "IX_Governments_BranchID",
+                table: "Governments",
                 column: "BranchID");
 
             migrationBuilder.CreateIndex(
@@ -628,53 +633,53 @@ namespace ShippingSystem.DAL.Migrations
                 column: "RoleID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_CitytId",
-                table: "Order",
+                name: "IX_Orders_CitytId",
+                table: "Orders",
                 column: "CitytId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_DeliveryID",
-                table: "Order",
+                name: "IX_Orders_DeliveryID",
+                table: "Orders",
                 column: "DeliveryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_GovernmentId",
-                table: "Order",
+                name: "IX_Orders_GovernmentId",
+                table: "Orders",
                 column: "GovernmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_MerchantID",
-                table: "Order",
+                name: "IX_Orders_MerchantID",
+                table: "Orders",
                 column: "MerchantID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_PaymentTypeID",
-                table: "Order",
+                name: "IX_Orders_PaymentTypeID",
+                table: "Orders",
                 column: "PaymentTypeID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_ShippingTypeID",
-                table: "Order",
+                name: "IX_Orders_ShippingTypeID",
+                table: "Orders",
                 column: "ShippingTypeID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_StaffMemberID",
-                table: "Order",
+                name: "IX_Orders_StaffMemberID",
+                table: "Orders",
                 column: "StaffMemberID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permission_EntityId",
-                table: "Permission",
+                name: "IX_Permissions_EntityId",
+                table: "Permissions",
                 column: "EntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permission_RoleId",
-                table: "Permission",
+                name: "IX_Permissions_RoleId",
+                table: "Permissions",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_order_Id",
-                table: "Product",
+                name: "IX_Products_order_Id",
+                table: "Products",
                 column: "order_Id");
 
             migrationBuilder.AddForeignKey(
@@ -702,17 +707,17 @@ namespace ShippingSystem.DAL.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_AspNetUsers_Branch_BranchID",
+                name: "FK_AspNetUsers_Branches_BranchID",
                 table: "AspNetUsers",
                 column: "BranchID",
-                principalTable: "Branch",
+                principalTable: "Branches",
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Branch_Government_GovernmentID",
-                table: "Branch",
+                name: "FK_Branches_Governments_GovernmentID",
+                table: "Branches",
                 column: "GovernmentID",
-                principalTable: "Government",
+                principalTable: "Governments",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -721,8 +726,8 @@ namespace ShippingSystem.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Government_Branch_BranchID",
-                table: "Government");
+                name: "FK_Governments_Branches_BranchID",
+                table: "Governments");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -740,22 +745,22 @@ namespace ShippingSystem.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Permission");
+                name: "Permissions");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "Products");
 
             migrationBuilder.DropTable(
-                name: "ExistedEntities");
+                name: "Entities");
 
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "City");
+                name: "Cities");
 
             migrationBuilder.DropTable(
                 name: "DeliveryAccounts");
@@ -764,19 +769,19 @@ namespace ShippingSystem.DAL.Migrations
                 name: "MerchantAccounts");
 
             migrationBuilder.DropTable(
-                name: "PaymentType");
+                name: "PaymentTypes");
 
             migrationBuilder.DropTable(
-                name: "ShippingType");
+                name: "ShippingTypes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Branch");
+                name: "Branches");
 
             migrationBuilder.DropTable(
-                name: "Government");
+                name: "Governments");
         }
     }
 }
