@@ -133,7 +133,14 @@ namespace ShippingSysem.BLL.Services
                 throw new Exception("Employee Dosen't Exist");
             }
         }
-
+        public async Task<bool> UpdateEmpStatus(int id)
+        {
+            var acc = await genRepo.GetByIdAsync(id);
+            acc.Status = !acc.Status;
+            await genRepo.SaveAsync();
+            if (acc != null) return true;
+            return false;
+        }
         public async Task<Account> DeleteEmpByID(int id)
         {
             var acc = await genRepo.DeleteById(id);
