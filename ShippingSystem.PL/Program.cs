@@ -91,7 +91,7 @@ namespace ShippingSystem.PL
 
             builder.Services.AddScoped<OrderService>();
             builder.Services.AddScoped<BranchService>();
-            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+            
 
 
 
