@@ -143,7 +143,7 @@ namespace ShippingSysem.BLL.Services
             city.GovernmentID= CityCreateDTO.GovernmentID;
             
             //3- update  to city 
-            _cityReposatry.Update(city);
+           await _cityReposatry.Update(city);
 
             //4- save to db 
           await  _cityReposatry.SaveAsync();
