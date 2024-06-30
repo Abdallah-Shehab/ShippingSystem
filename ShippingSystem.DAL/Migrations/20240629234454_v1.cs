@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ShippingSystem.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class v10 : Migration
+    public partial class v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,6 +20,7 @@ namespace ShippingSystem.DAL.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateOnly>(type: "date", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -89,6 +90,37 @@ namespace ShippingSystem.DAL.Migrations
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Permission",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    EntityId = table.Column<int>(type: "int", nullable: false),
+                    CanRead = table.Column<bool>(type: "bit", nullable: false),
+                    CanWrite = table.Column<bool>(type: "bit", nullable: false),
+                    CanDelete = table.Column<bool>(type: "bit", nullable: false),
+                    CanCreate = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Permission", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Permission_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Permission_ExistedEntities_EntityId",
+                        column: x => x.EntityId,
+                        principalTable: "ExistedEntities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
@@ -193,37 +225,6 @@ namespace ShippingSystem.DAL.Migrations
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Permission",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    AccountId = table.Column<int>(type: "int", nullable: false),
-                    EntityId = table.Column<int>(type: "int", nullable: false),
-                    CanRead = table.Column<bool>(type: "bit", nullable: false),
-                    CanWrite = table.Column<bool>(type: "bit", nullable: false),
-                    CanDelete = table.Column<bool>(type: "bit", nullable: false),
-                    CanCreate = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Permission", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Permission_AspNetUsers_AccountId",
-                        column: x => x.AccountId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Permission_ExistedEntities_EntityId",
-                        column: x => x.EntityId,
-                        principalTable: "ExistedEntities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.NoAction);
                 });
@@ -474,19 +475,14 @@ namespace ShippingSystem.DAL.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "IsDeleted", "Name", "NormalizedName" },
+                columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "IsDeleted", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, null, false, "Merchant", null },
-                    { 2, null, false, "Employee", null },
-                    { 3, null, false, "Delivery", null },
-                    { 4, null, false, "Admin", null }
+                    { 1, null, new DateOnly(2024, 6, 29), false, "Merchant", null },
+                    { 2, null, new DateOnly(2024, 6, 29), false, "Employee", null },
+                    { 3, null, new DateOnly(2024, 6, 29), false, "Delivery", null },
+                    { 4, null, new DateOnly(2024, 6, 29), false, "Admin", null }
                 });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "123 New Street", null, "81eb9c29-a145-423e-87b5-2ed898b8ce0d", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEON5ioaQHWgGJ+UP99YGjXhLsmCRWU8AsP5RV4wzHFP3Z7kN+lu4HE0+OunPxXQIYg==", null, false, null, null, true, false, "newuser" });
 
             migrationBuilder.InsertData(
                 table: "ExistedEntities",
@@ -525,20 +521,25 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
+                values: new object[] { 1, 0, "123 New Street", null, "2cde3e14-c4b8-4fff-b2d6-6d39378aa96f", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEKyH2jx1J7S3WIjUk2gb8Y4eb/mAVM+PDXHp0TAGOdxvWORn/4HIxyfiHcTDAFghog==", null, false, 4, null, true, false, "newuser" });
+
+            migrationBuilder.InsertData(
                 table: "Permission",
-                columns: new[] { "Id", "AccountId", "CanCreate", "CanDelete", "CanRead", "CanWrite", "EntityId", "IsDeleted" },
+                columns: new[] { "Id", "CanCreate", "CanDelete", "CanRead", "CanWrite", "EntityId", "IsDeleted", "RoleId" },
                 values: new object[,]
                 {
-                    { 1, 1, false, false, false, false, 1, false },
-                    { 2, 1, false, false, false, false, 2, false },
-                    { 3, 1, false, false, false, false, 3, false },
-                    { 4, 1, false, false, false, false, 4, false },
-                    { 5, 1, false, false, false, false, 5, false },
-                    { 6, 1, false, false, false, false, 6, false },
-                    { 7, 1, false, false, false, false, 7, false },
-                    { 8, 1, false, false, false, false, 8, false },
-                    { 9, 1, false, false, false, false, 9, false },
-                    { 10, 1, false, false, false, false, 10, false }
+                    { 1, false, false, false, false, 1, false, 4 },
+                    { 2, false, false, false, false, 2, false, 4 },
+                    { 3, false, false, false, false, 3, false, 4 },
+                    { 4, false, false, false, false, 4, false, 4 },
+                    { 5, false, false, false, false, 5, false, 4 },
+                    { 6, false, false, false, false, 6, false, 4 },
+                    { 7, false, false, false, false, 7, false, 4 },
+                    { 8, false, false, false, false, 8, false, 4 },
+                    { 9, false, false, false, false, 9, false, 4 },
+                    { 10, false, false, false, false, 10, false, 4 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -661,14 +662,14 @@ namespace ShippingSystem.DAL.Migrations
                 column: "StaffMemberID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permission_AccountId",
-                table: "Permission",
-                column: "AccountId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Permission_EntityId",
                 table: "Permission",
                 column: "EntityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Permission_RoleId",
+                table: "Permission",
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Product_order_Id",
