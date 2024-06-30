@@ -24,7 +24,7 @@ namespace ShippingSystem.DAL.Repositories.Base
 		{
 			row.Status = !row.Status;
 		}
-		public async void DeleteBranch(T row)
+		public async void Delete(T row)
 		{
 			row.IsDeleted = true;
 			//row.IsDeleted = !row.IsDeleted;

@@ -71,8 +71,10 @@ namespace ShippingSystem.PL
 
             //Register Emp Services 
             builder.Services.AddScoped<IGenericRepository<Account>, GenericRepository<Account>>();
-            builder.Services.AddScoped< IGenericStatusRepository<Branch>, GenericStatusRepository<Branch>>();
             builder.Services.AddScoped<IGenericStatusRepository<Government>, GenericStatusRepository<Government>>();
+            builder.Services.AddScoped<IGenericRepository<Role>, GenericRepository<Role>>();
+            builder.Services.AddScoped<IGenericStatusRepository<Branch>, GenericStatusRepository<Branch>>();
+            //builder.Services.AddScoped<IGenericStatusRepository<Government>, GenericStatusRepository<Government>>();
             builder.Services.AddScoped<IGenericRepository<ExistedEntities>, GenericRepository<ExistedEntities>>();
 
             //Delivery Accounts
@@ -80,10 +82,10 @@ namespace ShippingSystem.PL
 
             //builder.Services.AddScoped<IGenericRepository<Permission_User_Entities>, GenericRepository<Permission_User_Entities>>();
             builder.Services.AddScoped<EmployeeService>();
-            builder.Services.AddScoped<PermissionsService>();
+            //builder.Services.AddScoped<PermissionsService>();
 
             // Delivery Accounts Service
-            builder.Services.AddScoped< DeliveryAccountService>();
+            builder.Services.AddScoped<DeliveryAccountService>();
 
 
             //Register Order Service
@@ -91,8 +93,14 @@ namespace ShippingSystem.PL
 
             builder.Services.AddScoped<OrderService>();
             builder.Services.AddScoped<BranchService>();
-            builder.Services.AddScoped<IOrderRepository,OrderRepository>();
+            builder.Services.AddScoped<GovernmentService>();
+            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
+            //Register City Service
+            builder.Services.AddScoped<IGenericRepository<Government>, GenericRepository<Government>>();
+            builder.Services.AddScoped<IGenericRepository<City>, GenericRepository<City>>();
+            builder.Services.AddScoped< CityReposatry>();
+            builder.Services.AddScoped<CityService>();
 
 
 
@@ -115,6 +123,10 @@ namespace ShippingSystem.PL
 
 
 
+
+
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -128,7 +140,7 @@ namespace ShippingSystem.PL
             app.UseCors();
             app.UseAuthorization();
 
-           
+
             app.MapControllers();
 
             app.Run();
