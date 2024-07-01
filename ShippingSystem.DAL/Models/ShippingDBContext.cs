@@ -104,6 +104,7 @@ namespace ShippingSystem.DAL.Models
                 Address = "123 New Street",
                 Status = true,
                 RoleID = 1,
+                BranchID = 1,
                 PasswordHash = hasher.HashPassword(null, "password") // Set a default password
             };
             builder.Entity<Account>().HasData(

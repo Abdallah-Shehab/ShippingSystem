@@ -74,6 +74,7 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<IGenericRepository<Account>, GenericRepository<Account>>();
             builder.Services.AddScoped<IGenericStatusRepository<Government>, GenericStatusRepository<Government>>();
             builder.Services.AddScoped<IGenericRepository<Role>, GenericRepository<Role>>();
+            builder.Services.AddScoped<RoleService>();
             builder.Services.AddScoped<IGenericStatusRepository<Branch>, GenericStatusRepository<Branch>>();
             //builder.Services.AddScoped<IGenericStatusRepository<Government>, GenericStatusRepository<Government>>();
             builder.Services.AddScoped<IGenericRepository<ExistedEntities>, GenericRepository<ExistedEntities>>();
@@ -100,7 +101,7 @@ namespace ShippingSystem.PL
             //Register City Service
             builder.Services.AddScoped<IGenericRepository<Government>, GenericRepository<Government>>();
             builder.Services.AddScoped<IGenericRepository<City>, GenericRepository<City>>();
-            builder.Services.AddScoped< CityReposatry>();
+            builder.Services.AddScoped<CityReposatry>();
             builder.Services.AddScoped<CityService>();
 
             //Register Login Service
@@ -118,6 +119,7 @@ namespace ShippingSystem.PL
                            .AllowAnyHeader();
                 });
             });
+
 
 
 

@@ -37,6 +37,13 @@ namespace ShippingSystem.PL.Controllers
             return Ok(account);
         }
 
+        [HttpPut("UpdateEmpStatus/{id}")]
+        public async Task<IActionResult> UpdateEmpStatus(int id)
+        {
+            var account = await empService.UpdateEmpStatus(id);
+            return Ok(account);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> AddEmp(CreateEmployeeDTO EmpDto)
