@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ShippingSysem.BLL.Services;
 using ShippingSystem.DAL.Interfaces;
@@ -102,6 +103,8 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped< CityReposatry>();
             builder.Services.AddScoped<CityService>();
 
+            //Register Login Service
+            builder.Services.AddScoped<LoginService>();
 
 
             //  add  CORS configuration:
@@ -116,10 +119,9 @@ namespace ShippingSystem.PL
                 });
             });
 
-         
 
-            
-            
+
+
 
 
 

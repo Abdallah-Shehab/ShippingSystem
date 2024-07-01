@@ -91,7 +91,7 @@ namespace ShippingSysem.BLL.Services
         //Here Iwant to  get all cities with navigation property 
         //using function from genric reposatry
         public async Task<List<CityReadDTO>> GetCitiesWithGovernment(int governmentID) {
-         var CitiesList = await _cityReposatry.GetAllWithFilter(x => x.GovernmentID == governmentID && x.IsDeleted == false);
+            var CitiesList = await _cityReposatry.GetAllWithFilter(x => x.GovernmentID == governmentID && x.IsDeleted == false);
             return await CitiesList.Select(x =>
                 new CityReadDTO()
                 {
@@ -162,8 +162,6 @@ namespace ShippingSysem.BLL.Services
                 Status = city.Status
             };
 
-
-
             //var city = _cityReposatry.GetAllWithFilter(x => x.Id == id && x.IsDeleted == false).Result
             //    .Select(c => new CityReadDTO() {
             //        Name = c.Name,
@@ -197,6 +195,24 @@ namespace ShippingSysem.BLL.Services
             //}
             //else
             //    return null;
+        }
+
+        //GetCities With Pagination
+        public async Task<IQueryable<CityReadDTO>> getCityWithPagination(int page,int pageSize) {
+         var cities =await   _cityReposatry.GetAllAsyncWithPagination(page, pageSize);
+            cities = cities.Include(c => c.Government);
+            return cities.Select(c => new CityReadDTO()
+            {
+                GovernmentID = c.GovernmentID,
+                GovernmentName = c.Government.Name,
+                Status = c.Status,
+                Id = c.Id,
+                Name = c.Name,
+                NormalShippingCost = c.NormalShippingCost,
+                PickupShippingCost = c.PickupShippingCost
+
+            });
+        
         }
 
 

@@ -65,7 +65,7 @@ namespace ShippingSystem.DAL.Repositories
                                  .Where(expression)
                                  .AsNoTracking();
         }
-        public async Task< City> GetCity(Expression<Func<City, bool>> expression)
+        public async Task<City> GetCity(Expression<Func<City, bool>> expression)
         {
             if (context == null)
                 throw new InvalidOperationException("Context is null");

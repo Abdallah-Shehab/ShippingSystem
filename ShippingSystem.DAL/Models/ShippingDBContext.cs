@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -105,7 +106,56 @@ namespace ShippingSystem.DAL.Models
                 RoleID = 1,
                 PasswordHash = hasher.HashPassword(null, "password") // Set a default password
             };
-
+            builder.Entity<Account>().HasData(
+               new Account
+               {
+                   Id = 2,
+                   Name = "John Doe",
+                   Address = "123 Main St",
+                   Status = true,
+                   RoleID = 1,
+                   BranchID = 1,
+                   IsDeleted = false,
+                   UserName = "johndoe",
+                   NormalizedUserName = "JOHNDOE",
+                   Email = "john.doe@example.com",
+                   NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
+                   EmailConfirmed = true,
+                   PasswordHash = hasher.HashPassword(null, "passssword"),
+                   SecurityStamp = "HBLASJQKDKDKS",
+                   ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
+                   PhoneNumber = "1234567890",
+                   PhoneNumberConfirmed = true,
+                   TwoFactorEnabled = false,
+                   LockoutEnd = null,
+                   LockoutEnabled = true,
+                   AccessFailedCount = 0
+               },
+               new Account
+               {
+                   Id = 3,
+                   Name = "Jane Smith",
+                   Address = "456 Oak St",
+                   Status = true,
+                   RoleID = 2,
+                   BranchID = 2,
+                   IsDeleted = false,
+                   UserName = "janesmith",
+                   NormalizedUserName = "JANESMITH",
+                   Email = "jane.smith@example.com",
+                   NormalizedEmail = "JANE.SMITH@EXAMPLE.COM",
+                   EmailConfirmed = true,
+                   PasswordHash = hasher.HashPassword(null, "passwooord"),
+                   SecurityStamp = "HJSDKFHSDFHSD",
+                   ConcurrencyStamp = "87654321-dcba-4321-hgfe-0987654321ba",
+                   PhoneNumber = "0987654321",
+                   PhoneNumberConfirmed = true,
+                   TwoFactorEnabled = false,
+                   LockoutEnd = null,
+                   LockoutEnabled = true,
+                   AccessFailedCount = 0
+               }
+           );
             builder.Entity<Account>().HasData(newAccount);
 
             // Seed permissions for the new account

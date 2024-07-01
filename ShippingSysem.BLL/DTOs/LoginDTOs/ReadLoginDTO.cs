@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace ShippingSysem.BLL.DTOs.LoginDTOs
 {
-	internal class ReadLoginDTO
+	public class ReadLoginDTO
 	{
+		public string token {  get; set; }
+		public string Role { get; set; }
+		public string Name { get; set; }
+		public int id { get; set; }
 	}
 }

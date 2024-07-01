@@ -71,7 +71,12 @@ namespace ShippingSystem.PL.Controllers
             }
             else
                 return NotFound();
-
+        }
+        [HttpGet("pagination")]
+        public async Task<IActionResult> get_City_pagination(int page,int pageSize) {
+        
+        var cities = await cityService.getCityWithPagination(page,pageSize);
+            return Ok(cities);
         }
     }
 }
