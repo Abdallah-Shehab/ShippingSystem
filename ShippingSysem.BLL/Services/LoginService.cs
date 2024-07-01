@@ -11,6 +11,7 @@ using ShippingSysem.BLL.DTOs.LoginDTOs;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
+using ShippingSystem.DAL.Repositories;
 
 namespace ShippingSysem.BLL.Services
 {
@@ -25,17 +26,20 @@ namespace ShippingSysem.BLL.Services
         private readonly UserManager<Account> userManagerAccount;
         private readonly UserManager<MerchantAccount> userManagerMerchant;
         private readonly UserManager<DeliveryAccount> userManagerDelivery;
+        private readonly LoginAccountReposatry loginAccountReposatry;
 
         public IGenericRepository<Account> IGenericRepo { get; }
         public LoginService(IGenericRepository<Account> iGenericRepo,
             UserManager<Account> userManagerAccount,
             UserManager<MerchantAccount> userManagerMerchant,
-			UserManager<DeliveryAccount> userManagerDelivery)
+			UserManager<DeliveryAccount> userManagerDelivery,
+			LoginAccountReposatry loginAccountReposatry)
         {
 			IGenericRepo = iGenericRepo;
             this.userManagerAccount = userManagerAccount;
             this.userManagerMerchant = userManagerMerchant;
             this.userManagerDelivery = userManagerDelivery;
+            this.loginAccountReposatry = loginAccountReposatry;
         }
 
 		//public Task<bool> Login(string email,string password)
@@ -71,7 +75,7 @@ namespace ShippingSysem.BLL.Services
 			}
 		}
 
-
+		
 		public async Task<MessageOrToken> getTokenEmployee(CreateLoginDTO login) {
             //get User By Emial
 
@@ -90,11 +94,13 @@ namespace ShippingSysem.BLL.Services
                     var token = new JwtSecurityToken(claims: claims, signingCredentials: signCirdintional);
                     //convert token to string 
                     var tokenHandler = new JwtSecurityTokenHandler().WriteToken(token);
-					ReadLoginDTO readLoginDTO = new ReadLoginDTO() {
+					Account accountWithRole = loginAccountReposatry.GetAccountWithRole(o => o.Id == account.Id);
+
+                    ReadLoginDTO readLoginDTO = new ReadLoginDTO() {
 						id = account.Id,
 						Name=account.Name,
-						//Role=account.Role.Name,
-						token=tokenHandler
+						Role = accountWithRole.Role.Name,
+						token =tokenHandler
 					};
                     return (new MessageOrToken() { ReadLoginDTO = readLoginDTO });
                 }

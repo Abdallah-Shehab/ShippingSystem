@@ -106,6 +106,9 @@ namespace ShippingSystem.PL
 
             //Register Login Service
             builder.Services.AddScoped<LoginService>();
+            builder.Services.AddScoped<LoginAccountReposatry>();
+            builder.Services.AddScoped<LoginMerchantReposatry>();
+            builder.Services.AddScoped<LoginDeliveryReposatry>();
 
 
             //  add  CORS configuration:
