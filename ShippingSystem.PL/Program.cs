@@ -85,6 +85,8 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<IGenericRepository<MerchantAccount>, GenericRepository<MerchantAccount>>();
             builder.Services.AddScoped<MerchantService>();
 
+            //Merchant Accounts
+            builder.Services.AddScoped<IGenericRepository<MerchantAccount>, GenericRepository<MerchantAccount>>();
             //builder.Services.AddScoped<IGenericRepository<Permission_User_Entities>, GenericRepository<Permission_User_Entities>>();
             builder.Services.AddScoped<EmployeeService>();
             //builder.Services.AddScoped<PermissionsService>();
@@ -92,6 +94,9 @@ namespace ShippingSystem.PL
             // Delivery Accounts Service
             builder.Services.AddScoped<DeliveryAccountService>();
 
+            // Delivery Merchant Service
+
+            builder.Services.AddScoped<MerchantAccountService>();
 
             //Register Order Service
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
