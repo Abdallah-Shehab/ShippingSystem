@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ShippingSysem.BLL.Services;
+using ShippingSystem.BLL.Services;
 using ShippingSystem.DAL.Interfaces;
 using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
@@ -78,12 +79,12 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<IGenericStatusRepository<Branch>, GenericStatusRepository<Branch>>();
             //builder.Services.AddScoped<IGenericStatusRepository<Government>, GenericStatusRepository<Government>>();
             builder.Services.AddScoped<IGenericRepository<ExistedEntities>, GenericRepository<ExistedEntities>>();
-
             //Delivery Accounts
             builder.Services.AddScoped<IGenericRepository<DeliveryAccount>, GenericRepository<DeliveryAccount>>();
             //Delivery Merchant
             builder.Services.AddScoped<IGenericRepository<MerchantAccount>, GenericRepository<MerchantAccount>>();
             builder.Services.AddScoped<MerchantService>();
+            builder.Services.AddScoped(typeof(GenericRepository<>));
 
             //Merchant Accounts
             builder.Services.AddScoped<IGenericRepository<MerchantAccount>, GenericRepository<MerchantAccount>>();
@@ -91,12 +92,18 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<EmployeeService>();
             //builder.Services.AddScoped<PermissionsService>();
 
+
+
+
             // Delivery Accounts Service
             builder.Services.AddScoped<DeliveryAccountService>();
 
             // Delivery Merchant Service
 
             builder.Services.AddScoped<MerchantAccountService>();
+
+            builder.Services.AddScoped<SpecialOfferService>();
+
 
             //Register Order Service
             builder.Services.AddScoped<IOrderRepository, OrderRepository>();
