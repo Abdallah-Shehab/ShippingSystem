@@ -46,7 +46,7 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ExistedEntities",
+                name: "Entities",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -56,7 +56,7 @@ namespace ShippingSystem.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ExistedEntities", x => x.Id);
+                    table.PrimaryKey("PK_Entities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -127,7 +127,7 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Permission",
+                name: "Permissions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -142,17 +142,17 @@ namespace ShippingSystem.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Permission", x => x.Id);
+                    table.PrimaryKey("PK_Permissions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Permission_AspNetRoles_RoleId",
+                        name: "FK_Permissions_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Permission_ExistedEntities_EntityId",
+                        name: "FK_Permissions_Entities_EntityId",
                         column: x => x.EntityId,
-                        principalTable: "ExistedEntities",
+                        principalTable: "Entities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -534,7 +534,7 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ExistedEntities",
+                table: "Entities",
                 columns: new[] { "Id", "IsDeleted", "Name" },
                 values: new object[,]
                 {
@@ -574,9 +574,9 @@ namespace ShippingSystem.DAL.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "123 New Street", null, "ac7b0308-603d-47e7-829b-b220c3c6c300", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEHVo3SSFuPf9atPXJQS21Tf5tZm5EfQNS/9G/hmyU2qBdNuCrQas327F5Gadt8bxpg==", null, false, 1, null, true, false, "newuser" },
-                    { 2, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "john.doe@example.com", true, false, true, null, "John Doe", "JOHN.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAECnwuM8hrsOAQsYF2zux5SPm9ojAQTIDkL13NfdlTzaS/hVa89Vpo6Ri0uoWDXQTNw==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "johndoe" },
-                    { 3, 0, "456 Oak St", 2, "87654321-dcba-4321-hgfe-0987654321ba", "jane.smith@example.com", true, false, true, null, "Jane Smith", "JANE.SMITH@EXAMPLE.COM", "JANESMITH", "AQAAAAIAAYagAAAAEKnasS8HQaV2If1kkCJG/L+cEOZpcq9VC4lADyO5Y5qpqQmz+RoIzEHEZyWvUM+CJg==", "0987654321", true, 2, "HJSDKFHSDFHSD", true, false, "janesmith" }
+                    { 1, 0, "123 New Street", null, "e70872f8-e918-47b6-b4dd-e8c861c7704a", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEPUFou0a3D+uv9tffbCyIJpDT9eI3/CTd8Zr5Ml+h6IT/Abkh64QlGi6Uh+XXl+VyA==", null, false, 1, null, true, false, "newuser" },
+                    { 2, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "john.doe@example.com", true, false, true, null, "John Doe", "JOHN.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEDT/j1sNJFUMYHaCcQi9VxdkrD7c3kBetQ3LC+jcxy8Ya8zst0jAtm58unFRVt0p5A==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "johndoe" },
+                    { 3, 0, "456 Oak St", 2, "87654321-dcba-4321-hgfe-0987654321ba", "jane.smith@example.com", true, false, true, null, "Jane Smith", "JANE.SMITH@EXAMPLE.COM", "JANESMITH", "AQAAAAIAAYagAAAAECFZK+KUaCiL1d+1BZJkQKSf2crJjaLtSKthRkuWYg6fL15O+uhy4XYPvNuziDyemQ==", "0987654321", true, 2, "HJSDKFHSDFHSD", true, false, "janesmith" }
                 });
 
             migrationBuilder.InsertData(
@@ -585,7 +585,7 @@ namespace ShippingSystem.DAL.Migrations
                 values: new object[] { 1, null, "John Doe", new DateOnly(2024, 7, 2), null, 10.00m, 1, null, "john.doe@example.com", null, false, null, "Handle with care", 40.00m, null, "1234567890", "0987654321", 50.00m, null, null, "Pending", "123 Main St", 100.00m, 5.00m });
 
             migrationBuilder.InsertData(
-                table: "Permission",
+                table: "Permissions",
                 columns: new[] { "Id", "CanCreate", "CanDelete", "CanRead", "CanWrite", "EntityId", "IsDeleted", "RoleId" },
                 values: new object[,]
                 {
@@ -726,13 +726,13 @@ namespace ShippingSystem.DAL.Migrations
                 column: "StaffMemberID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permission_EntityId",
-                table: "Permission",
+                name: "IX_Permissions_EntityId",
+                table: "Permissions",
                 column: "EntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permission_RoleId",
-                table: "Permission",
+                name: "IX_Permissions_RoleId",
+                table: "Permissions",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
@@ -803,7 +803,7 @@ namespace ShippingSystem.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Permission");
+                name: "Permissions");
 
             migrationBuilder.DropTable(
                 name: "Products");
@@ -812,7 +812,7 @@ namespace ShippingSystem.DAL.Migrations
                 name: "SpecialOffer");
 
             migrationBuilder.DropTable(
-                name: "ExistedEntities");
+                name: "Entities");
 
             migrationBuilder.DropTable(
                 name: "Orders");
