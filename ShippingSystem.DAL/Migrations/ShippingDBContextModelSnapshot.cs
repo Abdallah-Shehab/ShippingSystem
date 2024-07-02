@@ -233,7 +233,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "John Doe",
                             NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAECnwuM8hrsOAQsYF2zux5SPm9ojAQTIDkL13NfdlTzaS/hVa89Vpo6Ri0uoWDXQTNw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDT/j1sNJFUMYHaCcQi9VxdkrD7c3kBetQ3LC+jcxy8Ya8zst0jAtm58unFRVt0p5A==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 1,
@@ -256,7 +256,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Jane Smith",
                             NormalizedEmail = "JANE.SMITH@EXAMPLE.COM",
                             NormalizedUserName = "JANESMITH",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKnasS8HQaV2If1kkCJG/L+cEOZpcq9VC4lADyO5Y5qpqQmz+RoIzEHEZyWvUM+CJg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECFZK+KUaCiL1d+1BZJkQKSf2crJjaLtSKthRkuWYg6fL15O+uhy4XYPvNuziDyemQ==",
                             PhoneNumber = "0987654321",
                             PhoneNumberConfirmed = true,
                             RoleID = 2,
@@ -270,13 +270,13 @@ namespace ShippingSystem.DAL.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Address = "123 New Street",
-                            ConcurrencyStamp = "ac7b0308-603d-47e7-829b-b220c3c6c300",
+                            ConcurrencyStamp = "e70872f8-e918-47b6-b4dd-e8c861c7704a",
                             Email = "newuser@example.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             Name = "New User",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHVo3SSFuPf9atPXJQS21Tf5tZm5EfQNS/9G/hmyU2qBdNuCrQas327F5Gadt8bxpg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPUFou0a3D+uv9tffbCyIJpDT9eI3/CTd8Zr5Ml+h6IT/Abkh64QlGi6Uh+XXl+VyA==",
                             PhoneNumberConfirmed = false,
                             RoleID = 1,
                             Status = true,
@@ -499,7 +499,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ExistedEntities");
+                    b.ToTable("Entities");
 
                     b.HasData(
                         new
@@ -886,7 +886,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("Permission");
+                    b.ToTable("Permissions");
 
                     b.HasData(
                         new

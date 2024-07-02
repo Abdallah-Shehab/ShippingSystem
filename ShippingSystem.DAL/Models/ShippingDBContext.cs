@@ -14,7 +14,11 @@ namespace ShippingSystem.DAL.Models
 {
     public class ShippingDBContext : IdentityDbContext<Account, Role, int>
     {
-    
+
+        public DbSet<Account> Accounts { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<ExistedEntities> Entities { get; set; }
 
         public DbSet<Branch> Branches { get; set; }
         public DbSet<City> Cities { get; set; }
@@ -26,17 +30,12 @@ namespace ShippingSystem.DAL.Models
         public DbSet<DeliveryType> DeliveryTypes { get; set; }
         public DbSet<MerchantAccount> MerchantAccounts { get; set; }
         public DbSet<DeliveryAccount> DeliveryAccounts { get; set; }
+        public DbSet<SpecialOffer> SpecialOffer { get; set; }
 
 
-        public DbSet<Account> Accounts;
-        public DbSet<Role> Roles;
-        public DbSet<Permission> Permissions;
-        public DbSet<ExistedEntities> Entities;
-        //public DbSet<AccountPermissions> Permissions_Users_Entities;
   
    
         
-        public DbSet<SpecialOffer> SpecialOffer;
         public ShippingDBContext(DbContextOptions<ShippingDBContext> options) : base(options)
         {
         }
