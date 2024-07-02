@@ -51,6 +51,13 @@ namespace ShippingSysem.BLL.Services
             return await Orders.ToListAsync();
         }
 
+        public async Task<OrederReadDTO> DeleteOrder(int id)
+        {
+            var order = await repository.DeleteById(id);
+            if (order != null) return await MappingorderToOrderReadDTO(order);
+            return null;
+        }
+
         //Private Method using for Mapping The orders return from database(order Repository)
         private async Task<List<OrederReadDTO>> MappingorderDTOs(IQueryable<Order> orders)
         {
@@ -92,16 +99,16 @@ namespace ShippingSysem.BLL.Services
                 ReceivedMoney = order.ReceivedMoney,
                 DeliveryPrice = order.DeliveryPrice,
                 PaiedMoney = order.PaiedMoney,
-                Government = order.government.Name,
-                Cityt = order.city.Name,
+                Government = order.government?.Name, // Null check
+                Cityt = order.city?.Name,            // Null check
                 PhoneOne = order.PhoneOne,
                 PhoneTwo = order.PhoneTwo,
                 Email = order.Email,
                 Notes = order.Notes,
                 StreetAndVillage = order.StreetAndVillage,
-                StaffMemberName = order.StaffMemberAccount.Name,
-                MerchantName = order.MerchantAccount.Name,
-                DeliveryName = order.DeliveryAccount.Name,
+                StaffMemberName = order.StaffMemberAccount?.Name, // Null check
+                MerchantName = order.MerchantAccount?.Name,       // Null check
+                DeliveryName = order.DeliveryAccount?.Name,       // Null check
                 CreatedDate = order.CreatedDate,
                 DeliverydDate = order.DeliverydDate,
                 TotalWeight = order.TotalWeight

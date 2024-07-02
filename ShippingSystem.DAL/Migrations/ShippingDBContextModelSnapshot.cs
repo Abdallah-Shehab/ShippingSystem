@@ -224,18 +224,14 @@ namespace ShippingSystem.DAL.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Address = "123 New Street",
-
                             BranchID = 1,
-                            ConcurrencyStamp = "6d7fb494-00fe-4d6a-bd27-e7869daffcb0",
-
+                            ConcurrencyStamp = "0b4c4156-3750-4f61-9880-deb83bd4d7e4",
                             Email = "newuser@example.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             Name = "New User",
-
-                            PasswordHash = "AQAAAAIAAYagAAAAEDPCWGaSfPgNAgpIWF/vOxiXKYuQ9RnzzmfyIwsfd5LArSbp3zmIzm0mBJHUXftiLg==",
-
+                            PasswordHash = "AQAAAAIAAYagAAAAELp15a4/DubPDMehXFrfNRx4/tBD7ulR6KHJSC/9iIhATnZ14qPSsseXTaCXemusIw==",
                             PhoneNumberConfirmed = false,
                             RoleID = 1,
                             Status = true,
@@ -279,7 +275,7 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateOnly(2024, 6, 30),
+                            CreatedDate = new DateOnly(2024, 7, 2),
                             GovernmentID = 1,
                             IsDeleted = false,
                             Name = "Branch1",
@@ -288,7 +284,7 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateOnly(2024, 6, 30),
+                            CreatedDate = new DateOnly(2024, 7, 2),
                             GovernmentID = 2,
                             IsDeleted = false,
                             Name = "Branch2",
@@ -685,7 +681,7 @@ namespace ShippingSystem.DAL.Migrations
                             Address = "123 Main St",
                             BranchID = 1,
                             City = "City1",
-                            ConcurrencyStamp = "d22ec16b-531e-44f6-96e0-68b4e6b2b665",
+                            ConcurrencyStamp = "fe6adeb0-76cf-44eb-995b-1b703bde8b58",
                             Email = "merchant1@example.com",
                             EmailConfirmed = true,
                             Government = "Government1",
@@ -694,7 +690,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Merchant 1",
                             NormalizedEmail = "MERCHANT1@EXAMPLE.COM",
                             NormalizedUserName = "MERCHANT1@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEM4qXp/BTkLBO7H5j+DSJlhbuRo4XOZXdRoSDt0My0ywu0lNsL9y/BxptVIKyxcyPg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPi88sTQn2lqwtUE96geg5HeZaDoHBKTvxclp5A52JLVyKIV601fQLbn4GXXWWKCvQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Pickup_Price = 5.00m,
@@ -713,7 +709,7 @@ namespace ShippingSystem.DAL.Migrations
                             Address = "456 Elm St",
                             BranchID = 2,
                             City = "City2",
-                            ConcurrencyStamp = "c45cca09-769b-4468-b537-5051f486ca3a",
+                            ConcurrencyStamp = "5f9dd0df-fefe-4e05-934f-ecf8f35bc9ba",
                             Email = "merchant2@example.com",
                             EmailConfirmed = true,
                             Government = "Government2",
@@ -722,7 +718,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Merchant 2",
                             NormalizedEmail = "MERCHANT2@EXAMPLE.COM",
                             NormalizedUserName = "MERCHANT2@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAECK3Jw0g/LCS2kFL/ylGWAPs8R0sJ6s8jNqQnofuz8EhOMyxIc9+XptJCg+fxtIjQw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED4ogS7SztWG7vPylQRTPg5hYd8VY90o5sGFVR8tgzTQAxyl3bbLwqN/nn3j1uUoWg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Pickup_Price = 7.00m,
