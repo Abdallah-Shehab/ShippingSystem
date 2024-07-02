@@ -12,8 +12,8 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    [Migration("20240702120148_v2")]
-    partial class v2
+    [Migration("20240702165959_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -224,16 +224,62 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasData(
                         new
                         {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            Address = "123 Main St",
+                            BranchID = 1,
+                            ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
+                            Email = "john.doe@example.com",
+                            EmailConfirmed = true,
+                            IsDeleted = false,
+                            LockoutEnabled = true,
+                            Name = "John Doe",
+                            NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
+                            NormalizedUserName = "JOHNDOE",
+                            PasswordHash = "AQAAAAIAAYagAAAAECnwuM8hrsOAQsYF2zux5SPm9ojAQTIDkL13NfdlTzaS/hVa89Vpo6Ri0uoWDXQTNw==",
+                            PhoneNumber = "1234567890",
+                            PhoneNumberConfirmed = true,
+                            RoleID = 1,
+                            SecurityStamp = "HBLASJQKDKDKS",
+                            Status = true,
+                            TwoFactorEnabled = false,
+                            UserName = "johndoe"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            Address = "456 Oak St",
+                            BranchID = 2,
+                            ConcurrencyStamp = "87654321-dcba-4321-hgfe-0987654321ba",
+                            Email = "jane.smith@example.com",
+                            EmailConfirmed = true,
+                            IsDeleted = false,
+                            LockoutEnabled = true,
+                            Name = "Jane Smith",
+                            NormalizedEmail = "JANE.SMITH@EXAMPLE.COM",
+                            NormalizedUserName = "JANESMITH",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKnasS8HQaV2If1kkCJG/L+cEOZpcq9VC4lADyO5Y5qpqQmz+RoIzEHEZyWvUM+CJg==",
+                            PhoneNumber = "0987654321",
+                            PhoneNumberConfirmed = true,
+                            RoleID = 2,
+                            SecurityStamp = "HJSDKFHSDFHSD",
+                            Status = true,
+                            TwoFactorEnabled = false,
+                            UserName = "janesmith"
+                        },
+                        new
+                        {
                             Id = 1,
                             AccessFailedCount = 0,
                             Address = "123 New Street",
-                            ConcurrencyStamp = "96fbc536-bc7e-44d9-a4a5-8da7b23216d9",
+                            ConcurrencyStamp = "ac7b0308-603d-47e7-829b-b220c3c6c300",
                             Email = "newuser@example.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             Name = "New User",
-                            PasswordHash = "AQAAAAIAAYagAAAAEM3nkNA4xHbvv2iI3KN6TQUTFHqqR/RX49pwYt7p/Via0M2fVT6zWOO56ADdeTb8GA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHVo3SSFuPf9atPXJQS21Tf5tZm5EfQNS/9G/hmyU2qBdNuCrQas327F5Gadt8bxpg==",
                             PhoneNumberConfirmed = false,
                             RoleID = 1,
                             Status = true,
@@ -271,7 +317,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("GovernmentID");
 
-                    b.ToTable("Branch");
+                    b.ToTable("Branches");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.City", b =>
@@ -306,7 +352,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("GovernmentID");
 
-                    b.ToTable("City");
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryAccount", b =>
@@ -397,6 +443,46 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("RoleID");
 
                     b.ToTable("DeliveryAccounts", (string)null);
+                });
+
+            modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DeliveryTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = "التسليم في الفرع",
+                            Price = 5.99m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = "التسليم من التاجر",
+                            Price = 12.99m
+                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.ExistedEntities", b =>
@@ -507,7 +593,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("BranchID");
 
-                    b.ToTable("Government");
+                    b.ToTable("Governments");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.MerchantAccount", b =>
@@ -634,6 +720,9 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<decimal?>("DeliveryPrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int?>("DeliveryTypeID")
+                        .HasColumnType("int");
+
                     b.Property<DateOnly?>("DeliverydDate")
                         .HasColumnType("date");
 
@@ -694,6 +783,8 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("DeliveryID");
 
+                    b.HasIndex("DeliveryTypeID");
+
                     b.HasIndex("GovernmentId");
 
                     b.HasIndex("MerchantID");
@@ -704,7 +795,28 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("StaffMemberID");
 
-                    b.ToTable("Order");
+                    b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClientName = "John Doe",
+                            CreatedDate = new DateOnly(2024, 7, 2),
+                            DeliveryPrice = 10.00m,
+                            DeliveryTypeID = 1,
+                            Email = "john.doe@example.com",
+                            IsDeleted = false,
+                            Notes = "Handle with care",
+                            PaiedMoney = 40.00m,
+                            PhoneOne = "1234567890",
+                            PhoneTwo = "0987654321",
+                            ReceivedMoney = 50.00m,
+                            Status = "Pending",
+                            StreetAndVillage = "123 Main St",
+                            TotalPrice = 100.00m,
+                            TotalWeight = 5.00m
+                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.PaymentType", b =>
@@ -725,7 +837,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PaymentType");
+                    b.ToTable("PaymentTypes");
 
                     b.HasData(
                         new
@@ -921,7 +1033,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("order_Id");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.Role", b =>
@@ -1011,7 +1123,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShippingType");
+                    b.ToTable("ShippingTypes");
 
                     b.HasData(
                         new
@@ -1204,6 +1316,10 @@ namespace ShippingSystem.DAL.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("DeliveryID");
 
+                    b.HasOne("ShippingSystem.DAL.Models.DeliveryType", "DeliveryType")
+                        .WithMany("Orders")
+                        .HasForeignKey("DeliveryTypeID");
+
                     b.HasOne("ShippingSystem.DAL.Models.Government", "government")
                         .WithMany()
                         .HasForeignKey("GovernmentId");
@@ -1225,6 +1341,8 @@ namespace ShippingSystem.DAL.Migrations
                         .HasForeignKey("StaffMemberID");
 
                     b.Navigation("DeliveryAccount");
+
+                    b.Navigation("DeliveryType");
 
                     b.Navigation("MerchantAccount");
 
@@ -1280,6 +1398,11 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryAccount", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryType", b =>
                 {
                     b.Navigation("Orders");
                 });

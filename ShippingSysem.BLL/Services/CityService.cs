@@ -124,7 +124,7 @@ namespace ShippingSysem.BLL.Services
             if(city != null)
             {
             _cityReposatry.Delete(city);
-            _cityReposatry.SaveAsync();
+           await _cityReposatry.SaveAsync();
                 
                 changeOrNot = true;
             }
@@ -213,6 +213,29 @@ namespace ShippingSysem.BLL.Services
 
             });
         
+        }
+
+        public async Task<CityReadDTO> GetCityByID(int id) {
+            var cities = await _cityReposatry.GetAllAsync();
+            City city = cities.Include(c => c.Government).Where(c => c.Id == id).FirstOrDefault();
+            if (city != null)
+            {
+                return new CityReadDTO()
+                {
+                    GovernmentID = city.GovernmentID,
+                    GovernmentName = city.Government.Name,
+                    Status = city.Status,
+                    Id = city.Id,
+                    NormalShippingCost = city.NormalShippingCost,
+                    PickupShippingCost = city.PickupShippingCost,
+                    Name = city.Name,
+                };
+            }
+            else {
+                return null;
+            }
+
+
         }
 
 

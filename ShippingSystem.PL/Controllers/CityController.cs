@@ -50,12 +50,12 @@ namespace ShippingSystem.PL.Controllers
 
 
 
-        [HttpGet("changeStatus")]
+        [HttpGet("changeStatus/{id}")]
         public async Task<ActionResult<CityReadDTO>> ChangeStatus(int id)
         {
             return Ok( await cityService.changeStatus(id));
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<CityReadDTO>> Delete(int id)
         {
             return Ok(await cityService.Delete(id));
@@ -77,6 +77,17 @@ namespace ShippingSystem.PL.Controllers
         
         var cities = await cityService.getCityWithPagination(page,pageSize);
             return Ok(cities);
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCityByID(int id)
+        {
+            var city = await cityService.GetCityByID(id);
+            if (city != null)
+            {
+                return Ok(city);
+            }
+            else
+                return NotFound();
         }
     }
 }

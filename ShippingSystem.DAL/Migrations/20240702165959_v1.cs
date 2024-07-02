@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ShippingSystem.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class ر10 : Migration
+    public partial class v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -46,7 +46,7 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Entities",
+                name: "ExistedEntities",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -56,7 +56,7 @@ namespace ShippingSystem.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Entities", x => x.Id);
+                    table.PrimaryKey("PK_ExistedEntities", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -89,6 +89,23 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SpecialOffer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Government = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeliveryPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MerchantId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SpecialOffer", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -110,7 +127,7 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Permissions",
+                name: "Permission",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -125,17 +142,17 @@ namespace ShippingSystem.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Permissions", x => x.Id);
+                    table.PrimaryKey("PK_Permission", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Permissions_AspNetRoles_RoleId",
+                        name: "FK_Permission_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Permissions_Entities_EntityId",
+                        name: "FK_Permission_ExistedEntities_EntityId",
                         column: x => x.EntityId,
-                        principalTable: "Entities",
+                        principalTable: "ExistedEntities",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -501,10 +518,10 @@ namespace ShippingSystem.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "IsDeleted", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, null, new DateOnly(2024, 7, 1), false, "Employee", null },
-                    { 2, null, new DateOnly(2024, 7, 1), false, "Merchant", null },
-                    { 3, null, new DateOnly(2024, 7, 1), false, "Delivery", null },
-                    { 4, null, new DateOnly(2024, 7, 1), false, "Admin", null }
+                    { 1, null, new DateOnly(2024, 7, 2), false, "Employee", null },
+                    { 2, null, new DateOnly(2024, 7, 2), false, "Merchant", null },
+                    { 3, null, new DateOnly(2024, 7, 2), false, "Delivery", null },
+                    { 4, null, new DateOnly(2024, 7, 2), false, "Admin", null }
                 });
 
             migrationBuilder.InsertData(
@@ -517,7 +534,7 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Entities",
+                table: "ExistedEntities",
                 columns: new[] { "Id", "IsDeleted", "Name" },
                 values: new object[,]
                 {
@@ -532,11 +549,6 @@ namespace ShippingSystem.DAL.Migrations
                     { 9, false, "Financials" },
                     { 10, false, "Reports" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Governments",
-                columns: new[] { "Id", "BranchID", "IsDeleted", "Name", "Status" },
-                values: new object[] { 1, null, false, "Government1", true });
 
             migrationBuilder.InsertData(
                 table: "PaymentTypes",
@@ -558,22 +570,22 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Branches",
-                columns: new[] { "Id", "CreatedDate", "GovernmentID", "IsDeleted", "Name", "Status" },
-                values: new object[] { 1, new DateOnly(2024, 7, 1), 1, false, "Branch1", true });
-
-            migrationBuilder.InsertData(
-                table: "Cities",
-                columns: new[] { "Id", "GovernmentID", "IsDeleted", "Name", "NormalShippingCost", "PickupShippingCost", "Status" },
-                values: new object[] { 1, 1, false, "City1", 10.00m, 5.00m, true });
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { 1, 0, "123 New Street", null, "ac7b0308-603d-47e7-829b-b220c3c6c300", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEHVo3SSFuPf9atPXJQS21Tf5tZm5EfQNS/9G/hmyU2qBdNuCrQas327F5Gadt8bxpg==", null, false, 1, null, true, false, "newuser" },
+                    { 2, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "john.doe@example.com", true, false, true, null, "John Doe", "JOHN.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAECnwuM8hrsOAQsYF2zux5SPm9ojAQTIDkL13NfdlTzaS/hVa89Vpo6Ri0uoWDXQTNw==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "johndoe" },
+                    { 3, 0, "456 Oak St", 2, "87654321-dcba-4321-hgfe-0987654321ba", "jane.smith@example.com", true, false, true, null, "Jane Smith", "JANE.SMITH@EXAMPLE.COM", "JANESMITH", "AQAAAAIAAYagAAAAEKnasS8HQaV2If1kkCJG/L+cEOZpcq9VC4lADyO5Y5qpqQmz+RoIzEHEZyWvUM+CJg==", "0987654321", true, 2, "HJSDKFHSDFHSD", true, false, "janesmith" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "CitytId", "ClientName", "CreatedDate", "DeliveryID", "DeliveryPrice", "DeliveryTypeID", "DeliverydDate", "Email", "GovernmentId", "IsDeleted", "MerchantID", "Notes", "PaiedMoney", "PaymentTypeID", "PhoneOne", "PhoneTwo", "ReceivedMoney", "ShippingTypeID", "StaffMemberID", "Status", "StreetAndVillage", "TotalPrice", "TotalWeight" },
-                values: new object[] { 1, null, "John Doe", new DateOnly(2024, 7, 1), null, 10.00m, 1, null, "john.doe@example.com", null, false, null, "Handle with care", 40.00m, null, "1234567890", "0987654321", 50.00m, null, null, "Pending", "123 Main St", 100.00m, 5.00m });
+                values: new object[] { 1, null, "John Doe", new DateOnly(2024, 7, 2), null, 10.00m, 1, null, "john.doe@example.com", null, false, null, "Handle with care", 40.00m, null, "1234567890", "0987654321", 50.00m, null, null, "Pending", "123 Main St", 100.00m, 5.00m });
 
             migrationBuilder.InsertData(
-                table: "Permissions",
+                table: "Permission",
                 columns: new[] { "Id", "CanCreate", "CanDelete", "CanRead", "CanWrite", "EntityId", "IsDeleted", "RoleId" },
                 values: new object[,]
                 {
@@ -588,50 +600,6 @@ namespace ShippingSystem.DAL.Migrations
                     { 9, false, false, false, false, 9, false, 1 },
                     { 10, false, false, false, false, 10, false, 1 }
                 });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[,]
-                {
-                    { 1, 0, "123 New Street", 1, "9814422d-7578-41bc-a075-ff31a42a9a43", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEOLAk2VcOrVao3ySt+5tTyQrwNidcGujqsWfsrs+S3pyeURCPVMjA2fl49t0UAjCsQ==", null, false, 1, null, true, false, "newuser" },
-                    { 2, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "john.doe@example.com", true, false, true, null, "John Doe", "JOHN.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEG7zx0xBO8opB5++oQ2IoO2lQyxNkr6YEIylAXQqzHhERHUxmDPla7QjCpCu6Ikc8w==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "johndoe" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Governments",
-                columns: new[] { "Id", "BranchID", "IsDeleted", "Name", "Status" },
-                values: new object[] { 2, 1, false, "Government3", true });
-
-            migrationBuilder.InsertData(
-                table: "MerchantAccounts",
-                columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "Government", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Pickup_Price", "Refund_Percentage", "RoleID", "SecurityStamp", "Status", "StoreName", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "123 Main St", 1, "City1", "c6a030b1-3d2f-4985-b933-0baf6bb0f5ec", "merchant1@example.com", true, "Government1", false, true, null, "Merchant 1", "MERCHANT1@EXAMPLE.COM", "MERCHANT1@EXAMPLE.COM", "AQAAAAIAAYagAAAAEAlDcDJoq6pRoTpXoZoTiKI8UceFCQtlG2ItAfN3L8yAlAzRsXbpf3KMxItzhfybAw==", "1234567890", true, 5.00m, 10.00m, 2, "", true, "Merchant Store 1", false, "merchant1@example.com" });
-
-            migrationBuilder.InsertData(
-                table: "Branches",
-                columns: new[] { "Id", "CreatedDate", "GovernmentID", "IsDeleted", "Name", "Status" },
-                values: new object[] { 2, new DateOnly(2024, 7, 1), 2, false, "Branch2", true });
-
-            migrationBuilder.InsertData(
-                table: "Cities",
-                columns: new[] { "Id", "GovernmentID", "IsDeleted", "Name", "NormalShippingCost", "PickupShippingCost", "Status" },
-                values: new object[] { 2, 2, false, "City2", 15.00m, 7.00m, true });
-
-            migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 3, 0, "456 Oak St", 2, "87654321-dcba-4321-hgfe-0987654321ba", "jane.smith@example.com", true, false, true, null, "Jane Smith", "JANE.SMITH@EXAMPLE.COM", "JANESMITH", "AQAAAAIAAYagAAAAEE4+edaYob9IrjtjakgUfAl55wvrgmk06nWM86i1jYzu3DbkSo+05pt5tTM5BlGCyw==", "0987654321", true, 2, "HJSDKFHSDFHSD", true, false, "janesmith" });
-
-            migrationBuilder.InsertData(
-                table: "Governments",
-                columns: new[] { "Id", "BranchID", "IsDeleted", "Name", "Status" },
-                values: new object[] { 3, 2, false, "Government2", true });
-
-            migrationBuilder.InsertData(
-                table: "MerchantAccounts",
-                columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "Government", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Pickup_Price", "Refund_Percentage", "RoleID", "SecurityStamp", "Status", "StoreName", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 2, 0, "456 Elm St", 2, "City2", "11fe68c0-203c-4e4c-9b43-1fc56e7afaed", "merchant2@example.com", true, "Government2", false, true, null, "Merchant 2", "MERCHANT2@EXAMPLE.COM", "MERCHANT2@EXAMPLE.COM", "AQAAAAIAAYagAAAAELRr7ZV3/iXHsOOI8SGw3D/7B5P1WTK6x1bDCqsyr/K2RoJ/Wb10B8QooxdPbODuTQ==", "1234567890", true, 7.00m, 15.00m, 2, "", true, "Merchant Store 2", false, "merchant2@example.com" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -758,13 +726,13 @@ namespace ShippingSystem.DAL.Migrations
                 column: "StaffMemberID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permissions_EntityId",
-                table: "Permissions",
+                name: "IX_Permission_EntityId",
+                table: "Permission",
                 column: "EntityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Permissions_RoleId",
-                table: "Permissions",
+                name: "IX_Permission_RoleId",
+                table: "Permission",
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
@@ -835,13 +803,16 @@ namespace ShippingSystem.DAL.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Permissions");
+                name: "Permission");
 
             migrationBuilder.DropTable(
                 name: "Products");
 
             migrationBuilder.DropTable(
-                name: "Entities");
+                name: "SpecialOffer");
+
+            migrationBuilder.DropTable(
+                name: "ExistedEntities");
 
             migrationBuilder.DropTable(
                 name: "Orders");
