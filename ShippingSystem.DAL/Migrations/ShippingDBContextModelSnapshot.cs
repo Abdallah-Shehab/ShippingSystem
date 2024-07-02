@@ -224,13 +224,13 @@ namespace ShippingSystem.DAL.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Address = "123 New Street",
-                            ConcurrencyStamp = "96fbc536-bc7e-44d9-a4a5-8da7b23216d9",
+                            ConcurrencyStamp = "d1707d60-1b75-4f78-a270-3f8dfcf20f4d",
                             Email = "newuser@example.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             Name = "New User",
-                            PasswordHash = "AQAAAAIAAYagAAAAEM3nkNA4xHbvv2iI3KN6TQUTFHqqR/RX49pwYt7p/Via0M2fVT6zWOO56ADdeTb8GA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFGNJ7w4x3/TuDG2U4cDt6aR5HHbWyCph0YzjnDbMb3x8Y8oaHTOlNtzFV03rG2B4g==",
                             PhoneNumberConfirmed = false,
                             RoleID = 1,
                             Status = true,
@@ -564,6 +564,10 @@ namespace ShippingSystem.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
