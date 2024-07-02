@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ShippingSystem.BLL.DTOs.SpecialOfferDTOS;
 using ShippingSystem.BLL.Services;
 using ShippingSystem.DAL.Models;
 using System.Collections.Generic;
@@ -22,6 +23,29 @@ namespace ShippingSystem.PL.Controllers
         {
             var specialOffers = await _specialOfferService.GetAllSpecialOffersAsync();
             return Ok(specialOffers);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<SpecialOffer>> GetSpecialOfferById(int id)
+        {
+            var specialOffer = await _specialOfferService.GetSpecialOfferByIdAsync(id);
+            if (specialOffer == null)
+            {
+                return NotFound();
+            }
+            return Ok(specialOffer);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<SpecialOffer>> AddSpecialOffer([FromBody] AddSpecialOfferDTO specialOfferDTO)
+        {
+            if (specialOfferDTO == null)
+            {
+                return BadRequest("Special offer object is null");
+            }
+
+            var addedSpecialOffer = await _specialOfferService.AddSpecialOfferAsync(specialOfferDTO);
+            return CreatedAtAction(nameof(GetSpecialOfferById), new { id = addedSpecialOffer.Id }, addedSpecialOffer);
         }
     }
 }

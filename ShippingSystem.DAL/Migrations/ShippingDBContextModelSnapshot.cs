@@ -224,13 +224,13 @@ namespace ShippingSystem.DAL.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Address = "123 New Street",
-                            ConcurrencyStamp = "a5dd3351-d3fe-4353-8bbc-f74d8f3056be",
+                            ConcurrencyStamp = "96fbc536-bc7e-44d9-a4a5-8da7b23216d9",
                             Email = "newuser@example.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             Name = "New User",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFGjNNbfZ1CNlI5A9QJ1huIU7jxWL2UEbr1M6E1ABchK/bQLnAVpt49OGnHH8dmWrA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEM3nkNA4xHbvv2iI3KN6TQUTFHqqR/RX49pwYt7p/Via0M2fVT6zWOO56ADdeTb8GA==",
                             PhoneNumberConfirmed = false,
                             RoleID = 1,
                             Status = true,
@@ -279,7 +279,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("GovernmentID")
+                    b.Property<int>("GovernmentID")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
@@ -1046,6 +1046,9 @@ namespace ShippingSystem.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<decimal>("DeliveryPrice")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("Government")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -1142,7 +1145,9 @@ namespace ShippingSystem.DAL.Migrations
                 {
                     b.HasOne("ShippingSystem.DAL.Models.Government", "Government")
                         .WithMany("Cities")
-                        .HasForeignKey("GovernmentID");
+                        .HasForeignKey("GovernmentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Government");
                 });
