@@ -131,7 +131,7 @@ namespace ShippingSysem.BLL.Services
                 ShippingTypeID = _orderCreateDto.ShippingTypeID,
                 PhoneOne = _orderCreateDto.PhoneOne,
                 PhoneTwo = _orderCreateDto.PhoneTwo,
-                Status = _orderCreateDto.Status,
+                Status = "New",
                 GovernmentId = _orderCreateDto.GovernmentId,
                 StreetAndVillage = _orderCreateDto.StreetAndVillage,
                 TotalWeight = _orderCreateDto.TotalWeight,
