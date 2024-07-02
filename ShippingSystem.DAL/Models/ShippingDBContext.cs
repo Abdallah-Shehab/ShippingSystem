@@ -12,6 +12,7 @@ namespace ShippingSystem.DAL.Models
 {
     public class ShippingDBContext : IdentityDbContext<Account, Role, int>
     {
+
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Permission> Permissions { get; set; }
@@ -26,6 +27,7 @@ namespace ShippingSystem.DAL.Models
         public DbSet<ShippingType> ShippingTypes { get; set; }
         public DbSet<MerchantAccount> MerchantAccounts { get; set; }
         public DbSet<DeliveryAccount> DeliveryAccounts { get; set; }
+        public DbSet<SpecialOffer> SpecialOffer { get; set; }
 
 
         public ShippingDBContext(DbContextOptions<ShippingDBContext> options) : base(options)
@@ -55,7 +57,12 @@ namespace ShippingSystem.DAL.Models
             builder.Entity<MerchantAccount>()
                 .ToTable("MerchantAccounts");
 
-
+            //builder.Entity<SpecialOffer>()
+            //.HasOne<MerchantAccount>()
+            //.WithMany()
+            //.HasForeignKey(so => so.MerchantId)
+            //.OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<SpecialOffer>().HasKey(so => so.Id);
             //add data 
 
 

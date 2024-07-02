@@ -27,6 +27,7 @@ namespace ShippingSysem.BLL.Services
             var dtos = accounts
                 .Select(acc => new DisplayDeliveryAccountsDTO
                 {
+                    id= acc.Id,
                     UserName = acc.UserName,
                     Email = acc.Email,
                     Phone = acc.PhoneNumber,
@@ -39,9 +40,10 @@ namespace ShippingSysem.BLL.Services
 
             return dtos;
         }
+        
+        
+        
         //method to  Add Delivery Account
-
-
 
         public async Task<bool> AddDeliveryAccount(AddDeliveryAccountDTO dto)
         {
