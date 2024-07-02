@@ -4,6 +4,7 @@ using ShippingSysem.BLL.DTOs.BranchDTOs;
 using ShippingSysem.BLL.Services;
 using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
+using System.Runtime.CompilerServices;
 
 namespace ShippingSystem.PL.Controllers
 {
@@ -36,7 +37,7 @@ namespace ShippingSystem.PL.Controllers
 				return NotFound();
 		}
 
-		[HttpGet("changeStatus/{id}")]   
+		[HttpGet("changeStatus/{id}")]
 		public async Task<IActionResult> ChangeStatus(int id)
 		{
 			return Ok(await branchService.ChangeStatus(id));
@@ -48,7 +49,7 @@ namespace ShippingSystem.PL.Controllers
 			return Ok(await branchService.DeleteBranch(id));
 		}
 		[HttpPut("{id}")]
-		public async Task<IActionResult> UpdateBranch(int id,CreateBranchDTO branchdto)
+		public async Task<IActionResult> UpdateBranch(int id, CreateBranchDTO branchdto)
 		{
 			var branch = await branchService.UpdateBranch(id, branchdto);
 			if (branch != null)
@@ -68,6 +69,17 @@ namespace ShippingSystem.PL.Controllers
 		public async Task<IActionResult> BranchPagination(int page, int pageSize)
 		{
 			return Ok(branchService.BranchPagination(page, pageSize));
+		}
+
+		[HttpPost("basedOnGovenrment")]
+		public async Task<IActionResult> branchByGovenrment(int id) {
+			var branch = branchService.getBranchByGovernment(id);
+			if (branch != null) {
+				return Ok(await branch);
+			}
+			else {
+				return NotFound();
+			}
 		}
 
 	}

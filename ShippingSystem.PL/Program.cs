@@ -81,6 +81,9 @@ namespace ShippingSystem.PL
 
             //Delivery Accounts
             builder.Services.AddScoped<IGenericRepository<DeliveryAccount>, GenericRepository<DeliveryAccount>>();
+            //Delivery Merchant
+            builder.Services.AddScoped<IGenericRepository<MerchantAccount>, GenericRepository<MerchantAccount>>();
+            builder.Services.AddScoped<MerchantService>();
 
             //builder.Services.AddScoped<IGenericRepository<Permission_User_Entities>, GenericRepository<Permission_User_Entities>>();
             builder.Services.AddScoped<EmployeeService>();
@@ -109,6 +112,19 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<LoginAccountReposatry>();
             builder.Services.AddScoped<LoginMerchantReposatry>();
             builder.Services.AddScoped<LoginDeliveryReposatry>();
+
+            //Register ShippingType Service
+            builder.Services.AddScoped<IGenericRepository<ShippingType>, GenericRepository<ShippingType>>();
+            builder.Services.AddScoped<ShippingTypeService>();
+          
+            //Register PaymentType Service
+            builder.Services.AddScoped<IGenericRepository<PaymentType>, GenericRepository<PaymentType>>();
+
+            builder.Services.AddScoped<PaymentTypeService>();
+            //Register DeliveryType Service
+            builder.Services.AddScoped<IGenericRepository<DeliveryType>, GenericRepository<DeliveryType>>();
+
+            builder.Services.AddScoped<DeliveryTpeService>();
 
 
             //  add  CORS configuration:

@@ -12,8 +12,8 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    [Migration("20240701005241_v6")]
-    partial class v6
+    [Migration("20240701225808_ر10")]
+    partial class ر10
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -236,7 +236,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "John Doe",
                             NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEG0e90GtAQCCaI+Fgy0y2EaDwBft3USf4SJqn2ALfpXCjx4hmOzBMJ1v1cPFAsDe5g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEG7zx0xBO8opB5++oQ2IoO2lQyxNkr6YEIylAXQqzHhERHUxmDPla7QjCpCu6Ikc8w==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 1,
@@ -259,7 +259,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Jane Smith",
                             NormalizedEmail = "JANE.SMITH@EXAMPLE.COM",
                             NormalizedUserName = "JANESMITH",
-                            PasswordHash = "AQAAAAIAAYagAAAAEH6yD+ZBGyIHMTEhLgQJMa4pXb2Jq3fOxTlkOlJz61f88Atz9Z3UYRiYcQMewPzgvg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEE4+edaYob9IrjtjakgUfAl55wvrgmk06nWM86i1jYzu3DbkSo+05pt5tTM5BlGCyw==",
                             PhoneNumber = "0987654321",
                             PhoneNumberConfirmed = true,
                             RoleID = 2,
@@ -273,13 +273,14 @@ namespace ShippingSystem.DAL.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Address = "123 New Street",
-                            ConcurrencyStamp = "75278094-2ddc-4a17-9587-dc00ff5a9e93",
+                            BranchID = 1,
+                            ConcurrencyStamp = "9814422d-7578-41bc-a075-ff31a42a9a43",
                             Email = "newuser@example.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             Name = "New User",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL0zDNx+081plcvAMoIiogFGXukHYBSCsH6ZdfpmCk0MTOiBDhd7HFQ5OpX6LTPGFA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOLAk2VcOrVao3ySt+5tTyQrwNidcGujqsWfsrs+S3pyeURCPVMjA2fl49t0UAjCsQ==",
                             PhoneNumberConfirmed = false,
                             RoleID = 1,
                             Status = true,
@@ -485,6 +486,46 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("RoleID");
 
                     b.ToTable("DeliveryAccounts", (string)null);
+                });
+
+            modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DeliveryTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = "التسليم في الفرع",
+                            Price = 5.99m
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = "التسليم من التاجر",
+                            Price = 12.99m
+                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.ExistedEntities", b =>
@@ -729,7 +770,7 @@ namespace ShippingSystem.DAL.Migrations
                             Address = "123 Main St",
                             BranchID = 1,
                             City = "City1",
-                            ConcurrencyStamp = "e0854f1d-3065-4378-a617-aaaf26b43e86",
+                            ConcurrencyStamp = "c6a030b1-3d2f-4985-b933-0baf6bb0f5ec",
                             Email = "merchant1@example.com",
                             EmailConfirmed = true,
                             Government = "Government1",
@@ -738,7 +779,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Merchant 1",
                             NormalizedEmail = "MERCHANT1@EXAMPLE.COM",
                             NormalizedUserName = "MERCHANT1@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHlCUtHwgqUax/lUmeK/vQbKxjGg5B8gGGLk/kCi9gxGcAaOjZPW9adpscCIbMgLiQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAlDcDJoq6pRoTpXoZoTiKI8UceFCQtlG2ItAfN3L8yAlAzRsXbpf3KMxItzhfybAw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Pickup_Price = 5.00m,
@@ -757,7 +798,7 @@ namespace ShippingSystem.DAL.Migrations
                             Address = "456 Elm St",
                             BranchID = 2,
                             City = "City2",
-                            ConcurrencyStamp = "f373c585-013e-4f45-a972-4e436c25025c",
+                            ConcurrencyStamp = "11fe68c0-203c-4e4c-9b43-1fc56e7afaed",
                             Email = "merchant2@example.com",
                             EmailConfirmed = true,
                             Government = "Government2",
@@ -766,7 +807,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Merchant 2",
                             NormalizedEmail = "MERCHANT2@EXAMPLE.COM",
                             NormalizedUserName = "MERCHANT2@EXAMPLE.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHZnWMiFkqU/bhmn85ZFCNAulo9ZDqq8pIMxyoDvA2wwgr1dj9dVH8FmG0FjHO4zRQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELRr7ZV3/iXHsOOI8SGw3D/7B5P1WTK6x1bDCqsyr/K2RoJ/Wb10B8QooxdPbODuTQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Pickup_Price = 7.00m,
@@ -804,6 +845,9 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.Property<decimal?>("DeliveryPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("DeliveryTypeID")
+                        .HasColumnType("int");
 
                     b.Property<DateOnly?>("DeliverydDate")
                         .HasColumnType("date");
@@ -865,6 +909,8 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("DeliveryID");
 
+                    b.HasIndex("DeliveryTypeID");
+
                     b.HasIndex("GovernmentId");
 
                     b.HasIndex("MerchantID");
@@ -876,6 +922,27 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("StaffMemberID");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ClientName = "John Doe",
+                            CreatedDate = new DateOnly(2024, 7, 1),
+                            DeliveryPrice = 10.00m,
+                            DeliveryTypeID = 1,
+                            Email = "john.doe@example.com",
+                            IsDeleted = false,
+                            Notes = "Handle with care",
+                            PaiedMoney = 40.00m,
+                            PhoneOne = "1234567890",
+                            PhoneTwo = "0987654321",
+                            ReceivedMoney = 50.00m,
+                            Status = "Pending",
+                            StreetAndVillage = "123 Main St",
+                            TotalPrice = 100.00m,
+                            TotalWeight = 5.00m
+                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.PaymentType", b =>
@@ -1345,6 +1412,10 @@ namespace ShippingSystem.DAL.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("DeliveryID");
 
+                    b.HasOne("ShippingSystem.DAL.Models.DeliveryType", "DeliveryType")
+                        .WithMany("Orders")
+                        .HasForeignKey("DeliveryTypeID");
+
                     b.HasOne("ShippingSystem.DAL.Models.Government", "government")
                         .WithMany()
                         .HasForeignKey("GovernmentId");
@@ -1366,6 +1437,8 @@ namespace ShippingSystem.DAL.Migrations
                         .HasForeignKey("StaffMemberID");
 
                     b.Navigation("DeliveryAccount");
+
+                    b.Navigation("DeliveryType");
 
                     b.Navigation("MerchantAccount");
 
@@ -1421,6 +1494,11 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryAccount", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryType", b =>
                 {
                     b.Navigation("Orders");
                 });

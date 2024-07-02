@@ -123,5 +123,27 @@ namespace ShippingSysem.BLL.Services
 				Status = branch.Status
 			};
 		}
+
+
+		public async Task<ReadBranchDTO> getBranchByGovernment(int id) {
+		IQueryable<Branch> branches = await	iGenericStatusRepository.GetAllWithFilter(o => o.GovernmentID == id);
+				Branch branch = branches.Include(b => b.Government).FirstOrDefault();
+			if (branch != null)
+			{
+				return new ReadBranchDTO()
+				{
+					GovernmentID = branch.GovernmentID,
+					Name = branch.Name,
+					CreatedDate = branch.CreatedDate,
+					Id = branch.Id,
+					GovernmentName = branch.Government.Name,
+					IsDeleted = branch.IsDeleted,
+				};
+			}
+			else {
+				return null;
+			}
+			
+		}
 	}
 }

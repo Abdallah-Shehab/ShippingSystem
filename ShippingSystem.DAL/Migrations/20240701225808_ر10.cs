@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ShippingSystem.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class v1 : Migration
+    public partial class ر10 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,6 +28,21 @@ namespace ShippingSystem.DAL.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DeliveryTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeliveryTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -409,6 +424,7 @@ namespace ShippingSystem.DAL.Migrations
                     DeliveryID = table.Column<int>(type: "int", nullable: true),
                     ShippingTypeID = table.Column<int>(type: "int", nullable: true),
                     PaymentTypeID = table.Column<int>(type: "int", nullable: true),
+                    DeliveryTypeID = table.Column<int>(type: "int", nullable: true),
                     GovernmentId = table.Column<int>(type: "int", nullable: true),
                     CitytId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -429,6 +445,11 @@ namespace ShippingSystem.DAL.Migrations
                         name: "FK_Orders_DeliveryAccounts_DeliveryID",
                         column: x => x.DeliveryID,
                         principalTable: "DeliveryAccounts",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Orders_DeliveryTypes_DeliveryTypeID",
+                        column: x => x.DeliveryTypeID,
+                        principalTable: "DeliveryTypes",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Orders_Governments_GovernmentId",
@@ -480,10 +501,19 @@ namespace ShippingSystem.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "IsDeleted", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, null, new DateOnly(2024, 6, 30), false, "Employee", null },
-                    { 2, null, new DateOnly(2024, 6, 30), false, "Merchant", null },
-                    { 3, null, new DateOnly(2024, 6, 30), false, "Delivery", null },
-                    { 4, null, new DateOnly(2024, 6, 30), false, "Admin", null }
+                    { 1, null, new DateOnly(2024, 7, 1), false, "Employee", null },
+                    { 2, null, new DateOnly(2024, 7, 1), false, "Merchant", null },
+                    { 3, null, new DateOnly(2024, 7, 1), false, "Delivery", null },
+                    { 4, null, new DateOnly(2024, 7, 1), false, "Admin", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DeliveryTypes",
+                columns: new[] { "Id", "IsDeleted", "Name", "Price" },
+                values: new object[,]
+                {
+                    { 1, false, "التسليم في الفرع", 5.99m },
+                    { 2, false, "التسليم من التاجر", 12.99m }
                 });
 
             migrationBuilder.InsertData(
@@ -530,12 +560,17 @@ namespace ShippingSystem.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "Branches",
                 columns: new[] { "Id", "CreatedDate", "GovernmentID", "IsDeleted", "Name", "Status" },
-                values: new object[] { 1, new DateOnly(2024, 6, 30), 1, false, "Branch1", true });
+                values: new object[] { 1, new DateOnly(2024, 7, 1), 1, false, "Branch1", true });
 
             migrationBuilder.InsertData(
                 table: "Cities",
                 columns: new[] { "Id", "GovernmentID", "IsDeleted", "Name", "NormalShippingCost", "PickupShippingCost", "Status" },
                 values: new object[] { 1, 1, false, "City1", 10.00m, 5.00m, true });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "Id", "CitytId", "ClientName", "CreatedDate", "DeliveryID", "DeliveryPrice", "DeliveryTypeID", "DeliverydDate", "Email", "GovernmentId", "IsDeleted", "MerchantID", "Notes", "PaiedMoney", "PaymentTypeID", "PhoneOne", "PhoneTwo", "ReceivedMoney", "ShippingTypeID", "StaffMemberID", "Status", "StreetAndVillage", "TotalPrice", "TotalWeight" },
+                values: new object[] { 1, null, "John Doe", new DateOnly(2024, 7, 1), null, 10.00m, 1, null, "john.doe@example.com", null, false, null, "Handle with care", 40.00m, null, "1234567890", "0987654321", 50.00m, null, null, "Pending", "123 Main St", 100.00m, 5.00m });
 
             migrationBuilder.InsertData(
                 table: "Permissions",
@@ -557,7 +592,11 @@ namespace ShippingSystem.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "123 New Street", 1, "6d7fb494-00fe-4d6a-bd27-e7869daffcb0", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEDPCWGaSfPgNAgpIWF/vOxiXKYuQ9RnzzmfyIwsfd5LArSbp3zmIzm0mBJHUXftiLg==", null, false, 1, null, true, false, "newuser" });
+                values: new object[,]
+                {
+                    { 1, 0, "123 New Street", 1, "9814422d-7578-41bc-a075-ff31a42a9a43", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEOLAk2VcOrVao3ySt+5tTyQrwNidcGujqsWfsrs+S3pyeURCPVMjA2fl49t0UAjCsQ==", null, false, 1, null, true, false, "newuser" },
+                    { 2, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "john.doe@example.com", true, false, true, null, "John Doe", "JOHN.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEG7zx0xBO8opB5++oQ2IoO2lQyxNkr6YEIylAXQqzHhERHUxmDPla7QjCpCu6Ikc8w==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "johndoe" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Governments",
@@ -567,17 +606,22 @@ namespace ShippingSystem.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "MerchantAccounts",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "Government", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Pickup_Price", "Refund_Percentage", "RoleID", "SecurityStamp", "Status", "StoreName", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "123 Main St", 1, "City1", "d22ec16b-531e-44f6-96e0-68b4e6b2b665", "merchant1@example.com", true, "Government1", false, true, null, "Merchant 1", "MERCHANT1@EXAMPLE.COM", "MERCHANT1@EXAMPLE.COM", "AQAAAAIAAYagAAAAEM4qXp/BTkLBO7H5j+DSJlhbuRo4XOZXdRoSDt0My0ywu0lNsL9y/BxptVIKyxcyPg==", "1234567890", true, 5.00m, 10.00m, 2, "", true, "Merchant Store 1", false, "merchant1@example.com" });
+                values: new object[] { 1, 0, "123 Main St", 1, "City1", "c6a030b1-3d2f-4985-b933-0baf6bb0f5ec", "merchant1@example.com", true, "Government1", false, true, null, "Merchant 1", "MERCHANT1@EXAMPLE.COM", "MERCHANT1@EXAMPLE.COM", "AQAAAAIAAYagAAAAEAlDcDJoq6pRoTpXoZoTiKI8UceFCQtlG2ItAfN3L8yAlAzRsXbpf3KMxItzhfybAw==", "1234567890", true, 5.00m, 10.00m, 2, "", true, "Merchant Store 1", false, "merchant1@example.com" });
 
             migrationBuilder.InsertData(
                 table: "Branches",
                 columns: new[] { "Id", "CreatedDate", "GovernmentID", "IsDeleted", "Name", "Status" },
-                values: new object[] { 2, new DateOnly(2024, 6, 30), 2, false, "Branch2", true });
+                values: new object[] { 2, new DateOnly(2024, 7, 1), 2, false, "Branch2", true });
 
             migrationBuilder.InsertData(
                 table: "Cities",
                 columns: new[] { "Id", "GovernmentID", "IsDeleted", "Name", "NormalShippingCost", "PickupShippingCost", "Status" },
                 values: new object[] { 2, 2, false, "City2", 15.00m, 7.00m, true });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
+                values: new object[] { 3, 0, "456 Oak St", 2, "87654321-dcba-4321-hgfe-0987654321ba", "jane.smith@example.com", true, false, true, null, "Jane Smith", "JANE.SMITH@EXAMPLE.COM", "JANESMITH", "AQAAAAIAAYagAAAAEE4+edaYob9IrjtjakgUfAl55wvrgmk06nWM86i1jYzu3DbkSo+05pt5tTM5BlGCyw==", "0987654321", true, 2, "HJSDKFHSDFHSD", true, false, "janesmith" });
 
             migrationBuilder.InsertData(
                 table: "Governments",
@@ -587,7 +631,7 @@ namespace ShippingSystem.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "MerchantAccounts",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "Government", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Pickup_Price", "Refund_Percentage", "RoleID", "SecurityStamp", "Status", "StoreName", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 2, 0, "456 Elm St", 2, "City2", "c45cca09-769b-4468-b537-5051f486ca3a", "merchant2@example.com", true, "Government2", false, true, null, "Merchant 2", "MERCHANT2@EXAMPLE.COM", "MERCHANT2@EXAMPLE.COM", "AQAAAAIAAYagAAAAECK3Jw0g/LCS2kFL/ylGWAPs8R0sJ6s8jNqQnofuz8EhOMyxIc9+XptJCg+fxtIjQw==", "1234567890", true, 7.00m, 15.00m, 2, "", true, "Merchant Store 2", false, "merchant2@example.com" });
+                values: new object[] { 2, 0, "456 Elm St", 2, "City2", "11fe68c0-203c-4e4c-9b43-1fc56e7afaed", "merchant2@example.com", true, "Government2", false, true, null, "Merchant 2", "MERCHANT2@EXAMPLE.COM", "MERCHANT2@EXAMPLE.COM", "AQAAAAIAAYagAAAAELRr7ZV3/iXHsOOI8SGw3D/7B5P1WTK6x1bDCqsyr/K2RoJ/Wb10B8QooxdPbODuTQ==", "1234567890", true, 7.00m, 15.00m, 2, "", true, "Merchant Store 2", false, "merchant2@example.com" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -682,6 +726,11 @@ namespace ShippingSystem.DAL.Migrations
                 name: "IX_Orders_DeliveryID",
                 table: "Orders",
                 column: "DeliveryID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_DeliveryTypeID",
+                table: "Orders",
+                column: "DeliveryTypeID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_GovernmentId",
@@ -805,6 +854,9 @@ namespace ShippingSystem.DAL.Migrations
 
             migrationBuilder.DropTable(
                 name: "DeliveryAccounts");
+
+            migrationBuilder.DropTable(
+                name: "DeliveryTypes");
 
             migrationBuilder.DropTable(
                 name: "MerchantAccounts");

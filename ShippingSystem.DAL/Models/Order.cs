@@ -51,9 +51,9 @@ namespace ShippingSystem.DAL.Models
 
         public string? Notes { get; set; }
 
-        public decimal? ReceivedMoney { get; set; }
-        public decimal? DeliveryPrice { get; set; }
-        public decimal? PaiedMoney { get; set; }
+        public decimal? ReceivedMoney { get; set; } // total 
+        public decimal? DeliveryPrice { get; set; } // price of Delivery 
+        public decimal? PaiedMoney { get; set; } // All paid from client
 
         public DateOnly? CreatedDate { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
         public DateOnly? DeliverydDate { get; set; }
@@ -73,8 +73,10 @@ namespace ShippingSystem.DAL.Models
         [ForeignKey("paymentType")]
         public int? PaymentTypeID { get; set; }
 
-        [ForeignKey("government")]
+        [ForeignKey("DeliveryType")]
+        public int? DeliveryTypeID { get; set; }
 
+        [ForeignKey("government")]
         public int? GovernmentId { get; set; }
 
         [ForeignKey("city")]
@@ -85,6 +87,7 @@ namespace ShippingSystem.DAL.Models
         public DeliveryAccount DeliveryAccount { get; set; }
 
         public ShippingType ShippingType { get; set; }
+        public DeliveryType DeliveryType { get; set; }
         public PaymentType paymentType { get; set; }
 
         public Government government { get; set; }

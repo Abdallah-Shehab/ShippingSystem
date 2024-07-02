@@ -15,10 +15,22 @@ namespace ShippingSysem.BLL.Services
     public class OrderService
     {
         private readonly IOrderRepository repository;
+        private readonly MerchantService merchantService;
+        private readonly ShippingTypeService shippingTypeService;
 
-        public OrderService(IOrderRepository repository)
+        public DeliveryTpeService DeliveryTpeService { get; }
+
+        public OrderService(
+            IOrderRepository repository,
+            MerchantService merchantService,
+            DeliveryTpeService deliveryTpeService,
+            ShippingTypeService shippingTypeService
+            )
         {
             this.repository = repository;
+            this.merchantService = merchantService;
+            DeliveryTpeService = deliveryTpeService;
+            this.shippingTypeService = shippingTypeService;
         }
 
         //Mpping The Orders return from The Database without Pagination and using Status as filteration
@@ -122,6 +134,7 @@ namespace ShippingSysem.BLL.Services
                 MerchantID = _orderCreateDto.MerchantID,
                 PaymentTypeID = _orderCreateDto.PaymentTypeID,
                 ShippingTypeID = _orderCreateDto.ShippingTypeID,
+                DeliveryTypeID = _orderCreateDto.DeliveryTypeID,
                 PhoneOne = _orderCreateDto.PhoneOne,
                 PhoneTwo = _orderCreateDto.PhoneTwo,
                 Status = _orderCreateDto.Status,
@@ -138,6 +151,22 @@ namespace ShippingSysem.BLL.Services
 
                 }).ToList(),
             };
+
+            //get price of shippingType 
+            decimal priceOfShippingType = await shippingTypeService.getPriceOfShippingType( _orderCreateDto.ShippingTypeID );
+            //get Price of DeliveryType
+            decimal priceOfDeliveryType = await DeliveryTpeService.getPriceOfShippingType(_orderCreateDto.DeliveryTypeID);
+
+            // get precentatge of merchant if has Refound
+            decimal refoundOFmerchant = await merchantService.getRefoundToMerchant(_orderCreateDto.MerchantID);
+
+
+            // count if weight of products increase than the normal wait 
+            //------------------------------------------------
+
+
+            // calculate shippingTypePrice  + DeliveryType + TotalPriceOFProduct -  Refound For the merchant
+            decimal totalPayment = priceOfShippingType + priceOfDeliveryType + _orderCreateDto.TotalPrice - refoundOFmerchant; 
             await repository.AddAsync(order);
             await repository.SaveAsync();
 

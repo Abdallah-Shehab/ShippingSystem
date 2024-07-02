@@ -23,6 +23,7 @@ namespace ShippingSysem.BLL.DTOs.OrderDTOs
         public  int CityID { get; set; }
         public  int MerchantID { get; set; }
         public  int ShippingTypeID { get; set; }
+        public  int DeliveryTypeID { get; set; }
         public  int PaymentTypeID { get; set; }
         public  int GovernmentId { get; set; }
         public  List<ProductCreateDTO> Products { get; set; }

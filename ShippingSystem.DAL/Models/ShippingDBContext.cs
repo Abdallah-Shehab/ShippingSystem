@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ShippingSystem.DAL.Models.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace ShippingSystem.DAL.Models
         public DbSet<Product> Products { get; set; }
         public DbSet<PaymentType> PaymentTypes { get; set; }
         public DbSet<ShippingType> ShippingTypes { get; set; }
+        public DbSet<DeliveryType> DeliveryTypes { get; set; }
         public DbSet<MerchantAccount> MerchantAccounts { get; set; }
         public DbSet<DeliveryAccount> DeliveryAccounts { get; set; }
 
@@ -73,6 +75,42 @@ namespace ShippingSystem.DAL.Models
 
 
               ));
+
+            builder.Entity<DeliveryType>(entity => entity.HasData(
+             new DeliveryType { Id = 1, Name = "التسليم في الفرع", Price = 5.99m },
+             new DeliveryType { Id = 2, Name = "التسليم من التاجر", Price = 12.99m }
+         ));
+
+            builder.Entity<Order>(entity => entity.HasData(
+                new Order
+                {
+                    Id = 1,
+                    ClientName = "John Doe",
+                    Status = "Pending",
+                    TotalPrice = 100.00m,
+                    TotalWeight = 5.00m,
+                    PhoneOne = "1234567890",
+                    PhoneTwo = "0987654321",
+                    Email = "john.doe@example.com",
+                    Notes = "Handle with care",
+                    ReceivedMoney = 50.00m,
+                    DeliveryPrice = 10.00m,
+                    PaiedMoney = 40.00m,
+                    CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow),
+                    DeliverydDate = null,
+                    StreetAndVillage = "123 Main St",
+                    StaffMemberID = null,
+                    MerchantID = null,
+                    DeliveryID = null,
+                    ShippingTypeID = null,
+                    PaymentTypeID = null,
+                    DeliveryTypeID = 1,
+                    GovernmentId = null,
+                    CitytId = null
+                }
+            ));
+
+
 
             builder.Entity<Role>(entity => entity.HasData(
               new Role { Id = 1, Name = "Employee" },
