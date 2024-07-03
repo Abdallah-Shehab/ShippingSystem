@@ -22,7 +22,7 @@ namespace ShippingSystem.PL.Controllers
             var orders = await orderService.GetAllFilterdOrders(status);
 
             if (!orders.Any())
-                return NotFound();
+               return NotFound();
 
             return Ok(orders);
         }
@@ -30,8 +30,8 @@ namespace ShippingSystem.PL.Controllers
         [HttpGet("AllWithPagination")]
         public async Task<ActionResult<List<OrederReadDTO>>> GetAllWithPagination(int page = 1,int pageSize = 10,string status="")
         {
-            var orders = await orderService.GetAllFilterdOrders(page,pageSize,status);
-            
+            var orders = await orderService.GetAllFilterdOrders(page, pageSize, status);
+
             if (!orders.Any())
                 return NotFound();
 
@@ -58,6 +58,23 @@ namespace ShippingSystem.PL.Controllers
                 return NotFound();
 
             return Ok(orders);
+        }
+
+        
+        [HttpPost]
+        public async Task<IActionResult> AddOrder(OrderCreateDTO orderCreateDto)
+        {
+            var order = await orderService.CreateOrder(orderCreateDto);
+
+            return Ok(order);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrder(int id)
+        {
+            var order = await orderService.DeleteOrder(id);
+            if (order == null) return NotFound();
+            return Ok(order);
         }
     }
 }

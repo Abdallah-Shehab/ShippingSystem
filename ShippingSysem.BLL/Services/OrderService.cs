@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using ShippingSysem.BLL.DTOs.OrderDTOs;
+using ShippingSysem.BLL.DTOs.ProductDTOs;
 using ShippingSystem.DAL.Interfaces;
 using ShippingSystem.DAL.Models;
 using System;
@@ -58,6 +59,13 @@ namespace ShippingSysem.BLL.Services
             return await Orders.ToListAsync();
         }
 
+        public async Task<OrederReadDTO> DeleteOrder(int id)
+        {
+            var order = await repository.DeleteById(id);
+            if (order != null) return await MappingorderToOrderReadDTO(order);
+            return null;
+        }
+
         //Private Method using for Mapping The orders return from database(order Repository)
         private async Task<List<OrederReadDTO>> MappingorderDTOs(IQueryable<Order> orders)
         {
@@ -88,7 +96,7 @@ namespace ShippingSysem.BLL.Services
         }
         private async Task<OrederReadDTO> MappingorderToOrderReadDTO(Order order)
         {
-            
+
             return new OrederReadDTO()
             {
                 Id = order.Id,
@@ -99,26 +107,27 @@ namespace ShippingSysem.BLL.Services
                 ReceivedMoney = order.ReceivedMoney,
                 DeliveryPrice = order.DeliveryPrice,
                 PaiedMoney = order.PaiedMoney,
-                Government = order.government.Name,
-                Cityt = order.city.Name,
+                Government = order.government?.Name, // Null check
+                Cityt = order.city?.Name,            // Null check
                 PhoneOne = order.PhoneOne,
                 PhoneTwo = order.PhoneTwo,
                 Email = order.Email,
                 Notes = order.Notes,
                 StreetAndVillage = order.StreetAndVillage,
-                StaffMemberName = order.StaffMemberAccount.Name,
-                MerchantName = order.MerchantAccount.Name,
-                DeliveryName = order.DeliveryAccount.Name,
+                StaffMemberName = order.StaffMemberAccount?.Name, // Null check
+                MerchantName = order.MerchantAccount?.Name,       // Null check
+                DeliveryName = order.DeliveryAccount?.Name,       // Null check
                 CreatedDate = order.CreatedDate,
                 DeliverydDate = order.DeliverydDate,
-                TotalWeight=order.TotalWeight
+                TotalWeight = order.TotalWeight
             };
         }
 
 
         // Mapping the Orders from Dto To Database 
-        public async Task<OrderCreateDTO> CreateOrder(OrderCreateDTO _orderCreateDto) {
-            
+        public async Task<OrderCreateDTO> CreateOrder(OrderCreateDTO _orderCreateDto)
+        {
+
             Order order = new Order()
             {
                 CitytId = _orderCreateDto.CityID,
@@ -130,8 +139,11 @@ namespace ShippingSysem.BLL.Services
                 ShippingTypeID = _orderCreateDto.ShippingTypeID,
                 PhoneOne = _orderCreateDto.PhoneOne,
                 PhoneTwo = _orderCreateDto.PhoneTwo,
-                Status = _orderCreateDto.Status,
+                Status = "New",
                 GovernmentId = _orderCreateDto.GovernmentId,
+                StreetAndVillage = _orderCreateDto.StreetAndVillage,
+                TotalWeight = _orderCreateDto.TotalWeight,
+                TotalPrice = _orderCreateDto.TotalPrice,
                 Products = _orderCreateDto.Products.Select(p => new Product()
                 {
                     Quantity = p.Quantity,
@@ -141,14 +153,14 @@ namespace ShippingSysem.BLL.Services
 
                 }).ToList(),
             };
-           await repository.AddAsync(order);
-            repository.SaveAsync();
+            await repository.AddAsync(order);
+            await repository.SaveAsync();
 
             return _orderCreateDto;
 
 
         }
-        
-    
+
+
     }
 }
