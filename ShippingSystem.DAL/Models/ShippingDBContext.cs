@@ -271,8 +271,68 @@ namespace ShippingSystem.DAL.Models
 		   );
 			builder.Entity<Account>().HasData(newAccount);
 
-			// Seed permissions for the new account
-			builder.Entity<Permission>().HasData(
+           
+
+            builder.Entity<MerchantAccount>().HasData(
+                new MerchantAccount
+                {
+                    Id = 1,
+                    Name = "John Doe",
+                    Address = "123 Main St",
+                    Status = true,
+                    RoleID = 2,
+                    BranchID = 1,
+                    IsDeleted = false,
+                    UserName = "johndoe",
+                    NormalizedUserName = "JOHNDOE",
+                    Email = "mariem.doe@example.com",
+                    NormalizedEmail = "MARIEM.DOE@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "passssword"),
+                    SecurityStamp = "HBLASJQKDKDKS",
+                    ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
+                    PhoneNumber = "1234567890",
+                    PhoneNumberConfirmed = true,
+                    TwoFactorEnabled = false,
+                    LockoutEnd = null,
+                    LockoutEnabled = true,
+                    AccessFailedCount = 0,
+                    Phone = "1234567890", // Required property
+                    StoreName = "Store A",
+                    Government = "Government A",
+                    City = "City A",
+                    Pickup_Price = 10.0m,
+                    Refund_Percentage = 0.1m
+                });
+
+            builder.Entity<DeliveryAccount>().HasData(
+                new DeliveryAccount
+                {
+                    Id = 1,
+                    Name = "John Doe",
+                    Address = "123 Main St",
+                    Status = true,
+                    RoleID = 3,
+                    BranchID = 1,
+                    IsDeleted = false,
+                    UserName = "johndoe",
+                    NormalizedUserName = "JOHNDOE",
+                    Email = "hamdy.doe@example.com",
+                    NormalizedEmail = "HAMDY.DOE@EXAMPLE.COM",
+                    EmailConfirmed = true,
+                    PasswordHash = hasher.HashPassword(null, "passssword"),
+                    SecurityStamp = "HBLASJQKDKDKS",
+                    ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
+                    PhoneNumber = "1234567890",
+                    PhoneNumberConfirmed = true,
+                    TwoFactorEnabled = false,
+                    LockoutEnd = null,
+                    LockoutEnabled = true,
+                    AccessFailedCount = 0
+                });
+
+            // Seed permissions for the new account
+            builder.Entity<Permission>().HasData(
 				new Permission
 				{
 					Id = 1,
