@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ShippingSystem.BLL.DTOs.SpecialOfferDTOS;
+﻿using ShippingSystem.BLL.DTOs.SpecialOfferDTOS;
 using ShippingSystem.DAL.Models;
 using ShippingSystem.DAL.Repositories.Base;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace ShippingSystem.BLL.Services
 {
@@ -38,11 +38,14 @@ namespace ShippingSystem.BLL.Services
             };
 
             var result = await _specialOfferRepository.AddAsync(specialOffer);
-            await _specialOfferRepository.SaveAsync(); 
+            await _specialOfferRepository.SaveAsync();
             return result;
         }
 
-
-
+        public async Task<IList<SpecialOffer>> GetSpecialOffersByMerchantIdAsync(int merchantId)
+        {
+            var specialOffers = await _specialOfferRepository.GetAllWithFilter(so => so.MerchantId == merchantId);
+            return specialOffers.ToList();
+        }
     }
 }
