@@ -15,10 +15,10 @@ namespace ShippingSysem.BLL.Enums
         RefusedWithoutPayment,
         RefusedWithPartialPayment,
         DeliveredToDelivery,
-        Deliverd,
+        Deliverd, // Typo: Should be Delivered
         PartiallyDelivered,
         Suspended,
-        NotRechable,
+        NotRechable, // Typo: Should be NotReachable
         Waiting
     }
 }

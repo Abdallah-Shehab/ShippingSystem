@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShippingSysem.BLL.DTOs.OrderDTOs;
+using ShippingSysem.BLL.Enums;
 using ShippingSysem.BLL.Services;
 using ShippingSystem.DAL.Models;
 
@@ -75,6 +76,13 @@ namespace ShippingSystem.PL.Controllers
             var order = await orderService.DeleteOrder(id);
             if (order == null) return NotFound();
             return Ok(order);
+        }
+
+        [HttpGet("OrderStatuses")]
+        public ActionResult<IEnumerable<string>> GetOrderStatuses()
+        {
+            var statuses = Enum.GetNames(typeof(OrderStatus)).ToList();
+            return Ok(statuses);
         }
     }
 }
