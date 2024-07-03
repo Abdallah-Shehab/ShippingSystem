@@ -47,5 +47,16 @@ namespace ShippingSystem.PL.Controllers
             var addedSpecialOffer = await _specialOfferService.AddSpecialOfferAsync(specialOfferDTO);
             return CreatedAtAction(nameof(GetSpecialOfferById), new { id = addedSpecialOffer.Id }, addedSpecialOffer);
         }
+
+        [HttpGet("Merchant/{merchantId}/SpecialOffers")]
+        public async Task<ActionResult<IEnumerable<SpecialOffer>>> GetSpecialOffersByMerchantId(int merchantId)
+        {
+            var specialOffers = await _specialOfferService.GetSpecialOffersByMerchantIdAsync(merchantId);
+            if (specialOffers == null || specialOffers.Count == 0)
+            {
+                return NotFound();
+            }
+            return Ok(specialOffers);
+        }
     }
 }
