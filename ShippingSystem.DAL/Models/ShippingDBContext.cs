@@ -29,7 +29,6 @@ namespace ShippingSystem.DAL.Models
         public DbSet<DeliveryAccount> DeliveryAccounts { get; set; }
         public DbSet<SpecialOffer> SpecialOffer { get; set; }
 
-
         public ShippingDBContext(DbContextOptions<ShippingDBContext> options) : base(options)
         {
         }

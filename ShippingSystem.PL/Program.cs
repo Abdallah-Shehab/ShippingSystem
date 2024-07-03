@@ -107,7 +107,7 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<OrderService>();
             builder.Services.AddScoped<BranchService>();
             builder.Services.AddScoped<GovernmentService>();
-            builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
 
             //Register City Service
             builder.Services.AddScoped<IGenericRepository<Government>, GenericRepository<Government>>();
