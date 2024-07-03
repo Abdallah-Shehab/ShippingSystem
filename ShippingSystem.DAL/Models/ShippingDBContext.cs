@@ -51,7 +51,16 @@ namespace ShippingSystem.DAL.Models
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
+            builder.Entity<Government>().HasData(
+              new Government { Id = 1, Name = "Government1" },
+              new Government { Id = 2, Name = "Government2" }
+          );
 
+            // Seed data for Branches
+            builder.Entity<Branch>().HasData(
+                new Branch { Id = 1, Name = "Branch1", IsDeleted = false, Status = true, GovernmentID = 1, CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow) },
+                new Branch { Id = 2, Name = "Branch2", IsDeleted = false, Status = true, GovernmentID = 2, CreatedDate = DateOnly.FromDateTime(DateTime.UtcNow) }
+            );
 
 
             builder.Entity<Account>()
@@ -305,5 +314,6 @@ namespace ShippingSystem.DAL.Models
             );
             base.OnModelCreating(builder);
         }
+  
     }
 }
