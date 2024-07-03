@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class MerchantAccount : IdentityUser<int>, IEntity
+    public class MerchantAccount : IdentityUser<int>, IEntity,IAccount
     {
         [DefaultValue(false)]
         public bool IsDeleted { get; set; }
@@ -34,6 +34,10 @@ namespace ShippingSystem.DAL.Models
         public int? BranchID { get; set; }
 
         public Branch Branch { get; set; }
+
+
+        [Required]
+        public string Phone { get; set; }
 
         public virtual List<Order>? Orders { get; set; } = new List<Order>();
         [Required]

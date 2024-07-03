@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ShippingSysem.BLL.Services;
+using ShippingSysem.BLL.Services.Base;
 using ShippingSystem.BLL.Services;
 using ShippingSystem.DAL.Interfaces;
 using ShippingSystem.DAL.Interfaces.Base;
@@ -120,10 +121,15 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<CityService>();
 
             //Register Login Service
-            builder.Services.AddScoped<LoginService>();
-            builder.Services.AddScoped<LoginAccountReposatry>();
-            builder.Services.AddScoped<LoginMerchantReposatry>();
-            builder.Services.AddScoped<LoginDeliveryReposatry>();
+            builder.Services.AddScoped<GenericLoginReposatry<Account>>();
+            builder.Services.AddScoped<GenericLoginReposatry<MerchantAccount>>();
+            builder.Services.AddScoped<GenericLoginReposatry<DeliveryAccount>>();
+            builder.Services.AddScoped<GenericLoginService<Account>>();
+            builder.Services.AddScoped<GenericLoginService<MerchantAccount>>();
+            builder.Services.AddScoped<GenericLoginService<DeliveryAccount>>();
+            builder.Services.AddScoped<UserManager<Account>>();
+            builder.Services.AddScoped<UserManager<MerchantAccount>>();
+            builder.Services.AddScoped<UserManager<DeliveryAccount>>();
 
             //Register ShippingType Service
             builder.Services.AddScoped<IGenericRepository<ShippingType>, GenericRepository<ShippingType>>();

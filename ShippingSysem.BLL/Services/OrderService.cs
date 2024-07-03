@@ -141,7 +141,7 @@ namespace ShippingSysem.BLL.Services
                 MerchantID = _orderCreateDto.MerchantID,
                 PaymentTypeID = _orderCreateDto.PaymentTypeID,
                 ShippingTypeID = _orderCreateDto.ShippingTypeID,
-                DeliveryTypeID = _orderCreateDto.DeliveryTypeID,
+                //DeliveryTypeID = _orderCreateDto.DeliveryTypeID,
                 PhoneOne = _orderCreateDto.PhoneOne,
                 PhoneTwo = _orderCreateDto.PhoneTwo,
                 Status = "New",
