@@ -233,7 +233,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "John Doe",
                             NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDT/j1sNJFUMYHaCcQi9VxdkrD7c3kBetQ3LC+jcxy8Ya8zst0jAtm58unFRVt0p5A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEK0xLpOHpIY9xMvG1MKlBxci+89Gt+7sX7BiH2+hExBCcVjYDekmGFAg0q6Xd6ftJg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 1,
@@ -256,7 +256,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Jane Smith",
                             NormalizedEmail = "JANE.SMITH@EXAMPLE.COM",
                             NormalizedUserName = "JANESMITH",
-                            PasswordHash = "AQAAAAIAAYagAAAAECFZK+KUaCiL1d+1BZJkQKSf2crJjaLtSKthRkuWYg6fL15O+uhy4XYPvNuziDyemQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELGMOU4LzKLa7od94DPCWzfL1JRETiW3EaTSP0hFC0ZX0T4h9dLOU/otXMeWmf+jzQ==",
                             PhoneNumber = "0987654321",
                             PhoneNumberConfirmed = true,
                             RoleID = 2,
@@ -270,13 +270,13 @@ namespace ShippingSystem.DAL.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Address = "123 New Street",
-                            ConcurrencyStamp = "e70872f8-e918-47b6-b4dd-e8c861c7704a",
+                            ConcurrencyStamp = "6763df5e-0260-4614-b523-b185aab11b04",
                             Email = "newuser@example.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             Name = "New User",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPUFou0a3D+uv9tffbCyIJpDT9eI3/CTd8Zr5Ml+h6IT/Abkh64QlGi6Uh+XXl+VyA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEAZwjmTjHdhuwOuBdR91crGSRjZIH2N6TmQ4KrBjIMuhaOB6QtMonr/Gbn4RkdzZlw==",
                             PhoneNumberConfirmed = false,
                             RoleID = 1,
                             Status = true,
@@ -315,6 +315,26 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("GovernmentID");
 
                     b.ToTable("Branches");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateOnly(2024, 7, 3),
+                            GovernmentID = 1,
+                            IsDeleted = false,
+                            Name = "Branch1",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateOnly(2024, 7, 3),
+                            GovernmentID = 2,
+                            IsDeleted = false,
+                            Name = "Branch2",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.City", b =>
@@ -591,6 +611,22 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("BranchID");
 
                     b.ToTable("Governments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = "Government1",
+                            Status = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = "Government2",
+                            Status = false
+                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.MerchantAccount", b =>
@@ -799,7 +835,7 @@ namespace ShippingSystem.DAL.Migrations
                         {
                             Id = 1,
                             ClientName = "John Doe",
-                            CreatedDate = new DateOnly(2024, 7, 2),
+                            CreatedDate = new DateOnly(2024, 7, 3),
                             DeliveryPrice = 10.00m,
                             DeliveryTypeID = 1,
                             Email = "john.doe@example.com",
@@ -1072,28 +1108,28 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateOnly(2024, 7, 2),
+                            CreatedDate = new DateOnly(2024, 7, 3),
                             IsDeleted = false,
                             Name = "Employee"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateOnly(2024, 7, 2),
+                            CreatedDate = new DateOnly(2024, 7, 3),
                             IsDeleted = false,
                             Name = "Merchant"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateOnly(2024, 7, 2),
+                            CreatedDate = new DateOnly(2024, 7, 3),
                             IsDeleted = false,
                             Name = "Delivery"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateOnly(2024, 7, 2),
+                            CreatedDate = new DateOnly(2024, 7, 3),
                             IsDeleted = false,
                             Name = "Admin"
                         });
