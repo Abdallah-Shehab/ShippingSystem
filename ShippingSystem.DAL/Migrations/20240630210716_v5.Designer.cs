@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShippingSystem.DAL.Models;
 
@@ -11,9 +12,16 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    partial class ShippingDBContextModelSnapshot : ModelSnapshot
+<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240630210716_v5.Designer.cs
+    [Migration("20240630210716_v5")]
+    partial class v5
+========
+    [Migration("20240702121137_v1")]
+    partial class v1
+>>>>>>>> Abdallah:ShippingSystem.DAL/Migrations/20240702121137_v1.Designer.cs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,108 +229,25 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 2,
-                            AccessFailedCount = 0,
-                            Address = "123 Main St",
-                            BranchID = 1,
-                            ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
-                            Email = "john.doe@example.com",
-                            EmailConfirmed = true,
-                            IsDeleted = false,
-                            LockoutEnabled = true,
-                            Name = "John Doe",
-                            NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
-                            NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOLN0qtJi4n7QzXGHPD05WvNUhsTTIBA79umuJJyQcmmhm3wyiwMnmLbDnP9tATH1w==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = true,
-                            RoleID = 1,
-                            SecurityStamp = "HBLASJQKDKDKS",
-                            Status = true,
-                            TwoFactorEnabled = false,
-                            UserName = "johndoe"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            Address = "456 Oak St",
-                            BranchID = 2,
-                            ConcurrencyStamp = "87654321-dcba-4321-hgfe-0987654321ba",
-                            Email = "jane.smith@example.com",
-                            EmailConfirmed = true,
-                            IsDeleted = false,
-                            LockoutEnabled = true,
-                            Name = "Jane Smith",
-                            NormalizedEmail = "JANE.SMITH@EXAMPLE.COM",
-                            NormalizedUserName = "JANESMITH",
-                            PasswordHash = "AQAAAAIAAYagAAAAECjLNua9yiXvMVyXP+041aMJ58AcGfx4hpQsjQwE2hwqF2vaoE1zohGqxZ2MGkorWg==",
-                            PhoneNumber = "0987654321",
-                            PhoneNumberConfirmed = true,
-                            RoleID = 2,
-                            SecurityStamp = "HJSDKFHSDFHSD",
-                            Status = true,
-                            TwoFactorEnabled = false,
-                            UserName = "janesmith"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AccessFailedCount = 0,
-                            Address = "123 Main St",
-                            BranchID = 1,
-                            ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
-                            Email = "ahmed.salah@example.com",
-                            EmailConfirmed = true,
-                            IsDeleted = false,
-                            LockoutEnabled = true,
-                            Name = "Ahmed Salah",
-                            NormalizedEmail = "AHMED.SALAH@EXAMPLE.COM",
-                            NormalizedUserName = "AHMED",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEKP7C44QfG6ELTPiwtZoQGQjSK/oGy3JqXN/UKhXIal4zoQauYx/xuLk28Qpn/xWg==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = true,
-                            RoleID = 3,
-                            SecurityStamp = "HBLASJQKDKDKS",
-                            Status = true,
-                            TwoFactorEnabled = false,
-                            UserName = "ahmed"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AccessFailedCount = 0,
-                            Address = "123 Main St",
-                            BranchID = 1,
-                            ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
-                            Email = "mona.magdy@example.com",
-                            EmailConfirmed = true,
-                            IsDeleted = false,
-                            LockoutEnabled = true,
-                            Name = "Mona Magdy",
-                            NormalizedEmail = "MONA.MAGDY@EXAMPLE.COM",
-                            NormalizedUserName = "MONA",
-                            PasswordHash = "AQAAAAIAAYagAAAAELjgwpTdHhN2463IWk5UGv8BcJye+m344P+w2sCRkGRkRg7cjcP1xHcgOmK5jrsD7Q==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = true,
-                            RoleID = 4,
-                            SecurityStamp = "HBLASJQKDKDKS",
-                            Status = true,
-                            TwoFactorEnabled = false,
-                            UserName = "mona"
-                        },
-                        new
-                        {
                             Id = 1,
                             AccessFailedCount = 0,
                             Address = "123 New Street",
-                            ConcurrencyStamp = "2775d5e3-a1a8-4dff-a3d2-2d72fd1cd336",
+<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240630210716_v5.Designer.cs
+                            ConcurrencyStamp = "f3f52467-b2da-4962-ab35-ca11bbbfee61",
+========
+                            BranchID = 1,
+                            ConcurrencyStamp = "0b4c4156-3750-4f61-9880-deb83bd4d7e4",
+>>>>>>>> Abdallah:ShippingSystem.DAL/Migrations/20240702121137_v1.Designer.cs
                             Email = "newuser@example.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             Name = "New User",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPzCmjwnCV5MmYOEILpwCMj14f79gFBKJjHKg8OY+xutiDraNIx+HTiH81AqbHkjoA==",
+<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240630210716_v5.Designer.cs
+                            PasswordHash = "AQAAAAIAAYagAAAAEHuiaFw6bbdlceyuYHW8OMVx+1MLg63h1fjG33W2tKyR/xuZ21YDlZFYe8a4PSeeBg==",
+========
+                            PasswordHash = "AQAAAAIAAYagAAAAELp15a4/DubPDMehXFrfNRx4/tBD7ulR6KHJSC/9iIhATnZ14qPSsseXTaCXemusIw==",
+>>>>>>>> Abdallah:ShippingSystem.DAL/Migrations/20240702121137_v1.Designer.cs
                             PhoneNumberConfirmed = false,
                             RoleID = 1,
                             Status = true,
@@ -366,7 +291,7 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateOnly(2024, 7, 3),
+                            CreatedDate = new DateOnly(2024, 7, 2),
                             GovernmentID = 1,
                             IsDeleted = false,
                             Name = "Branch1",
@@ -375,7 +300,7 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateOnly(2024, 7, 3),
+                            CreatedDate = new DateOnly(2024, 7, 2),
                             GovernmentID = 2,
                             IsDeleted = false,
                             Name = "Branch2",
@@ -416,6 +341,28 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("GovernmentID");
 
                     b.ToTable("Cities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            GovernmentID = 1,
+                            IsDeleted = false,
+                            Name = "City1",
+                            NormalShippingCost = 10.00m,
+                            PickupShippingCost = 5.00m,
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            GovernmentID = 2,
+                            IsDeleted = false,
+                            Name = "City2",
+                            NormalShippingCost = 15.00m,
+                            PickupShippingCost = 7.00m,
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryAccount", b =>
@@ -506,46 +453,6 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("RoleID");
 
                     b.ToTable("DeliveryAccounts", (string)null);
-                });
-
-            modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DeliveryType");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsDeleted = false,
-                            Name = "التسليم في الفرع",
-                            Price = 5.99m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsDeleted = false,
-                            Name = "التسليم من التاجر",
-                            Price = 12.99m
-                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.ExistedEntities", b =>
@@ -664,14 +571,23 @@ namespace ShippingSystem.DAL.Migrations
                             Id = 1,
                             IsDeleted = false,
                             Name = "Government1",
-                            Status = false
+                            Status = true
                         },
                         new
                         {
                             Id = 2,
+                            BranchID = 1,
+                            IsDeleted = false,
+                            Name = "Government3",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BranchID = 2,
                             IsDeleted = false,
                             Name = "Government2",
-                            Status = false
+                            Status = true
                         });
                 });
 
@@ -734,10 +650,6 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -776,6 +688,80 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("RoleID");
 
                     b.ToTable("MerchantAccounts", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            Address = "123 Main St",
+                            BranchID = 1,
+                            City = "City1",
+<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240630210716_v5.Designer.cs
+                            ConcurrencyStamp = "0f572bf5-59dd-421e-90e7-c5236cc2cf70",
+========
+                            ConcurrencyStamp = "fe6adeb0-76cf-44eb-995b-1b703bde8b58",
+>>>>>>>> Abdallah:ShippingSystem.DAL/Migrations/20240702121137_v1.Designer.cs
+                            Email = "merchant1@example.com",
+                            EmailConfirmed = true,
+                            Government = "Government1",
+                            IsDeleted = false,
+                            LockoutEnabled = true,
+                            Name = "Merchant 1",
+                            NormalizedEmail = "MERCHANT1@EXAMPLE.COM",
+                            NormalizedUserName = "MERCHANT1@EXAMPLE.COM",
+<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240630210716_v5.Designer.cs
+                            PasswordHash = "AQAAAAIAAYagAAAAEH279ufesicbTxks51nnz6DpQY3W3gDP5rlhvdbOvQT7kcu2FWnh8DHu0e3QdjahFQ==",
+========
+                            PasswordHash = "AQAAAAIAAYagAAAAEPi88sTQn2lqwtUE96geg5HeZaDoHBKTvxclp5A52JLVyKIV601fQLbn4GXXWWKCvQ==",
+>>>>>>>> Abdallah:ShippingSystem.DAL/Migrations/20240702121137_v1.Designer.cs
+                            PhoneNumber = "1234567890",
+                            PhoneNumberConfirmed = true,
+                            Pickup_Price = 5.00m,
+                            Refund_Percentage = 10.00m,
+                            RoleID = 2,
+                            SecurityStamp = "",
+                            Status = true,
+                            StoreName = "Merchant Store 1",
+                            TwoFactorEnabled = false,
+                            UserName = "merchant1@example.com"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            Address = "456 Elm St",
+                            BranchID = 2,
+                            City = "City2",
+<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240630210716_v5.Designer.cs
+                            ConcurrencyStamp = "d5b8b13d-b84c-46ac-8c92-962cbf1443f0",
+========
+                            ConcurrencyStamp = "5f9dd0df-fefe-4e05-934f-ecf8f35bc9ba",
+>>>>>>>> Abdallah:ShippingSystem.DAL/Migrations/20240702121137_v1.Designer.cs
+                            Email = "merchant2@example.com",
+                            EmailConfirmed = true,
+                            Government = "Government2",
+                            IsDeleted = false,
+                            LockoutEnabled = true,
+                            Name = "Merchant 2",
+                            NormalizedEmail = "MERCHANT2@EXAMPLE.COM",
+                            NormalizedUserName = "MERCHANT2@EXAMPLE.COM",
+<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240630210716_v5.Designer.cs
+                            PasswordHash = "AQAAAAIAAYagAAAAEElHKlLs9fL/yDgjdxTecTYs8f3x/khgan8pvJ69ht2Wv1a6lONuUDUwEqdkYTsxCw==",
+========
+                            PasswordHash = "AQAAAAIAAYagAAAAED4ogS7SztWG7vPylQRTPg5hYd8VY90o5sGFVR8tgzTQAxyl3bbLwqN/nn3j1uUoWg==",
+>>>>>>>> Abdallah:ShippingSystem.DAL/Migrations/20240702121137_v1.Designer.cs
+                            PhoneNumber = "1234567890",
+                            PhoneNumberConfirmed = true,
+                            Pickup_Price = 7.00m,
+                            Refund_Percentage = 15.00m,
+                            RoleID = 2,
+                            SecurityStamp = "",
+                            Status = true,
+                            StoreName = "Merchant Store 2",
+                            TwoFactorEnabled = false,
+                            UserName = "merchant2@example.com"
+                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.Order", b =>
@@ -802,9 +788,6 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.Property<decimal?>("DeliveryPrice")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("DeliveryTypeId")
-                        .HasColumnType("int");
 
                     b.Property<DateOnly?>("DeliverydDate")
                         .HasColumnType("date");
@@ -866,8 +849,6 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("DeliveryID");
 
-                    b.HasIndex("DeliveryTypeId");
-
                     b.HasIndex("GovernmentId");
 
                     b.HasIndex("MerchantID");
@@ -879,26 +860,6 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("StaffMemberID");
 
                     b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClientName = "John Doe",
-                            CreatedDate = new DateOnly(2024, 7, 3),
-                            DeliveryPrice = 10.00m,
-                            Email = "john.doe@example.com",
-                            IsDeleted = false,
-                            Notes = "Handle with care",
-                            PaiedMoney = 40.00m,
-                            PhoneOne = "1234567890",
-                            PhoneTwo = "0987654321",
-                            ReceivedMoney = 50.00m,
-                            Status = "Pending",
-                            StreetAndVillage = "123 Main St",
-                            TotalPrice = 100.00m,
-                            TotalWeight = 5.00m
-                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.PaymentType", b =>
@@ -1157,28 +1118,28 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateOnly(2024, 7, 3),
+                            CreatedDate = new DateOnly(2024, 7, 2),
                             IsDeleted = false,
                             Name = "Employee"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateOnly(2024, 7, 3),
+                            CreatedDate = new DateOnly(2024, 7, 2),
                             IsDeleted = false,
                             Name = "Merchant"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateOnly(2024, 7, 3),
+                            CreatedDate = new DateOnly(2024, 7, 2),
                             IsDeleted = false,
                             Name = "Delivery"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateOnly(2024, 7, 3),
+                            CreatedDate = new DateOnly(2024, 7, 2),
                             IsDeleted = false,
                             Name = "Admin"
                         });
@@ -1242,9 +1203,6 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("DeliveryPrice")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Government")
                         .IsRequired()
@@ -1398,10 +1356,6 @@ namespace ShippingSystem.DAL.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("DeliveryID");
 
-                    b.HasOne("ShippingSystem.DAL.Models.DeliveryType", null)
-                        .WithMany("Orders")
-                        .HasForeignKey("DeliveryTypeId");
-
                     b.HasOne("ShippingSystem.DAL.Models.Government", "government")
                         .WithMany()
                         .HasForeignKey("GovernmentId");
@@ -1478,11 +1432,6 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryAccount", b =>
-                {
-                    b.Navigation("Orders");
-                });
-
-            modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryType", b =>
                 {
                     b.Navigation("Orders");
                 });

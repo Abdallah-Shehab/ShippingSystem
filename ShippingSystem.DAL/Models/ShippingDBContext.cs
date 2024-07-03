@@ -121,9 +121,24 @@ namespace ShippingSystem.DAL.Models
 				}
 			));
 
-   
 
-       
+			builder.Entity<Account>()
+			.ToTable("Accounts");
+
+			builder.Entity<DeliveryAccount>()
+				.ToTable("DeliveryAccounts");
+
+			builder.Entity<MerchantAccount>()
+				.ToTable("MerchantAccounts");
+
+			//builder.Entity<SpecialOffer>()
+			//.HasOne<MerchantAccount>()
+			//.WithMany()
+			//.HasForeignKey(so => so.MerchantId)
+			//.OnDelete(DeleteBehavior.Cascade);
+			builder.Entity<SpecialOffer>().HasKey(so => so.Id);
+			//add data 
+
 			builder.Entity<Role>(entity => entity.HasData(
 			  new Role { Id = 1, Name = "Employee" },
 			  new Role { Id = 2, Name = "Merchant" },

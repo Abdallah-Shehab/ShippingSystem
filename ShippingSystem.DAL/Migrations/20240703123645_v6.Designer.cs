@@ -12,8 +12,8 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    [Migration("20240703143348_v1")]
-    partial class v1
+    [Migration("20240703123645_v6")]
+    partial class v6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -236,7 +236,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "John Doe",
                             NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBi9FwZ/S55lSlMbQB9ASdGUeMI7NLX1usWFrD9S3cwtRE/UlY0RuY0z+lg6HKBVbQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKNwIueqiO6qYt3YXfM9Xp51ZvSb0/snHCL7zjl117xaAmlq5Ehzs/KC6NYIn62bFg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 1,
@@ -259,7 +259,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Jane Smith",
                             NormalizedEmail = "JANE.SMITH@EXAMPLE.COM",
                             NormalizedUserName = "JANESMITH",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAUG78o7vM/i/fODyfJqiejmoSFmFGt1EqETXNyPxoml2u4BjjB7IAKgwURW1wCl/Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ5pH1LWrZngMBtzB37xdsiUGjjbW/5ViY3uP+ox+/HwrMhxbtIdrO8Ri92OSvZPog==",
                             PhoneNumber = "0987654321",
                             PhoneNumberConfirmed = true,
                             RoleID = 2,
@@ -270,62 +270,16 @@ namespace ShippingSystem.DAL.Migrations
                         },
                         new
                         {
-                            Id = 4,
-                            AccessFailedCount = 0,
-                            Address = "123 Main St",
-                            BranchID = 1,
-                            ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
-                            Email = "ahmed.salah@example.com",
-                            EmailConfirmed = true,
-                            IsDeleted = false,
-                            LockoutEnabled = true,
-                            Name = "Ahmed Salah",
-                            NormalizedEmail = "AHMED.SALAH@EXAMPLE.COM",
-                            NormalizedUserName = "AHMED",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBWah3ioGDrLfV0uG6JCgcAM0Ti+5s3+VpP1EFvufAvETpbAABaMr0P1nZMxclVDmw==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = true,
-                            RoleID = 3,
-                            SecurityStamp = "HBLASJQKDKDKS",
-                            Status = true,
-                            TwoFactorEnabled = false,
-                            UserName = "ahmed"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AccessFailedCount = 0,
-                            Address = "123 Main St",
-                            BranchID = 1,
-                            ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
-                            Email = "mona.magdy@example.com",
-                            EmailConfirmed = true,
-                            IsDeleted = false,
-                            LockoutEnabled = true,
-                            Name = "Mona Magdy",
-                            NormalizedEmail = "MONA.MAGDY@EXAMPLE.COM",
-                            NormalizedUserName = "MONA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGfu08j6kdeSdtpgPqU9XQTy1RkdkpcSx3XJ7gRqCGxQEg2BnB8Butkye3gLqxYnog==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = true,
-                            RoleID = 4,
-                            SecurityStamp = "HBLASJQKDKDKS",
-                            Status = true,
-                            TwoFactorEnabled = false,
-                            UserName = "mona"
-                        },
-                        new
-                        {
                             Id = 1,
                             AccessFailedCount = 0,
                             Address = "123 New Street",
-                            ConcurrencyStamp = "e8fac218-eb82-4497-83fe-45981c48e992",
+                            ConcurrencyStamp = "e30824e6-639d-42ce-88dc-f065aeba75ec",
                             Email = "newuser@example.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             Name = "New User",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFNm6E7IFW8vTjKJop2RVOTqv8TpXH9VucDdarLuEb3JZksmO3wqf84t3hKcQFtuLQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEONHIFXR7b0XMJiHc6+LR/n/gTx0kpQvHWaWZJ7ttmjAWo4vgxIn9+pdnB9I8gHsYQ==",
                             PhoneNumberConfirmed = false,
                             RoleID = 1,
                             Status = true,
@@ -735,10 +689,6 @@ namespace ShippingSystem.DAL.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
