@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class DeliveryAccount : IdentityUser<int>, IEntity
+    public class DeliveryAccount : IdentityUser<int>, IEntity,IAccount
     {
         [MaxLength(50)]
         [Required]

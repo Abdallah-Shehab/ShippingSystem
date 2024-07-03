@@ -12,8 +12,8 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    [Migration("20240702170733_v1")]
-    partial class v1
+    [Migration("20240703123645_v6")]
+    partial class v6
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -236,7 +236,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "John Doe",
                             NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDT/j1sNJFUMYHaCcQi9VxdkrD7c3kBetQ3LC+jcxy8Ya8zst0jAtm58unFRVt0p5A==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKNwIueqiO6qYt3YXfM9Xp51ZvSb0/snHCL7zjl117xaAmlq5Ehzs/KC6NYIn62bFg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 1,
@@ -259,7 +259,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Jane Smith",
                             NormalizedEmail = "JANE.SMITH@EXAMPLE.COM",
                             NormalizedUserName = "JANESMITH",
-                            PasswordHash = "AQAAAAIAAYagAAAAECFZK+KUaCiL1d+1BZJkQKSf2crJjaLtSKthRkuWYg6fL15O+uhy4XYPvNuziDyemQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ5pH1LWrZngMBtzB37xdsiUGjjbW/5ViY3uP+ox+/HwrMhxbtIdrO8Ri92OSvZPog==",
                             PhoneNumber = "0987654321",
                             PhoneNumberConfirmed = true,
                             RoleID = 2,
@@ -273,13 +273,13 @@ namespace ShippingSystem.DAL.Migrations
                             Id = 1,
                             AccessFailedCount = 0,
                             Address = "123 New Street",
-                            ConcurrencyStamp = "e70872f8-e918-47b6-b4dd-e8c861c7704a",
+                            ConcurrencyStamp = "e30824e6-639d-42ce-88dc-f065aeba75ec",
                             Email = "newuser@example.com",
                             EmailConfirmed = false,
                             IsDeleted = false,
                             LockoutEnabled = false,
                             Name = "New User",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPUFou0a3D+uv9tffbCyIJpDT9eI3/CTd8Zr5Ml+h6IT/Abkh64QlGi6Uh+XXl+VyA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEONHIFXR7b0XMJiHc6+LR/n/gTx0kpQvHWaWZJ7ttmjAWo4vgxIn9+pdnB9I8gHsYQ==",
                             PhoneNumberConfirmed = false,
                             RoleID = 1,
                             Status = true,
@@ -318,6 +318,26 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("GovernmentID");
 
                     b.ToTable("Branches");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateOnly(2024, 7, 3),
+                            GovernmentID = 1,
+                            IsDeleted = false,
+                            Name = "Branch1",
+                            Status = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateOnly(2024, 7, 3),
+                            GovernmentID = 2,
+                            IsDeleted = false,
+                            Name = "Branch2",
+                            Status = true
+                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.City", b =>
@@ -466,7 +486,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DeliveryTypes");
+                    b.ToTable("DeliveryType");
 
                     b.HasData(
                         new
@@ -594,6 +614,22 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("BranchID");
 
                     b.ToTable("Governments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsDeleted = false,
+                            Name = "Government1",
+                            Status = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsDeleted = false,
+                            Name = "Government2",
+                            Status = false
+                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.MerchantAccount", b =>
@@ -720,7 +756,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<decimal?>("DeliveryPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("DeliveryTypeID")
+                    b.Property<int?>("DeliveryTypeId")
                         .HasColumnType("int");
 
                     b.Property<DateOnly?>("DeliverydDate")
@@ -783,7 +819,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("DeliveryID");
 
-                    b.HasIndex("DeliveryTypeID");
+                    b.HasIndex("DeliveryTypeId");
 
                     b.HasIndex("GovernmentId");
 
@@ -802,9 +838,8 @@ namespace ShippingSystem.DAL.Migrations
                         {
                             Id = 1,
                             ClientName = "John Doe",
-                            CreatedDate = new DateOnly(2024, 7, 2),
+                            CreatedDate = new DateOnly(2024, 7, 3),
                             DeliveryPrice = 10.00m,
-                            DeliveryTypeID = 1,
                             Email = "john.doe@example.com",
                             IsDeleted = false,
                             Notes = "Handle with care",
@@ -1075,28 +1110,28 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateOnly(2024, 7, 2),
+                            CreatedDate = new DateOnly(2024, 7, 3),
                             IsDeleted = false,
                             Name = "Employee"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateOnly(2024, 7, 2),
+                            CreatedDate = new DateOnly(2024, 7, 3),
                             IsDeleted = false,
                             Name = "Merchant"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateOnly(2024, 7, 2),
+                            CreatedDate = new DateOnly(2024, 7, 3),
                             IsDeleted = false,
                             Name = "Delivery"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateOnly(2024, 7, 2),
+                            CreatedDate = new DateOnly(2024, 7, 3),
                             IsDeleted = false,
                             Name = "Admin"
                         });
@@ -1316,9 +1351,9 @@ namespace ShippingSystem.DAL.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("DeliveryID");
 
-                    b.HasOne("ShippingSystem.DAL.Models.DeliveryType", "DeliveryType")
+                    b.HasOne("ShippingSystem.DAL.Models.DeliveryType", null)
                         .WithMany("Orders")
-                        .HasForeignKey("DeliveryTypeID");
+                        .HasForeignKey("DeliveryTypeId");
 
                     b.HasOne("ShippingSystem.DAL.Models.Government", "government")
                         .WithMany()
@@ -1341,8 +1376,6 @@ namespace ShippingSystem.DAL.Migrations
                         .HasForeignKey("StaffMemberID");
 
                     b.Navigation("DeliveryAccount");
-
-                    b.Navigation("DeliveryType");
 
                     b.Navigation("MerchantAccount");
 

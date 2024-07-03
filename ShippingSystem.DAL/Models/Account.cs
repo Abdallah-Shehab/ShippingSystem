@@ -11,7 +11,7 @@ using ShippingSystem.DAL.Models.Base;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class Account : IdentityUser<int>, IEntity
+    public class Account : IdentityUser<int>, IEntity,IAccount
     {
         [MaxLength(50)]
         [Required]

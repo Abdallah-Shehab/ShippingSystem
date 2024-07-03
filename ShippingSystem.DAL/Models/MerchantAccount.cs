@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ShippingSystem.DAL.Models
 {
-    public class MerchantAccount : IdentityUser<int>, IEntity
+    public class MerchantAccount : IdentityUser<int>, IEntity,IAccount
     {
         [DefaultValue(false)]
         public bool IsDeleted { get; set; }
