@@ -17,20 +17,21 @@ namespace ShippingSystem.PL.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(string status = "") {
+        public async Task<IActionResult> GetAll(string status = "")
+        {
             var orders = await orderService.GetAllFilterdOrders(status);
 
-            if (!orders.Any())
-                return NotFound();
+            //if (!orders.Any())
+            //    return NotFound();
 
             return Ok(orders);
         }
 
         [HttpGet("AllWithPagination")]
-        public async Task<IActionResult> GetAllWithPagination(int page = 1,int pageSize = 10,string status="")
+        public async Task<IActionResult> GetAllWithPagination(int page = 1, int pageSize = 10, string status = "")
         {
-            var orders = await orderService.GetAllFilterdOrders(page,pageSize,status);
-            
+            var orders = await orderService.GetAllFilterdOrders(page, pageSize, status);
+
             if (!orders.Any())
                 return NotFound();
 
@@ -40,10 +41,10 @@ namespace ShippingSystem.PL.Controllers
         [HttpGet("OrdersCount")]
         public async Task<IActionResult> GetOrdersCount(int merchantId = 0)
         {
-            if(merchantId == 0)
+            if (merchantId == 0)
             {
                 var orderCounts = await orderService.GetOrderCountsAsync();
-                
+
                 if (!orderCounts.Any())
                     return NotFound();
 
@@ -58,12 +59,21 @@ namespace ShippingSystem.PL.Controllers
 
                 return Ok(orderCounts);
             }
-                
+
         }
         [HttpPost]
         public async Task<IActionResult> AddOrder(OrderCreateDTO orderCreateDto)
         {
             var order = await orderService.CreateOrder(orderCreateDto);
+
+            return Ok(order);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteOrder(int id)
+        {
+            var order = await orderService.DeleteOrder(id);
+            if (order == null) return NotFound();
             return Ok(order);
         }
     }
