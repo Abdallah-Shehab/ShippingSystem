@@ -36,8 +36,8 @@ namespace ShippingSystem.DAL.Models
         public Branch Branch { get; set; }
 
 
-        [Required]
-        public string Phone { get; set; }
+        //[Required]
+        //public string Phone { get; set; }
 
         public virtual List<Order>? Orders { get; set; } = new List<Order>();
         [Required]

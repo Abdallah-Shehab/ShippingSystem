@@ -12,7 +12,7 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    [Migration("20240704135710_v1")]
+    [Migration("20240704223620_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -236,7 +236,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "John Doe",
                             NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEMkWvyk8gco7emav7fukH4UV3CMAC5Kjzs8+Gsu6hrts6UtbHIF9t4U1glN1iCvhcg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEGAedw55y1kOrV2LiJqi6l4pmde1uDt73Y0n+9lv5XNKZ+cm5slP7R18+3UVZAU1aQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 1,
@@ -259,7 +259,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Jane Smith",
                             NormalizedEmail = "JANE.SMITH@EXAMPLE.COM",
                             NormalizedUserName = "JANESMITH",
-                            PasswordHash = "AQAAAAIAAYagAAAAEI6/K6Ls1dyUJHl/rlB3YMnYxmKeQpquVY7ko092lGrEqfCtLNDg5+20kLm/khOcgw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDfnNNVeUHWT9f7aaJ9Fw5dQe1zVnwlYFcOfg9RdQqX+38f6mr1gAu9Oi2IcJ/hsfw==",
                             PhoneNumber = "0987654321",
                             PhoneNumberConfirmed = true,
                             RoleID = 2,
@@ -282,7 +282,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Ahmed Salah",
                             NormalizedEmail = "AHMED.SALAH@EXAMPLE.COM",
                             NormalizedUserName = "AHMED",
-                            PasswordHash = "AQAAAAIAAYagAAAAENfUErMfsV7UUlHEaAgZetTOhJqeDwghEDWSTj7yHbEAEHRN5vfHff1O1U/CgHzLKA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEG084AhkFKlIdLVD+CTkZNvSNPJFljC+uM50bucnzAPTkoeYX6PwBlCOEqMRjVW9Sg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 3,
@@ -305,7 +305,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Mona Magdy",
                             NormalizedEmail = "MONA.MAGDY@EXAMPLE.COM",
                             NormalizedUserName = "MONA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDLOhGKMi+OcbqTf8qexuug94iOSVOtzAEuR2lp2ny1XIagIsXlcr7REvuXVL6Ew2Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENlOdxIp69WJjbUUyZ0kxH1sv6MF8lPX1EC/rHANqqy67G9HsaJ240HrtwlYaMCM/A==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 4,
@@ -313,24 +313,6 @@ namespace ShippingSystem.DAL.Migrations
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "mona"
-                        },
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            Address = "123 New Street",
-                            ConcurrencyStamp = "2b85fbc7-255c-4da6-9792-ade89d174171",
-                            Email = "newuser@example.com",
-                            EmailConfirmed = false,
-                            IsDeleted = false,
-                            LockoutEnabled = false,
-                            Name = "New User",
-                            PasswordHash = "AQAAAAIAAYagAAAAEL74fjs16Wyi95vy8JjCUsN2jGfw8N7JCeSHo/ABITWucF+l8kI+haKYoO8/Scw+1w==",
-                            PhoneNumberConfirmed = false,
-                            RoleID = 1,
-                            Status = true,
-                            TwoFactorEnabled = false,
-                            UserName = "newuser"
                         });
                 });
 
@@ -527,7 +509,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "John Doe",
                             NormalizedEmail = "HAMDY.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPU3CJYcaHq+94/e2msAti3UHgsvKo6oOen6/FYIAoLj5fnTQDwligsZyjKwCMHOGg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEeYUGFRxo0iaR3z4r/i32WjJFt+RVSED3oxxOjya3QbpfM3m3jr7NBK7GFKag4Mfg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 3,
@@ -764,10 +746,6 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -824,8 +802,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "John Doe",
                             NormalizedEmail = "MARIEM.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEO2iy1xMS07sB47lP+czv95WQ9MVuZNojK5spOUD2yJ0c9DZ3om/gEwDZNTNShvYIQ==",
-                            Phone = "1234567890",
+                            PasswordHash = "AQAAAAIAAYagAAAAEInBR484oUk3CxCmYtJNkTEKUTLgx0J/gCNRdsb3scLx8BR+OVi+rtOtW9q/kcSPEA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Pickup_Price = 10.0m,
