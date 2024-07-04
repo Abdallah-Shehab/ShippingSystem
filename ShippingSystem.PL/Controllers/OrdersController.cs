@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShippingSysem.BLL.DTOs.OrderDTOs;
+using ShippingSysem.BLL.Enums;
 using ShippingSysem.BLL.Services;
+using ShippingSystem.DAL.Models;
 
 namespace ShippingSystem.PL.Controllers
 {
@@ -17,18 +19,17 @@ namespace ShippingSystem.PL.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll(string status = "")
-        {
+        public async Task<ActionResult<List<OrederReadDTO>>> GetAll(string status = "") {
             var orders = await orderService.GetAllFilterdOrders(status);
 
-            //if (!orders.Any())
-            //    return NotFound();
+            if (!orders.Any())
+               return NotFound();
 
             return Ok(orders);
         }
 
         [HttpGet("AllWithPagination")]
-        public async Task<IActionResult> GetAllWithPagination(int page = 1, int pageSize = 10, string status = "")
+        public async Task<ActionResult<List<OrederReadDTO>>> GetAllWithPagination(int page = 1,int pageSize = 10,string status="")
         {
             var orders = await orderService.GetAllFilterdOrders(page, pageSize, status);
 
@@ -39,28 +40,28 @@ namespace ShippingSystem.PL.Controllers
         }
 
         [HttpGet("OrdersCount")]
-        public async Task<IActionResult> GetOrdersCount(int merchantId = 0)
+        public async Task<ActionResult<List<OrderCount>>> GetOrdersCount(int merchantId = 0)
         {
-            if (merchantId == 0)
-            {
-                var orderCounts = await orderService.GetOrderCountsAsync();
-
-                if (!orderCounts.Any())
-                    return NotFound();
-
-                return Ok(orderCounts);
-            }
-            else
-            {
                 var orderCounts = await orderService.GetOrderCountsAsync(merchantId);
 
                 if (!orderCounts.Any())
                     return NotFound();
 
                 return Ok(orderCounts);
-            }
-
         }
+
+        [HttpGet("AllOrdersForMerchant")]
+        public async Task<ActionResult<List<OrederReadDTO>>> GetAllForMerchant(string status="",int MerchantId = 0)
+        {
+            var orders = await orderService.GetAllOrdersForMerchant(status, MerchantId);
+
+            if (!orders.Any())
+                return NotFound();
+
+            return Ok(orders);
+        }
+
+        
         [HttpPost]
         public async Task<IActionResult> AddOrder(OrderCreateDTO orderCreateDto)
         {
@@ -75,6 +76,13 @@ namespace ShippingSystem.PL.Controllers
             var order = await orderService.DeleteOrder(id);
             if (order == null) return NotFound();
             return Ok(order);
+        }
+
+        [HttpGet("OrderStatuses")]
+        public ActionResult<IEnumerable<string>> GetOrderStatuses()
+        {
+            var statuses = Enum.GetNames(typeof(OrderStatus)).ToList();
+            return Ok(statuses);
         }
     }
 }

@@ -68,6 +68,18 @@ namespace ShippingSystem.DAL.Repositories
                                         );
         }
 
+        //Get all orders for merchant member fitler with status
+        public async Task<IQueryable<Order>> GetAllOrdersForMerchant(string status ,int merchantId)
+        {
+            if (merchantId == 0)
+                return await GetAllFilterdOrdersAsync(status);
+
+            if (string.IsNullOrEmpty(status))
+                return await Task.FromResult(GetOrders(order => order.MerchantID == merchantId));
+
+            return await Task.FromResult(GetOrders(order => order.Status == status && order.MerchantID == merchantId));
+        }
+
         //Get Count For all orders for specific mrechant account depending on Status 
         public async Task<IQueryable<OrderCount>> GetOrderCountsAsync(int merchantId)
         {

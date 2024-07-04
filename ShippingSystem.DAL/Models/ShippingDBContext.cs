@@ -27,7 +27,6 @@ namespace ShippingSystem.DAL.Models
         public DbSet<MerchantAccount> MerchantAccounts { get; set; }
         public DbSet<DeliveryAccount> DeliveryAccounts { get; set; }
 
-
         public ShippingDBContext(DbContextOptions<ShippingDBContext> options) : base(options)
         {
         }
