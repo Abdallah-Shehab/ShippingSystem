@@ -51,6 +51,8 @@ namespace ShippingSystem.DAL.Models
         [Required]
         public decimal Refund_Percentage { get; set; }
 
+     public virtual  List<SpecialOffer>? SpecialOffer { get; set; }
+
 
     }
 }

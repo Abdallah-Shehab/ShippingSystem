@@ -4,6 +4,7 @@ using ShippingSystem.DAL.Repositories.Base;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace ShippingSystem.BLL.Services
 {
@@ -46,6 +47,11 @@ namespace ShippingSystem.BLL.Services
         {
             var specialOffers = await _specialOfferRepository.GetAllWithFilter(so => so.MerchantId == merchantId);
             return specialOffers.ToList();
+        }
+        public async Task<SpecialOffer> GetSpecialOfferByMerchantIdAsync(int merchantId)
+        {
+            var specialOffers = await _specialOfferRepository.GetAllWithFilter(so => so.MerchantId == merchantId);
+            return  specialOffers.FirstOrDefault();
         }
     }
 }

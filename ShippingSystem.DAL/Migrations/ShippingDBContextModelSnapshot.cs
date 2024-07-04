@@ -838,7 +838,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<decimal?>("DeliveryPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("DeliveryTypeId")
+                    b.Property<int>("DeliveryTypeID")
                         .HasColumnType("int");
 
                     b.Property<DateOnly?>("DeliverydDate")
@@ -853,7 +853,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("MerchantID")
+                    b.Property<int>("MerchantID")
                         .HasColumnType("int");
 
                     b.Property<string>("Notes")
@@ -901,7 +901,7 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasIndex("DeliveryID");
 
-                    b.HasIndex("DeliveryTypeId");
+                    b.HasIndex("DeliveryTypeID");
 
                     b.HasIndex("GovernmentId");
 
@@ -922,8 +922,10 @@ namespace ShippingSystem.DAL.Migrations
                             ClientName = "John Doe",
                             CreatedDate = new DateOnly(2024, 7, 4),
                             DeliveryPrice = 10.00m,
+                            DeliveryTypeID = 1,
                             Email = "john.doe@example.com",
                             IsDeleted = false,
+                            MerchantID = 1,
                             Notes = "Handle with care",
                             PaiedMoney = 40.00m,
                             PhoneOne = "1234567890",
@@ -1293,6 +1295,8 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("MerchantId");
+
                     b.ToTable("SpecialOffer");
                 });
 
@@ -1433,9 +1437,11 @@ namespace ShippingSystem.DAL.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("DeliveryID");
 
-                    b.HasOne("ShippingSystem.DAL.Models.DeliveryType", null)
+                    b.HasOne("ShippingSystem.DAL.Models.DeliveryType", "deliveryType")
                         .WithMany("Orders")
-                        .HasForeignKey("DeliveryTypeId");
+                        .HasForeignKey("DeliveryTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ShippingSystem.DAL.Models.Government", "government")
                         .WithMany()
@@ -1443,7 +1449,9 @@ namespace ShippingSystem.DAL.Migrations
 
                     b.HasOne("ShippingSystem.DAL.Models.MerchantAccount", "MerchantAccount")
                         .WithMany("Orders")
-                        .HasForeignKey("MerchantID");
+                        .HasForeignKey("MerchantID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ShippingSystem.DAL.Models.PaymentType", "paymentType")
                         .WithMany("orders")
@@ -1466,6 +1474,8 @@ namespace ShippingSystem.DAL.Migrations
                     b.Navigation("StaffMemberAccount");
 
                     b.Navigation("city");
+
+                    b.Navigation("deliveryType");
 
                     b.Navigation("government");
 
@@ -1502,6 +1512,17 @@ namespace ShippingSystem.DAL.Migrations
                     b.Navigation("order");
                 });
 
+            modelBuilder.Entity("ShippingSystem.DAL.Models.SpecialOffer", b =>
+                {
+                    b.HasOne("ShippingSystem.DAL.Models.MerchantAccount", "MerchantAccount")
+                        .WithMany("SpecialOffer")
+                        .HasForeignKey("MerchantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MerchantAccount");
+                });
+
             modelBuilder.Entity("ShippingSystem.DAL.Models.Account", b =>
                 {
                     b.Navigation("Orders");
@@ -1535,6 +1556,8 @@ namespace ShippingSystem.DAL.Migrations
             modelBuilder.Entity("ShippingSystem.DAL.Models.MerchantAccount", b =>
                 {
                     b.Navigation("Orders");
+
+                    b.Navigation("SpecialOffer");
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.Order", b =>

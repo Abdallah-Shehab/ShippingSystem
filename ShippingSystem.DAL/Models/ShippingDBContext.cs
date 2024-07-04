@@ -41,8 +41,9 @@ namespace ShippingSystem.DAL.Models
 
 		protected override void OnModelCreating(ModelBuilder builder)
 		{
-
-			builder.Entity<Government>().HasData(
+            // Seed initial account
+            var hasher = new PasswordHasher<Account>();
+            builder.Entity<Government>().HasData(
 			  new Government { Id = 1, Name = "Government1" },
 			  new Government { Id = 2, Name = "Government2" }
 		  );
@@ -90,8 +91,39 @@ namespace ShippingSystem.DAL.Models
 			 new DeliveryType { Id = 1, Name = "التسليم في الفرع", Price = 5.99m },
 			 new DeliveryType { Id = 2, Name = "التسليم من التاجر", Price = 12.99m }
 		 ));
+            builder.Entity<MerchantAccount>().HasData(
+               new MerchantAccount
+               {
+                   Id = 1,
+                   Name = "John Doe",
+                   Address = "123 Main St",
+                   Status = true,
+                   RoleID = 2,
+                   BranchID = 1,
+                   IsDeleted = false,
+                   UserName = "johndoe",
+                   NormalizedUserName = "JOHNDOE",
+                   Email = "mariem.doe@example.com",
+                   NormalizedEmail = "MARIEM.DOE@EXAMPLE.COM",
+                   EmailConfirmed = true,
+                   PasswordHash = hasher.HashPassword(null, "passssword"),
+                   SecurityStamp = "HBLASJQKDKDKS",
+                   ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
+                   PhoneNumber = "1234567890",
+                   PhoneNumberConfirmed = true,
+                   TwoFactorEnabled = false,
+                   LockoutEnd = null,
+                   LockoutEnabled = true,
+                   AccessFailedCount = 0,
+                   Phone = "1234567890", // Required property
+                   StoreName = "Store A",
+                   Government = "Government A",
+                   City = "City A",
+                   Pickup_Price = 10.0m,
+                   Refund_Percentage = 0.1m
+               });
 
-			builder.Entity<Order>(entity => entity.HasData(
+            builder.Entity<Order>(entity => entity.HasData(
 				new Order
 				{
 					Id = 1,
@@ -110,11 +142,11 @@ namespace ShippingSystem.DAL.Models
 					DeliverydDate = null,
 					StreetAndVillage = "123 Main St",
 					StaffMemberID = null,
-					MerchantID = null,
+					MerchantID = 1,
 					DeliveryID = null,
 					ShippingTypeID = null,
 					PaymentTypeID = null,
-					//DeliveryTypeID = 1,
+					DeliveryTypeID = 1,
 					GovernmentId = null,
 					CitytId = null
 				}

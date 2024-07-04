@@ -113,7 +113,7 @@ namespace ShippingSysem.BLL.Services
             return await genRepo.GetByIdAsync(id);
         }
 
-
+       
 
 
 
@@ -151,6 +151,28 @@ namespace ShippingSysem.BLL.Services
             {
                 return false;
             }
+        }
+        //==========================
+        // Method to get if Merchant have Special Package Or Not
+        public async Task<bool> ifMerchantHavePackage(int id)
+        {
+            MerchantAccount merchant = await genRepo.GetByIdAsync(id);
+            if (merchant.SpecialOffer  == null)
+            {
+
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
+        public async Task<decimal> getRefoundToMerchant(int id)
+        {
+            MerchantAccount merchant = await genRepo.GetByIdAsync(id);
+            return merchant.Refund_Percentage;
         }
 
     }

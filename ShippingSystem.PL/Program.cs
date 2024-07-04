@@ -87,7 +87,7 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<IGenericRepository<DeliveryAccount>, GenericRepository<DeliveryAccount>>();
             //Delivery Merchant
             builder.Services.AddScoped<IGenericRepository<MerchantAccount>, GenericRepository<MerchantAccount>>();
-            builder.Services.AddScoped<MerchantService>();
+            
             builder.Services.AddScoped(typeof(GenericRepository<>));
 
             //Merchant Accounts
