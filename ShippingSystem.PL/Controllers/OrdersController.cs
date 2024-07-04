@@ -84,7 +84,7 @@ namespace ShippingSystem.PL.Controllers
         [HttpGet("OrderStatuses")]
         public ActionResult<IEnumerable<string>> GetOrderStatuses()
         {
-            var statuses = Enum.GetNames(typeof(OrderStatus)).Select(e => new { name = e }).ToList();
+            var statuses = Enum.GetNames(typeof(OrderStatus)).ToList();
             return Ok(statuses);
         }
 

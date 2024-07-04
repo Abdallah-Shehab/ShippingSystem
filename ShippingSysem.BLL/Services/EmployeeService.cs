@@ -1,4 +1,5 @@
 ﻿
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ShippingSysem.BLL.DTOs.Create;
@@ -66,7 +67,7 @@ namespace ShippingSysem.BLL.Services
         {
             var accounts = await genRepo.GetAllAsync();
 
-            var dtos = accounts.Where(e => e.Role.Name == "Employee")
+            var dtos = accounts.Where(e => e.Role.Name != "Merchant" || e.Role.Name != "Delivery")
                 .Select(acc =>
                 new ReadEmployeeDTO
                 {
@@ -100,6 +101,7 @@ namespace ShippingSysem.BLL.Services
                     address = acc.Address,
                     BranchName = acc.Branch?.Name,
                     branchId = acc.BranchID,
+                    password = acc.PasswordHash,
                     roleId = acc.RoleID,
                     email = acc.Email,
                     phone = acc.PhoneNumber,
@@ -134,8 +136,24 @@ namespace ShippingSysem.BLL.Services
             acc.Email = empDto.email;
 
 
-            // Assuming the password is hashed before storing
-            acc.PasswordHash = empDto.password;
+
+
+            if (empDto.password != acc.PasswordHash)
+            {
+                var removePasswordResult = await userManager.RemovePasswordAsync(acc);
+                if (!removePasswordResult.Succeeded)
+                {
+                    return null;
+                }
+
+                // Add the new password
+                var addPasswordResult = await userManager.AddPasswordAsync(acc, empDto.password);
+                if (!addPasswordResult.Succeeded)
+                {
+                    return null;
+                }
+            }
+
 
             await genRepo.SaveAsync();
             return acc;
