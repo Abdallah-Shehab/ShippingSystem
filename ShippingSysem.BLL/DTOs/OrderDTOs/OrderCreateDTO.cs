@@ -11,7 +11,7 @@ namespace ShippingSysem.BLL.DTOs.OrderDTOs
     public class OrderCreateDTO
     {
         public string ClientName { get; set; }//1
-        public string Status { get; set; }//2
+        public string Status { get; set; } = "Created";//2
         public decimal TotalPrice { get; set; }//3
         public decimal TotalWeight { get; set; }//4
         public  string PhoneOne { get; set; }//5

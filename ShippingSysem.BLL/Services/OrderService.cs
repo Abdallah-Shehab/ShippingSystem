@@ -232,9 +232,11 @@ namespace ShippingSysem.BLL.Services
 
 
             // calculate = shippingTypePrice  + DeliveryType + TotalPriceOFProduct -  Refound For the merchant + DeliveryPrice Or SpecialPakage +
-            decimal totalPayment = priceOfShippingType  + _orderCreateDto.TotalPrice - refoundOFmerchant + IncreaseIFweightMoreThan10+ SpecialpakageOfMerchant; 
-            
+            decimal totalPayment = priceOfShippingType  + _orderCreateDto.TotalPrice - refoundOFmerchant + IncreaseIFweightMoreThan10+ SpecialpakageOfMerchant;
 
+            order.DeliveryPrice = priceOfDeliveryType + priceOfDeliveryType;
+            order.PaiedMoney = totalPayment;
+            repository.Update(order);
             return new OrederReadDTO()
             {
                 TotalWeight = order.TotalWeight,

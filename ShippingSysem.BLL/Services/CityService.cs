@@ -100,7 +100,8 @@ namespace ShippingSysem.BLL.Services
                     NormalShippingCost = x.NormalShippingCost,
                     PickupShippingCost = x.PickupShippingCost,
                     Name = x.Name,
-                    Status = x.Status
+                    Status = x.Status,
+                       Id=x.Id
 
                 }).ToListAsync();
         }
