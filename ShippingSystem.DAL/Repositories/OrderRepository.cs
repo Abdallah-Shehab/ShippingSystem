@@ -14,7 +14,7 @@ namespace ShippingSystem.DAL.Repositories
     public class OrderRepository : GenericRepository<Order>, IOrderRepository
     {
         private readonly ShippingDBContext context;
-        public OrderRepository(ShippingDBContext context):base(context)
+        public OrderRepository(ShippingDBContext context) : base(context)
         {
             this.context = context;
         }
@@ -25,12 +25,12 @@ namespace ShippingSystem.DAL.Repositories
         {
             if (string.IsNullOrEmpty(status))
                 return await Task.FromResult(
-                                            GetOrders(order=> order.IsDeleted == false)
+                                            GetOrders(order => order.IsDeleted == false)
                                             );
 
 
             return await Task.FromResult(
-                                        GetOrders(order=> order.IsDeleted == false && order.Status == status)
+                                        GetOrders(order => order.IsDeleted == false && order.Status == status)
                                         );
         }
 
@@ -40,7 +40,7 @@ namespace ShippingSystem.DAL.Repositories
         {
             if (string.IsNullOrEmpty(Status))
                 return await Task.FromResult(
-                                            GetOrders(order=>order.IsDeleted == false)
+                                            GetOrders(order => order.IsDeleted == false)
                                             .Skip((page - 1) * pageSize)
                                             .Take(pageSize)
                                             );
@@ -58,6 +58,7 @@ namespace ShippingSystem.DAL.Repositories
         {
             return await Task.FromResult(
                                         context.Orders
+                                                .Where(order => order.IsDeleted == false)
                                                .GroupBy(order => order.Status)
                                                .Select(order => new OrderCount
                                                {
@@ -68,17 +69,29 @@ namespace ShippingSystem.DAL.Repositories
                                         );
         }
 
+        //Get all orders for merchant member fitler with status
+        public async Task<IQueryable<Order>> GetAllOrdersForMerchant(string status, int merchantId)
+        {
+            if (merchantId == 0)
+                return await GetAllFilterdOrdersAsync(status);
+
+            if (string.IsNullOrEmpty(status))
+                return await Task.FromResult(GetOrders(order => order.MerchantID == merchantId && order.IsDeleted == false));
+
+            return await Task.FromResult(GetOrders(order => order.Status == status && order.MerchantID == merchantId && order.IsDeleted == false));
+        }
+
         //Get Count For all orders for specific mrechant account depending on Status 
         public async Task<IQueryable<OrderCount>> GetOrderCountsAsync(int merchantId)
         {
             return await Task.FromResult(
                                         context.Orders
-                                               .Where(order=> order.MerchantID == merchantId)
+                                               .Where(order => order.MerchantID == merchantId && order.IsDeleted == false)
                                                .GroupBy(order => order.Status)
                                                .Select(order => new OrderCount
                                                {
-                                                    Status = order.Key,
-                                                    Count = order.Count()
+                                                   Status = order.Key,
+                                                   Count = order.Count()
                                                })
                                                .AsNoTracking()
                                         );

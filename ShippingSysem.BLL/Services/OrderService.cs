@@ -41,6 +41,14 @@ namespace ShippingSysem.BLL.Services
             return await MappingorderDTOs(orders);
         }
 
+        //Mapping the orders return from database using status as filteration
+        public async Task<List<OrederReadDTO>> GetAllOrdersForMerchant(string status = "", int merchantId = 0)
+        {
+            var orders = await repository.GetAllOrdersForMerchant(status, merchantId);
+
+            return await MappingorderDTOs(orders);
+        }
+
         //Mpping The Orders return from The Database with Pagination and using Status as filteration
         public async Task<List<OrederReadDTO>> GetAllFilterdOrders(int page, int pageSize, string status = "")
         {
@@ -61,6 +69,18 @@ namespace ShippingSysem.BLL.Services
         {
             var Orders = await repository.GetOrderCountsAsync(merchantId);
             return await Orders.ToListAsync();
+        }
+
+        public async Task<bool> UpdateOrderStatus(int id, string status)
+        {
+            var order = await repository.GetByIdAsync(id);
+            if (order != null)
+            {
+                order.Status = status;
+                await repository.SaveAsync();
+                return true;
+            }
+            return false;
         }
 
         public async Task<OrederReadDTO> DeleteOrder(int id)
@@ -91,7 +111,7 @@ namespace ShippingSysem.BLL.Services
                 Email = o.Email,
                 Notes = o.Notes,
                 StreetAndVillage = o.StreetAndVillage,
-                StaffMemberName = o.StaffMemberAccount.Name,
+                StaffMemberName = o.StaffMemberAccount.Name ?? "",
                 MerchantName = o.MerchantAccount.Name,
                 DeliveryName = o.DeliveryAccount.Name,
                 CreatedDate = o.CreatedDate,

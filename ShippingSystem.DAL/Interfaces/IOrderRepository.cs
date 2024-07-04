@@ -23,5 +23,6 @@ namespace ShippingSystem.DAL.Interfaces
         public Task<IQueryable<Order>> GetAllFilterdOrdersAsync(string Status = "");
         public  Task<IQueryable<OrderCount>> GetOrderCountsAsync();
         public  Task<IQueryable<OrderCount>> GetOrderCountsAsync(int merchantId);
+        public  Task<IQueryable<Order>> GetAllOrdersForMerchant(string status, int merchantId);
     }
 }
