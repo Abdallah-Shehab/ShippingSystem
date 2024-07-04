@@ -89,23 +89,6 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SpecialOffer",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
-                    Government = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DeliveryPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    MerchantId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SpecialOffer", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -417,6 +400,29 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SpecialOffer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Government = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DeliveryPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    MerchantId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SpecialOffer", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SpecialOffer_MerchantAccounts_MerchantId",
+                        column: x => x.MerchantId,
+                        principalTable: "MerchantAccounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Orders",
                 columns: table => new
                 {
@@ -438,13 +444,13 @@ namespace ShippingSystem.DAL.Migrations
                     DeliverydDate = table.Column<DateOnly>(type: "date", nullable: true),
                     StreetAndVillage = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StaffMemberID = table.Column<int>(type: "int", nullable: true),
-                    MerchantID = table.Column<int>(type: "int", nullable: true),
+                    MerchantID = table.Column<int>(type: "int", nullable: false),
                     DeliveryID = table.Column<int>(type: "int", nullable: true),
                     ShippingTypeID = table.Column<int>(type: "int", nullable: true),
                     PaymentTypeID = table.Column<int>(type: "int", nullable: true),
+                    DeliveryTypeID = table.Column<int>(type: "int", nullable: false),
                     GovernmentId = table.Column<int>(type: "int", nullable: true),
-                    CitytId = table.Column<int>(type: "int", nullable: true),
-                    DeliveryTypeId = table.Column<int>(type: "int", nullable: true)
+                    CitytId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -465,10 +471,11 @@ namespace ShippingSystem.DAL.Migrations
                         principalTable: "DeliveryAccounts",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Orders_DeliveryType_DeliveryTypeId",
-                        column: x => x.DeliveryTypeId,
+                        name: "FK_Orders_DeliveryType_DeliveryTypeID",
+                        column: x => x.DeliveryTypeID,
                         principalTable: "DeliveryType",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Orders_Governments_GovernmentId",
                         column: x => x.GovernmentId,
@@ -478,7 +485,8 @@ namespace ShippingSystem.DAL.Migrations
                         name: "FK_Orders_MerchantAccounts_MerchantID",
                         column: x => x.MerchantID,
                         principalTable: "MerchantAccounts",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Orders_PaymentTypes_PaymentTypeID",
                         column: x => x.PaymentTypeID,
@@ -519,10 +527,10 @@ namespace ShippingSystem.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "IsDeleted", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, null, new DateOnly(2024, 7, 3), false, "Employee", null },
-                    { 2, null, new DateOnly(2024, 7, 3), false, "Merchant", null },
-                    { 3, null, new DateOnly(2024, 7, 3), false, "Delivery", null },
-                    { 4, null, new DateOnly(2024, 7, 3), false, "Admin", null }
+                    { 1, null, new DateOnly(2024, 7, 4), false, "Employee", null },
+                    { 2, null, new DateOnly(2024, 7, 4), false, "Merchant", null },
+                    { 3, null, new DateOnly(2024, 7, 4), false, "Delivery", null },
+                    { 4, null, new DateOnly(2024, 7, 4), false, "Admin", null }
                 });
 
             migrationBuilder.InsertData(
@@ -561,11 +569,6 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Orders",
-                columns: new[] { "Id", "CitytId", "ClientName", "CreatedDate", "DeliveryID", "DeliveryPrice", "DeliveryTypeId", "DeliverydDate", "Email", "GovernmentId", "IsDeleted", "MerchantID", "Notes", "PaiedMoney", "PaymentTypeID", "PhoneOne", "PhoneTwo", "ReceivedMoney", "ShippingTypeID", "StaffMemberID", "Status", "StreetAndVillage", "TotalPrice", "TotalWeight" },
-                values: new object[] { 1, null, "John Doe", new DateOnly(2024, 7, 3), null, 10.00m, null, null, "john.doe@example.com", null, false, null, "Handle with care", 40.00m, null, "1234567890", "0987654321", 50.00m, null, null, "Pending", "123 Main St", 100.00m, 5.00m });
-
-            migrationBuilder.InsertData(
                 table: "PaymentTypes",
                 columns: new[] { "Id", "IsDeleted", "Name" },
                 values: new object[,]
@@ -587,15 +590,15 @@ namespace ShippingSystem.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "123 New Street", null, "2775d5e3-a1a8-4dff-a3d2-2d72fd1cd336", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEPzCmjwnCV5MmYOEILpwCMj14f79gFBKJjHKg8OY+xutiDraNIx+HTiH81AqbHkjoA==", null, false, 1, null, true, false, "newuser" });
+                values: new object[] { 1, 0, "123 New Street", null, "2b85fbc7-255c-4da6-9792-ade89d174171", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEL74fjs16Wyi95vy8JjCUsN2jGfw8N7JCeSHo/ABITWucF+l8kI+haKYoO8/Scw+1w==", null, false, 1, null, true, false, "newuser" });
 
             migrationBuilder.InsertData(
                 table: "Branches",
                 columns: new[] { "Id", "CreatedDate", "GovernmentID", "IsDeleted", "Name", "Status" },
                 values: new object[,]
                 {
-                    { 1, new DateOnly(2024, 7, 3), 1, false, "Branch1", true },
-                    { 2, new DateOnly(2024, 7, 3), 2, false, "Branch2", true }
+                    { 1, new DateOnly(2024, 7, 4), 1, false, "Branch1", true },
+                    { 2, new DateOnly(2024, 7, 4), 2, false, "Branch2", true }
                 });
 
             migrationBuilder.InsertData(
@@ -620,11 +623,26 @@ namespace ShippingSystem.DAL.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 2, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "john.doe@example.com", true, false, true, null, "John Doe", "JOHN.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEOLN0qtJi4n7QzXGHPD05WvNUhsTTIBA79umuJJyQcmmhm3wyiwMnmLbDnP9tATH1w==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "johndoe" },
-                    { 3, 0, "456 Oak St", 2, "87654321-dcba-4321-hgfe-0987654321ba", "jane.smith@example.com", true, false, true, null, "Jane Smith", "JANE.SMITH@EXAMPLE.COM", "JANESMITH", "AQAAAAIAAYagAAAAECjLNua9yiXvMVyXP+041aMJ58AcGfx4hpQsjQwE2hwqF2vaoE1zohGqxZ2MGkorWg==", "0987654321", true, 2, "HJSDKFHSDFHSD", true, false, "janesmith" },
-                    { 4, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "ahmed.salah@example.com", true, false, true, null, "Ahmed Salah", "AHMED.SALAH@EXAMPLE.COM", "AHMED", "AQAAAAIAAYagAAAAEEKP7C44QfG6ELTPiwtZoQGQjSK/oGy3JqXN/UKhXIal4zoQauYx/xuLk28Qpn/xWg==", "1234567890", true, 3, "HBLASJQKDKDKS", true, false, "ahmed" },
-                    { 5, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "mona.magdy@example.com", true, false, true, null, "Mona Magdy", "MONA.MAGDY@EXAMPLE.COM", "MONA", "AQAAAAIAAYagAAAAELjgwpTdHhN2463IWk5UGv8BcJye+m344P+w2sCRkGRkRg7cjcP1xHcgOmK5jrsD7Q==", "1234567890", true, 4, "HBLASJQKDKDKS", true, false, "mona" }
+                    { 2, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "john.doe@example.com", true, false, true, null, "John Doe", "JOHN.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEMkWvyk8gco7emav7fukH4UV3CMAC5Kjzs8+Gsu6hrts6UtbHIF9t4U1glN1iCvhcg==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "johndoe" },
+                    { 3, 0, "456 Oak St", 2, "87654321-dcba-4321-hgfe-0987654321ba", "jane.smith@example.com", true, false, true, null, "Jane Smith", "JANE.SMITH@EXAMPLE.COM", "JANESMITH", "AQAAAAIAAYagAAAAEI6/K6Ls1dyUJHl/rlB3YMnYxmKeQpquVY7ko092lGrEqfCtLNDg5+20kLm/khOcgw==", "0987654321", true, 2, "HJSDKFHSDFHSD", true, false, "janesmith" },
+                    { 4, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "ahmed.salah@example.com", true, false, true, null, "Ahmed Salah", "AHMED.SALAH@EXAMPLE.COM", "AHMED", "AQAAAAIAAYagAAAAENfUErMfsV7UUlHEaAgZetTOhJqeDwghEDWSTj7yHbEAEHRN5vfHff1O1U/CgHzLKA==", "1234567890", true, 3, "HBLASJQKDKDKS", true, false, "ahmed" },
+                    { 5, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "mona.magdy@example.com", true, false, true, null, "Mona Magdy", "MONA.MAGDY@EXAMPLE.COM", "MONA", "AQAAAAIAAYagAAAAEDLOhGKMi+OcbqTf8qexuug94iOSVOtzAEuR2lp2ny1XIagIsXlcr7REvuXVL6Ew2Q==", "1234567890", true, 4, "HBLASJQKDKDKS", true, false, "mona" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "DeliveryAccounts",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "Company_Percantage", "ConcurrencyStamp", "Discount_type", "Email", "EmailConfirmed", "Governments", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
+                values: new object[] { 1, 0, "123 Main St", 1, 0m, "12345678-abcd-1234-efgh-1234567890ab", 0m, "hamdy.doe@example.com", true, null, false, true, null, "John Doe", "HAMDY.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEPU3CJYcaHq+94/e2msAti3UHgsvKo6oOen6/FYIAoLj5fnTQDwligsZyjKwCMHOGg==", "1234567890", true, 3, "HBLASJQKDKDKS", true, false, "johndoe" });
+
+            migrationBuilder.InsertData(
+                table: "MerchantAccounts",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "Government", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "Phone", "PhoneNumber", "PhoneNumberConfirmed", "Pickup_Price", "Refund_Percentage", "RoleID", "SecurityStamp", "Status", "StoreName", "TwoFactorEnabled", "UserName" },
+                values: new object[] { 1, 0, "123 Main St", 1, "City A", "12345678-abcd-1234-efgh-1234567890ab", "mariem.doe@example.com", true, "Government A", false, true, null, "John Doe", "MARIEM.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEO2iy1xMS07sB47lP+czv95WQ9MVuZNojK5spOUD2yJ0c9DZ3om/gEwDZNTNShvYIQ==", "1234567890", "1234567890", true, 10.0m, 0.1m, 2, "HBLASJQKDKDKS", true, "Store A", false, "johndoe" });
+
+            migrationBuilder.InsertData(
+                table: "Orders",
+                columns: new[] { "Id", "CitytId", "ClientName", "CreatedDate", "DeliveryID", "DeliveryPrice", "DeliveryTypeID", "DeliverydDate", "Email", "GovernmentId", "IsDeleted", "MerchantID", "Notes", "PaiedMoney", "PaymentTypeID", "PhoneOne", "PhoneTwo", "ReceivedMoney", "ShippingTypeID", "StaffMemberID", "Status", "StreetAndVillage", "TotalPrice", "TotalWeight" },
+                values: new object[] { 1, null, "John Doe", new DateOnly(2024, 7, 4), null, 10.00m, 1, null, "john.doe@example.com", null, false, 1, "Handle with care", 40.00m, null, "1234567890", "0987654321", 50.00m, null, null, "Pending", "123 Main St", 100.00m, 5.00m });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -721,9 +739,9 @@ namespace ShippingSystem.DAL.Migrations
                 column: "DeliveryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_DeliveryTypeId",
+                name: "IX_Orders_DeliveryTypeID",
                 table: "Orders",
-                column: "DeliveryTypeId");
+                column: "DeliveryTypeID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_GovernmentId",
@@ -764,6 +782,11 @@ namespace ShippingSystem.DAL.Migrations
                 name: "IX_Products_order_Id",
                 table: "Products",
                 column: "order_Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SpecialOffer_MerchantId",
+                table: "SpecialOffer",
+                column: "MerchantId");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserClaims_AspNetUsers_UserId",

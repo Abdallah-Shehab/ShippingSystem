@@ -146,7 +146,7 @@ namespace ShippingSystem.DAL.Models
 					DeliveryID = null,
 					ShippingTypeID = null,
 					PaymentTypeID = null,
-					//DeliveryTypeID = 1,
+					DeliveryTypeID = 1,
 					GovernmentId = null,
 					CitytId = null
 				}
