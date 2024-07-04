@@ -64,7 +64,7 @@ namespace ShippingSystem.DAL.Models
         public int? StaffMemberID { get; set; }
 
         [ForeignKey("MerchantAccount")]
-        public int? MerchantID { get; set; }
+        public int MerchantID { get; set; }
         [ForeignKey("DeliveryAccount")]
         public int? DeliveryID { get; set; }
 
@@ -72,6 +72,8 @@ namespace ShippingSystem.DAL.Models
         public int? ShippingTypeID { get; set; }
         [ForeignKey("paymentType")]
         public int? PaymentTypeID { get; set; }
+        [ForeignKey("deliveryType")]
+        public int DeliveryTypeID { get; set; }
 
         [ForeignKey("government")]
 
@@ -86,6 +88,7 @@ namespace ShippingSystem.DAL.Models
 
         public ShippingType ShippingType { get; set; }
         public PaymentType paymentType { get; set; }
+        public DeliveryType deliveryType { get; set; }
 
         public Government government { get; set; }
         public City city { get; set; }

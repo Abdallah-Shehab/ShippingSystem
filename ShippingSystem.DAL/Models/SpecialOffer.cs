@@ -21,5 +21,7 @@ namespace ShippingSystem.DAL.Models
         [ForeignKey("MerchantAccount")]
         public int MerchantId { get; set; }
 
+        public virtual MerchantAccount? MerchantAccount { get; set; }
+
     }
 }
