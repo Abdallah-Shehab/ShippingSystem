@@ -568,14 +568,6 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
-<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240704220551_v1.cs
-                table: "Orders",
-                columns: new[] { "Id", "CitytId", "ClientName", "CreatedDate", "DeliveryID", "DeliveryPrice", "DeliveryTypeId", "DeliverydDate", "Email", "GovernmentId", "IsDeleted", "MerchantID", "Notes", "PaiedMoney", "PaymentTypeID", "PhoneOne", "PhoneTwo", "ReceivedMoney", "ShippingTypeID", "StaffMemberID", "Status", "StreetAndVillage", "TotalPrice", "TotalWeight" },
-                values: new object[] { 1, null, "John Doe", new DateOnly(2024, 7, 4), null, 10.00m, null, null, "john.doe@example.com", null, false, null, "Handle with care", 40.00m, null, "1234567890", "0987654321", 50.00m, null, null, "Pending", "123 Main St", 100.00m, 5.00m });
-
-            migrationBuilder.InsertData(
-========
->>>>>>>> Mariem:ShippingSystem.DAL/Migrations/20240704135710_v1.cs
                 table: "PaymentTypes",
                 columns: new[] { "Id", "IsDeleted", "Name" },
                 values: new object[,]
@@ -595,14 +587,6 @@ namespace ShippingSystem.DAL.Migrations
                 });
 
             migrationBuilder.InsertData(
-<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240704220551_v1.cs
-========
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "123 New Street", null, "2b85fbc7-255c-4da6-9792-ade89d174171", "newuser@example.com", false, false, false, null, "New User", null, null, "AQAAAAIAAYagAAAAEL74fjs16Wyi95vy8JjCUsN2jGfw8N7JCeSHo/ABITWucF+l8kI+haKYoO8/Scw+1w==", null, false, 1, null, true, false, "newuser" });
-
-            migrationBuilder.InsertData(
->>>>>>>> Mariem:ShippingSystem.DAL/Migrations/20240704135710_v1.cs
                 table: "Branches",
                 columns: new[] { "Id", "CreatedDate", "GovernmentID", "IsDeleted", "Name", "Status" },
                 values: new object[,]
@@ -633,42 +617,26 @@ namespace ShippingSystem.DAL.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240704220551_v1.cs
-                    { 2, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "john.doe@example.com", true, false, true, null, "John Doe", "JOHN.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEHR+i6B2o5nr+P2ozXdndFbYB9uEoer0e9AOslIz3/iJqjtoEie4QLXOC2ePqvG8+A==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "johndoe" },
-                    { 3, 0, "456 Oak St", 2, "87654321-dcba-4321-hgfe-0987654321ba", "jane.smith@example.com", true, false, true, null, "Jane Smith", "JANE.SMITH@EXAMPLE.COM", "JANESMITH", "AQAAAAIAAYagAAAAELfpYZ4FlVFTJRFnITtF+VfBgdx3FtRap/QLYO/9uO/cPTt77aX9iQ9zgijUXRSyWA==", "0987654321", true, 2, "HJSDKFHSDFHSD", true, false, "janesmith" },
-                    { 4, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "ahmed.salah@example.com", true, false, true, null, "Ahmed Salah", "AHMED.SALAH@EXAMPLE.COM", "AHMED", "AQAAAAIAAYagAAAAEEk+xGZ4fH27kctrCRPkm2/3v0y8cCQ65ZX5sGktMDKOF/KCMNuO8tKFLk05X1PDKA==", "1234567890", true, 3, "HBLASJQKDKDKS", true, false, "ahmed" },
-                    { 5, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "mona.magdy@example.com", true, false, true, null, "Mona Magdy", "MONA.MAGDY@EXAMPLE.COM", "MONA", "AQAAAAIAAYagAAAAEFFtyUx1s+D9ulB3BC9DDr6G6taEZ2anSXkopm76QskIhhl6TFQRVIfkY48rnvYTqw==", "1234567890", true, 4, "HBLASJQKDKDKS", true, false, "mona" }
-========
-                    { 2, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "john.doe@example.com", true, false, true, null, "John Doe", "JOHN.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEMkWvyk8gco7emav7fukH4UV3CMAC5Kjzs8+Gsu6hrts6UtbHIF9t4U1glN1iCvhcg==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "johndoe" },
-                    { 3, 0, "456 Oak St", 2, "87654321-dcba-4321-hgfe-0987654321ba", "jane.smith@example.com", true, false, true, null, "Jane Smith", "JANE.SMITH@EXAMPLE.COM", "JANESMITH", "AQAAAAIAAYagAAAAEI6/K6Ls1dyUJHl/rlB3YMnYxmKeQpquVY7ko092lGrEqfCtLNDg5+20kLm/khOcgw==", "0987654321", true, 2, "HJSDKFHSDFHSD", true, false, "janesmith" },
-                    { 4, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "ahmed.salah@example.com", true, false, true, null, "Ahmed Salah", "AHMED.SALAH@EXAMPLE.COM", "AHMED", "AQAAAAIAAYagAAAAENfUErMfsV7UUlHEaAgZetTOhJqeDwghEDWSTj7yHbEAEHRN5vfHff1O1U/CgHzLKA==", "1234567890", true, 3, "HBLASJQKDKDKS", true, false, "ahmed" },
-                    { 5, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "mona.magdy@example.com", true, false, true, null, "Mona Magdy", "MONA.MAGDY@EXAMPLE.COM", "MONA", "AQAAAAIAAYagAAAAEDLOhGKMi+OcbqTf8qexuug94iOSVOtzAEuR2lp2ny1XIagIsXlcr7REvuXVL6Ew2Q==", "1234567890", true, 4, "HBLASJQKDKDKS", true, false, "mona" }
->>>>>>>> Mariem:ShippingSystem.DAL/Migrations/20240704135710_v1.cs
+                    { 2, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "john.doe@example.com", true, false, true, null, "John Doe", "JOHN.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEGAedw55y1kOrV2LiJqi6l4pmde1uDt73Y0n+9lv5XNKZ+cm5slP7R18+3UVZAU1aQ==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "johndoe" },
+                    { 3, 0, "456 Oak St", 2, "87654321-dcba-4321-hgfe-0987654321ba", "jane.smith@example.com", true, false, true, null, "Jane Smith", "JANE.SMITH@EXAMPLE.COM", "JANESMITH", "AQAAAAIAAYagAAAAEDfnNNVeUHWT9f7aaJ9Fw5dQe1zVnwlYFcOfg9RdQqX+38f6mr1gAu9Oi2IcJ/hsfw==", "0987654321", true, 2, "HJSDKFHSDFHSD", true, false, "janesmith" },
+                    { 4, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "ahmed.salah@example.com", true, false, true, null, "Ahmed Salah", "AHMED.SALAH@EXAMPLE.COM", "AHMED", "AQAAAAIAAYagAAAAEG084AhkFKlIdLVD+CTkZNvSNPJFljC+uM50bucnzAPTkoeYX6PwBlCOEqMRjVW9Sg==", "1234567890", true, 3, "HBLASJQKDKDKS", true, false, "ahmed" },
+                    { 5, 0, "123 Main St", 1, "12345678-abcd-1234-efgh-1234567890ab", "mona.magdy@example.com", true, false, true, null, "Mona Magdy", "MONA.MAGDY@EXAMPLE.COM", "MONA", "AQAAAAIAAYagAAAAENlOdxIp69WJjbUUyZ0kxH1sv6MF8lPX1EC/rHANqqy67G9HsaJ240HrtwlYaMCM/A==", "1234567890", true, 4, "HBLASJQKDKDKS", true, false, "mona" }
                 });
 
             migrationBuilder.InsertData(
                 table: "DeliveryAccounts",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "Company_Percantage", "ConcurrencyStamp", "Discount_type", "Email", "EmailConfirmed", "Governments", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-<<<<<<<< HEAD:ShippingSystem.DAL/Migrations/20240704220551_v1.cs
-                values: new object[] { 1, 0, "123 Main St", 1, 0m, "12345678-abcd-1234-efgh-1234567890ab", 0m, "hamdy.doe@example.com", true, null, false, true, null, "John Doe", "HAMDY.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEL/6kxMLyDdV/8H5Y840Urdy8z+r33/PesMMRmyvJi7XQ+K778EvHH77zbzLmtgTXQ==", "1234567890", true, 3, "HBLASJQKDKDKS", true, false, "johndoe" });
+                values: new object[] { 1, 0, "123 Main St", 1, 0m, "12345678-abcd-1234-efgh-1234567890ab", 0m, "hamdy.doe@example.com", true, null, false, true, null, "John Doe", "HAMDY.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEEeYUGFRxo0iaR3z4r/i32WjJFt+RVSED3oxxOjya3QbpfM3m3jr7NBK7GFKag4Mfg==", "1234567890", true, 3, "HBLASJQKDKDKS", true, false, "johndoe" });
 
             migrationBuilder.InsertData(
                 table: "MerchantAccounts",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "Government", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "Pickup_Price", "Refund_Percentage", "RoleID", "SecurityStamp", "Status", "StoreName", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "123 Main St", 1, "City A", "12345678-abcd-1234-efgh-1234567890ab", "mariem.doe@example.com", true, "Government A", false, true, null, "John Doe", "MARIEM.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAELuuZQ68MfwdWx7NYIw26ZXZmw+Uc8PUo3sV6SXAptdTRRw0THT3RkrbHbCkn4gQeA==", "1234567890", true, 10.0m, 0.1m, 2, "HBLASJQKDKDKS", true, "Store A", false, "johndoe" });
-========
-                values: new object[] { 1, 0, "123 Main St", 1, 0m, "12345678-abcd-1234-efgh-1234567890ab", 0m, "hamdy.doe@example.com", true, null, false, true, null, "John Doe", "HAMDY.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEPU3CJYcaHq+94/e2msAti3UHgsvKo6oOen6/FYIAoLj5fnTQDwligsZyjKwCMHOGg==", "1234567890", true, 3, "HBLASJQKDKDKS", true, false, "johndoe" });
-
-            migrationBuilder.InsertData(
-                table: "MerchantAccounts",
-                columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "City", "ConcurrencyStamp", "Email", "EmailConfirmed", "Government", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "Phone", "PhoneNumber", "PhoneNumberConfirmed", "Pickup_Price", "Refund_Percentage", "RoleID", "SecurityStamp", "Status", "StoreName", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "123 Main St", 1, "City A", "12345678-abcd-1234-efgh-1234567890ab", "mariem.doe@example.com", true, "Government A", false, true, null, "John Doe", "MARIEM.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEO2iy1xMS07sB47lP+czv95WQ9MVuZNojK5spOUD2yJ0c9DZ3om/gEwDZNTNShvYIQ==", "1234567890", "1234567890", true, 10.0m, 0.1m, 2, "HBLASJQKDKDKS", true, "Store A", false, "johndoe" });
+                values: new object[] { 1, 0, "123 Main St", 1, "City A", "12345678-abcd-1234-efgh-1234567890ab", "mariem.doe@example.com", true, "Government A", false, true, null, "John Doe", "MARIEM.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEInBR484oUk3CxCmYtJNkTEKUTLgx0J/gCNRdsb3scLx8BR+OVi+rtOtW9q/kcSPEA==", "1234567890", true, 10.0m, 0.1m, 2, "HBLASJQKDKDKS", true, "Store A", false, "johndoe" });
 
             migrationBuilder.InsertData(
                 table: "Orders",
                 columns: new[] { "Id", "CitytId", "ClientName", "CreatedDate", "DeliveryID", "DeliveryPrice", "DeliveryTypeID", "DeliverydDate", "Email", "GovernmentId", "IsDeleted", "MerchantID", "Notes", "PaiedMoney", "PaymentTypeID", "PhoneOne", "PhoneTwo", "ReceivedMoney", "ShippingTypeID", "StaffMemberID", "Status", "StreetAndVillage", "TotalPrice", "TotalWeight" },
                 values: new object[] { 1, null, "John Doe", new DateOnly(2024, 7, 4), null, 10.00m, 1, null, "john.doe@example.com", null, false, 1, "Handle with care", 40.00m, null, "1234567890", "0987654321", 50.00m, null, null, "Pending", "123 Main St", 100.00m, 5.00m });
->>>>>>>> Mariem:ShippingSystem.DAL/Migrations/20240704135710_v1.cs
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
