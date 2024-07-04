@@ -159,17 +159,6 @@ namespace ShippingSystem.DAL.Models
 			 ));
 			// Seed initial account
 			var hasher = new PasswordHasher<Account>();
-			var newAccount = new Account
-			{
-				Id = 1,
-				UserName = "newuser",
-				Email = "newuser@example.com",
-				Name = "New User",
-				Address = "123 New Street",
-				Status = true,
-				RoleID = 1,
-				PasswordHash = hasher.HashPassword(null, "password") // Set a default password
-			};
 			builder.Entity<Account>().HasData(
 			   new Account
 			   {
@@ -268,7 +257,6 @@ namespace ShippingSystem.DAL.Models
 				   AccessFailedCount = 0
 			   }
 		   );
-			builder.Entity<Account>().HasData(newAccount);
 
            
 
@@ -296,7 +284,6 @@ namespace ShippingSystem.DAL.Models
                     LockoutEnd = null,
                     LockoutEnabled = true,
                     AccessFailedCount = 0,
-                    Phone = "1234567890", // Required property
                     StoreName = "Store A",
                     Government = "Government A",
                     City = "City A",

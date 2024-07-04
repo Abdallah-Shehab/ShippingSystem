@@ -12,8 +12,8 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    [Migration("20240703155030_v5")]
-    partial class v5
+    [Migration("20240704220551_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -236,7 +236,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "John Doe",
                             NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIrHA5WEpIcV1qs6XIuINp71u4bn7Ezmf6pLTzTgqWdMwCzytY0cPS00sQdpTXYOig==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHR+i6B2o5nr+P2ozXdndFbYB9uEoer0e9AOslIz3/iJqjtoEie4QLXOC2ePqvG8+A==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 1,
@@ -259,7 +259,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Jane Smith",
                             NormalizedEmail = "JANE.SMITH@EXAMPLE.COM",
                             NormalizedUserName = "JANESMITH",
-                            PasswordHash = "AQAAAAIAAYagAAAAEO3gpOUpcSV05pZrfYlScTDqnvrbcHre2byw8ZlhOa7XbrgqHf1oK1rYR8NTco3Ltg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELfpYZ4FlVFTJRFnITtF+VfBgdx3FtRap/QLYO/9uO/cPTt77aX9iQ9zgijUXRSyWA==",
                             PhoneNumber = "0987654321",
                             PhoneNumberConfirmed = true,
                             RoleID = 2,
@@ -282,7 +282,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Ahmed Salah",
                             NormalizedEmail = "AHMED.SALAH@EXAMPLE.COM",
                             NormalizedUserName = "AHMED",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPjXpAvYkHC9SYMHGSuG9zr8D6m4foOKFAWRKPka0PN8x+dbt9zEUtXMSF5xANXPpg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEk+xGZ4fH27kctrCRPkm2/3v0y8cCQ65ZX5sGktMDKOF/KCMNuO8tKFLk05X1PDKA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 3,
@@ -305,7 +305,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Mona Magdy",
                             NormalizedEmail = "MONA.MAGDY@EXAMPLE.COM",
                             NormalizedUserName = "MONA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFMVQgm+M5KKQyG3IDomaMsWGFrSbAIUujbvxnPRwdLQC+3EfoB5jN0IBXi+4XaGGA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEFFtyUx1s+D9ulB3BC9DDr6G6taEZ2anSXkopm76QskIhhl6TFQRVIfkY48rnvYTqw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 4,
@@ -313,24 +313,6 @@ namespace ShippingSystem.DAL.Migrations
                             Status = true,
                             TwoFactorEnabled = false,
                             UserName = "mona"
-                        },
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            Address = "123 New Street",
-                            ConcurrencyStamp = "fa370fd2-c1df-4410-ba9f-2e3bbaed7b2d",
-                            Email = "newuser@example.com",
-                            EmailConfirmed = false,
-                            IsDeleted = false,
-                            LockoutEnabled = false,
-                            Name = "New User",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDkYZHybKfphY8PEvZWACW2eBcfIVzekc30WCGNBBtTEVeLGbwgIQ8qIAC9jpb7STg==",
-                            PhoneNumberConfirmed = false,
-                            RoleID = 1,
-                            Status = true,
-                            TwoFactorEnabled = false,
-                            UserName = "newuser"
                         });
                 });
 
@@ -369,7 +351,7 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateOnly(2024, 7, 3),
+                            CreatedDate = new DateOnly(2024, 7, 4),
                             GovernmentID = 1,
                             IsDeleted = false,
                             Name = "Branch1",
@@ -378,7 +360,7 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateOnly(2024, 7, 3),
+                            CreatedDate = new DateOnly(2024, 7, 4),
                             GovernmentID = 2,
                             IsDeleted = false,
                             Name = "Branch2",
@@ -527,7 +509,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "John Doe",
                             NormalizedEmail = "HAMDY.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEDMAeRmDWiSM/PesQpGarU3gws8+Xo89A+m+LWUAmr+2moInnEvvdHoXnMRccnNgqg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEL/6kxMLyDdV/8H5Y840Urdy8z+r33/PesMMRmyvJi7XQ+K778EvHH77zbzLmtgTXQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 3,
@@ -764,10 +746,6 @@ namespace ShippingSystem.DAL.Migrations
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Phone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
@@ -824,8 +802,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "John Doe",
                             NormalizedEmail = "MARIEM.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHSc9W+M2g1UHg1sffmlfy1tFsyCvMishnNnBKli6pUD+MdS1NCoNVo9Nkachp7Uow==",
-                            Phone = "1234567890",
+                            PasswordHash = "AQAAAAIAAYagAAAAELuuZQ68MfwdWx7NYIw26ZXZmw+Uc8PUo3sV6SXAptdTRRw0THT3RkrbHbCkn4gQeA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             Pickup_Price = 10.0m,
@@ -946,7 +923,7 @@ namespace ShippingSystem.DAL.Migrations
                         {
                             Id = 1,
                             ClientName = "John Doe",
-                            CreatedDate = new DateOnly(2024, 7, 3),
+                            CreatedDate = new DateOnly(2024, 7, 4),
                             DeliveryPrice = 10.00m,
                             Email = "john.doe@example.com",
                             IsDeleted = false,
@@ -1218,28 +1195,28 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateOnly(2024, 7, 3),
+                            CreatedDate = new DateOnly(2024, 7, 4),
                             IsDeleted = false,
                             Name = "Employee"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateOnly(2024, 7, 3),
+                            CreatedDate = new DateOnly(2024, 7, 4),
                             IsDeleted = false,
                             Name = "Merchant"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateOnly(2024, 7, 3),
+                            CreatedDate = new DateOnly(2024, 7, 4),
                             IsDeleted = false,
                             Name = "Delivery"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateOnly(2024, 7, 3),
+                            CreatedDate = new DateOnly(2024, 7, 4),
                             IsDeleted = false,
                             Name = "Admin"
                         });

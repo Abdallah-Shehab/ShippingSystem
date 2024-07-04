@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ShippingSysem.BLL.DTOs.BranchDTOs;
 using ShippingSysem.BLL.Services;
@@ -18,14 +19,15 @@ namespace ShippingSystem.PL.Controllers
 		{
 			this.branchService = branchService;
 		}
-
 		[HttpGet]
+		[Authorize]
 		public async Task<IActionResult> GetBranches()
 		{
 			var branches = await branchService.GetBranches();
 			return Ok(branches);
 		}
 		[HttpGet("{id}")]
+		[Authorize]
 		public async Task<IActionResult> GetBranchByID(int id)
 		{
 			var branch = await branchService.GetBranchByID(id);
@@ -38,17 +40,20 @@ namespace ShippingSystem.PL.Controllers
 		}
 
 		[HttpGet("changeStatus/{id}")]
+		[Authorize]
 		public async Task<IActionResult> ChangeStatus(int id)
 		{
 			return Ok(await branchService.ChangeStatus(id));
 		}
 
 		[HttpDelete("{id}")]
+		[Authorize]
 		public async Task<IActionResult> DeleteBranch(int id)
 		{
 			return Ok(await branchService.DeleteBranch(id));
 		}
 		[HttpPut("{id}")]
+		[Authorize]
 		public async Task<IActionResult> UpdateBranch(int id, CreateBranchDTO branchdto)
 		{
 			var branch = await branchService.UpdateBranch(id, branchdto);
@@ -61,17 +66,20 @@ namespace ShippingSystem.PL.Controllers
 
 		}
 		[HttpPost]
+		[Authorize]
 		public async Task<IActionResult> AddBranch(CreateBranchDTO branchdto)
 		{
 			return Ok(await branchService.AddBranch(branchdto));
 		}
 		[HttpPost("pagination")]
+		[Authorize]
 		public async Task<IActionResult> BranchPagination(int page, int pageSize)
 		{
 			return Ok(branchService.BranchPagination(page, pageSize));
 		}
 
 		[HttpPost("basedOnGovenrment")]
+		[Authorize]
 		public async Task<IActionResult> branchByGovenrment(int id) {
 			var branch = branchService.getBranchByGovernment(id);
 			if (branch != null) {

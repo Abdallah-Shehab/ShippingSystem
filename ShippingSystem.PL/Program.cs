@@ -1,6 +1,8 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using ShippingSysem.BLL.Services;
 using ShippingSysem.BLL.Services.Base;
 using ShippingSystem.BLL.Services;
@@ -9,6 +11,7 @@ using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
 using ShippingSystem.DAL.Repositories;
 using ShippingSystem.DAL.Repositories.Base;
+using System.Text;
 
 namespace ShippingSystem.PL
 {
@@ -160,6 +163,25 @@ namespace ShippingSystem.PL
 
 
 
+			builder.Services.AddAuthentication(option => {
+				//option.DefaultAuthenticateScheme = "mySchema"; 
+				option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+				option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+			}) //.AddJwtBearer("mySchema", op => {
+				.AddJwtBearer(op => {
+					var secrite = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Mohamed Hamdy and Abdallah Shafiq and Hala Mansour and Azza Gamel And Mariem Omran"));
+					op.TokenValidationParameters = new TokenValidationParameters
+					{
+						IssuerSigningKey = secrite,
+						ValidateIssuer = false,
+						ValidateAudience = false,
+						ValidateActor = false,
+						RequireExpirationTime = false,
+						ValidateIssuerSigningKey = false
+
+					};
+				});
 
 
 
@@ -167,8 +189,7 @@ namespace ShippingSystem.PL
 
 
 
-
-            var app = builder.Build();
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

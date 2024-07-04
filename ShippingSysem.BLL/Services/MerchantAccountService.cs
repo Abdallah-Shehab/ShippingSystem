@@ -30,7 +30,7 @@ namespace ShippingSysem.BLL.Services
                 {
                     
                     ID=acc.Id,
-                    Phone=acc.Phone,
+                    Phone=acc.PhoneNumber,
                     Name = acc.Name,
                     email = acc.Email,
                     password = acc.PasswordHash,
@@ -59,7 +59,7 @@ namespace ShippingSysem.BLL.Services
             {
                 var account = new MerchantAccount
                 {
-                    Phone = dto.Phone,
+                    PhoneNumber = dto.Phone,
                     Name = dto.Name,
                     Email = dto.Email,
                     PasswordHash = dto.Password,
@@ -130,7 +130,7 @@ namespace ShippingSysem.BLL.Services
 
                 // Update properties
                 existingAccount.Name = dto.Name;
-                existingAccount.Phone = dto.Phone;
+                existingAccount.PhoneNumber = dto.Phone;
                 existingAccount.Email = dto.Email;
                 existingAccount.PasswordHash = dto.Password;
                 existingAccount.BranchID = dto.BranchId;
