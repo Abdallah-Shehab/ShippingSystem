@@ -9,86 +9,89 @@ using System.Runtime.CompilerServices;
 
 namespace ShippingSystem.PL.Controllers
 {
-	[Route("api/[controller]")]
-	[ApiController]
-	public class BranchController : ControllerBase
-	{
-		private readonly BranchService branchService;
+    [Route("api/[controller]")]
+    [ApiController]
+    public class BranchController : ControllerBase
+    {
+        private readonly BranchService branchService;
 
-		public BranchController(BranchService branchService)
-		{
-			this.branchService = branchService;
-		}
-		[HttpGet]
-		[Authorize]
-		public async Task<IActionResult> GetBranches()
-		{
-			var branches = await branchService.GetBranches();
-			return Ok(branches);
-		}
-		[HttpGet("{id}")]
-		[Authorize]
-		public async Task<IActionResult> GetBranchByID(int id)
-		{
-			var branch = await branchService.GetBranchByID(id);
-			if (branch != null)
-			{
-				return Ok(branch);
-			}
-			else
-				return NotFound();
-		}
+        public BranchController(BranchService branchService)
+        {
+            this.branchService = branchService;
+        }
+        [HttpGet]
 
-		[HttpGet("changeStatus/{id}")]
-		[Authorize]
-		public async Task<IActionResult> ChangeStatus(int id)
-		{
-			return Ok(await branchService.ChangeStatus(id));
-		}
+        public async Task<IActionResult> GetBranches()
+        {
+            var branches = await branchService.GetBranches();
+            return Ok(branches);
+        }
+        [HttpGet("{id}")]
 
-		[HttpDelete("{id}")]
-		[Authorize]
-		public async Task<IActionResult> DeleteBranch(int id)
-		{
-			return Ok(await branchService.DeleteBranch(id));
-		}
-		[HttpPut("{id}")]
-		[Authorize]
-		public async Task<IActionResult> UpdateBranch(int id, CreateBranchDTO branchdto)
-		{
-			var branch = await branchService.UpdateBranch(id, branchdto);
-			if (branch != null)
-			{
-				return Ok(branch);
-			}
-			else
-				return NotFound();
+        public async Task<IActionResult> GetBranchByID(int id)
+        {
+            var branch = await branchService.GetBranchByID(id);
+            if (branch != null)
+            {
+                return Ok(branch);
+            }
+            else
+                return NotFound();
+        }
 
-		}
-		[HttpPost]
-		[Authorize]
-		public async Task<IActionResult> AddBranch(CreateBranchDTO branchdto)
-		{
-			return Ok(await branchService.AddBranch(branchdto));
-		}
-		[HttpPost("pagination")]
-		[Authorize]
-		public async Task<IActionResult> BranchPagination(int page, int pageSize)
-		{
-			return Ok(branchService.BranchPagination(page, pageSize));
-		}
+        [HttpGet("changeStatus/{id}")]
 
-		[HttpPost("basedOnGovenrment")]
-		[Authorize]
-		public async Task<IActionResult> branchByGovenrment(int id) {
-			var branch = branchService.getBranchByGovernment(id);
-			if (branch != null) {
-				return Ok(await branch);
-			}
-			else {
-				return NotFound();
-			}
-		}
+        public async Task<IActionResult> ChangeStatus(int id)
+        {
+            return Ok(await branchService.ChangeStatus(id));
+        }
 
-	}
+        [HttpDelete("{id}")]
+
+        public async Task<IActionResult> DeleteBranch(int id)
+        {
+            return Ok(await branchService.DeleteBranch(id));
+        }
+        [HttpPut("{id}")]
+
+        public async Task<IActionResult> UpdateBranch(int id, CreateBranchDTO branchdto)
+        {
+            var branch = await branchService.UpdateBranch(id, branchdto);
+            if (branch != null)
+            {
+                return Ok(branch);
+            }
+            else
+                return NotFound();
+
+        }
+        [HttpPost]
+
+        public async Task<IActionResult> AddBranch(CreateBranchDTO branchdto)
+        {
+            return Ok(await branchService.AddBranch(branchdto));
+        }
+        [HttpPost("pagination")]
+
+        public async Task<IActionResult> BranchPagination(int page, int pageSize)
+        {
+            return Ok(branchService.BranchPagination(page, pageSize));
+        }
+
+        [HttpPost("basedOnGovenrment")]
+
+        public async Task<IActionResult> branchByGovenrment(int id)
+        {
+            var branch = branchService.getBranchByGovernment(id);
+            if (branch != null)
+            {
+                return Ok(await branch);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+    }
 }
