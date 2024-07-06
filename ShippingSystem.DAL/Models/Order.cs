@@ -90,7 +90,7 @@ namespace ShippingSystem.DAL.Models
         public PaymentType paymentType { get; set; }
         public DeliveryType deliveryType { get; set; }
 
-        public Government government { get; set; }
+        public Governorate government { get; set; }
         public City city { get; set; }
         public virtual List<Product>? Products { get; set; } = new List<Product>();
 

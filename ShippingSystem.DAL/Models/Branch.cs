@@ -28,7 +28,7 @@ namespace ShippingSystem.DAL.Models
         [ForeignKey("Government")]
         public int GovernmentID { get; set; }
 
-        public Government Government { get; set; }
+        public Governorate Government { get; set; }
 
         public virtual List<Account>? Accounts { get; set; } = new List<Account>();
 

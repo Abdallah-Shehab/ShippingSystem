@@ -14,8 +14,8 @@ namespace ShippingSysem.BLL.Services
 	public class BranchService
 	{
 		private readonly IGenericStatusRepository<Branch> iGenericStatusRepository;
-		private readonly IGenericStatusRepository<Government> iGenericStatusRepositoryGovernment;
-		public BranchService(IGenericStatusRepository<Branch> iGenericStatusRepository, IGenericStatusRepository<Government> iGenericStatusRepositoryGovernment) {
+		private readonly IGenericStatusRepository<Governorate> iGenericStatusRepositoryGovernment;
+		public BranchService(IGenericStatusRepository<Branch> iGenericStatusRepository, IGenericStatusRepository<Governorate> iGenericStatusRepositoryGovernment) {
 			this.iGenericStatusRepository = iGenericStatusRepository;
 			this.iGenericStatusRepositoryGovernment = iGenericStatusRepositoryGovernment;
 		}

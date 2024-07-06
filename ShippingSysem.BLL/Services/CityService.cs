@@ -18,10 +18,10 @@ namespace ShippingSysem.BLL.Services
     public class CityService
     {
         private readonly CityReposatry _cityReposatry;
-        private readonly IGenericStatusRepository<Government> _genericRepository;
+        private readonly IGenericStatusRepository<Governorate> _genericRepository;
         //private readonly IGenericRepository<City> genericCityRepository;
 
-        public CityService(CityReposatry cityReposatry, IGenericStatusRepository<Government> genericRepository)
+        public CityService(CityReposatry cityReposatry, IGenericStatusRepository<Governorate> genericRepository)
         {
             _cityReposatry = cityReposatry;
             _genericRepository = genericRepository;

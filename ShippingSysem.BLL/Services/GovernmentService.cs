@@ -13,8 +13,8 @@ namespace ShippingSysem.BLL.Services
 {
 	public class GovernmentService
 	{
-		private readonly IGenericStatusRepository<Government> iGenericStatusRepository;
-		public GovernmentService(IGenericStatusRepository<Government> iGenericStatusRepository)
+		private readonly IGenericStatusRepository<Governorate> iGenericStatusRepository;
+		public GovernmentService(IGenericStatusRepository<Governorate> iGenericStatusRepository)
 		{
 			this.iGenericStatusRepository = iGenericStatusRepository;
 		}
@@ -59,7 +59,7 @@ namespace ShippingSysem.BLL.Services
 				government.Name = governmentdto.Name;
 				government.Status = governmentdto.Status;
 
-				Government updatedGovernment = iGenericStatusRepository.Update(government).Result;
+				Governorate updatedGovernment = iGenericStatusRepository.Update(government).Result;
 				await iGenericStatusRepository.SaveAsync();
 
 				//mapping from Government to ReadGovernmentDTO
@@ -71,14 +71,14 @@ namespace ShippingSysem.BLL.Services
 
 		public async Task<ReadGovernmentDTO> AddGovernment(CreateGovernmentDTO governmentdto)
 		{
-			Government government = new()
+			Governorate government = new()
 			{
 				//mapping from CreateGovernmentDTO to Government
 				Name = governmentdto.Name,
 				Status = governmentdto.Status
 			};
 
-			Government addedGovernment = iGenericStatusRepository.AddAsync(government).Result;
+			Governorate addedGovernment = iGenericStatusRepository.AddAsync(government).Result;
 			await iGenericStatusRepository.SaveAsync();
 
 			//mapping from Government to ReadGovernmentDTO
@@ -115,7 +115,7 @@ namespace ShippingSysem.BLL.Services
 				   .Select(g => MappingGovernmentToReadGovernmentDTO(g)).ToList();
 		}
 
-		public ReadGovernmentDTO MappingGovernmentToReadGovernmentDTO(Government government)
+		public ReadGovernmentDTO MappingGovernmentToReadGovernmentDTO(Governorate government)
 		{
 			return new ReadGovernmentDTO
 			{

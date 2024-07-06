@@ -12,7 +12,7 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    [Migration("20240705132556_v1")]
+    [Migration("20240706195104_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -224,95 +224,25 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 2,
+                            Id = 1,
                             AccessFailedCount = 0,
                             Address = "123 Main St",
-                            BranchID = 1,
                             ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
-                            Email = "john.doe@example.com",
+                            Email = "Admin@Admin.com",
                             EmailConfirmed = true,
                             IsDeleted = false,
                             LockoutEnabled = true,
-                            Name = "John Doe",
+                            Name = "Admin",
                             NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEOspiVckCOELzGFOfntb+nS5APqqSGRCTiMXAN0Hp/CAcW2sZ9rVZdFawXktCozwfA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEHQD0gqV6Aqi8y0vswo/9WobekSBBo6xvtUroH8JHkELX+Flj/uKVKVMPW7/Tn8lVQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 1,
                             SecurityStamp = "HBLASJQKDKDKS",
                             Status = true,
                             TwoFactorEnabled = false,
-                            UserName = "johndoe"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccessFailedCount = 0,
-                            Address = "456 Oak St",
-                            BranchID = 2,
-                            ConcurrencyStamp = "87654321-dcba-4321-hgfe-0987654321ba",
-                            Email = "jane.smith@example.com",
-                            EmailConfirmed = true,
-                            IsDeleted = false,
-                            LockoutEnabled = true,
-                            Name = "Jane Smith",
-                            NormalizedEmail = "JANE.SMITH@EXAMPLE.COM",
-                            NormalizedUserName = "JANESMITH",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJAWmFcOwj6gBho5zb0bAB8+Aq2OcOrnsGqPmlbrVSFrN/l3l4aViRXj3TwJ6QM2PA==",
-                            PhoneNumber = "0987654321",
-                            PhoneNumberConfirmed = true,
-                            RoleID = 2,
-                            SecurityStamp = "HJSDKFHSDFHSD",
-                            Status = true,
-                            TwoFactorEnabled = false,
-                            UserName = "janesmith"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AccessFailedCount = 0,
-                            Address = "123 Main St",
-                            BranchID = 1,
-                            ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
-                            Email = "ahmed.salah@example.com",
-                            EmailConfirmed = true,
-                            IsDeleted = false,
-                            LockoutEnabled = true,
-                            Name = "Ahmed Salah",
-                            NormalizedEmail = "AHMED.SALAH@EXAMPLE.COM",
-                            NormalizedUserName = "AHMED",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIJ1Sdx7QzKwDrEi3V0T2US7S0OTGJXf6pCzO/Plgp16hVdkIooOclj83i62+X9S5w==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = true,
-                            RoleID = 3,
-                            SecurityStamp = "HBLASJQKDKDKS",
-                            Status = true,
-                            TwoFactorEnabled = false,
-                            UserName = "ahmed"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AccessFailedCount = 0,
-                            Address = "123 Main St",
-                            BranchID = 1,
-                            ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
-                            Email = "mona.magdy@example.com",
-                            EmailConfirmed = true,
-                            IsDeleted = false,
-                            LockoutEnabled = true,
-                            Name = "Mona Magdy",
-                            NormalizedEmail = "MONA.MAGDY@EXAMPLE.COM",
-                            NormalizedUserName = "MONA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIUsho16YWri6++EtFCwge7hSJAGQ5jl7fL0olH2TVs7aIqIKxA12iQ0Klo9g3CEzQ==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = true,
-                            RoleID = 4,
-                            SecurityStamp = "HBLASJQKDKDKS",
-                            Status = true,
-                            TwoFactorEnabled = false,
-                            UserName = "mona"
+                            UserName = "Admin"
                         });
                 });
 
@@ -346,26 +276,6 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("GovernmentID");
 
                     b.ToTable("Branches");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateOnly(2024, 7, 5),
-                            GovernmentID = 1,
-                            IsDeleted = false,
-                            Name = "Branch1",
-                            Status = true
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateOnly(2024, 7, 5),
-                            GovernmentID = 2,
-                            IsDeleted = false,
-                            Name = "Branch2",
-                            Status = true
-                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.City", b =>
@@ -491,33 +401,6 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("RoleID");
 
                     b.ToTable("DeliveryAccounts", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            Address = "123 Main St",
-                            BranchID = 1,
-                            Company_Percantage = 0m,
-                            ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
-                            Discount_type = 0m,
-                            Email = "hamdy.doe@example.com",
-                            EmailConfirmed = true,
-                            IsDeleted = false,
-                            LockoutEnabled = true,
-                            Name = "John Doe",
-                            NormalizedEmail = "HAMDY.DOE@EXAMPLE.COM",
-                            NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFdOtjuEaizhYa1gQ7JAmd9e1UucvodDTimAIQ1/TA3HMHvjPRJSocwtc5zyPlD5TA==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = true,
-                            RoleID = 3,
-                            SecurityStamp = "HBLASJQKDKDKS",
-                            Status = true,
-                            TwoFactorEnabled = false,
-                            UserName = "johndoe"
-                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.DeliveryType", b =>
@@ -584,65 +467,65 @@ namespace ShippingSystem.DAL.Migrations
                         {
                             Id = 1,
                             IsDeleted = false,
-                            Name = "Settings"
+                            Name = "الإعدادات"
                         },
                         new
                         {
                             Id = 2,
                             IsDeleted = false,
-                            Name = "Branches"
+                            Name = "الفروع"
                         },
                         new
                         {
                             Id = 3,
                             IsDeleted = false,
-                            Name = "Employees"
+                            Name = "الموظفين"
                         },
                         new
                         {
                             Id = 4,
                             IsDeleted = false,
-                            Name = "Merchants"
+                            Name = "التجار"
                         },
                         new
                         {
                             Id = 5,
                             IsDeleted = false,
-                            Name = "Deliveries"
+                            Name = "المندوبين"
                         },
                         new
                         {
                             Id = 6,
                             IsDeleted = false,
-                            Name = "Governorates"
+                            Name = "المحافظات"
                         },
                         new
                         {
                             Id = 7,
                             IsDeleted = false,
-                            Name = "Cities"
+                            Name = "المدن"
                         },
                         new
                         {
                             Id = 8,
                             IsDeleted = false,
-                            Name = "Orders"
+                            Name = "الطلبات"
                         },
                         new
                         {
                             Id = 9,
                             IsDeleted = false,
-                            Name = "Financials"
+                            Name = "الحسابات"
                         },
                         new
                         {
                             Id = 10,
                             IsDeleted = false,
-                            Name = "Reports"
+                            Name = "التقارير"
                         });
                 });
 
-            modelBuilder.Entity("ShippingSystem.DAL.Models.Government", b =>
+            modelBuilder.Entity("ShippingSystem.DAL.Models.Governorate", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -669,22 +552,6 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("BranchID");
 
                     b.ToTable("Governments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsDeleted = false,
-                            Name = "Government1",
-                            Status = false
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsDeleted = false,
-                            Name = "Government2",
-                            Status = false
-                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.MerchantAccount", b =>
@@ -784,36 +651,6 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("RoleID");
 
                     b.ToTable("MerchantAccounts", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccessFailedCount = 0,
-                            Address = "123 Main St",
-                            BranchID = 1,
-                            City = "City A",
-                            ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
-                            Email = "mariem.doe@example.com",
-                            EmailConfirmed = true,
-                            Government = "Government A",
-                            IsDeleted = false,
-                            LockoutEnabled = true,
-                            Name = "John Doe",
-                            NormalizedEmail = "MARIEM.DOE@EXAMPLE.COM",
-                            NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKLeIlzgOgHb4DzhPqHf/V9Kl6PdC3ZzHKUopSmaL66yjApjdCXv48H6ncKL1vSGfQ==",
-                            PhoneNumber = "1234567890",
-                            PhoneNumberConfirmed = true,
-                            Pickup_Price = 10.0m,
-                            Refund_Percentage = 0.1m,
-                            RoleID = 2,
-                            SecurityStamp = "HBLASJQKDKDKS",
-                            Status = true,
-                            StoreName = "Store A",
-                            TwoFactorEnabled = false,
-                            UserName = "johndoe"
-                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.Order", b =>
@@ -917,28 +754,6 @@ namespace ShippingSystem.DAL.Migrations
                     b.HasIndex("StaffMemberID");
 
                     b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ClientName = "John Doe",
-                            CreatedDate = new DateOnly(2024, 7, 5),
-                            DeliveryPrice = 10.00m,
-                            DeliveryTypeID = 1,
-                            Email = "john.doe@example.com",
-                            IsDeleted = false,
-                            MerchantID = 1,
-                            Notes = "Handle with care",
-                            PaiedMoney = 40.00m,
-                            PhoneOne = "1234567890",
-                            PhoneTwo = "0987654321",
-                            ReceivedMoney = 50.00m,
-                            Status = "Pending",
-                            StreetAndVillage = "123 Main St",
-                            TotalPrice = 100.00m,
-                            TotalWeight = 5.00m
-                        });
                 });
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.PaymentType", b =>
@@ -1017,10 +832,10 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CanCreate = false,
-                            CanDelete = false,
-                            CanRead = false,
-                            CanWrite = false,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
                             EntityId = 1,
                             IsDeleted = false,
                             RoleId = 1
@@ -1028,10 +843,10 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 2,
-                            CanCreate = false,
-                            CanDelete = false,
-                            CanRead = false,
-                            CanWrite = false,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
                             EntityId = 2,
                             IsDeleted = false,
                             RoleId = 1
@@ -1039,10 +854,10 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 3,
-                            CanCreate = false,
-                            CanDelete = false,
-                            CanRead = false,
-                            CanWrite = false,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
                             EntityId = 3,
                             IsDeleted = false,
                             RoleId = 1
@@ -1050,10 +865,10 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 4,
-                            CanCreate = false,
-                            CanDelete = false,
-                            CanRead = false,
-                            CanWrite = false,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
                             EntityId = 4,
                             IsDeleted = false,
                             RoleId = 1
@@ -1061,10 +876,10 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 5,
-                            CanCreate = false,
-                            CanDelete = false,
-                            CanRead = false,
-                            CanWrite = false,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
                             EntityId = 5,
                             IsDeleted = false,
                             RoleId = 1
@@ -1072,10 +887,10 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 6,
-                            CanCreate = false,
-                            CanDelete = false,
-                            CanRead = false,
-                            CanWrite = false,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
                             EntityId = 6,
                             IsDeleted = false,
                             RoleId = 1
@@ -1083,10 +898,10 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 7,
-                            CanCreate = false,
-                            CanDelete = false,
-                            CanRead = false,
-                            CanWrite = false,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
                             EntityId = 7,
                             IsDeleted = false,
                             RoleId = 1
@@ -1094,10 +909,10 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 8,
-                            CanCreate = false,
-                            CanDelete = false,
-                            CanRead = false,
-                            CanWrite = false,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
                             EntityId = 8,
                             IsDeleted = false,
                             RoleId = 1
@@ -1105,10 +920,10 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 9,
-                            CanCreate = false,
-                            CanDelete = false,
-                            CanRead = false,
-                            CanWrite = false,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
                             EntityId = 9,
                             IsDeleted = false,
                             RoleId = 1
@@ -1116,10 +931,10 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 10,
-                            CanCreate = false,
-                            CanDelete = false,
-                            CanRead = false,
-                            CanWrite = false,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
                             EntityId = 10,
                             IsDeleted = false,
                             RoleId = 1
@@ -1197,28 +1012,7 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateOnly(2024, 7, 5),
-                            IsDeleted = false,
-                            Name = "Employee"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateOnly(2024, 7, 5),
-                            IsDeleted = false,
-                            Name = "Merchant"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateOnly(2024, 7, 5),
-                            IsDeleted = false,
-                            Name = "Delivery"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CreatedDate = new DateOnly(2024, 7, 5),
+                            CreatedDate = new DateOnly(2024, 7, 6),
                             IsDeleted = false,
                             Name = "Admin"
                         });
@@ -1371,7 +1165,7 @@ namespace ShippingSystem.DAL.Migrations
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.Branch", b =>
                 {
-                    b.HasOne("ShippingSystem.DAL.Models.Government", "Government")
+                    b.HasOne("ShippingSystem.DAL.Models.Governorate", "Government")
                         .WithMany()
                         .HasForeignKey("GovernmentID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1382,7 +1176,7 @@ namespace ShippingSystem.DAL.Migrations
 
             modelBuilder.Entity("ShippingSystem.DAL.Models.City", b =>
                 {
-                    b.HasOne("ShippingSystem.DAL.Models.Government", "Government")
+                    b.HasOne("ShippingSystem.DAL.Models.Governorate", "Government")
                         .WithMany("Cities")
                         .HasForeignKey("GovernmentID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1406,7 +1200,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("ShippingSystem.DAL.Models.Government", b =>
+            modelBuilder.Entity("ShippingSystem.DAL.Models.Governorate", b =>
                 {
                     b.HasOne("ShippingSystem.DAL.Models.Branch", "Branch")
                         .WithMany()
@@ -1446,7 +1240,7 @@ namespace ShippingSystem.DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ShippingSystem.DAL.Models.Government", "government")
+                    b.HasOne("ShippingSystem.DAL.Models.Governorate", "government")
                         .WithMany()
                         .HasForeignKey("GovernmentId");
 
@@ -1551,7 +1345,7 @@ namespace ShippingSystem.DAL.Migrations
                     b.Navigation("Permissions");
                 });
 
-            modelBuilder.Entity("ShippingSystem.DAL.Models.Government", b =>
+            modelBuilder.Entity("ShippingSystem.DAL.Models.Governorate", b =>
                 {
                     b.Navigation("Cities");
                 });
