@@ -54,9 +54,17 @@ namespace ShippingSysem.BLL.Services
         }
 
         //Mapping the orders return from database using status as filteration
-        public async Task<List<OrederReadDTO>> GetAllOrdersForMerchant(string status = "", int merchantId = 0)
+        public async Task<List<OrederReadDTO>> GetAllOrdersForMerchant(string status, int merchantId)
         {
             var orders = await repository.GetAllOrdersForMerchant(status, merchantId);
+
+            return await MappingorderDTOs(orders);
+        }
+
+        //Mapping the orders return from database using status as filteration
+        public async Task<List<OrederReadDTO>> GetAllOrdersForDelivery(string status, int deliveryId)
+        {
+            var orders = await repository.GetAllOrdersForDelivery(status, deliveryId);
 
             return await MappingorderDTOs(orders);
         }
@@ -124,8 +132,8 @@ namespace ShippingSysem.BLL.Services
                 Notes = o.Notes,
                 StreetAndVillage = o.StreetAndVillage,
                 StaffMemberName = o.StaffMemberAccount.Name ?? "",
-                MerchantName = o.MerchantAccount.Name,
-                DeliveryName = o.DeliveryAccount.Name,
+                MerchantName = o.MerchantAccount.Name ?? "",
+                DeliveryName = o.DeliveryAccount.Name ?? "",
                 CreatedDate = o.CreatedDate,
                 DeliverydDate = o.DeliverydDate,
             }).ToListAsync();

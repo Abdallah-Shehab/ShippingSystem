@@ -64,6 +64,16 @@ namespace ShippingSystem.PL.Controllers
             return Ok(orders);
         }
 
+        [HttpGet("AllOrdersForDelivery")]
+        public async Task<ActionResult<List<OrederReadDTO>>> GetAllForDelivery(string status = "", int DeliveryId = 0)
+        {
+            var orders = await orderService.GetAllOrdersForDelivery(status, DeliveryId);
+
+            if (!orders.Any())
+                return NotFound();
+
+            return Ok(orders);
+        }
 
         [HttpPost]
         public async Task<IActionResult> AddOrder(OrderCreateDTO orderCreateDto)

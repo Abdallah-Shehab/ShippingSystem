@@ -81,6 +81,18 @@ namespace ShippingSystem.DAL.Repositories
             return await Task.FromResult(GetOrders(order => order.Status == status && order.MerchantID == merchantId && order.IsDeleted == false));
         }
 
+        //Get all orders for delivery member fitler with status
+        public async Task<IQueryable<Order>> GetAllOrdersForDelivery(string status, int deliveryId)
+        {
+            if (deliveryId == 0)
+                return await GetAllFilterdOrdersAsync(status);
+
+            if (string.IsNullOrEmpty(status))
+                return await Task.FromResult(GetOrders(order => order.DeliveryID == deliveryId && order.IsDeleted == false));
+
+            return await Task.FromResult(GetOrders(order => order.Status == status && order.DeliveryID == deliveryId && order.IsDeleted == false));
+        }
+
         //Get Count For all orders for specific mrechant account depending on Status 
         public async Task<IQueryable<OrderCount>> GetOrderCountsAsync(int merchantId)
         {
@@ -110,5 +122,7 @@ namespace ShippingSystem.DAL.Repositories
                                  .Where(expression)
                                  .AsNoTracking();
         }
+
+        
     }
 }
