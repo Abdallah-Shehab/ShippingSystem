@@ -1,4 +1,6 @@
-﻿using ShippingSysem.BLL.DTOs.DeliveryDTOS;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
+using ShippingSysem.BLL.DTOs.DeliveryDTOS;
 using ShippingSysem.BLL.DTOs.MerchantDTOS;
 using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
@@ -14,8 +16,14 @@ namespace ShippingSysem.BLL.Services
     public class MerchantAccountService
     {
         private readonly IGenericRepository<MerchantAccount> genRepo;
-        public MerchantAccountService(IGenericRepository<MerchantAccount> genRepo) {
+        private readonly IPasswordHasher<MerchantAccount> passwordHasher;
+
+        public MerchantAccountService(
+            IGenericRepository<MerchantAccount> genRepo,
+            IPasswordHasher<MerchantAccount> passwordHasher
+            ) {
             this.genRepo = genRepo;
+            this.passwordHasher = passwordHasher;
         }
 
 
@@ -33,6 +41,7 @@ namespace ShippingSysem.BLL.Services
                     Phone=acc.PhoneNumber,
                     Name = acc.Name,
                     email = acc.Email,
+                    
                     password = acc.PasswordHash,
                     Branch = acc.Branch.Name,
                     Address = acc.Address,
@@ -61,8 +70,10 @@ namespace ShippingSysem.BLL.Services
                 {
                     PhoneNumber = dto.Phone,
                     Name = dto.Name,
+                    NormalizedUserName=dto.Name.ToUpper(),
                     Email = dto.Email,
-                    PasswordHash = dto.Password,
+                    NormalizedEmail=dto.Email.ToUpper(),
+                    EmailConfirmed=true,
                     BranchID = dto.BranchId,
                     Address = dto.Address,
                     StoreName = dto.StoreName,
@@ -70,9 +81,12 @@ namespace ShippingSysem.BLL.Services
                     City = dto.City,
                     Pickup_Price = dto.Pickup_Price,
                     Refund_Percentage = dto.Refund_Percentage,
-                    UserName = dto.Name 
+                    UserName = dto.Name ,
+                    RoleID=2
                 };
 
+                // Hash the password
+                account.PasswordHash = passwordHasher.HashPassword(account, dto.Password);
                 await genRepo.AddAsync(account);
                 await genRepo.SaveAsync();
                 return true;
