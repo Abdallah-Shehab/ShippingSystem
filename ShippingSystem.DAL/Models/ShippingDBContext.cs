@@ -134,7 +134,7 @@ namespace ShippingSystem.DAL.Models
                    UserName = "Admin",
                    NormalizedUserName = "JOHNDOE",
                    Email = "Admin@Admin.com",
-                   NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
+                   NormalizedEmail = "ADMIN@ADMIN.COM",
                    EmailConfirmed = true,
                    PasswordHash = hasher.HashPassword(null, "Admin"),
                    SecurityStamp = "HBLASJQKDKDKS",

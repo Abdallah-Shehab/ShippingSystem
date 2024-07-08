@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShippingSystem.DAL.Models;
 
@@ -11,9 +12,11 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    partial class ShippingDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240707164054_v2")]
+    partial class v2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -230,9 +233,9 @@ namespace ShippingSystem.DAL.Migrations
                             IsDeleted = false,
                             LockoutEnabled = true,
                             Name = "Admin",
-                            NormalizedEmail = "ADMIN@ADMIN.COM",
+                            NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKI+YmepVa2x28hDfpaqwQCVUFkcksPx8l3nzq33FF04FH7cmdDHTtsEQRJO8Mq2XA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEO8RqOTXYrkGqQI5/QFz3J1doHCReVl/vbj5HSNBRQJI7v0+sJuFybnXBciPNqLDMQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 1,

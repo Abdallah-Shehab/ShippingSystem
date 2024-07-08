@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Identity;
 
 namespace ShippingSysem.BLL.Services
 {
@@ -12,11 +13,14 @@ namespace ShippingSysem.BLL.Services
     {
         private readonly IGenericRepository<DeliveryAccount> genRepo;
         private readonly ILogger<DeliveryAccountService> _logger;
-
-        public DeliveryAccountService(IGenericRepository<DeliveryAccount> genRepo, ILogger<DeliveryAccountService> logger)
+        private readonly IPasswordHasher<DeliveryAccount> passwordHasher;
+        public DeliveryAccountService(
+            IGenericRepository<DeliveryAccount> genRepo,
+            ILogger<DeliveryAccountService> logger, IPasswordHasher<DeliveryAccount> passwordHasher)
         {
             this.genRepo = genRepo;
             _logger = logger;
+            this.passwordHasher = passwordHasher;
         }
 
 
@@ -52,7 +56,10 @@ namespace ShippingSysem.BLL.Services
                 var account = new DeliveryAccount
                 {
                     UserName = dto.UserName,
+                    NormalizedUserName = dto.UserName.ToUpper(),
                     Email = dto.Email,
+                    NormalizedEmail = dto.Email.ToUpper(),
+                    EmailConfirmed = true,
                     PasswordHash = dto.Password,
                     Governments = dto.Governments,
                     BranchID = dto.Branch,
@@ -60,7 +67,10 @@ namespace ShippingSysem.BLL.Services
                     Address = dto.Address,
                     Discount_type = dto.Discount_type,
                     Company_Percantage = dto.Company_Percantage,
+                    RoleID=4
                 };
+                // Hash the password
+                account.PasswordHash = passwordHasher.HashPassword(account, dto.Password);
 
                 await genRepo.AddAsync(account);
                 await genRepo.SaveAsync(); 

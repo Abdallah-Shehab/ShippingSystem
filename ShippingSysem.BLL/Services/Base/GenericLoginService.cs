@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using ShippingSystem.DAL.Repositories.Base;
+using ShippingSystem.DAL.Models;
 
 
 
@@ -26,7 +27,9 @@ namespace ShippingSysem.BLL.Services.Base
 
         public GenericLoginService(IGenericRepository<T> iGenericRepo,
             UserManager<T> userManagerAccount,
-            GenericLoginReposatry<T> genericLoginReposatry)
+            GenericLoginReposatry<T> genericLoginReposatry
+            
+            )
         {
             this.IGenericRepo = iGenericRepo;
             this.userManagerAccount = userManagerAccount;
@@ -47,6 +50,7 @@ namespace ShippingSysem.BLL.Services.Base
             if (account != null)
             {
                 bool found = await userManagerAccount.CheckPasswordAsync(account, login.Password);
+                if (!found) { }
                 if (found)
                 {
                     T accountWithRole = genericLoginReposatry.GetAccountWithRole(o => o.Id == account.Id, includes);

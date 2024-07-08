@@ -147,6 +147,7 @@ namespace ShippingSystem.PL
 
             builder.Services.AddScoped<DeliveryTpeService>();
 
+            //builder.Services.AddScoped<IPasswordHasher<MerchantAccount>>();
 
             //  add  CORS configuration:
 
