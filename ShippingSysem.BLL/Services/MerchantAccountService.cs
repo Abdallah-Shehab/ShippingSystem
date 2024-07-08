@@ -21,7 +21,8 @@ namespace ShippingSysem.BLL.Services
         public MerchantAccountService(
             IGenericRepository<MerchantAccount> genRepo,
             IPasswordHasher<MerchantAccount> passwordHasher
-            ) {
+            )
+        {
             this.genRepo = genRepo;
             this.passwordHasher = passwordHasher;
         }
@@ -36,12 +37,12 @@ namespace ShippingSysem.BLL.Services
             var dtos = accounts
                 .Select(acc => new DisplayMerchantAccountsDTO
                 {
-                    
-                    ID=acc.Id,
-                    Phone=acc.PhoneNumber,
+
+                    ID = acc.Id,
+                    Phone = acc.PhoneNumber,
                     Name = acc.Name,
                     email = acc.Email,
-                    
+
                     password = acc.PasswordHash,
                     Branch = acc.Branch.Name,
                     Address = acc.Address,
@@ -50,7 +51,7 @@ namespace ShippingSysem.BLL.Services
                     City = acc.City,
                     Pickup_Price = acc.Pickup_Price,
                     Refund_Percentage = acc.Id,
-                    
+
 
                 })
                 .ToList();
@@ -70,10 +71,10 @@ namespace ShippingSysem.BLL.Services
                 {
                     PhoneNumber = dto.Phone,
                     Name = dto.Name,
-                    NormalizedUserName=dto.Name.ToUpper(),
+                    NormalizedUserName = dto.Name.ToUpper(),
                     Email = dto.Email,
-                    NormalizedEmail=dto.Email.ToUpper(),
-                    EmailConfirmed=true,
+                    NormalizedEmail = dto.Email.ToUpper(),
+                    EmailConfirmed = true,
                     BranchID = dto.BranchId,
                     Address = dto.Address,
                     StoreName = dto.StoreName,
@@ -81,8 +82,8 @@ namespace ShippingSysem.BLL.Services
                     City = dto.City,
                     Pickup_Price = dto.Pickup_Price,
                     Refund_Percentage = dto.Refund_Percentage,
-                    UserName = dto.Name ,
-                    RoleID=2
+                    UserName = dto.Name,
+                    RoleID = 3
                 };
 
                 // Hash the password
@@ -127,7 +128,7 @@ namespace ShippingSysem.BLL.Services
             return await genRepo.GetByIdAsync(id);
         }
 
-       
+
 
 
 
@@ -171,7 +172,7 @@ namespace ShippingSysem.BLL.Services
         public async Task<bool> ifMerchantHavePackage(int id)
         {
             MerchantAccount merchant = await genRepo.GetByIdAsync(id);
-            if (merchant.SpecialOffer  == null)
+            if (merchant.SpecialOffer == null)
             {
 
                 return false;

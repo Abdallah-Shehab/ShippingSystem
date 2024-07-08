@@ -105,7 +105,10 @@ namespace ShippingSystem.DAL.Models
 
             builder.Entity<Role>(entity => entity.HasData(
 
-              new Role { Id = 1, Name = "Admin" }
+              new Role { Id = 1, Name = "Admin" },
+              new Role { Id = 2, Name = "موظف" },
+              new Role { Id = 3, Name = "تاجر" },
+              new Role { Id = 4, Name = "مندوب" }
               ));
 
             builder.Entity<ExistedEntities>(entity => entity.HasData(
@@ -247,6 +250,308 @@ namespace ShippingSystem.DAL.Models
         CanCreate = true
     }
 );
+            builder.Entity<Permission>().HasData(
+new Permission
+{
+    Id = 1,
+    RoleId = 3,
+    EntityId = 1, // Settings
+    CanRead = false,
+    CanWrite = false,
+    CanDelete = false,
+    CanCreate = false
+},
+new Permission
+{
+    Id = 2,
+    RoleId = 1,
+    EntityId = 2,
+    CanRead = false,
+    CanWrite = false,
+    CanDelete = false,
+    CanCreate = false
+}, new Permission
+{
+    Id = 3,
+    RoleId = 3,
+    EntityId = 3,
+    CanRead = true,
+    CanWrite = true,
+    CanDelete = true,
+    CanCreate = true
+}, new Permission
+{
+    Id = 4,
+    RoleId = 3,
+    EntityId = 4,
+    CanRead = true,
+    CanWrite = true,
+    CanDelete = true,
+    CanCreate = true
+}, new Permission
+{
+    Id = 5,
+    RoleId = 3,
+    EntityId = 5,
+    CanRead = true,
+    CanWrite = true,
+    CanDelete = true,
+    CanCreate = true
+}, new Permission
+{
+    Id = 6,
+    RoleId = 3,
+    EntityId = 6,
+    CanRead = true,
+    CanWrite = true,
+    CanDelete = true,
+    CanCreate = true
+}, new Permission
+{
+    Id = 7,
+    RoleId = 3,
+    EntityId = 7,
+    CanRead = true,
+    CanWrite = true,
+    CanDelete = true,
+    CanCreate = true
+}, new Permission
+{
+    Id = 8,
+    RoleId = 3,
+    EntityId = 8,
+    CanRead = true,
+    CanWrite = true,
+    CanDelete = true,
+    CanCreate = true
+}, new Permission
+{
+    Id = 9,
+    RoleId = 3,
+    EntityId = 9,
+    CanRead = true,
+    CanWrite = true,
+    CanDelete = true,
+    CanCreate = true
+}, new Permission
+{
+    Id = 10,
+    RoleId = 3,
+    EntityId = 10,
+    CanRead = true,
+    CanWrite = true,
+    CanDelete = true,
+    CanCreate = true
+}
+);
+
+            builder.Entity<Permission>().HasData(
+    new Permission
+    {
+        Id = 1,
+        RoleId = 2,
+        EntityId = 1, // Settings
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 2,
+        RoleId = 2,
+        EntityId = 2,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 3,
+        RoleId = 2,
+        EntityId = 3,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 4,
+        RoleId = 2,
+        EntityId = 4,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 5,
+        RoleId = 2,
+        EntityId = 5,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 6,
+        RoleId = 2,
+        EntityId = 6,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 7,
+        RoleId = 2,
+        EntityId = 7,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 8,
+        RoleId = 2,
+        EntityId = 8,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 9,
+        RoleId = 2,
+        EntityId = 9,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 10,
+        RoleId = 2,
+        EntityId = 10,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    }
+);
+
+            builder.Entity<Permission>().HasData(
+    new Permission
+    {
+        Id = 1,
+        RoleId = 4,
+        EntityId = 1, // Settings
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 2,
+        RoleId = 4,
+        EntityId = 2,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 3,
+        RoleId = 4,
+        EntityId = 3,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 4,
+        RoleId = 4,
+        EntityId = 4,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 5,
+        RoleId = 4,
+        EntityId = 5,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 6,
+        RoleId = 4,
+        EntityId = 6,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 7,
+        RoleId = 4,
+        EntityId = 7,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 8,
+        RoleId = 4,
+        EntityId = 8,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 9,
+        RoleId = 4,
+        EntityId = 9,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    },
+    new Permission
+    {
+        Id = 10,
+        RoleId = 4,
+        EntityId = 10,
+        CanRead = false,
+        CanWrite = false,
+        CanDelete = false,
+        CanCreate = false
+    }
+);
+
+
 
             base.OnModelCreating(builder);
         }
