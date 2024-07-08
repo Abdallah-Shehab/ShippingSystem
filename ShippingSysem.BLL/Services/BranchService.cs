@@ -50,12 +50,15 @@ namespace ShippingSysem.BLL.Services
 
 			if (branch != null)
 			{
+				Governorate governator = iGenericStatusRepositoryGovernment.GetByIdAsync(branchdto.GovernmentID).Result;
+
 				//mapping from CreateBranchDTO to Branch
 				branch.Name = branchdto.Name;
 				branch.GovernmentID = branchdto.GovernmentID;
-
+				governator.BranchID= id;
 				Branch updatedBranch = iGenericStatusRepository.Update(branch).Result;
 				await iGenericStatusRepository.SaveAsync();
+				await iGenericStatusRepositoryGovernment.SaveAsync();
 
 				//mapping from Branch to ReadBranchDTO
 				return MappingBranchToReadBranchDTO(updatedBranch);
@@ -73,23 +76,32 @@ namespace ShippingSysem.BLL.Services
 				GovernmentID = branchdto.GovernmentID,
 				Status = branchdto.Status
 			};
-
-			Branch addedBranch = iGenericStatusRepository.AddAsync(branch).Result;
-			await iGenericStatusRepository.SaveAsync();
-
-			//mapping from Branch to ReadBranchDTO
-			return MappingBranchToReadBranchDTO(addedBranch);
+				Governorate governorate= iGenericStatusRepositoryGovernment.GetByIdAsync(branchdto.GovernmentID).Result;
+		
+                Branch addedBranch = iGenericStatusRepository.AddAsync(branch).Result;
+				await iGenericStatusRepository.SaveAsync();
+				governorate.BranchID = addedBranch.Id;
+				await iGenericStatusRepositoryGovernment.SaveAsync();
+            //mapping from Branch to ReadBranchDTO
+            return MappingBranchToReadBranchDTO(addedBranch);
 		}
 		public async Task<bool> DeleteBranch(int id)
 		{
 			var row = await iGenericStatusRepository.GetByIdAsync(id);
-			var deletedOrNot = false;
+
+            var deletedOrNot = false;
+			Governorate governorate = iGenericStatusRepositoryGovernment.GetByIdAsync(row.GovernmentID).Result;
+            governorate.BranchID = null;
+
+              await iGenericStatusRepositoryGovernment.SaveAsync();
 			if (row != null)
 			{
-				iGenericStatusRepository.Delete(row);
-				await iGenericStatusRepository.SaveAsync();
-				deletedOrNot = true;
+					iGenericStatusRepository.Delete(row);
+					await iGenericStatusRepository.SaveAsync();
 			}
+				
+				deletedOrNot = true;
+			
 			return deletedOrNot;
 		}
 		public async Task<bool> ChangeStatus(int id)
