@@ -12,7 +12,7 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    [Migration("20240706195104_v1")]
+    [Migration("20240708195557_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -233,9 +233,9 @@ namespace ShippingSystem.DAL.Migrations
                             IsDeleted = false,
                             LockoutEnabled = true,
                             Name = "Admin",
-                            NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
+                            NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHQD0gqV6Aqi8y0vswo/9WobekSBBo6xvtUroH8JHkELX+Flj/uKVKVMPW7/Tn8lVQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIdcO1isAKS2Me+r2x1S0ukG8xR2Waybt2kteNM9JcpKpayPEKlouVKEZ9NN7a6xpQ==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 1,
@@ -938,6 +938,336 @@ namespace ShippingSystem.DAL.Migrations
                             EntityId = 10,
                             IsDeleted = false,
                             RoleId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 1,
+                            IsDeleted = false,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 2,
+                            IsDeleted = false,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
+                            EntityId = 3,
+                            IsDeleted = false,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
+                            EntityId = 4,
+                            IsDeleted = false,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
+                            EntityId = 5,
+                            IsDeleted = false,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
+                            EntityId = 6,
+                            IsDeleted = false,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
+                            EntityId = 7,
+                            IsDeleted = false,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
+                            EntityId = 8,
+                            IsDeleted = false,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
+                            EntityId = 9,
+                            IsDeleted = false,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CanCreate = true,
+                            CanDelete = true,
+                            CanRead = true,
+                            CanWrite = true,
+                            EntityId = 10,
+                            IsDeleted = false,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            Id = 21,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 1,
+                            IsDeleted = false,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 22,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 2,
+                            IsDeleted = false,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 23,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 3,
+                            IsDeleted = false,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 24,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 4,
+                            IsDeleted = false,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 25,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 5,
+                            IsDeleted = false,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 26,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 6,
+                            IsDeleted = false,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 27,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 7,
+                            IsDeleted = false,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 28,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 8,
+                            IsDeleted = false,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 29,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 9,
+                            IsDeleted = false,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 30,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 10,
+                            IsDeleted = false,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            Id = 31,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 1,
+                            IsDeleted = false,
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            Id = 32,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 2,
+                            IsDeleted = false,
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            Id = 33,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 3,
+                            IsDeleted = false,
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            Id = 34,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 4,
+                            IsDeleted = false,
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            Id = 35,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 5,
+                            IsDeleted = false,
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            Id = 36,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 6,
+                            IsDeleted = false,
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            Id = 37,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 7,
+                            IsDeleted = false,
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            Id = 38,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 8,
+                            IsDeleted = false,
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            Id = 39,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 9,
+                            IsDeleted = false,
+                            RoleId = 4
+                        },
+                        new
+                        {
+                            Id = 40,
+                            CanCreate = false,
+                            CanDelete = false,
+                            CanRead = false,
+                            CanWrite = false,
+                            EntityId = 10,
+                            IsDeleted = false,
+                            RoleId = 4
                         });
                 });
 
@@ -1012,9 +1342,30 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateOnly(2024, 7, 6),
+                            CreatedDate = new DateOnly(2024, 7, 8),
                             IsDeleted = false,
                             Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateOnly(2024, 7, 8),
+                            IsDeleted = false,
+                            Name = "موظف"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateOnly(2024, 7, 8),
+                            IsDeleted = false,
+                            Name = "تاجر"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedDate = new DateOnly(2024, 7, 8),
+                            IsDeleted = false,
+                            Name = "مندوب"
                         });
                 });
 

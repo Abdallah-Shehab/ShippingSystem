@@ -76,6 +76,7 @@ namespace ShippingSystem.DAL.Models
                 ));
 
             builder.Entity<ShippingType>(entity => entity.HasData(
+
               new ShippingType { Id = 1, Name = "Normal", Price = 30 },
               new ShippingType { Id = 2, Name = "7 Days", Price = 50 },
               new ShippingType { Id = 3, Name = "24 Hour", Price = 70 }
@@ -139,7 +140,7 @@ namespace ShippingSystem.DAL.Models
                    Email = "Admin@Admin.com",
                    NormalizedEmail = "ADMIN@ADMIN.COM",
                    EmailConfirmed = true,
-                   PasswordHash = hasher.HashPassword(null, "Admin"),
+                   PasswordHash = hasher.HashPassword(null, "admin"),
                    SecurityStamp = "HBLASJQKDKDKS",
                    ConcurrencyStamp = "12345678-abcd-1234-efgh-1234567890ab",
                    PhoneNumber = "1234567890",
@@ -154,8 +155,6 @@ namespace ShippingSystem.DAL.Models
            );
 
 
-
-            // Seed permissions for the new account
             builder.Entity<Permission>().HasData(
     new Permission
     {
@@ -176,7 +175,8 @@ namespace ShippingSystem.DAL.Models
         CanWrite = true,
         CanDelete = true,
         CanCreate = true
-    }, new Permission
+    },
+    new Permission
     {
         Id = 3,
         RoleId = 1,
@@ -185,7 +185,8 @@ namespace ShippingSystem.DAL.Models
         CanWrite = true,
         CanDelete = true,
         CanCreate = true
-    }, new Permission
+    },
+    new Permission
     {
         Id = 4,
         RoleId = 1,
@@ -194,7 +195,8 @@ namespace ShippingSystem.DAL.Models
         CanWrite = true,
         CanDelete = true,
         CanCreate = true
-    }, new Permission
+    },
+    new Permission
     {
         Id = 5,
         RoleId = 1,
@@ -203,7 +205,8 @@ namespace ShippingSystem.DAL.Models
         CanWrite = true,
         CanDelete = true,
         CanCreate = true
-    }, new Permission
+    },
+    new Permission
     {
         Id = 6,
         RoleId = 1,
@@ -212,7 +215,8 @@ namespace ShippingSystem.DAL.Models
         CanWrite = true,
         CanDelete = true,
         CanCreate = true
-    }, new Permission
+    },
+    new Permission
     {
         Id = 7,
         RoleId = 1,
@@ -221,7 +225,8 @@ namespace ShippingSystem.DAL.Models
         CanWrite = true,
         CanDelete = true,
         CanCreate = true
-    }, new Permission
+    },
+    new Permission
     {
         Id = 8,
         RoleId = 1,
@@ -230,7 +235,8 @@ namespace ShippingSystem.DAL.Models
         CanWrite = true,
         CanDelete = true,
         CanCreate = true
-    }, new Permission
+    },
+    new Permission
     {
         Id = 9,
         RoleId = 1,
@@ -239,7 +245,8 @@ namespace ShippingSystem.DAL.Models
         CanWrite = true,
         CanDelete = true,
         CanCreate = true
-    }, new Permission
+    },
+    new Permission
     {
         Id = 10,
         RoleId = 1,
@@ -248,308 +255,317 @@ namespace ShippingSystem.DAL.Models
         CanWrite = true,
         CanDelete = true,
         CanCreate = true
-    }
-);
-            builder.Entity<Permission>().HasData(
-new Permission
-{
-    Id = 1,
-    RoleId = 3,
-    EntityId = 1, // Settings
-    CanRead = false,
-    CanWrite = false,
-    CanDelete = false,
-    CanCreate = false
-},
-new Permission
-{
-    Id = 2,
-    RoleId = 1,
-    EntityId = 2,
-    CanRead = false,
-    CanWrite = false,
-    CanDelete = false,
-    CanCreate = false
-}, new Permission
-{
-    Id = 3,
-    RoleId = 3,
-    EntityId = 3,
-    CanRead = true,
-    CanWrite = true,
-    CanDelete = true,
-    CanCreate = true
-}, new Permission
-{
-    Id = 4,
-    RoleId = 3,
-    EntityId = 4,
-    CanRead = true,
-    CanWrite = true,
-    CanDelete = true,
-    CanCreate = true
-}, new Permission
-{
-    Id = 5,
-    RoleId = 3,
-    EntityId = 5,
-    CanRead = true,
-    CanWrite = true,
-    CanDelete = true,
-    CanCreate = true
-}, new Permission
-{
-    Id = 6,
-    RoleId = 3,
-    EntityId = 6,
-    CanRead = true,
-    CanWrite = true,
-    CanDelete = true,
-    CanCreate = true
-}, new Permission
-{
-    Id = 7,
-    RoleId = 3,
-    EntityId = 7,
-    CanRead = true,
-    CanWrite = true,
-    CanDelete = true,
-    CanCreate = true
-}, new Permission
-{
-    Id = 8,
-    RoleId = 3,
-    EntityId = 8,
-    CanRead = true,
-    CanWrite = true,
-    CanDelete = true,
-    CanCreate = true
-}, new Permission
-{
-    Id = 9,
-    RoleId = 3,
-    EntityId = 9,
-    CanRead = true,
-    CanWrite = true,
-    CanDelete = true,
-    CanCreate = true
-}, new Permission
-{
-    Id = 10,
-    RoleId = 3,
-    EntityId = 10,
-    CanRead = true,
-    CanWrite = true,
-    CanDelete = true,
-    CanCreate = true
-}
-);
-
-            builder.Entity<Permission>().HasData(
-    new Permission
-    {
-        Id = 1,
-        RoleId = 2,
-        EntityId = 1, // Settings
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 2,
-        RoleId = 2,
-        EntityId = 2,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 3,
-        RoleId = 2,
-        EntityId = 3,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 4,
-        RoleId = 2,
-        EntityId = 4,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 5,
-        RoleId = 2,
-        EntityId = 5,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 6,
-        RoleId = 2,
-        EntityId = 6,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 7,
-        RoleId = 2,
-        EntityId = 7,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 8,
-        RoleId = 2,
-        EntityId = 8,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 9,
-        RoleId = 2,
-        EntityId = 9,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 10,
-        RoleId = 2,
-        EntityId = 10,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
     }
 );
 
             builder.Entity<Permission>().HasData(
-    new Permission
-    {
-        Id = 1,
-        RoleId = 4,
-        EntityId = 1, // Settings
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 2,
-        RoleId = 4,
-        EntityId = 2,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 3,
-        RoleId = 4,
-        EntityId = 3,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 4,
-        RoleId = 4,
-        EntityId = 4,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 5,
-        RoleId = 4,
-        EntityId = 5,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 6,
-        RoleId = 4,
-        EntityId = 6,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 7,
-        RoleId = 4,
-        EntityId = 7,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 8,
-        RoleId = 4,
-        EntityId = 8,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 9,
-        RoleId = 4,
-        EntityId = 9,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    },
-    new Permission
-    {
-        Id = 10,
-        RoleId = 4,
-        EntityId = 10,
-        CanRead = false,
-        CanWrite = false,
-        CanDelete = false,
-        CanCreate = false
-    }
-);
+                new Permission
+                {
+                    Id = 11, // Changed Id to avoid conflict
+                    RoleId = 3,
+                    EntityId = 1, // Settings
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 12, // Changed Id to avoid conflict
+                    RoleId = 3,
+                    EntityId = 2,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 13, // Changed Id to avoid conflict
+                    RoleId = 3,
+                    EntityId = 3,
+                    CanRead = true,
+                    CanWrite = true,
+                    CanDelete = true,
+                    CanCreate = true
+                },
+                new Permission
+                {
+                    Id = 14, // Changed Id to avoid conflict
+                    RoleId = 3,
+                    EntityId = 4,
+                    CanRead = true,
+                    CanWrite = true,
+                    CanDelete = true,
+                    CanCreate = true
+                },
+                new Permission
+                {
+                    Id = 15, // Changed Id to avoid conflict
+                    RoleId = 3,
+                    EntityId = 5,
+                    CanRead = true,
+                    CanWrite = true,
+                    CanDelete = true,
+                    CanCreate = true
+                },
+                new Permission
+                {
+                    Id = 16, // Changed Id to avoid conflict
+                    RoleId = 3,
+                    EntityId = 6,
+                    CanRead = true,
+                    CanWrite = true,
+                    CanDelete = true,
+                    CanCreate = true
+                },
+                new Permission
+                {
+                    Id = 17, // Changed Id to avoid conflict
+                    RoleId = 3,
+                    EntityId = 7,
+                    CanRead = true,
+                    CanWrite = true,
+                    CanDelete = true,
+                    CanCreate = true
+                },
+                new Permission
+                {
+                    Id = 18, // Changed Id to avoid conflict
+                    RoleId = 3,
+                    EntityId = 8,
+                    CanRead = true,
+                    CanWrite = true,
+                    CanDelete = true,
+                    CanCreate = true
+                },
+                new Permission
+                {
+                    Id = 19, // Changed Id to avoid conflict
+                    RoleId = 3,
+                    EntityId = 9,
+                    CanRead = true,
+                    CanWrite = true,
+                    CanDelete = true,
+                    CanCreate = true
+                },
+                new Permission
+                {
+                    Id = 20, // Changed Id to avoid conflict
+                    RoleId = 3,
+                    EntityId = 10,
+                    CanRead = true,
+                    CanWrite = true,
+                    CanDelete = true,
+                    CanCreate = true
+                }
+            );
+
+            builder.Entity<Permission>().HasData(
+                new Permission
+                {
+                    Id = 21, // Changed Id to avoid conflict
+                    RoleId = 2,
+                    EntityId = 1, // Settings
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 22, // Changed Id to avoid conflict
+                    RoleId = 2,
+                    EntityId = 2,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 23, // Changed Id to avoid conflict
+                    RoleId = 2,
+                    EntityId = 3,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 24, // Changed Id to avoid conflict
+                    RoleId = 2,
+                    EntityId = 4,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 25, // Changed Id to avoid conflict
+                    RoleId = 2,
+                    EntityId = 5,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 26, // Changed Id to avoid conflict
+                    RoleId = 2,
+                    EntityId = 6,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 27, // Changed Id to avoid conflict
+                    RoleId = 2,
+                    EntityId = 7,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 28, // Changed Id to avoid conflict
+                    RoleId = 2,
+                    EntityId = 8,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 29, // Changed Id to avoid conflict
+                    RoleId = 2,
+                    EntityId = 9,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 30, // Changed Id to avoid conflict
+                    RoleId = 2,
+                    EntityId = 10,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                }
+            );
+
+            builder.Entity<Permission>().HasData(
+                new Permission
+                {
+                    Id = 31, // Changed Id to avoid conflict
+                    RoleId = 4,
+                    EntityId = 1, // Settings
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 32, // Changed Id to avoid conflict
+                    RoleId = 4,
+                    EntityId = 2,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 33, // Changed Id to avoid conflict
+                    RoleId = 4,
+                    EntityId = 3,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 34, // Changed Id to avoid conflict
+                    RoleId = 4,
+                    EntityId = 4,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 35, // Changed Id to avoid conflict
+                    RoleId = 4,
+                    EntityId = 5,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 36, // Changed Id to avoid conflict
+                    RoleId = 4,
+                    EntityId = 6,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 37, // Changed Id to avoid conflict
+                    RoleId = 4,
+                    EntityId = 7,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 38, // Changed Id to avoid conflict
+                    RoleId = 4,
+                    EntityId = 8,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 39, // Changed Id to avoid conflict
+                    RoleId = 4,
+                    EntityId = 9,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                },
+                new Permission
+                {
+                    Id = 40, // Changed Id to avoid conflict
+                    RoleId = 4,
+                    EntityId = 10,
+                    CanRead = false,
+                    CanWrite = false,
+                    CanDelete = false,
+                    CanCreate = false
+                }
+            );
 
 
 

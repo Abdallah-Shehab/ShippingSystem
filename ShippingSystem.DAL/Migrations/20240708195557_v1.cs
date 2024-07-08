@@ -524,7 +524,13 @@ namespace ShippingSystem.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "IsDeleted", "Name", "NormalizedName" },
-                values: new object[] { 1, null, new DateOnly(2024, 7, 6), false, "Admin", null });
+                values: new object[,]
+                {
+                    { 1, null, new DateOnly(2024, 7, 8), false, "Admin", null },
+                    { 2, null, new DateOnly(2024, 7, 8), false, "موظف", null },
+                    { 3, null, new DateOnly(2024, 7, 8), false, "تاجر", null },
+                    { 4, null, new DateOnly(2024, 7, 8), false, "مندوب", null }
+                });
 
             migrationBuilder.InsertData(
                 table: "DeliveryType",
@@ -574,7 +580,7 @@ namespace ShippingSystem.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "123 Main St", null, "12345678-abcd-1234-efgh-1234567890ab", "Admin@Admin.com", true, false, true, null, "Admin", "JOHN.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEHQD0gqV6Aqi8y0vswo/9WobekSBBo6xvtUroH8JHkELX+Flj/uKVKVMPW7/Tn8lVQ==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "Admin" });
+                values: new object[] { 1, 0, "123 Main St", null, "12345678-abcd-1234-efgh-1234567890ab", "Admin@Admin.com", true, false, true, null, "Admin", "ADMIN@ADMIN.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEIdcO1isAKS2Me+r2x1S0ukG8xR2Waybt2kteNM9JcpKpayPEKlouVKEZ9NN7a6xpQ==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Permissions",
@@ -590,7 +596,37 @@ namespace ShippingSystem.DAL.Migrations
                     { 7, true, true, true, true, 7, false, 1 },
                     { 8, true, true, true, true, 8, false, 1 },
                     { 9, true, true, true, true, 9, false, 1 },
-                    { 10, true, true, true, true, 10, false, 1 }
+                    { 10, true, true, true, true, 10, false, 1 },
+                    { 11, false, false, false, false, 1, false, 3 },
+                    { 12, false, false, false, false, 2, false, 3 },
+                    { 13, true, true, true, true, 3, false, 3 },
+                    { 14, true, true, true, true, 4, false, 3 },
+                    { 15, true, true, true, true, 5, false, 3 },
+                    { 16, true, true, true, true, 6, false, 3 },
+                    { 17, true, true, true, true, 7, false, 3 },
+                    { 18, true, true, true, true, 8, false, 3 },
+                    { 19, true, true, true, true, 9, false, 3 },
+                    { 20, true, true, true, true, 10, false, 3 },
+                    { 21, false, false, false, false, 1, false, 2 },
+                    { 22, false, false, false, false, 2, false, 2 },
+                    { 23, false, false, false, false, 3, false, 2 },
+                    { 24, false, false, false, false, 4, false, 2 },
+                    { 25, false, false, false, false, 5, false, 2 },
+                    { 26, false, false, false, false, 6, false, 2 },
+                    { 27, false, false, false, false, 7, false, 2 },
+                    { 28, false, false, false, false, 8, false, 2 },
+                    { 29, false, false, false, false, 9, false, 2 },
+                    { 30, false, false, false, false, 10, false, 2 },
+                    { 31, false, false, false, false, 1, false, 4 },
+                    { 32, false, false, false, false, 2, false, 4 },
+                    { 33, false, false, false, false, 3, false, 4 },
+                    { 34, false, false, false, false, 4, false, 4 },
+                    { 35, false, false, false, false, 5, false, 4 },
+                    { 36, false, false, false, false, 6, false, 4 },
+                    { 37, false, false, false, false, 7, false, 4 },
+                    { 38, false, false, false, false, 8, false, 4 },
+                    { 39, false, false, false, false, 9, false, 4 },
+                    { 40, false, false, false, false, 10, false, 4 }
                 });
 
             migrationBuilder.CreateIndex(

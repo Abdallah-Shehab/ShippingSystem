@@ -47,8 +47,8 @@ namespace ShippingSystem.PL.Controllers
             if (merchantId == 0) orderCounts = await orderService.GetOrderCountsAsync();
             else orderCounts = await orderService.GetOrderCountsAsync(merchantId);
 
-            if (!orderCounts.Any())
-                return NotFound();
+            //if (!orderCounts.Any())
+            //    return NotFound();
 
             return Ok(orderCounts);
         }
@@ -58,8 +58,8 @@ namespace ShippingSystem.PL.Controllers
         {
             var orders = await orderService.GetAllOrdersForMerchant(status, MerchantId);
 
-            if (!orders.Any())
-                return NotFound();
+            //if (!orders.Any())
+            //    return NotFound();
 
             return Ok(orders);
         }

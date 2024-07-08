@@ -167,16 +167,16 @@ namespace ShippingSysem.BLL.Services
             };
         }
 
-        
 
-     
-       
+
+
+
 
         // Mapping the Orders from Dto To Database 
         public async Task<OrederReadDTO> CreateOrder(OrderCreateDTO _orderCreateDto)
         {
 
-            
+
             Order order = new Order()
             {
                 CitytId = _orderCreateDto.CityID,
@@ -207,9 +207,9 @@ namespace ShippingSysem.BLL.Services
             await repository.SaveAsync();
             Order orderWithNavigationProperties = repository.GetAllFilterdOrdersAsync().Result.FirstOrDefault(o => o.Id == order.Id);
 
-            
+
             //1-get price based ond  shippingType   and price of city
-            decimal priceOfShippingType = await shippingTypeService.getPriceOfShippingType( _orderCreateDto.ShippingTypeID,_orderCreateDto.CityID );
+            decimal priceOfShippingType = await shippingTypeService.getPriceOfShippingType(_orderCreateDto.ShippingTypeID, _orderCreateDto.CityID);
             //get Price of DeliveryType
             decimal priceOfDeliveryType = await DeliveryTpeService.getPriceOfShippingType(_orderCreateDto.DeliveryTypeID);
 
@@ -218,15 +218,16 @@ namespace ShippingSysem.BLL.Services
 
 
             //4- count if weight of products increase than the normal wait 
-            
-            decimal IncreaseIFweightMoreThan10=0;
-            if (order.TotalWeight > 10) {
+
+            decimal IncreaseIFweightMoreThan10 = 0;
+            if (order.TotalWeight > 10)
+            {
 
                 IncreaseIFweightMoreThan10 = (order.TotalWeight - 10) * 5;
             }
 
             //5- if the merchant have package
-            decimal SpecialpakageOfMerchant =30;
+            decimal SpecialpakageOfMerchant = 30;
             if (await merchantService.ifMerchantHavePackage(order.MerchantID))
             {
 
@@ -234,13 +235,13 @@ namespace ShippingSysem.BLL.Services
                 SpecialpakageOfMerchant = specialOffer.DeliveryPrice;
             }
 
-            
 
-            
+
+
 
 
             // calculate = shippingTypePrice  + DeliveryType + TotalPriceOFProduct -  Refound For the merchant + DeliveryPrice Or SpecialPakage +
-            decimal totalPayment = priceOfShippingType  + _orderCreateDto.TotalPrice - refoundOFmerchant + IncreaseIFweightMoreThan10+ SpecialpakageOfMerchant;
+            decimal totalPayment = priceOfShippingType + _orderCreateDto.TotalPrice - refoundOFmerchant + IncreaseIFweightMoreThan10 + SpecialpakageOfMerchant;
 
             order.DeliveryPrice = priceOfDeliveryType + priceOfDeliveryType;
             order.PaiedMoney = totalPayment;
