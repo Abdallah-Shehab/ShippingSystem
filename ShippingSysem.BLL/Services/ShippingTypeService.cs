@@ -34,16 +34,9 @@ namespace ShippingSysem.BLL.Services
         }
 
         // get price for shipping type and price for city
-        public async Task<decimal> getPriceOfShippingType(int idShipping,int idCity) {
+        public async Task<decimal> getPriceOfShippingType(int idShipping) {
             ShippingType shipping =await shippingTypeReposatry.GetByIdAsync(idShipping);
-            City city = await cityReposatry.GetByIdAsync(idCity);
-            if (shipping.Name == "Normal")
-            {
-                return city.NormalShippingCost;
-            }
-            else { 
-                return (city.PickupShippingCost +  shipping.Price);
-            }
+            return shipping.Price;
         }
     }
 }

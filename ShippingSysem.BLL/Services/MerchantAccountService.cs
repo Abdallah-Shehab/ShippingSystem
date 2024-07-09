@@ -4,6 +4,7 @@ using ShippingSysem.BLL.DTOs.DeliveryDTOS;
 using ShippingSysem.BLL.DTOs.MerchantDTOS;
 using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
+using ShippingSystem.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -17,14 +18,17 @@ namespace ShippingSysem.BLL.Services
     {
         private readonly IGenericRepository<MerchantAccount> genRepo;
         private readonly IPasswordHasher<MerchantAccount> passwordHasher;
+        private readonly MerchantReposatry merchantReposatry;
 
         public MerchantAccountService(
             IGenericRepository<MerchantAccount> genRepo,
-            IPasswordHasher<MerchantAccount> passwordHasher
+            IPasswordHasher<MerchantAccount> passwordHasher,
+            MerchantReposatry merchantReposatry
             )
         {
             this.genRepo = genRepo;
             this.passwordHasher = passwordHasher;
+            this.merchantReposatry = merchantReposatry;
         }
 
 
@@ -167,7 +171,7 @@ namespace ShippingSysem.BLL.Services
                 return false;
             }
         }
-        //==========================
+         //==========================
         // Method to get if Merchant have Special Package Or Not
         public async Task<bool> ifMerchantHavePackage(int id)
         {
@@ -184,11 +188,14 @@ namespace ShippingSysem.BLL.Services
 
         }
 
-        public async Task<decimal> getRefoundToMerchant(int id)
-        {
-            MerchantAccount merchant = await genRepo.GetByIdAsync(id);
-            return merchant.Refund_Percentage;
-        }
+        
 
+
+        //Method to Get Merchat with Navigation Properties
+        public async Task<MerchantAccount> getMerchantAccountWithNavigationProperites(int id)
+        {
+            return await merchantReposatry.GetSpecificMerchantWithNavigation(id);
+            
+        }
     }
 }

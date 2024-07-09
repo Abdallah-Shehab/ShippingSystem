@@ -7,6 +7,7 @@ using ShippingSystem.BLL.Services;
 using ShippingSystem.DAL.Interfaces;
 using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
+using ShippingSystem.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace ShippingSysem.BLL.Services
         private readonly IGenericRepository<DeliveryType> deliveryReposatry;
         private readonly IGenericRepository<City> cityReposatry;
         private readonly SpecialOfferService specialOfferService;
+        private readonly MerchantReposatry merchantReposatry;
 
         public DeliveryTpeService DeliveryTpeService { get; }
 
@@ -33,7 +35,8 @@ namespace ShippingSysem.BLL.Services
             ShippingTypeService shippingTypeService,
             IGenericRepository<DeliveryType> deliveryReposatry,
             IGenericRepository<City> cityReposatry,
-            SpecialOfferService specialOfferService
+            SpecialOfferService specialOfferService,
+            MerchantReposatry merchantReposatry
             )
         {
             this.repository = repository;
@@ -43,6 +46,7 @@ namespace ShippingSysem.BLL.Services
             this.deliveryReposatry = deliveryReposatry;
             this.cityReposatry = cityReposatry;
             this.specialOfferService = specialOfferService;
+            this.merchantReposatry = merchantReposatry;
         }
 
         //Mpping The Orders return from The Database without Pagination and using Status as filteration
@@ -206,51 +210,96 @@ namespace ShippingSysem.BLL.Services
             await repository.AddAsync(order);
             await repository.SaveAsync();
             Order orderWithNavigationProperties = repository.GetAllFilterdOrdersAsync().Result.FirstOrDefault(o => o.Id == order.Id);
+            //City Order
+            City city = orderWithNavigationProperties.city;
+            //Merchant Create Order
+            MerchantAccount merchant = await merchantService.getMerchantAccountWithNavigationProperites(orderWithNavigationProperties.MerchantID);
 
 
-            //1-get price based ond  shippingType   and price of city
-            decimal priceOfShippingType = await shippingTypeService.getPriceOfShippingType(_orderCreateDto.ShippingTypeID, _orderCreateDto.CityID);
-            //get Price of DeliveryType
-            decimal priceOfDeliveryType = await DeliveryTpeService.getPriceOfShippingType(_orderCreateDto.DeliveryTypeID);
-
-            //2-get precentatge of merchant if has Refound
-            decimal refoundOFmerchant = await merchantService.getRefoundToMerchant(_orderCreateDto.MerchantID);
-
-
-            //4- count if weight of products increase than the normal wait 
-
+            //Prices
+            decimal cityPrice;
+            decimal ShippingTypePrice;
             decimal IncreaseIFweightMoreThan10 = 0;
+            decimal priceProducts = order.TotalPrice;
+            decimal ifvillage=0;
+
+
+            //1-get  shippingType Price
+            ShippingTypePrice = await shippingTypeService.getPriceOfShippingType(_orderCreateDto.ShippingTypeID);
+
+            //2- count if weight of products increase than the normal wait 
             if (order.TotalWeight > 10)
             {
 
                 IncreaseIFweightMoreThan10 = (order.TotalWeight - 10) * 5;
             }
 
-            //5- if the merchant have package
-            decimal SpecialpakageOfMerchant = 30;
-            if (await merchantService.ifMerchantHavePackage(order.MerchantID))
+            //3- get Price is Village
+            if (order.StreetAndVillage!="") {
+                ifvillage = 30; //constant Price 
+            }
+            
+            
+            
+            
+            
+            //--------------------------------Delivery From Branch To Client ---------------------------------------//
+            //search on special Offers for this merchant if have special Package  for this merchant 
+            var ifMerchantHasSpecialOffer = merchant.SpecialOffer.Where(s => s.City.ToLower() == city.Name.ToLower()).FirstOrDefault();
+            if (ifMerchantHasSpecialOffer != null)
             {
+                //حساب سعر المدينة من التاجر 
+                cityPrice = ifMerchantHasSpecialOffer.DeliveryPrice;
+            }
+            else
+            {
+                //حساب سعر المدينة العادي 
+                cityPrice = city.NormalShippingCost;
+            }
+            //--------------------------------------------------------------------//
 
-                SpecialOffer specialOffer = await specialOfferService.GetSpecialOfferByMerchantIdAsync(order.MerchantID);
-                SpecialpakageOfMerchant = specialOffer.DeliveryPrice;
+
+
+
+            //-------------------------------- Delivery From Merchant To Branch ---------------------------------------//
+            if (orderWithNavigationProperties.deliveryType.Name == "التسليم من التاجر") {
+                
+                // اذا التاجر له سعر pickaup  خاص به 
+                var ifMerchantHasPcikaup = merchant.Pickup_Price;
+                if (ifMerchantHasPcikaup != 0)
+                {
+                    //Take Pickaup From Merchant
+                    cityPrice += ifMerchantHasPcikaup;
+                }
+                else {
+                    //Take Pickaup From City 
+                    cityPrice += city.PickupShippingCost;
+                }
             }
 
 
+           //------------------------------------------------------------------------//
+           
+            
+            
+          
+           
+
+            
+
+            // save delivery price and recived price
 
 
 
-
-            // calculate = shippingTypePrice  + DeliveryType + TotalPriceOFProduct -  Refound For the merchant + DeliveryPrice Or SpecialPakage +
-            decimal totalPayment = priceOfShippingType + _orderCreateDto.TotalPrice - refoundOFmerchant + IncreaseIFweightMoreThan10 + SpecialpakageOfMerchant;
-
-            order.DeliveryPrice = priceOfDeliveryType + priceOfDeliveryType;
-            order.PaiedMoney = totalPayment;
+          order.DeliveryPrice = cityPrice + ShippingTypePrice + IncreaseIFweightMoreThan10 + ifvillage;
+            order.PaiedMoney = order.DeliveryPrice + order.TotalPrice;
+            
             repository.Update(order);
             return new OrederReadDTO()
             {
                 TotalWeight = order.TotalWeight,
                 TotalPrice = order.TotalPrice,
-                DeliveryPrice = priceOfDeliveryType + priceOfDeliveryType,
+               DeliveryPrice = order.DeliveryPrice,
                 StreetAndVillage = order.StreetAndVillage,
                 ClientName = order.ClientName,
                 CreatedDate = order.CreatedDate,
@@ -258,7 +307,7 @@ namespace ShippingSysem.BLL.Services
                 Status = "Created",
                 Cityt = orderWithNavigationProperties.city.Name,
                 Notes = order.Notes,
-                PaiedMoney = totalPayment,
+                PaiedMoney = order.PaiedMoney,
 
             };
 
