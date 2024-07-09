@@ -194,7 +194,8 @@ namespace ShippingSysem.BLL.Services
         //Method to Get Merchat with Navigation Properties
         public async Task<MerchantAccount> getMerchantAccountWithNavigationProperites(int id)
         {
-            return await merchantReposatry.GetSpecificMerchantWithNavigation(id);
+            var m = merchantReposatry.GetSpecificMerchantWithNavigation(id);
+            return await m;
             
         }
     }
