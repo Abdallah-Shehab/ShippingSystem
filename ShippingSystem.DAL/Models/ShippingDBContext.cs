@@ -16,6 +16,8 @@ namespace ShippingSystem.DAL.Models
         public DbSet<Role> Roles { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<ExistedEntities> Entities { get; set; }
+        public DbSet<SpecialOffer> SpecialOffer { get; set; }
+
 
         public DbSet<Branch> Branches { get; set; }
         public DbSet<City> Cities { get; set; }
