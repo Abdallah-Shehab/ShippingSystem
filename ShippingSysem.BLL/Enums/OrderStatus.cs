@@ -9,16 +9,16 @@ namespace ShippingSysem.BLL.Enums
     public enum OrderStatus
     {
 
-        New,
+
         Canceled,
         RefusedWithPayment,
         RefusedWithoutPayment,
         RefusedWithPartialPayment,
         DeliveredToDelivery,
-        Deliverd, // Typo: Should be Delivered
+        Delivered, // Typo: Should be Delivered
         PartiallyDelivered,
         Suspended,
-        NotRechable, // Typo: Should be NotReachable
+        NotReachable, // Typo: Should be NotReachable
         Waiting
     }
 }
