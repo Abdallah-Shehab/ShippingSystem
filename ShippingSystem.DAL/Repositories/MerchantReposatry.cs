@@ -19,21 +19,23 @@ namespace ShippingSystem.DAL.Repositories
         }
 
         //private method to get all navigation properties I need
-        private IQueryable<MerchantAccount> GetMerchants(Expression<Func<MerchantAccount, bool>> expression)
+        private async Task< IQueryable<MerchantAccount>> GetMerchants(Expression<Func<MerchantAccount, bool>> expression)
         {
             //Note => you must handle this function, when there is no data for orders in database it occures error (nullReference error)
-            return context.MerchantAccounts.Include(merchant => merchant.Branch)
+           var m = context.MerchantAccounts.Include(merchant => merchant.Branch)
                                  .Include(merchant => merchant.SpecialOffer)
-                                 .Include(merchant => merchant.Government)
-                                 .Include(merchant => merchant.Orders)
-                                 .Include(merchant => merchant.Role)
+                                 //.Include(merchant => merchant.Government)
+                                 //.Include(merchant => merchant.Orders)
+                                 //.Include(merchant => merchant.Role)
                                  .Where(expression)
                                  .AsNoTracking();
+            return  m;
         }
         //private method to get all navigation properties I need
         public async Task< MerchantAccount> GetSpecificMerchantWithNavigation(int id)
         {
-            return  await GetMerchants(m => m.Id == id).FirstOrDefaultAsync();
+            var m = GetMerchants(m => m.Id == id).Result.FirstOrDefaultAsync();
+            return  await m;
         }
     }
 }
