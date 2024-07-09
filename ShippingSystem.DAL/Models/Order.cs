@@ -53,7 +53,7 @@ namespace ShippingSystem.DAL.Models
 
         public decimal? ReceivedMoney { get; set; }
         public decimal? DeliveryPrice { get; set; }
-        public decimal? PaiedMoney { get; set; }
+        public decimal? PaiedMoney { get; set; }       
 
         public DateOnly? CreatedDate { get; set; } = DateOnly.FromDateTime(DateTime.UtcNow);
         public DateOnly? DeliverydDate { get; set; }

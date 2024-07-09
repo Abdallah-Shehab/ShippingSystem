@@ -126,5 +126,24 @@ namespace ShippingSysem.BLL.Services
 			};
 		}
 
+		public async Task<List<ReadGovernmentDTO>> GetAllGovernatorsNoBranches() {
+
+            var governments =  iGenericStatusRepository.GetAllAsync().Result.Where(g => g.BranchID==null);
+            if (governments != null)
+            {
+                var dtos = await governments
+                .Select(government => new ReadGovernmentDTO
+                {
+                    Id = government.Id,
+                    Name = government.Name,
+                    IsDeleted = government.IsDeleted,
+                    Status = government.Status
+                }).ToListAsync();
+
+                return dtos;
+            }
+            else
+                return null;
+        } 
 	}
 }

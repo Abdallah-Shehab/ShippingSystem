@@ -26,10 +26,6 @@ namespace ShippingSysem.BLL.Services
                 Name = x.Name,
             });
         }
-        public async Task<decimal> getPriceOfShippingType(int id)
-        {
-            DeliveryType delivery = await deliveryTypeReposatyr.GetByIdAsync(id);
-            return delivery.Price;
-        }
+        
     }
 }

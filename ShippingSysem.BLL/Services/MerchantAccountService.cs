@@ -1,7 +1,10 @@
-﻿using ShippingSysem.BLL.DTOs.DeliveryDTOS;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
+using ShippingSysem.BLL.DTOs.DeliveryDTOS;
 using ShippingSysem.BLL.DTOs.MerchantDTOS;
 using ShippingSystem.DAL.Interfaces.Base;
 using ShippingSystem.DAL.Models;
+using ShippingSystem.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -14,8 +17,18 @@ namespace ShippingSysem.BLL.Services
     public class MerchantAccountService
     {
         private readonly IGenericRepository<MerchantAccount> genRepo;
-        public MerchantAccountService(IGenericRepository<MerchantAccount> genRepo) {
+        private readonly IPasswordHasher<MerchantAccount> passwordHasher;
+        private readonly MerchantReposatry merchantReposatry;
+
+        public MerchantAccountService(
+            IGenericRepository<MerchantAccount> genRepo,
+            IPasswordHasher<MerchantAccount> passwordHasher,
+            MerchantReposatry merchantReposatry
+            )
+        {
             this.genRepo = genRepo;
+            this.passwordHasher = passwordHasher;
+            this.merchantReposatry = merchantReposatry;
         }
 
 
@@ -28,11 +41,12 @@ namespace ShippingSysem.BLL.Services
             var dtos = accounts
                 .Select(acc => new DisplayMerchantAccountsDTO
                 {
-                    
-                    ID=acc.Id,
-                    Phone=acc.PhoneNumber,
+
+                    ID = acc.Id,
+                    Phone = acc.PhoneNumber,
                     Name = acc.Name,
                     email = acc.Email,
+
                     password = acc.PasswordHash,
                     Branch = acc.Branch.Name,
                     Address = acc.Address,
@@ -41,7 +55,7 @@ namespace ShippingSysem.BLL.Services
                     City = acc.City,
                     Pickup_Price = acc.Pickup_Price,
                     Refund_Percentage = acc.Id,
-                    
+
 
                 })
                 .ToList();
@@ -61,8 +75,10 @@ namespace ShippingSysem.BLL.Services
                 {
                     PhoneNumber = dto.Phone,
                     Name = dto.Name,
+                    NormalizedUserName = dto.Name.ToUpper(),
                     Email = dto.Email,
-                    PasswordHash = dto.Password,
+                    NormalizedEmail = dto.Email.ToUpper(),
+                    EmailConfirmed = true,
                     BranchID = dto.BranchId,
                     Address = dto.Address,
                     StoreName = dto.StoreName,
@@ -70,9 +86,12 @@ namespace ShippingSysem.BLL.Services
                     City = dto.City,
                     Pickup_Price = dto.Pickup_Price,
                     Refund_Percentage = dto.Refund_Percentage,
-                    UserName = dto.Name 
+                    UserName = dto.Name,
+                    RoleID = 3
                 };
 
+                // Hash the password
+                account.PasswordHash = passwordHasher.HashPassword(account, dto.Password);
                 await genRepo.AddAsync(account);
                 await genRepo.SaveAsync();
                 return true;
@@ -113,7 +132,7 @@ namespace ShippingSysem.BLL.Services
             return await genRepo.GetByIdAsync(id);
         }
 
-       
+
 
 
 
@@ -152,12 +171,12 @@ namespace ShippingSysem.BLL.Services
                 return false;
             }
         }
-        //==========================
+         //==========================
         // Method to get if Merchant have Special Package Or Not
         public async Task<bool> ifMerchantHavePackage(int id)
         {
             MerchantAccount merchant = await genRepo.GetByIdAsync(id);
-            if (merchant.SpecialOffer  == null)
+            if (merchant.SpecialOffer == null)
             {
 
                 return false;
@@ -169,11 +188,15 @@ namespace ShippingSysem.BLL.Services
 
         }
 
-        public async Task<decimal> getRefoundToMerchant(int id)
-        {
-            MerchantAccount merchant = await genRepo.GetByIdAsync(id);
-            return merchant.Refund_Percentage;
-        }
+        
 
+
+        //Method to Get Merchat with Navigation Properties
+        public async Task<MerchantAccount> getMerchantAccountWithNavigationProperites(int id)
+        {
+            var m = merchantReposatry.GetSpecificMerchantWithNavigation(id);
+            return await m;
+            
+        }
     }
 }

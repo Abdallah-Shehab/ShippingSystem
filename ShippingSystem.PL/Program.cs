@@ -87,11 +87,12 @@ namespace ShippingSystem.PL
             builder.Services.AddScoped<IGenericRepository<DeliveryAccount>, GenericRepository<DeliveryAccount>>();
             //Delivery Merchant
             builder.Services.AddScoped<IGenericRepository<MerchantAccount>, GenericRepository<MerchantAccount>>();
-            
+
             builder.Services.AddScoped(typeof(GenericRepository<>));
 
             //Merchant Accounts
             builder.Services.AddScoped<IGenericRepository<MerchantAccount>, GenericRepository<MerchantAccount>>();
+           builder.Services.AddScoped<MerchantReposatry>();
             //builder.Services.AddScoped<IGenericRepository<Permission_User_Entities>, GenericRepository<Permission_User_Entities>>();
             builder.Services.AddScoped<EmployeeService>();
             //builder.Services.AddScoped<PermissionsService>();
@@ -137,7 +138,7 @@ namespace ShippingSystem.PL
             //Register ShippingType Service
             builder.Services.AddScoped<IGenericRepository<ShippingType>, GenericRepository<ShippingType>>();
             builder.Services.AddScoped<ShippingTypeService>();
-          
+
             //Register PaymentType Service
             builder.Services.AddScoped<IGenericRepository<PaymentType>, GenericRepository<PaymentType>>();
 
@@ -147,6 +148,7 @@ namespace ShippingSystem.PL
 
             builder.Services.AddScoped<DeliveryTpeService>();
 
+            //builder.Services.AddScoped<IPasswordHasher<MerchantAccount>>();
 
             //  add  CORS configuration:
 
@@ -154,7 +156,7 @@ namespace ShippingSystem.PL
             {
                 options.AddDefaultPolicy(builder =>
                 {
-                    builder.WithOrigins("http://localhost:4200")
+                    builder.AllowAnyOrigin()
                            .AllowAnyMethod()
                            .AllowAnyHeader();
                 });
@@ -163,33 +165,35 @@ namespace ShippingSystem.PL
 
 
 
-			builder.Services.AddAuthentication(option => {
-				//option.DefaultAuthenticateScheme = "mySchema"; 
-				option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-				option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            builder.Services.AddAuthentication(option =>
+            {
+                //option.DefaultAuthenticateScheme = "mySchema"; 
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
-			}) //.AddJwtBearer("mySchema", op => {
-				.AddJwtBearer(op => {
-					var secrite = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Mohamed Hamdy and Abdallah Shafiq and Hala Mansour and Azza Gamel And Mariem Omran"));
-					op.TokenValidationParameters = new TokenValidationParameters
-					{
-						IssuerSigningKey = secrite,
-						ValidateIssuer = false,
-						ValidateAudience = false,
-						ValidateActor = false,
-						RequireExpirationTime = false,
-						ValidateIssuerSigningKey = false
+            }) //.AddJwtBearer("mySchema", op => {
+                .AddJwtBearer(op =>
+                {
+                    var secrite = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Mohamed Hamdy and Abdallah Shafiq and Hala Mansour and Azza Gamel And Mariem Omran"));
+                    op.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        IssuerSigningKey = secrite,
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateActor = false,
+                        RequireExpirationTime = false,
+                        ValidateIssuerSigningKey = false
 
-					};
-				});
-
-
-
-
+                    };
+                });
 
 
 
-			var app = builder.Build();
+
+
+
+
+            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())

@@ -119,6 +119,7 @@ namespace ShippingSystem.DAL.Repositories
                                  .Include(order => order.MerchantAccount)
                                  .Include(order => order.StaffMemberAccount)
                                  .Include(order => order.DeliveryAccount)
+                                 .Include(order=>order.deliveryType)
                                  .Where(expression)
                                  .AsNoTracking();
         }

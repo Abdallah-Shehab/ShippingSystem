@@ -22,8 +22,16 @@ namespace ShippingSystem.PL.Controllers
 			var governments = await governmentService.GetGovernments();
 			return Ok(governments);
 		}
-		
-		[HttpGet("{id}")]
+
+        [HttpGet("NoBranch")]
+        public async Task<IActionResult> GetAllGovernmentsNoBranches()
+        {
+            var governments = await governmentService.GetAllGovernatorsNoBranches();
+            return Ok(governments);
+        }
+
+
+        [HttpGet("{id}")]
 		public async Task<IActionResult> GetGovernmentByID(int id)
 		{
 			var government = await governmentService.GetGovernmentByID(id);
@@ -47,19 +55,19 @@ namespace ShippingSystem.PL.Controllers
 				return NotFound();
 
 		}
-		
+
 		[HttpPost]
 		public async Task<IActionResult> AddGovernment(CreateGovernmentDTO governmentdto)
 		{
 			return Ok(await governmentService.AddGovernment(governmentdto));
 		}
-		
+
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteGovernment(int id)
 		{
 			return Ok(await governmentService.DeleteGovernment(id));
 		}
-		
+
 		[HttpGet("changeStatus/{id}")]
 		public async Task<IActionResult> ChangeStatus(int id)
 		{
@@ -71,6 +79,6 @@ namespace ShippingSystem.PL.Controllers
 		{
 			return Ok(governmentService.GovernmentPagination(page, pageSize));
 		}
-
+		
 	}
 }
