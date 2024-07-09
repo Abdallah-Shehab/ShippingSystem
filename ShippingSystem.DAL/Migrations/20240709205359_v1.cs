@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ShippingSystem.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class V1 : Migration
+    public partial class v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -344,9 +344,6 @@ namespace ShippingSystem.DAL.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Pickup_Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Refund_Percentage = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    SpecialOffer_Government = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SpecialOffer_City = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SpecialOffer_DeliveryPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -577,7 +574,7 @@ namespace ShippingSystem.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "123 Main St", null, "12345678-abcd-1234-efgh-1234567890ab", "Admin@Admin.com", true, false, true, null, "Admin", "JOHN.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEEhz05rzz1qTdFp36C/gF/Rgndj0SrFJ/TblBjPehxTxdChc3aX5nlWaoAayupVnHQ==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "Admin" });
+                values: new object[] { 1, 0, "123 Main St", null, "12345678-abcd-1234-efgh-1234567890ab", "Admin@Admin.com", true, false, true, null, "Admin", "JOHN.DOE@EXAMPLE.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEDgi3VosTe5N9m7jJsnzfKLoc7O6CoZGmqW33rnCkI1P63vlyuF2SWR9pKHSQzqi0w==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Permissions",

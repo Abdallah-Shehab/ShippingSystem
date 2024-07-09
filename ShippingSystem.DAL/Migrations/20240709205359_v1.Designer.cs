@@ -12,8 +12,8 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    [Migration("20240709133224_V1")]
-    partial class V1
+    [Migration("20240709205359_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -235,7 +235,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Admin",
                             NormalizedEmail = "JOHN.DOE@EXAMPLE.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEhz05rzz1qTdFp36C/gF/Rgndj0SrFJ/TblBjPehxTxdChc3aX5nlWaoAayupVnHQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDgi3VosTe5N9m7jJsnzfKLoc7O6CoZGmqW33rnCkI1P63vlyuF2SWR9pKHSQzqi0w==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 1,
@@ -629,15 +629,6 @@ namespace ShippingSystem.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SpecialOffer_City")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("SpecialOffer_DeliveryPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("SpecialOffer_Government")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Status")
