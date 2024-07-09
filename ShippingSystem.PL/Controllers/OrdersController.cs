@@ -69,8 +69,8 @@ namespace ShippingSystem.PL.Controllers
         {
             var orders = await orderService.GetAllOrdersForDelivery(status, DeliveryId);
 
-            if (!orders.Any())
-                return NotFound();
+            //if (!orders.Any())
+            //    return NotFound();
 
             return Ok(orders);
         }
