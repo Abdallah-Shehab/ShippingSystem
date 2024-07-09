@@ -92,6 +92,7 @@ namespace ShippingSystem.PL
 
             //Merchant Accounts
             builder.Services.AddScoped<IGenericRepository<MerchantAccount>, GenericRepository<MerchantAccount>>();
+           builder.Services.AddScoped<MerchantReposatry>();
             //builder.Services.AddScoped<IGenericRepository<Permission_User_Entities>, GenericRepository<Permission_User_Entities>>();
             builder.Services.AddScoped<EmployeeService>();
             //builder.Services.AddScoped<PermissionsService>();
