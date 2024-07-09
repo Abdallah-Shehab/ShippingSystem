@@ -171,10 +171,15 @@ namespace ShippingSysem.BLL.Services
             };
         }
 
+        //Assign order to delivert
+        public async Task<OrederReadDTO> AssignOrderToDelivery(int orderId,int deliveryId)
+        {
+            var order = await repository.AssignOrderToDelivery(orderId, deliveryId);
 
+            var orderDto = await MappingorderToOrderReadDTO(order); 
 
-
-
+            return await Task.FromResult(orderDto);
+        }
 
         // Mapping the Orders from Dto To Database 
         public async Task<OrederReadDTO> CreateOrder(OrderCreateDTO _orderCreateDto)

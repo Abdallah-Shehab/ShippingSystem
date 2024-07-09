@@ -109,6 +109,15 @@ namespace ShippingSystem.DAL.Repositories
                                         );
         }
 
+        //Assign order for delivery
+        public async Task<Order> AssignOrderToDelivery(int orderId,int deliveryId)
+        {
+            var order = await GetByIdAsync(orderId);
+            order.DeliveryID = deliveryId;
+            await SaveAsync();
+
+            return await Task.FromResult(order);
+        }
 
         //private method to get all navigation properties I need
         private IQueryable<Order> GetOrders(Expression<Func<Order, bool>> expression)
