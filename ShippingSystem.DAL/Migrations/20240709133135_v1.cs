@@ -526,10 +526,10 @@ namespace ShippingSystem.DAL.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "CreatedDate", "IsDeleted", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, null, new DateOnly(2024, 7, 8), false, "Admin", null },
-                    { 2, null, new DateOnly(2024, 7, 8), false, "موظف", null },
-                    { 3, null, new DateOnly(2024, 7, 8), false, "تاجر", null },
-                    { 4, null, new DateOnly(2024, 7, 8), false, "مندوب", null }
+                    { 1, null, new DateOnly(2024, 7, 9), false, "Admin", null },
+                    { 2, null, new DateOnly(2024, 7, 9), false, "موظف", null },
+                    { 3, null, new DateOnly(2024, 7, 9), false, "تاجر", null },
+                    { 4, null, new DateOnly(2024, 7, 9), false, "مندوب", null }
                 });
 
             migrationBuilder.InsertData(
@@ -580,7 +580,7 @@ namespace ShippingSystem.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "Address", "BranchID", "ConcurrencyStamp", "Email", "EmailConfirmed", "IsDeleted", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RoleID", "SecurityStamp", "Status", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "123 Main St", null, "12345678-abcd-1234-efgh-1234567890ab", "Admin@Admin.com", true, false, true, null, "Admin", "ADMIN@ADMIN.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEIdcO1isAKS2Me+r2x1S0ukG8xR2Waybt2kteNM9JcpKpayPEKlouVKEZ9NN7a6xpQ==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "Admin" });
+                values: new object[] { 1, 0, "123 Main St", null, "12345678-abcd-1234-efgh-1234567890ab", "Admin@Admin.com", true, false, true, null, "Admin", "ADMIN@ADMIN.COM", "JOHNDOE", "AQAAAAIAAYagAAAAEKwuQrmTrs6A2ucXXwXShCsHC2LuRePXrCtUadX2fNZX6MNe/I3Rml5ozzljwzRhKA==", "1234567890", true, 1, "HBLASJQKDKDKS", true, false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "Permissions",

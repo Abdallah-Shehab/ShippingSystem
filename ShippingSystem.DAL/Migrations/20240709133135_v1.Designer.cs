@@ -12,7 +12,7 @@ using ShippingSystem.DAL.Models;
 namespace ShippingSystem.DAL.Migrations
 {
     [DbContext(typeof(ShippingDBContext))]
-    [Migration("20240708195557_v1")]
+    [Migration("20240709133135_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -235,7 +235,7 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "JOHNDOE",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIdcO1isAKS2Me+r2x1S0ukG8xR2Waybt2kteNM9JcpKpayPEKlouVKEZ9NN7a6xpQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKwuQrmTrs6A2ucXXwXShCsHC2LuRePXrCtUadX2fNZX6MNe/I3Rml5ozzljwzRhKA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 1,
@@ -1342,28 +1342,28 @@ namespace ShippingSystem.DAL.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateOnly(2024, 7, 8),
+                            CreatedDate = new DateOnly(2024, 7, 9),
                             IsDeleted = false,
                             Name = "Admin"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateOnly(2024, 7, 8),
+                            CreatedDate = new DateOnly(2024, 7, 9),
                             IsDeleted = false,
                             Name = "موظف"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateOnly(2024, 7, 8),
+                            CreatedDate = new DateOnly(2024, 7, 9),
                             IsDeleted = false,
                             Name = "تاجر"
                         },
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateOnly(2024, 7, 8),
+                            CreatedDate = new DateOnly(2024, 7, 9),
                             IsDeleted = false,
                             Name = "مندوب"
                         });
