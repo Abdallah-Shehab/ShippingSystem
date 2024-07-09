@@ -291,14 +291,15 @@ namespace ShippingSysem.BLL.Services
 
 
 
-           //order.DeliveryPrice = cityPrice + ShippingTypePrice + IncreaseIFweightMoreThan10 + ifvillage;
-
+          order.DeliveryPrice = cityPrice + ShippingTypePrice + IncreaseIFweightMoreThan10 + ifvillage;
+            order.PaiedMoney = order.DeliveryPrice + order.TotalPrice;
+            
             repository.Update(order);
             return new OrederReadDTO()
             {
                 TotalWeight = order.TotalWeight,
                 TotalPrice = order.TotalPrice,
-                //DeliveryPrice = priceOfDeliveryType + priceOfDeliveryType,
+               DeliveryPrice = order.DeliveryPrice,
                 StreetAndVillage = order.StreetAndVillage,
                 ClientName = order.ClientName,
                 CreatedDate = order.CreatedDate,
@@ -306,7 +307,7 @@ namespace ShippingSysem.BLL.Services
                 Status = "Created",
                 Cityt = orderWithNavigationProperties.city.Name,
                 Notes = order.Notes,
-                //PaiedMoney = totalPayment,
+                PaiedMoney = order.PaiedMoney,
 
             };
 
