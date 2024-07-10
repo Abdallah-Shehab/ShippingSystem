@@ -75,14 +75,15 @@ namespace ShippingSystem.PL.Controllers
             return Ok(orders);
         }
 
-        [HttpPost("AssignOrderToDelivery")]
-        public async Task<ActionResult<OrederReadDTO>> AssignOrderToDelivery(int orderId,int deliveryId)
+        [HttpPut("AssignOrderToDelivery")]
+        public async Task<ActionResult<OrederReadDTO>> AssignOrderToDelivery(int orderId, int deliveryId)
         {
             try
             {
                 var orderDto = await orderService.AssignOrderToDelivery(orderId, deliveryId);
                 return Ok(orderDto);
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
