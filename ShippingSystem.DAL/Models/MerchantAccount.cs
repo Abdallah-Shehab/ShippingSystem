@@ -54,5 +54,8 @@ namespace ShippingSystem.DAL.Models
      public virtual  List<SpecialOffer>? SpecialOffer { get; set; }
 
 
+
+
+        
     }
 }

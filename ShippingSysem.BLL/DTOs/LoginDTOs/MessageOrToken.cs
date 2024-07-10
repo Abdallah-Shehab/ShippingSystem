@@ -9,6 +9,6 @@ namespace ShippingSysem.BLL.DTOs.LoginDTOs
     public class MessageOrToken
     {
         public string? Msg { get; set; }
-        public ReadLoginDTO? ReadLoginDTO { get; set; }=new ReadLoginDTO();
+        public ReadLoginDTO? ReadLoginDTO { get; set; }
     }
 }
