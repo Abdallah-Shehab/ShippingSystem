@@ -45,7 +45,7 @@ namespace ShippingSysem.BLL.Services
 
             return new CityReadDTO()
             {
-                Id=city.Id,
+                Id = city.Id,
                 GovernmentID = government.Id,
                 GovernmentName = government.Name,
                 NormalShippingCost = cityDto.NormalShippingCost,
@@ -54,9 +54,10 @@ namespace ShippingSysem.BLL.Services
                 Status = cityDto.Status
             };
         }
-        public async Task<List<CityReadDTO>> getAllCities() { 
-        
-        var cities = await _cityReposatry.GetAllAsync();
+        public async Task<List<CityReadDTO>> getAllCities()
+        {
+
+            var cities = await _cityReposatry.GetAllAsync();
             return await cities.Select(x =>
                new CityReadDTO()
                {
@@ -90,7 +91,8 @@ namespace ShippingSysem.BLL.Services
 
         //Here Iwant to  get all cities with navigation property 
         //using function from genric reposatry
-        public async Task<List<CityReadDTO>> GetCitiesWithGovernment(int governmentID) {
+        public async Task<List<CityReadDTO>> GetCitiesWithGovernment(int governmentID)
+        {
             var CitiesList = await _cityReposatry.GetAllWithFilter(x => x.GovernmentID == governmentID && x.IsDeleted == false);
             return await CitiesList.Select(x =>
                 new CityReadDTO()
@@ -101,32 +103,34 @@ namespace ShippingSysem.BLL.Services
                     PickupShippingCost = x.PickupShippingCost,
                     Name = x.Name,
                     Status = x.Status,
-                       Id=x.Id
+                    Id = x.Id
 
                 }).ToListAsync();
         }
 
-        public async Task<bool> changeStatus(int id) {
-         City city = await  _cityReposatry.GetByIdAsync(id);
+        public async Task<bool> changeStatus(int id)
+        {
+            City city = await _cityReposatry.GetByIdAsync(id);
             bool changeOrNot = false;
-            if(city != null)
+            if (city != null)
             {
-            _cityReposatry.ChangeStatus(city);
-            _cityReposatry.SaveAsync();
-                
+                _cityReposatry.ChangeStatus(city);
+                _cityReposatry.SaveAsync();
+
                 changeOrNot = true;
             }
             return changeOrNot;
 
         }
-        public async Task<bool> Delete(int id) {
-         City city = await  _cityReposatry.GetByIdAsync(id);
+        public async Task<bool> Delete(int id)
+        {
+            City city = await _cityReposatry.GetByIdAsync(id);
             bool changeOrNot = false;
-            if(city != null)
+            if (city != null)
             {
-            _cityReposatry.Delete(city);
-           await _cityReposatry.SaveAsync();
-                
+                _cityReposatry.Delete(city);
+                await _cityReposatry.SaveAsync();
+
                 changeOrNot = true;
             }
             return changeOrNot;
@@ -140,21 +144,22 @@ namespace ShippingSysem.BLL.Services
             //2- map data in cityCreateDTO TO City
             city.Name = CityCreateDTO.Name;
             city.Status = CityCreateDTO.Status;
-            city.PickupShippingCost= CityCreateDTO.PickupShippingCost;
-            city.GovernmentID= CityCreateDTO.GovernmentID;
-            
+            city.NormalShippingCost = CityCreateDTO.NormalShippingCost;
+            city.PickupShippingCost = CityCreateDTO.PickupShippingCost;
+            city.GovernmentID = CityCreateDTO.GovernmentID;
+
             //3- update  to city 
-           await _cityReposatry.Update(city);
+            await _cityReposatry.Update(city);
 
             //4- save to db 
-          await  _cityReposatry.SaveAsync();
+            await _cityReposatry.SaveAsync();
 
             // 3- city after update with navigation property
-            var cityWithNavigation =  _cityReposatry.GetCity(c=>c.GovernmentID==city.GovernmentID).Result;
+            var cityWithNavigation = _cityReposatry.GetCity(c => c.GovernmentID == city.GovernmentID).Result;
 
             //4- return cityReadDTO
 
-             return new CityReadDTO()
+            return new CityReadDTO()
             {
                 Id = city.Id,
                 Name = city.Name,
@@ -199,8 +204,9 @@ namespace ShippingSysem.BLL.Services
         }
 
         //GetCities With Pagination
-        public async Task<IQueryable<CityReadDTO>> getCityWithPagination(int page,int pageSize) {
-         var cities =await   _cityReposatry.GetAllAsyncWithPagination(page, pageSize);
+        public async Task<IQueryable<CityReadDTO>> getCityWithPagination(int page, int pageSize)
+        {
+            var cities = await _cityReposatry.GetAllAsyncWithPagination(page, pageSize);
             cities = cities.Include(c => c.Government);
             return cities.Select(c => new CityReadDTO()
             {
@@ -213,10 +219,11 @@ namespace ShippingSysem.BLL.Services
                 PickupShippingCost = c.PickupShippingCost
 
             });
-        
+
         }
 
-        public async Task<CityReadDTO> GetCityByID(int id) {
+        public async Task<CityReadDTO> GetCityByID(int id)
+        {
             var cities = await _cityReposatry.GetAllAsync();
             City city = cities.Include(c => c.Government).Where(c => c.Id == id).FirstOrDefault();
             if (city != null)
@@ -232,7 +239,8 @@ namespace ShippingSysem.BLL.Services
                     Name = city.Name,
                 };
             }
-            else {
+            else
+            {
                 return null;
             }
 
