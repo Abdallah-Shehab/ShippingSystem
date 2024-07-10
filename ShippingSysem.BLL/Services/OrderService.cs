@@ -172,11 +172,11 @@ namespace ShippingSysem.BLL.Services
         }
 
         //Assign order to delivert
-        public async Task<OrederReadDTO> AssignOrderToDelivery(int orderId,int deliveryId)
+        public async Task<OrederReadDTO> AssignOrderToDelivery(int orderId, int deliveryId)
         {
             var order = await repository.AssignOrderToDelivery(orderId, deliveryId);
 
-            var orderDto = await MappingorderToOrderReadDTO(order); 
+            var orderDto = await MappingorderToOrderReadDTO(order);
 
             return await Task.FromResult(orderDto);
         }
@@ -198,7 +198,7 @@ namespace ShippingSysem.BLL.Services
                 DeliveryTypeID = _orderCreateDto.DeliveryTypeID,
                 PhoneOne = _orderCreateDto.PhoneOne,
                 PhoneTwo = _orderCreateDto.PhoneTwo,
-                Status = "New",
+                Status = "جديد",
                 GovernmentId = _orderCreateDto.GovernmentId,
                 StreetAndVillage = _orderCreateDto.StreetAndVillage,
                 TotalWeight = _orderCreateDto.TotalWeight,
@@ -226,7 +226,7 @@ namespace ShippingSysem.BLL.Services
             decimal ShippingTypePrice;
             decimal IncreaseIFweightMoreThan10 = 0;
             decimal priceProducts = order.TotalPrice;
-            decimal ifvillage=0;
+            decimal ifvillage = 0;
 
 
             //1-get  shippingType Price
@@ -240,14 +240,15 @@ namespace ShippingSysem.BLL.Services
             }
 
             //3- get Price is Village
-            if (order.StreetAndVillage!="") {
+            if (order.StreetAndVillage != "")
+            {
                 ifvillage = 30; //constant Price 
             }
-            
-            
-            
-            
-            
+
+
+
+
+
             //--------------------------------Delivery From Branch To Client ---------------------------------------//
             //search on special Offers for this merchant if have special Package  for this merchant 
             var ifMerchantHasSpecialOffer = merchant.SpecialOffer.Where(s => s.City.ToLower() == city.Name.ToLower()).FirstOrDefault();
@@ -267,8 +268,9 @@ namespace ShippingSysem.BLL.Services
 
 
             //-------------------------------- Delivery From Merchant To Branch ---------------------------------------//
-            if (orderWithNavigationProperties.deliveryType.Name == "التسليم من التاجر") {
-                
+            if (orderWithNavigationProperties.deliveryType.Name == "التسليم من التاجر")
+            {
+
                 // اذا التاجر له سعر pickaup  خاص به 
                 var ifMerchantHasPcikaup = merchant.Pickup_Price;
                 if (ifMerchantHasPcikaup != 0)
@@ -276,35 +278,36 @@ namespace ShippingSysem.BLL.Services
                     //Take Pickaup From Merchant
                     cityPrice += ifMerchantHasPcikaup;
                 }
-                else {
+                else
+                {
                     //Take Pickaup From City 
                     cityPrice += city.PickupShippingCost;
                 }
             }
 
 
-           //------------------------------------------------------------------------//
-           
-            
-            
-          
-           
+            //------------------------------------------------------------------------//
 
-            
+
+
+
+
+
+
 
             // save delivery price and recived price
 
 
 
-          order.DeliveryPrice = cityPrice + ShippingTypePrice + IncreaseIFweightMoreThan10 + ifvillage;
+            order.DeliveryPrice = cityPrice + ShippingTypePrice + IncreaseIFweightMoreThan10 + ifvillage;
             order.PaiedMoney = order.DeliveryPrice + order.TotalPrice;
-            
+
             repository.Update(order);
             return new OrederReadDTO()
             {
                 TotalWeight = order.TotalWeight,
                 TotalPrice = order.TotalPrice,
-               DeliveryPrice = order.DeliveryPrice,
+                DeliveryPrice = order.DeliveryPrice,
                 StreetAndVillage = order.StreetAndVillage,
                 ClientName = order.ClientName,
                 CreatedDate = order.CreatedDate,

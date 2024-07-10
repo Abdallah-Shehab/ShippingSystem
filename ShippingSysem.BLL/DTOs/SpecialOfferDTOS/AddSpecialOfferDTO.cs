@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using ShippingSystem.DAL.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ShippingSystem.BLL.DTOs.SpecialOfferDTOS
 {
@@ -8,7 +9,9 @@ namespace ShippingSystem.BLL.DTOs.SpecialOfferDTOS
         public string City { get; set; }
         public decimal DeliveryPrice { get; set; }
 
-        [ForeignKey("MerchantAccount")]
+
         public int MerchantId { get; set; }
+
+
     }
 }

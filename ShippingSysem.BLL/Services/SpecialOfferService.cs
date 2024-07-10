@@ -51,7 +51,7 @@ namespace ShippingSystem.BLL.Services
         public async Task<SpecialOffer> GetSpecialOfferByMerchantIdAsync(int merchantId)
         {
             var specialOffers = await _specialOfferRepository.GetAllWithFilter(so => so.MerchantId == merchantId);
-            return  specialOffers.FirstOrDefault();
+            return specialOffers.FirstOrDefault();
         }
     }
 }
