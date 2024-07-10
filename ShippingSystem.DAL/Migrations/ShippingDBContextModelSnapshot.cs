@@ -232,7 +232,11 @@ namespace ShippingSystem.DAL.Migrations
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "JOHNDOE",
+<<<<<<< HEAD
+                            PasswordHash = "AQAAAAIAAYagAAAAEDgi3VosTe5N9m7jJsnzfKLoc7O6CoZGmqW33rnCkI1P63vlyuF2SWR9pKHSQzqi0w==",
+=======
                             PasswordHash = "AQAAAAIAAYagAAAAEKwuQrmTrs6A2ucXXwXShCsHC2LuRePXrCtUadX2fNZX6MNe/I3Rml5ozzljwzRhKA==",
+>>>>>>> origin/Mariem
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = true,
                             RoleID = 1,
