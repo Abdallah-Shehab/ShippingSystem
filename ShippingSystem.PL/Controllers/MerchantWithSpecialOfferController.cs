@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Humanizer;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShippingSysem.BLL.DTOs.MerchantDTOS;
@@ -11,6 +13,7 @@ namespace ShippingSystem.PL.Controllers
     public class MerchantWithSpecialOfferController : ControllerBase
     {
         private readonly ShippingDBContext _context;
+        //private readonly IPasswordHasher<MerchantAccount> passwordHasher;
 
         public MerchantWithSpecialOfferController(ShippingDBContext context)
         {
@@ -29,19 +32,23 @@ namespace ShippingSystem.PL.Controllers
             {
                 UserName = data.Merchant.Email,
                 Email = data.Merchant.Email,
+
                 Name = data.Merchant.Name,
                 Address = data.Merchant.Address,
                 PhoneNumber = data.Merchant.Phone,
                 BranchID = data.Merchant.BranchId,
+                RoleID = 3,
                 City = data.Merchant.City,
                 Government = data.Merchant.Government,
                 StoreName = data.Merchant.StoreName,
                 Refund_Percentage = data.Merchant.Refund_Percentage,
                 Pickup_Price = data.Merchant.Pickup_Price,
-                Status = true 
+                PasswordHash=data.Merchant.Password,
+                Status = true
             };
+            // Hash the password
+            
 
-           
 
             _context.MerchantAccounts.Add(merchant);
             await _context.SaveChangesAsync();

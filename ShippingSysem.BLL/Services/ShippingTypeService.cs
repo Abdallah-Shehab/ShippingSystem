@@ -24,18 +24,21 @@ namespace ShippingSysem.BLL.Services
             this.cityReposatry = cityReposatry;
         }
 
-        public async Task<IQueryable<ShippingTypeReadDTO>> getAllTypes() { 
-          IQueryable<ShippingType> shippingTypes= shippingTypeReposatry.GetAllAsync().Result;
-          return  shippingTypes.Select(x => new ShippingTypeReadDTO
-          {
-              Id = x.Id,
-              Name = x.Name,
-          });
+        public async Task<IQueryable<ShippingTypeReadDTO>> getAllTypes()
+        {
+            IQueryable<ShippingType> shippingTypes = shippingTypeReposatry.GetAllAsync().Result;
+            return shippingTypes.Select(x => new ShippingTypeReadDTO
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Price = x.Price
+            });
         }
 
         // get price for shipping type and price for city
-        public async Task<decimal> getPriceOfShippingType(int idShipping) {
-            ShippingType shipping =await shippingTypeReposatry.GetByIdAsync(idShipping);
+        public async Task<decimal> getPriceOfShippingType(int idShipping)
+        {
+            ShippingType shipping = await shippingTypeReposatry.GetByIdAsync(idShipping);
             return shipping.Price;
         }
     }

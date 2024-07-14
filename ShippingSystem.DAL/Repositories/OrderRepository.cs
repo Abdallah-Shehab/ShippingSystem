@@ -100,6 +100,7 @@ namespace ShippingSystem.DAL.Repositories
                                         context.Orders
                                                .Where(order => order.MerchantID == merchantId && order.IsDeleted == false)
                                                .GroupBy(order => order.Status)
+
                                                .Select(order => new OrderCount
                                                {
                                                    Status = order.Key,
@@ -110,7 +111,7 @@ namespace ShippingSystem.DAL.Repositories
         }
 
         //Assign order for delivery
-        public async Task<Order> AssignOrderToDelivery(int orderId,int deliveryId)
+        public async Task<Order> AssignOrderToDelivery(int orderId, int deliveryId)
         {
             var order = await GetByIdAsync(orderId);
             order.DeliveryID = deliveryId;
@@ -126,13 +127,14 @@ namespace ShippingSystem.DAL.Repositories
             return context.Orders.Include(order => order.city)
                                  .Include(order => order.government)
                                  .Include(order => order.MerchantAccount)
+                                 .Include(order => order.ShippingType)
                                  .Include(order => order.StaffMemberAccount)
                                  .Include(order => order.DeliveryAccount)
-                                 .Include(order=>order.deliveryType)
+                                 .Include(order => order.deliveryType)
                                  .Where(expression)
                                  .AsNoTracking();
         }
 
-        
+
     }
 }
